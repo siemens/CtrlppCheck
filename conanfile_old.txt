@@ -1,6 +1,0 @@
- [requires]
- #tinyxml2/6.2.0@nicolastagliani/stable
- #tinyxml2/7.0.1@nicolastagliani/stable
-
- [generators]
- cmake
