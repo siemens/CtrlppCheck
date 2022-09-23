@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<results version="2">
+    <cppcheck version=""/>
+    <errors>
+        <error id="suspiciousSemicolon" severity="warning" msg="Suspicious use of ; at the end of &apos;if&apos; statement." verbose="Suspicious use of ; at the end of &apos;if&apos; statement." cwe="398" inconclusive="true">
+            <location file0="" file="" line="7"/>
+        </error>
+        <error id="suspiciousSemicolon" severity="warning" msg="Suspicious use of ; at the end of &apos;if&apos; statement." verbose="Suspicious use of ; at the end of &apos;if&apos; statement." cwe="398" inconclusive="true">
+            <location file0="" file="" line="17"/>
+        </error>
+        <error id="suspiciousSemicolon" severity="warning" msg="Suspicious use of ; at the end of &apos;if&apos; statement." verbose="Suspicious use of ; at the end of &apos;if&apos; statement." cwe="398" inconclusive="true">
+            <location file0="" file="" line="21"/>
+        </error>
+    </errors>
+</results>

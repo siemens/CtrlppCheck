@@ -1,0 +1,1121 @@
+V 14
+2
+LANG:10001 0 
+LANG:10000 0 
+PANEL,-1 -1 1099 654 N "White" 0
+E E E E E 1 -1 -1 0  100 70
+""0  1
+E "#uses \"gedi/qualityCheck_ext\"
+
+" 0
+ 3
+"CBRef" "1"
+"EClose" E
+"dpi" "120"
+1 0 0
+""
+DISPLAY_LAYER, 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0
+LAYER, 0 
+1
+LANG:10001 0 
+4 5
+"LINE3"
+""
+1 12 606 E E E 1 E 1 E N "HeaderText" E N {255,255,255} E E
+ E E
+4 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+3
+"layoutAlignment" "AlignNone"
+"dashclr"N "_Transparent"
+"antiAliased" "1"
+E E 0 1 3 2 1 E  12 606 1085.999999999972 606
+2 6
+"text"
+""
+1 395.5 59.5 E E E 1 E 1 E N "DavyGrey" E N "_Transparent" E E
+ E E
+5 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+4
+"sizePolicy" "Fixed Fixed"
+"layoutAlignment" "AlignLeading|AlignVCenter"
+"dashclr"N "_Transparent"
+"antiAliased" "0"
+E E 0 1 1 0 1 E 0.9982238010657558 0 0.9655172413793102 -383.7975133215064 -45.94827586206895 0 E 395.5 59.5 677 74
+0 0 0 "0s" 0 0 0 192 0 0  395.5 59.5 1
+2
+LANG:10001 26 Arial,-1,12,5,75,0,0,0,0,0
+LANG:10000 26 Arial,-1,12,5,75,0,0,0,0,0
+0 2
+LANG:10001 45 A warm welcome to the WinCC OA quality checks
+LANG:10000 49 Herzlich Willkommen zu den WinCCOA Quality Checks
+32 7
+"SPACER2"
+""
+1 129 615 E E E 1 E 1 E N {0,0,0} E N {255,255,255} E E
+ E E
+6 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+3
+"transparentForMouse" ""
+"sizePolicy" "Expanding Ignored"
+"layoutAlignment" "AlignNone"
+ 129 615 1087.000000000042 641.9999999999993 1
+29 9
+"txt_description"
+""
+1 11 33 E E E 1 E 1 E N "DavyGrey" E N "_Transparent" E E
+ E E
+8 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+7
+"currentFont" "font Arial,-1,12,5,50,0,0,0,0,0"
+"frameShape" "enum 0"
+"currentColor" "color DavyGrey"
+"readOnly" "bool TRUE"
+"minimumSize" "345 60"
+"maximumSize" "-1 60"
+"layoutAlignment" "AlignNone"
+2
+LANG:10001 25 Arial,-1,8,5,50,0,0,0,0,0
+LANG:10000 26 Arial,-1,12,5,50,0,0,0,0,0
+0  11 33 1086.99999999997 92
+15 PVSS.TextEdit.1
+0
+"main()
+{
+  this.text(getCatStr(\"WinCCOA_gedi_ext\",\"welcomeText\"));
+}" 0
+13 10
+"btn_QgStaticCheck_Panels"
+""
+1 370.4700797872337 276.6328124999999 E E E 1 E 1 E N "DarkJungle" E N "_Button" E E
+ E E
+9 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+2
+"minimumSize" "111 -1"
+"layoutAlignment" "AlignVCenter"
+2
+LANG:10001 26 Arial,-1,12,5,50,0,0,0,0,0
+LANG:10000 26 Arial,-1,12,5,50,0,0,0,0,0
+0  370 269.5 727.9999999999852 300.4999999999994
+
+T 
+2
+LANG:10001 5 Start
+LANG:10000 5 Start
+"main(mapping event)
+{
+  tool_QualityGates_QgStaticCheck_Panels();
+}" 0
+ E E E
+29 11
+"eff_QgStaticCheck_Panels"
+""
+1 -657.3164062500679 366.1328124999976 E E E 1 E 1 E N "_3DText" E N "_3DFace" E E
+ E E
+10 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+4
+"color1" "color BrandeisBlue"
+"effectType" "enum 2"
+"minimumSize" "111 -1"
+"layoutAlignment" "AlignNone"
+2
+LANG:10001 35 MS Shell Dlg 2,-1,11,5,50,0,0,0,0,0
+LANG:10000 35 MS Shell Dlg 2,-1,11,5,50,0,0,0,0,0
+0  733.9999999999999 271 1087.000000000017 297.9999999999994
+19 AttentionEffect.ewo
+0
+E2 12
+"txt_QgStaticCheck_Panels"
+""
+1 395.5 59.5 E E E 1 E 1 E N "DavyGrey" E N "_Transparent" E E
+ E E
+11 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+4
+"sizePolicy" "Fixed Fixed"
+"layoutAlignment" "AlignLeading|AlignVCenter"
+"dashclr"N "_Transparent"
+"antiAliased" "0"
+"main()
+{
+  this.text = getCatStr(\"WinCCOA_gedi_ext\", \"tool_QualityGates_QgStaticCheck_Panels\");
+}" 0
+ E 0 1 1 0 1 E 0.9863013698630138 0 0.9655172413793087 -379.0821917808219 220.5517241379311 0 E 395.5 59.5 432 74
+0 0 0 "0s" 0 0 0 192 0 0  395.5 59.5 1
+2
+LANG:10001 26 Arial,-1,12,5,50,0,0,0,0,0
+LANG:10000 26 Arial,-1,12,5,50,0,0,0,0,0
+0 2
+LANG:10001 5 Check
+LANG:10000 5 Check
+13 13
+"btn_QgStaticCheck_Scripts"
+""
+1 372 312.125 E E E 1 E 1 E N "DarkJungle" E N "_Button" E E
+ E E
+12 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+2
+"minimumSize" "111 -1"
+"layoutAlignment" "AlignVCenter"
+2
+LANG:10001 26 Arial,-1,12,5,50,0,0,0,0,0
+LANG:10000 26 Arial,-1,12,5,50,0,0,0,0,0
+0  370 304.5 727.9999999999852 335.4999999999994
+
+T 
+2
+LANG:10001 5 Start
+LANG:10000 5 Start
+"main(mapping event)
+{
+  tool_QualityGates_QgStaticCheck_Scripts();
+}
+" 0
+ E E E
+29 14
+"eff_QgStaticCheck_Scripts"
+""
+1 -666.0494791667317 401.6249999999979 E E E 1 E 1 E N "_3DText" E N "_3DFace" E E
+ E E
+13 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+4
+"color1" "color BrandeisBlue"
+"effectType" "enum 2"
+"minimumSize" "111 -1"
+"layoutAlignment" "AlignNone"
+2
+LANG:10001 35 MS Shell Dlg 2,-1,11,5,50,0,0,0,0,0
+LANG:10000 35 MS Shell Dlg 2,-1,11,5,50,0,0,0,0,0
+0  733.9999999999999 306 1087.000000000017 332.9999999999994
+19 AttentionEffect.ewo
+0
+E2 15
+"txt_QgStaticCheck_Scripts"
+""
+1 395.5 59.5 E E E 1 E 1 E N "DavyGrey" E N "_Transparent" E E
+ E E
+14 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+4
+"sizePolicy" "Fixed Fixed"
+"layoutAlignment" "AlignLeading|AlignVCenter"
+"dashclr"N "_Transparent"
+"antiAliased" "0"
+"main()
+{
+  this.text = getCatStr(\"WinCCOA_gedi_ext\", \"tool_QualityGates_QgStaticCheck_Scripts\");
+}" 0
+ E 0 1 1 0 1 E 0.9863013698630138 0 0.9655172413793124 -379.0821917808219 255.5517241379309 0 E 395.5 59.5 432 74
+0 0 0 "0s" 0 0 0 192 0 0  395.5 59.5 1
+2
+LANG:10001 26 Arial,-1,12,5,50,0,0,0,0,0
+LANG:10000 26 Arial,-1,12,5,50,0,0,0,0,0
+0 2
+LANG:10001 5 Check
+LANG:10000 5 Check
+13 16
+"btn_QgStaticCheck_Libs"
+""
+1 372 347.125 E E E 1 E 1 E N "DarkJungle" E N "_Button" E E
+ E E
+15 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+2
+"minimumSize" "111 -1"
+"layoutAlignment" "AlignVCenter"
+2
+LANG:10001 26 Arial,-1,12,5,50,0,0,0,0,0
+LANG:10000 26 Arial,-1,12,5,50,0,0,0,0,0
+0  370 339.5 727.9999999999852 370.4999999999994
+
+T 
+2
+LANG:10001 5 Start
+LANG:10000 5 Start
+"main(mapping event)
+{
+  tool_QualityGates_QgStaticCheck_Libs();
+}
+" 0
+ E E E
+29 17
+"eff_QgStaticCheck_Libs"
+""
+1 -666.0494791667317 436.6249999999978 E E E 1 E 1 E N "_3DText" E N "_3DFace" E E
+ E E
+16 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+4
+"color1" "color BrandeisBlue"
+"effectType" "enum 2"
+"minimumSize" "111 -1"
+"layoutAlignment" "AlignNone"
+2
+LANG:10001 35 MS Shell Dlg 2,-1,11,5,50,0,0,0,0,0
+LANG:10000 35 MS Shell Dlg 2,-1,11,5,50,0,0,0,0,0
+0  733.9999999999999 341 1087.000000000017 367.9999999999994
+19 AttentionEffect.ewo
+0
+E2 18
+"txt_QgStaticCheck_Libs"
+""
+1 395.5 59.5 E E E 1 E 1 E N "DavyGrey" E N "_Transparent" E E
+ E E
+17 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+4
+"sizePolicy" "Fixed Fixed"
+"layoutAlignment" "AlignLeading|AlignVCenter"
+"dashclr"N "_Transparent"
+"antiAliased" "0"
+"main()
+{
+  this.text = getCatStr(\"WinCCOA_gedi_ext\", \"tool_QualityGates_QgStaticCheck_Libs\");
+}" 0
+ E 0 1 1 0 1 E 0.9863013698630138 0 0.9655172413793085 -379.0821917808219 290.5517241379312 0 E 395.5 59.5 432 74
+0 0 0 "0s" 0 0 0 192 0 0  395.5 59.5 1
+2
+LANG:10001 26 Arial,-1,12,5,50,0,0,0,0,0
+LANG:10000 26 Arial,-1,12,5,50,0,0,0,0,0
+0 2
+LANG:10001 5 Check
+LANG:10000 5 Check
+13 19
+"btn_QgStaticCheck_Pictures"
+""
+1 372 382.1250000000001 E E E 1 E 1 E N "DarkJungle" E N "_Button" E E
+ E E
+18 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+2
+"minimumSize" "111 -1"
+"layoutAlignment" "AlignVCenter"
+2
+LANG:10001 26 Arial,-1,12,5,50,0,0,0,0,0
+LANG:10000 26 Arial,-1,12,5,50,0,0,0,0,0
+0  370 374.5 727.9999999999852 405.4999999999994
+
+T 
+2
+LANG:10001 5 Start
+LANG:10000 5 Start
+"main(mapping event)
+{
+  tool_QualityGates_QgStaticCheck_Pictures();
+}
+" 0
+ E E E
+29 20
+"eff_QgStaticCheck_Pictures"
+""
+1 -666.0494791667317 471.6249999999978 E E E 1 E 1 E N "_3DText" E N "_3DFace" E E
+ E E
+19 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+4
+"color1" "color BrandeisBlue"
+"effectType" "enum 2"
+"minimumSize" "111 -1"
+"layoutAlignment" "AlignNone"
+2
+LANG:10001 35 MS Shell Dlg 2,-1,11,5,50,0,0,0,0,0
+LANG:10000 35 MS Shell Dlg 2,-1,11,5,50,0,0,0,0,0
+0  733.9999999999999 376 1087.000000000017 402.9999999999994
+19 AttentionEffect.ewo
+0
+E2 21
+"txt_QgStaticCheck_Pictures"
+""
+1 395.5 59.5 E E E 1 E 1 E N "DavyGrey" E N "_Transparent" E E
+ E E
+20 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+4
+"sizePolicy" "Fixed Fixed"
+"layoutAlignment" "AlignLeading|AlignVCenter"
+"dashclr"N "_Transparent"
+"antiAliased" "0"
+"main()
+{
+  this.text = getCatStr(\"WinCCOA_gedi_ext\", \"tool_QualityGates_QgStaticCheck_Pictures\");
+}" 0
+ E 0 1 1 0 1 E 0.9863013698630138 0 0.9655172413793127 -379.0821917808219 325.5517241379309 0 E 395.5 59.5 432 74
+0 0 0 "0s" 0 0 0 192 0 0  395.5 59.5 1
+2
+LANG:10001 26 Arial,-1,12,5,50,0,0,0,0,0
+LANG:10000 26 Arial,-1,12,5,50,0,0,0,0,0
+0 2
+LANG:10001 5 Check
+LANG:10000 5 Check
+13 22
+"btn_QgCtrlppCheck"
+""
+1 372 128.1249999999998 E E E 1 E 1 E N "DarkJungle" E N "_Button" E E
+ E E
+21 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+2
+"minimumSize" "111 -1"
+"layoutAlignment" "AlignVCenter"
+2
+LANG:10001 26 Arial,-1,12,5,50,0,0,0,0,0
+LANG:10000 26 Arial,-1,12,5,50,0,0,0,0,0
+0  370 120.5 727.9999999999852 151.4999999999994
+
+T 
+2
+LANG:10001 5 Start
+LANG:10000 5 Start
+"main(mapping event)
+{
+  tool_QualityGates_QgStaticCheck_CtrlppCheck();
+}
+" 0
+ E E E
+29 23
+"eff_QgCtrlppCheck"
+""
+1 -666.0494791667317 217.6249999999979 E E E 1 E 1 E N "_3DText" E N "_3DFace" E E
+ E E
+22 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+4
+"color1" "color BrandeisBlue"
+"effectType" "enum 2"
+"minimumSize" "111 -1"
+"layoutAlignment" "AlignNone"
+2
+LANG:10001 35 MS Shell Dlg 2,-1,11,5,50,0,0,0,0,0
+LANG:10000 35 MS Shell Dlg 2,-1,11,5,50,0,0,0,0,0
+0  733.9999999999999 122 1087.000000000017 148.9999999999994
+19 AttentionEffect.ewo
+0
+E2 24
+"txt_QgStaticCheck_CtrlppCheck"
+""
+1 395.5 59.5 E E E 1 E 1 E N "DavyGrey" E N "_Transparent" E E
+ E E
+23 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+4
+"sizePolicy" "Fixed Fixed"
+"layoutAlignment" "AlignLeading|AlignVCenter"
+"dashclr"N "_Transparent"
+"antiAliased" "0"
+"main()
+{
+  this.text = getCatStr(\"WinCCOA_gedi_ext\", \"tool_QualityGates_QgStaticCheck_CtrlppCheck\");
+}" 0
+ E 0 1 1 0 1 E 0.9863013698630138 0 0.9655172413793096 -379.0821917808219 71.55172413793107 0 E 395.5 59.5 432 74
+0 0 0 "0s" 0 0 0 192 0 0  395.5 59.5 1
+2
+LANG:10001 26 Arial,-1,12,5,50,0,0,0,0,0
+LANG:10000 26 Arial,-1,12,5,50,0,0,0,0,0
+0 2
+LANG:10001 5 Check
+LANG:10000 5 Check
+13 25
+"btn_QgSyntaxCheck"
+""
+1 372 526.125 E E E 1 E 1 E N "DarkJungle" E N "_Button" E E
+ E E
+24 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+2
+"minimumSize" "111 -1"
+"layoutAlignment" "AlignVCenter"
+2
+LANG:10001 26 Arial,-1,12,5,50,0,0,0,0,0
+LANG:10000 26 Arial,-1,12,5,50,0,0,0,0,0
+0  370 518.5 727.9999999999852 549.4999999999994
+
+T 
+2
+LANG:10001 5 Start
+LANG:10000 5 Start
+"main(mapping event)
+{
+  tool_QualityGates_QgSyntaxCheck();
+}
+" 0
+ E E E
+29 26
+"eff_QgSyntaxCheck"
+""
+1 -666.0494791667311 615.624999999998 E E E 1 E 1 E N "_3DText" E N "_3DFace" E E
+ E E
+25 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+4
+"color1" "color BrandeisBlue"
+"effectType" "enum 2"
+"minimumSize" "111 -1"
+"layoutAlignment" "AlignNone"
+2
+LANG:10001 35 MS Shell Dlg 2,-1,11,5,50,0,0,0,0,0
+LANG:10000 35 MS Shell Dlg 2,-1,11,5,50,0,0,0,0,0
+0  733.9999999999999 520 1087.000000000017 546.9999999999994
+19 AttentionEffect.ewo
+0
+E2 27
+"txt_QgSyntaxCheck"
+""
+1 395.5 59.5 E E E 1 E 1 E N "DavyGrey" E N "_Transparent" E E
+ E E
+26 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+4
+"sizePolicy" "Fixed Fixed"
+"layoutAlignment" "AlignLeading|AlignVCenter"
+"dashclr"N "_Transparent"
+"antiAliased" "0"
+"main()
+{
+  this.text = getCatStr(\"WinCCOA_gedi_ext\", \"tool_QualityGates_QgSyntaxCheck\");
+}" 0
+ E 0 1 1 0 1 E 0.9863013698630138 0 0.9655172413793107 -379.0821917808219 469.551724137931 0 E 395.5 59.5 432 74
+0 0 0 "0s" 0 0 0 192 0 0  395.5 59.5 1
+2
+LANG:10001 26 Arial,-1,12,5,50,0,0,0,0,0
+LANG:10000 26 Arial,-1,12,5,50,0,0,0,0,0
+0 2
+LANG:10001 5 Check
+LANG:10000 5 Check
+13 28
+"btn_QgStaticCheck_OverloadedFiles"
+""
+1 372 417.1250000000001 E E E 1 E 1 E N "DarkJungle" E N "_Button" E E
+ E E
+27 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+2
+"minimumSize" "111 -1"
+"layoutAlignment" "AlignVCenter"
+2
+LANG:10001 26 Arial,-1,12,5,50,0,0,0,0,0
+LANG:10000 26 Arial,-1,12,5,50,0,0,0,0,0
+0  370 409.5 727.9999999999852 440.4999999999994
+
+T 
+2
+LANG:10001 5 Start
+LANG:10000 5 Start
+"main(mapping event)
+{
+  tool_QualityGates_QgOverloadedFilesCheck();
+}
+" 0
+ E E E
+29 29
+"eff_QgStaticCheck_OverloadedFiles"
+""
+1 -666.0494791667307 506.6249999999977 E E E 1 E 1 E N "_3DText" E N "_3DFace" E E
+ E E
+28 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+4
+"color1" "color BrandeisBlue"
+"effectType" "enum 2"
+"minimumSize" "111 -1"
+"layoutAlignment" "AlignNone"
+2
+LANG:10001 35 MS Shell Dlg 2,-1,11,5,50,0,0,0,0,0
+LANG:10000 35 MS Shell Dlg 2,-1,11,5,50,0,0,0,0,0
+0  733.9999999999999 411 1087.000000000017 437.9999999999994
+19 AttentionEffect.ewo
+0
+E2 30
+"txt_QgOverloadedFilesCheck"
+""
+1 395.5 59.5 E E E 1 E 1 E N "DavyGrey" E N "_Transparent" E E
+ E E
+29 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+4
+"sizePolicy" "Fixed Fixed"
+"layoutAlignment" "AlignLeading|AlignVCenter"
+"dashclr"N "_Transparent"
+"antiAliased" "0"
+"main()
+{
+  this.text = getCatStr(\"WinCCOA_gedi_ext\", \"tool_QualityGates_QgOverloadedFilesCheck\");
+}" 0
+ E 0 1 1 0 1 E 0.9863013698630138 0 0.9655172413793068 -379.0821917808219 360.5517241379313 0 E 395.5 59.5 432 74
+0 0 0 "0s" 0 0 0 192 0 0  395.5 59.5 1
+2
+LANG:10001 26 Arial,-1,12,5,50,0,0,0,0,0
+LANG:10000 26 Arial,-1,12,5,50,0,0,0,0,0
+0 2
+LANG:10001 5 Check
+LANG:10000 5 Check
+2 33
+"txt_prerequisits"
+""
+1 395.5 59.5 E E E 1 E 1 E N "DavyGrey" E N "_Transparent" E E
+ E E
+32 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+4
+"sizePolicy" "Fixed Fixed"
+"layoutAlignment" "AlignLeading|AlignVCenter"
+"dashclr"N "_Transparent"
+"antiAliased" "0"
+E E 0 1 1 0 1 E 0.9972451790633526 0 0.9655172413793107 -383.4104683195559 389.051724137931 0 E 395.5 59.5 577 74
+0 0 0 "0s" 0 0 0 192 0 0  395.5 59.5 1
+2
+LANG:10001 26 Arial,-1,12,5,75,0,0,0,0,0
+LANG:10000 26 Arial,-1,12,5,75,0,0,0,0,0
+0 2
+LANG:10001 32 Prerequisite for Quality Checks:
+LANG:10000 36 Voraussetzungen für Quality Checks:
+32 34
+"SPACER3"
+""
+1 11 555 E E E 1 E 1 E N {0,0,0} E N {255,255,255} E E
+ E E
+33 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+4
+"transparentForMouse" ""
+"minimumSize" "20 -1"
+"sizePolicy" "Ignored Expanding"
+"layoutAlignment" "AlignNone"
+ 11 555 1086.99999999997 596.9999999999998 2
+2 36
+"txt_python"
+""
+1 395.5 59.5 E E E 1 E 1 E N "DavyGrey" E N "_Transparent" E E
+ E E
+35 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+4
+"sizePolicy" "Fixed Fixed"
+"layoutAlignment" "AlignLeading|AlignVCenter"
+"dashclr"N "_Transparent"
+"antiAliased" "0"
+E E 0 1 1 0 1 E 0.9950738916256159 0 0.9655172413793107 -382.5517241379311 415.051724137931 0 E 395.5 59.5 497 74
+0 0 0 "0s" 0 0 0 192 0 0  395.5 59.5 1
+2
+LANG:10001 26 Arial,-1,12,5,50,0,0,0,0,0
+LANG:10000 26 Arial,-1,12,5,50,0,0,0,0,0
+0 2
+LANG:10001 19 Python installation
+LANG:10000 19 Python Installation
+2 37
+"txt_lizard"
+""
+1 395.5 59.5 E E E 1 E 1 E N "DavyGrey" E N "_Transparent" E E
+ E E
+36 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+4
+"sizePolicy" "Fixed Fixed"
+"layoutAlignment" "AlignLeading|AlignVCenter"
+"dashclr"N "_Transparent"
+"antiAliased" "0"
+E E 0 1 1 0 1 E 0.9948717948717947 0 0.9655172413793107 161.5282051282052 415.051724137931 0 E 395.5 59.5 493 74
+0 0 0 "0s" 0 0 0 192 0 0  395.5 59.5 1
+2
+LANG:10001 26 Arial,-1,12,5,50,0,0,0,0,0
+LANG:10000 26 Arial,-1,12,5,50,0,0,0,0,0
+0 2
+LANG:10001 19 Lizard installation
+LANG:10000 19 Lizard Installation
+6 38
+"state_python"
+""
+1 140 665 E E E 1 E 1 E N "_Transparent" E N {255,255,255} E E
+ E E
+37 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+5
+"minimumSize" "23 23"
+"maximumSize" "23 23"
+"layoutAlignment" "AlignNone"
+"dashclr"N "_Transparent"
+"antiAliased" "0"
+"#uses \"classes/QualityGates/Tools/Python/Python\"
+
+main()
+{
+  
+  if ( Python::isInstalled() )
+    this.fill(\"[pattern,[fit,any,StandardIcons/apply_40.png]]\");
+  else    
+    this.fill(\"[pattern,[fit,any,StandardIcons/delete_40.png]]\");
+    
+}" 0
+ E 0 1 3 2 1 E 1 0 1 -20 -197 2  1 0  "pictures/StandardIcons/apply_40.png" 4294967295 E 140 665 162 687
+6 39
+"state_lizard"
+""
+1 140 665 E E E 1 E 1 E N "_Transparent" E N {255,255,255} E E
+ E E
+38 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+5
+"minimumSize" "23 23"
+"maximumSize" "23 23"
+"layoutAlignment" "AlignNone"
+"dashclr"N "_Transparent"
+"antiAliased" "0"
+"#uses \"classes/QualityGates/Tools/Lizard/ToolLizard\"
+
+main()
+{
+  
+  if ( ToolLizard::isInstalled() )
+    this.fill(\"[pattern,[fit,any,StandardIcons/apply_40.png]]\");
+  else    
+    this.fill(\"[pattern,[fit,any,StandardIcons/delete_40.png]]\");
+    
+}" 0
+ E 0 1 3 2 1 E 1 0 1 520 -197 2  1 0  "pictures/StandardIcons/delete_40.png" 4294967295 E 140 665 162 687
+2 46
+"PRIMITIVE_TEXT4"
+""
+1 395.5 59.5 E E E 1 E 1 E N "DavyGrey" E N "_Transparent" E E
+ E E
+45 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+4
+"sizePolicy" "Fixed Fixed"
+"layoutAlignment" "AlignLeading|AlignVCenter"
+"dashclr"N "_Transparent"
+"antiAliased" "0"
+E E 0 1 1 0 1 E 0.9969418960244484 0 0.9655172413793099 -383.2905198776693 43.05172413793107 0 E 395.5 59.5 559 74
+0 0 0 "0s" 0 0 0 192 0 0  395.5 59.5 1
+2
+LANG:10001 26 Arial,-1,12,5,75,0,0,0,0,0
+LANG:10000 26 Arial,-1,12,5,75,0,0,0,0,0
+0 2
+LANG:10001 28 CtrlPPCheck - whole project:
+LANG:10000 33 CtrlPPCheck - komplettes Projekt:
+2 47
+"PRIMITIVE_TEXT5"
+""
+1 395.5 59.5 E E E 1 E 1 E N "DavyGrey" E N "_Transparent" E E
+ E E
+46 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+4
+"sizePolicy" "Fixed Fixed"
+"layoutAlignment" "AlignLeading|AlignVCenter"
+"dashclr"N "_Transparent"
+"antiAliased" "0"
+E E 0 1 1 0 1 E 0.9971671388101809 0 0.9655172413793107 -383.3796033994266 192.051724137931 0 E 395.5 59.5 572 74
+0 0 0 "0s" 0 0 0 192 0 0  395.5 59.5 1
+2
+LANG:10001 26 Arial,-1,12,5,75,0,0,0,0,0
+LANG:10000 26 Arial,-1,12,5,75,0,0,0,0,0
+0 2
+LANG:10001 31 Quality Checks - whole project:
+LANG:10000 36 Quality Checks - komplettes Projekt:
+2 48
+"PRIMITIVE_TEXT6"
+""
+1 395.5 59.5 E E E 1 E 1 E N "DavyGrey" E N "_Transparent" E E
+ E E
+47 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+4
+"sizePolicy" "Fixed Fixed"
+"layoutAlignment" "AlignLeading|AlignVCenter"
+"dashclr"N "_Transparent"
+"antiAliased" "0"
+E E 0 1 1 0 1 E 0.9967637540452856 0 0.9655172413793107 -383.2200647249105 441.051724137931 0 E 395.5 59.5 550 74
+0 0 0 "0s" 0 0 0 192 0 0  395.5 59.5 1
+2
+LANG:10001 26 Arial,-1,12,5,75,0,0,0,0,0
+LANG:10000 26 Arial,-1,12,5,75,0,0,0,0,0
+0 2
+LANG:10001 26 OA Checks - whole project:
+LANG:10000 31 OA Checks - komplettes Projekt:
+29 49
+"txt_versioninfo"
+""
+1 11 157 E E E 1 E 1 E N "DavyGrey" E N "_Transparent" E E
+ E E
+48 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+8
+"currentFont" "font Arial,-1,12,5,50,0,0,0,0,0"
+"frameShape" "enum 0"
+"currentColor" "color DavyGrey"
+"readOnly" "bool TRUE"
+"minimumSize" "-1 85"
+"maximumSize" "-1 85"
+"sizePolicy" "Expanding Preferred"
+"layoutAlignment" "AlignNone"
+2
+LANG:10001 25 Arial,-1,8,5,50,0,0,0,0,0
+LANG:10000 26 Arial,-1,12,5,50,0,0,0,0,0
+0  11 157 1086.99999999997 241
+15 PVSS.TextEdit.1
+0
+"
+main()
+{
+  this.text = \"\";
+}" 0
+32 50
+"SPACER6"
+""
+1 689.9999999999995 468 E E E 1 E 1 E N {0,0,0} E N {255,255,255} E E
+ E E
+49 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+3
+"transparentForMouse" ""
+"sizePolicy" "Expanding Ignored"
+"layoutAlignment" "AlignNone"
+ 689.9999999999995 468 1086.999999999981 490 1
+32 51
+"SPACER7"
+""
+1 150.0000000000002 468 E E E 1 E 1 E N {0,0,0} E N {255,255,255} E E
+ E E
+50 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+3
+"transparentForMouse" ""
+"sizePolicy" "Expanding Ignored"
+"layoutAlignment" "AlignNone"
+ 150.0000000000002 468 546.9999999999895 490 1
+13 53
+"PUSH_BUTTON2"
+""
+1 11 621.1249999999998 E E E 1 E 1 E N "DarkJungle" E N "_Button" E E
+ E E
+52 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+2
+"minimumSize" "111 -1"
+"layoutAlignment" "AlignVCenter"
+2
+LANG:10001 26 Arial,-1,12,5,50,0,0,0,0,0
+LANG:10000 26 Arial,-1,12,5,50,0,0,0,0,0
+0  9 613.5 123 644.4999999999993
+
+T 
+2
+LANG:10001 8 Settings
+LANG:10000 13 Einstellungen
+"main(mapping event)
+{
+  ChildPanelOnCentralModal(\"WinCCOA_QualityChecks/general/Settings.pnl\", \"Settings\", makeDynString(\"\"));
+}" 0
+ E E E
+0
+LAYER, 1 
+1
+LANG:10001 0 
+0
+LAYER, 2 
+1
+LANG:10001 0 
+0
+LAYER, 3 
+1
+LANG:10001 0 
+0
+LAYER, 4 
+1
+LANG:10001 0 
+0
+LAYER, 5 
+1
+LANG:10001 0 
+0
+LAYER, 6 
+1
+LANG:10001 0 
+0
+LAYER, 7 
+1
+LANG:10001 0 
+0
+4 0 "LAYOUT_GROUP0" 9
+1 0 
+6 
+
+"S 6" "0 0 1 1"
+"" ""
+0 1 0 0
+4 3 "LAYOUT_GROUP3" 9
+2 0 
+7 53 
+
+"S 7" "1 0 1 1"
+"S 53" "0 0 1 1"
+"" ""
+0 1 0 0
+4 5 "LAYOUT_GROUP6" 9
+3 0 
+26 27 25 
+
+"S 26" "0 2 1 1"
+"S 27" "0 0 1 1"
+"S 25" "0 1 1 1"
+"" ""
+0 3 0 0
+4 6 "LAYOUT_GROUP7" 9
+15 0 
+12 15 18 21 30 28 19 16 13 10 11 14 17 20 29 
+
+"S 12" "0 0 1 1"
+"S 15" "1 0 1 1"
+"S 18" "2 0 1 1"
+"S 21" "3 0 1 1"
+"S 30" "4 0 1 1"
+"S 28" "4 1 1 1"
+"S 19" "3 1 1 1"
+"S 16" "2 1 1 1"
+"S 13" "1 1 1 1"
+"S 10" "0 1 1 1"
+"S 11" "0 2 1 1"
+"S 14" "1 2 1 1"
+"S 17" "2 2 1 1"
+"S 20" "3 2 1 1"
+"S 29" "4 2 1 1"
+"" ""
+0 3 0 0
+4 7 "LAYOUT_GROUP8" 9
+3 0 
+24 22 23 
+
+"S 24" "0 0 1 1"
+"S 22" "0 1 1 1"
+"S 23" "0 2 1 1"
+"" ""
+0 3 0 0
+4 8 "LAYOUT_GROUP11" 9
+6 0 
+38 36 51 37 50 39 
+
+"S 38" "1 0 1 1"
+"S 36" "0 0 1 1"
+"S 51" "2 0 1 1"
+"S 37" "3 0 1 1"
+"S 50" "5 0 1 1"
+"S 39" "4 0 1 1"
+"" ""
+0 1 0 0
+4 9 "LAYOUT_GROUP13" -1
+8 6 
+5 9 33 34 46 47 48 49 
+0 3 5 6 7 8 
+"S 5" "12 0 1 1"
+"S 9" "1 0 1 1"
+"S 33" "7 0 1 1"
+"S 34" "11 0 1 1"
+"S 46" "2 0 1 1"
+"S 47" "5 0 1 1"
+"S 48" "9 0 1 1"
+"S 49" "4 0 1 1"
+"G 0" "0 0 1 1"
+"G 3" "13 0 1 1"
+"G 5" "10 0 1 1"
+"G 6" "6 0 1 1"
+"G 7" "3 0 1 1"
+"G 8" "8 0 1 1"
+"" ""
+0 2 0 0
+0

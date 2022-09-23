@@ -1,0 +1,18 @@
+17
+"QC_OK" N {170,180,20}
+"QC_NOK" N {255,185,0}
+"QC_NOKErrors" N {213,48,2}
+"QC_NOKPerformance" N {213,136,2}
+"QC_Text" N {80,90,100}
+"QC_TextInv" N {238,238,238}
+"HeaderText" N {157,157,157}
+"Isabelline" N {239,239,233}
+"DavyGrey" N {91,91,91}
+"DarkJungle" N {22,22,29}
+"MayaBlue" N {95,201,248}
+"Azure" N {0,152,240}
+"BrandeisBlue" N {18,106,251}
+"Emerald" N {83,216,105}
+"MikadoYellow" N {255,195,24}
+"AtomicTangerine" N {254,156,91}
+"CoralRed" N {252,61,57}

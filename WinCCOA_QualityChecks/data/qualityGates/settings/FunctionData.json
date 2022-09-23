@@ -1,0 +1,56 @@
+{
+    "settingsVersion": 0,
+    "checks": [
+        {
+            "id": "FunctionData.function.CCN",
+            "description":{ 
+                "de_AT.utf8":"Prüft den berechneten CCN wert ob dieser innerhalb des Limits liegt",
+                "en_US.utf8":"Checks the calculated CCN within the limit"
+             },
+            "highLimit": 15,
+            "scorePoints": 1,
+            "enabled": true
+        },
+        {
+            "id": "FunctionData.function.NLOC",
+            "description":{ 
+                "de_AT.utf8":"Überprüft, ob die Anzahl der Skriptzeilen (ohne Kommentare und Leerzeilen) innerhalb der Grenzen liegt",
+                "en_US.utf8":"Checks if the script line count (without comments and empty lines) is within the limits"
+             },
+            "lowLimit": 4,
+            "highLimit": 80,
+            "scorePoints": 1,
+            "enabled": true
+        },
+        {
+            "id": "FunctionData.function.NLOC.ctor",
+            "description":{ 
+                "de_AT.utf8":"Überprüft Konstruktoren auf die Anzahl der Zeilenanzahlbegrenzungen",
+                "en_US.utf8":"Checks the constructors for the number of lines limits"
+             },
+            "lowLimit": 3,
+            "highLimit": 20,
+            "scorePoints": 1,
+            "enabled": true
+        },
+        {
+            "id": "FunctionData.function.paramCount",
+            "description":{ 
+                "de_AT.utf8":"Prüft die Funktion ob die Parametergrenze eingehalten werden",
+                "en_US.utf8":"Checks the function for the parameter limit"
+             },
+            "highLimit": 10,
+            "scorePoints": 1,
+            "enabled": true
+        },
+        {
+            "id": "FunctionData.function.countOfLines",
+            "description":{ 
+                "de_AT.utf8":"Bestimmen die Anzahl der Zeilen",
+                "en_US.utf8":"Determine the number of lines"
+             },
+            "scorePoints": 1,
+            "enabled": true
+        }
+    ]
+}

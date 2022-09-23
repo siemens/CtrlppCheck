@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<results version="2">
+    <cppcheck version=""/>
+    <errors>
+        <error id="shiftNegative" severity="error" msg="Shifting by a negative value is undefined behaviour" verbose="Shifting by a negative value is undefined behaviour" cwe="758">
+            <location file0="" file="" line="70"/>
+        </error>
+        <error id="shiftNegative" severity="error" msg="Shifting by a negative value is undefined behaviour" verbose="Shifting by a negative value is undefined behaviour" cwe="758">
+            <location file0="" file="" line="94"/>
+        </error>
+        <error id="shiftTooManyBits" severity="error" msg="Shifting 32-bit value by 32 bits is undefined behaviour" verbose="Shifting 32-bit value by 32 bits is undefined behaviour" cwe="758">
+            <location file0="" file="" line="22" info="Shift"/>
+        </error>
+        <error id="shiftTooManyBits" severity="error" msg="Shifting 32-bit value by 32 bits is undefined behaviour" verbose="Shifting 32-bit value by 32 bits is undefined behaviour" cwe="758">
+            <location file0="" file="" line="34" info="Shift"/>
+        </error>
+        <error knownBug="#60" id="shiftTooManyBits" severity="error" msg="Shifting 32-bit value by 32 bits is undefined behaviour" verbose="Shifting 32-bit value by 32 bits is undefined behaviour" cwe="758">
+            <location file0="" file="" line="46" info="Shift"/>
+        </error>
+        <error knownBug="#60" id="shiftTooManyBits" severity="error" msg="Shifting 32-bit value by 32 bits is undefined behaviour" verbose="Shifting 32-bit value by 32 bits is undefined behaviour" cwe="758">
+            <location file0="" file="" line="58" info="Shift"/>
+        </error>
+        <error id="shiftTooManyBits" severity="error" msg="Shifting 32-bit value by 32 bits is undefined behaviour" verbose="Shifting 32-bit value by 32 bits is undefined behaviour" cwe="758">
+            <location file0="" file="" line="82" info="Shift"/>
+        </error>
+        <error knownBug="#60" id="shiftTooManyBits" severity="error" msg="Shifting 32-bit value by 32 bits is undefined behaviour" verbose="Shifting 32-bit value by 32 bits is undefined behaviour" cwe="758">
+            <location file0="" file="" line="94" info="Shift"/>
+        </error>
+        <error id="shiftTooManyBits" severity="error" msg="Shifting 32-bit value by 32 bits is undefined behaviour" verbose="Shifting 32-bit value by 32 bits is undefined behaviour" cwe="758">
+            <location file0="" file="" line="107" info="Shift"/>
+            <location file0="" file="" line="105" info="Assignment &apos;shift=32&apos;, assigned value is 32"/>
+        </error>
+        <error knownBug="#60" id="shiftTooManyBits" severity="error" msg="Shifting 32-bit value by 32 bits is undefined behaviour" verbose="Shifting 32-bit value by 32 bits is undefined behaviour" cwe="758">
+            <location file0="" file="" line="121" info="Shift"/>
+        </error>
+        <error id="shiftTooManyBits" severity="error" msg="Shifting 32-bit value by 32 bits is undefined behaviour" verbose="Shifting 32-bit value by 32 bits is undefined behaviour" cwe="758">
+            <location file0="" file="" line="134" info="Shift"/>
+            <location file0="" file="" line="132" info="Assignment &apos;shift=6&apos;, assigned value is 6"/>
+        </error>
+        <error id="shiftTooManyBits" severity="error" msg="Shifting 32-bit value by 32 bits is undefined behaviour" verbose="Shifting 32-bit value by 32 bits is undefined behaviour" cwe="758">
+            <location file0="" file="" line="147" info="Shift"/>
+            <location file0="" file="" line="145" info="Assignment &apos;shift=5&apos;, assigned value is 5"/>
+        </error>
+        <error id="shiftTooManyBits" severity="error" msg="Shifting 32-bit value by 32 bits is undefined behaviour" verbose="Shifting 32-bit value by 32 bits is undefined behaviour" cwe="758">
+            <location file0="" file="" line="164" info="Shift"/>
+        </error>
+        <error knownBug="#60" id="shiftTooManyBits" severity="error" msg="Shifting 32-bit value by 32 bits is undefined behaviour" verbose="Shifting 32-bit value by 32 bits is undefined behaviour" cwe="758">
+            <location file0="" file="" line="176" info="Shift"/>
+        </error>
+        <error knownBug="#60" id="shiftTooManyBits" severity="error" msg="Shifting 32-bit value by 32 bits is undefined behaviour" verbose="Shifting 32-bit value by 32 bits is undefined behaviour" cwe="758">
+            <location file0="" file="" line="194" info="Shift"/>
+        </error>
+        <error id="shiftTooManyBits" severity="error" msg="Shifting 32-bit value by 32 bits is undefined behaviour" verbose="Shifting 32-bit value by 32 bits is undefined behaviour" cwe="758">
+            <location file0="" file="" line="209" info="Shift"/>
+            <location file0="" file="" line="208" info="Assignment &apos;shift1=shift&apos;, assigned value is 32"/>
+            <location file0="" file="" line="205" info="Assignment &apos;shift=32&apos;, assigned value is 32"/>
+        </error>
+        <error id="shiftTooManyBits" severity="error" msg="Shifting 32-bit value by 32 bits is undefined behaviour" verbose="Shifting 32-bit value by 32 bits is undefined behaviour" cwe="758">
+            <location file0="" file="" line="226" info="Shift"/>
+            <location file0="" file="" line="225" info="Assignment &apos;shift2=shift1&apos;, assigned value is 32"/>
+            <location file0="" file="" line="224" info="Assignment &apos;shift1=shift&apos;, assigned value is 32"/>
+            <location file0="" file="" line="220" info="Assignment &apos;shift=32&apos;, assigned value is 32"/>
+        </error>
+        <error id="shiftTooManyBits" severity="error" msg="Shifting 32-bit value by 32 bits is undefined behaviour" verbose="Shifting 32-bit value by 32 bits is undefined behaviour" cwe="758">
+            <location file0="" file="" line="237" info="Shift"/>
+        </error>
+    </errors>
+</results>

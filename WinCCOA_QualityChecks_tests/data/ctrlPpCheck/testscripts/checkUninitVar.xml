@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<results version="2">
+    <ctrlppcheck version="2.0"/>
+    <errors>
+        <error id="uninitvar" severity="information" msg="Uninitialized variable: s1" verbose="Uninitialized variable: s1" cwe="908" inconclusive="true">
+            <location file0="" file="" line="12"/>
+            <symbol>s1</symbol>
+        </error>
+        <error id="uninitvar" severity="information" msg="Uninitialized variable: dpeValue" verbose="Uninitialized variable: dpeValue" cwe="908" inconclusive="true">
+            <location file0="" file="" line="17"/>
+            <symbol>dpeValue</symbol>
+        </error>
+        <error id="uninitvar" severity="information" msg="Uninitialized variable: dpe2" verbose="Uninitialized variable: dpe2" cwe="908" inconclusive="true">
+            <location file0="" file="" line="24"/>
+            <symbol>dpe2</symbol>
+        </error>
+        <error id="uninitvar" severity="information" msg="Uninitialized variable: dpeValue2" verbose="Uninitialized variable: dpeValue2" cwe="908" inconclusive="true">
+            <location file0="" file="" line="24"/>
+            <symbol>dpeValue2</symbol>
+        </error>
+    </errors>
+</results>

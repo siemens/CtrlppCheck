@@ -1,0 +1,11 @@
+assert.script.isCalculated,Is calculated
+reason.script.isCalculated,Sorry, the script '($script.name)' can't be calculated.
+assert.script.countOfFunctions,Count of functions
+reason.script.countOfFunctions,The script '($script.name)' hasn´t valid count of functions ($countOfFunctions).
+assert.script.avgCCN,Average complexity (McCabe-Metric)
+reason.script.avgCCN,The script '($script.name)' has too high average of CCN ($avgCCN).
+assert.script.NLOC,NLOC (No. Lines Of Code)
+reason.script.NLOC,The script '($script.name)' has no valid count of lines ($NLOC).
+assert.script.avgNLOC,Average lines of code per function
+reason.script.avgNLOC,The script '($script.name)' has too high average of NLOC ($avgNLOC).
+functionsList,Functions

@@ -1,0 +1,41 @@
+{
+    "settingsVersion": 0,
+    "checks": [
+        {
+            "id": "StaticCodeDir.dir.NLOC",
+            "description":{ 
+                "de_AT.utf8":"Bestimmt die Anzahl der Codezeile",
+                "en_US.utf8":"Determine the number of line of code"
+             },
+            "scorePoints": 1,
+            "enabled": true
+        },
+        {
+            "id": "StaticCodeDir.dir.avgNLOC",
+            "description":{ 
+                "de_AT.utf8":"Bestimmt die durchschnittliche Anzahl der Codezeilen",
+                "en_US.utf8":"Determine the average number of line of code"
+             },
+            "scorePoints": 1,
+            "enabled": true
+        },
+        {
+            "id": "StaticCodeDir.dir.CCN",
+            "description":{ 
+                "de_AT.utf8":"Bestimmt die zyklomatische Komplexitätszahl der Dateien",
+                "en_US.utf8":"Determine the cyclomatic complexity number of files"
+             },
+            "scorePoints": 1,
+            "enabled": true
+        },
+        {
+            "id": "StaticCodeDir.dir.avgCCN",
+            "description":{ 
+                "de_AT.utf8":"Bestimmt die durchschnittliche zyklomatische Komplexität der Dateien",
+                "en_US.utf8":"Determine the average cyclomatic complexity number of files"
+             },
+            "scorePoints": 1,
+            "enabled": true
+        }
+    ]
+}

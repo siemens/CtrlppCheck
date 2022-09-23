@@ -1,0 +1,339 @@
+V 14
+2
+LANG:10000 0 
+LANG:10001 0 
+PANEL,-1 -1 376 178 N "_3DFace" 0
+E E E E E 1 -1 -1 0  0 0
+""0  1
+E "
+#property string title
+#property string detailText
+
+string sTitle;
+
+public void setTitle(const string &title)
+{
+  txtTitle.text(title);
+  recIndicator.fill = \"[pattern,[fit,any,QC_Icons/\"+title+\".svg]]\";  
+  recIndicator.visible = TRUE;
+}
+
+public string getTitle()
+{
+  return (string)txtTitle.text();
+}
+
+public void setDetailText(const string &detail)
+{
+  int w,h;
+  getValue(\"txtTitle\", \"size\", w, h);
+  _makeCR(detail, w, \"txtDetailText\");
+}
+
+public string getDetailText()
+{
+  return (string)txtDetailText.text();
+}
+
+public void setGoodRange(const string &range)
+{
+  txtGoodRange.text(range);
+}
+
+public void setNumber(const anytype &number)
+{
+  string str = number;
+  if ( getType(number) == FLOAT_VAR )
+  {
+    sprintf(str, \"%6.1f\", number);
+  }
+  txtNumber.text(str);
+}
+
+public void setErrorPoints(const int errorPoints)
+{
+  string errorColor = \"QC_OK\";
+  string errorTextColor = \"QC_Text\";
+  
+  if (errorPoints > 0)
+  {
+    string check = this.name;
+    
+    switch (check)
+    {
+      case \"ctrlPpCheckErrors\" : errorColor = \"QC_NOKErrors\";  errorTextColor = \"QC_TextInv\"; break;
+      case \"ctrlPpCheckPerformance\" : errorColor = \"QC_NOKPerformance\"; break;
+      default : errorColor = \"QC_NOK\";
+    }
+  }          
+  recBackgroundNumber.backCol = errorColor;
+  txtNumber.foreCol = errorTextColor;
+}
+
+
+void _makeCR(string txt, int width, string shapeName = \"\")
+{
+  int        i,h,w;
+  string     s;
+  dyn_string words;
+  
+  if (strpos(txt,\"\\n\")>0 || txt==\"\")
+  {
+    setValue(shapeName, \"text\", txt);
+    return;
+  }
+  words = strsplit(txt, \" \");    
+  txt=words[1];
+  for(i=2;i<=dynlen(words);i++)
+  {
+    s=txt+\" \"+words[i];
+    setValue(shapeName,\"text\",s);
+    getValue(shapeName,\"size\",w,h);
+    if(w >= width)
+      txt = txt + \"\\n\" + words[i];
+    else
+      txt = txt + \" \" + words[i];
+
+  }
+  
+  setValue(shapeName, \"text\", txt);
+}
+" 0
+ 3
+"CBRef" "1"
+"EClose" E
+"dpi" "96"
+0 0 0
+""
+DISPLAY_LAYER, 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0
+LAYER, 0 
+2
+LANG:10000 0 
+LANG:10001 0 
+6 0
+"recBackgroundMain"
+""
+1 134 16 E E E 1 E 1 E N {183,187,189} E N "_Button" E E
+ E E
+0 0 0 0 0 0
+E E E
+0
+2
+LANG:10000 0 
+LANG:10001 0 
+
+3
+"layoutAlignment" "AlignCenter"
+"dashclr"N "_Transparent"
+"antiAliased" "0"
+E E 0 1 1 1 1 E 1.065989847715736 0 1.056818181818182 -141.8426395939086 -14.90909090909092 1 E 134 16 331 104
+6 13
+"recBackgroundNumber"
+""
+1 15 75 E E E 1 E 1 E N "_Transparent" E N "QC_OK" E E
+ E E
+13 0 0 0 0 0
+E E E
+0
+2
+LANG:10000 0 
+LANG:10001 0 
+
+4
+"layoutAlignment" "AlignNone"
+"dashclr"N "_Transparent"
+"antiAliased" "1"
+"cornerRadius" "6"
+E E 0 1 3 2 1 E 1 0 1 -7.500000000000057 -20 1 E 15 75 90 110
+2 2
+"txtTitle"
+""
+1 93 12 E E E 1 E 1 E N "DavyGrey" E N "_Window" E E
+ E E
+2 0 0 0 0 0
+E E E
+0
+2
+LANG:10000 0 
+LANG:10001 0 
+
+4
+"sizePolicy" "Fixed Fixed"
+"layoutAlignment" "AlignCenter"
+"dashclr"N "_Transparent"
+"antiAliased" "1"
+E E 0 1 2 1 1 E U  0 E 93 12 203 30
+0 2 2 "0s" 0 0 0 64 0 0  93 12 1
+2
+LANG:10000 26 Arial,-1,13,5,75,0,0,0,0,0
+LANG:10001 26 Arial,-1,13,5,75,0,0,0,0,0
+0 2
+LANG:10000 3 ...
+LANG:10001 3 ...
+2 4
+"txtDetailText"
+""
+1 93 35 E E E 1 E 1 E N "DavyGrey" E N "_Window" E E
+ E E
+4 0 0 0 0 0
+E E E
+0
+2
+LANG:10000 0 
+LANG:10001 0 
+
+4
+"sizePolicy" "Fixed Fixed"
+"layoutAlignment" "AlignCenter"
+"dashclr"N "_Transparent"
+"antiAliased" "1"
+E E 0 1 2 1 1 E U  0 E 93 35 104 66
+0 2 2 "0s" 0 0 0 192 0 0  93 35 2
+2
+LANG:10000 26 Arial,-1,12,5,50,0,0,0,0,0
+LANG:10001 26 Arial,-1,12,5,50,0,0,0,0,0
+0 2
+LANG:10000 3 ...
+LANG:10001 3 ...
+2
+LANG:10000 26 Arial,-1,12,5,50,0,0,0,0,0
+LANG:10001 26 Arial,-1,12,5,50,0,0,0,0,0
+0 2
+LANG:10000 0 
+LANG:10001 0 
+2 5
+"txtNumber"
+""
+1 11.05706421595714 57.25 E E E 1 E 1 E N "QC_Text" E N "_Window" E E
+ E E
+5 0 0 0 0 0
+E E E
+0
+2
+LANG:10000 0 
+LANG:10001 0 
+
+4
+"sizePolicy" "Fixed Fixed"
+"layoutAlignment" "AlignCenter"
+"dashclr"N "_Transparent"
+"antiAliased" "1"
+E E 0 1 2 1 1 E U  0 E 11.05706421595714 59.25 78.94293578404275 85.75
+0 2 2 "0s" 0 0 0 65 0 0  11.05706421595714 59.25 1
+2
+LANG:10000 26 Arial,-1,24,5,75,0,0,0,0,0
+LANG:10001 26 Arial,-1,24,5,75,0,0,0,0,0
+0 2
+LANG:10000 4 9999
+LANG:10001 4 9999
+2 8
+"txtGoodRange"
+""
+1 95 77 E E E 1 E 1 E N "DavyGrey" E N "_Window" E E
+ E E
+8 0 0 0 0 0
+E E E
+0
+2
+LANG:10000 10 Good range
+LANG:10001 0 
+
+4
+"sizePolicy" "Fixed Fixed"
+"layoutAlignment" "AlignCenter"
+"dashclr"N "_Transparent"
+"antiAliased" "1"
+E E 0 1 2 1 1 E U  0 E 93 68 211 95
+0 2 2 "0s" 0 0 0 64 0 0  93 68 1
+2
+LANG:10000 26 Arial,-1,13,5,75,0,0,0,0,0
+LANG:10001 26 Arial,-1,13,5,75,0,0,0,0,0
+0 2
+LANG:10000 3 ...
+LANG:10001 3 ...
+6 12
+"recIndicator"
+""
+1 255.0000000000001 115 E E E 1 E 1 E N "_Transparent" E N {255,255,255} E E
+ E E
+12 0 0 0 0 0
+E E E
+0
+2
+LANG:10000 0 
+LANG:10001 0 
+
+3
+"layoutAlignment" "AlignNone"
+"dashclr"N "_Transparent"
+"antiAliased" "0"
+E E 0 1 3 2 1 E 1 0 1 -190.0000000000001 -65 2  1 0  "pictures/QC_Icons/CCN.svg" 4294967295 E 255.0000000000001 115 215 75
+6 14
+"clkframe"
+""
+1 213 97 E E E 1 E 1 E N "_Transparent" E N "_Transparent" E E
+ E E
+14 0 0 0 0 0
+E E E
+0
+2
+LANG:10000 0 
+LANG:10001 0 
+
+3
+"layoutAlignment" "AlignNone"
+"dashclr"N "_Transparent"
+"antiAliased" "0"
+"main()
+{
+  if (strpos(getDetailText(),\"CtrlPP\") != 0)
+  {
+    this.visible = FALSE;
+  }
+}" 0
+ "main(mapping event)
+{
+  if (strpos(getDetailText(),\"CtrlPP\") == 0)
+  {
+    if (shapeExists(myModuleName()+\".staticTests:registerCard\"))
+      setValue(myModuleName()+\".staticTests:registerCard\",\"namedActiveRegister\",\"details\");
+  } 
+}" 0
+ 0 1 3 2 1 E U  1 E 213 97 1.000000000000028 1.999999999999993
+0
+LAYER, 1 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 2 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 3 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 4 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 5 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 6 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 7 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+0

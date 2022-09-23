@@ -1,0 +1,325 @@
+V 14
+3
+LANG:10000 11 staticTests
+LANG:10001 11 staticTests
+LANG:10027 11 staticTests
+PANEL,-1 -1 881 340 N "white" 0
+"//--------------------------------------------------------------------------------
+void main()
+{
+  while( !dpExists(\"_CtrlCommandInterface_StaticTests\") ||
+         !dpExists(\"_CtrlppCheck\") )
+    delay(1); // wait till created by update script
+     
+  dpConnect(\"filter_cb\", TRUE, \"_CtrlppCheck.filter.id\", \"_CtrlppCheck.filter.severity\");
+  dpConnect(\"update_cb\", FALSE, \"_CtrlCommandInterface_StaticTests.Command\");
+}
+
+dyn_string disabledIds, disabledSeverities;
+void filter_cb(const string dpe1, const dyn_string &ids, const string dpe2, const dyn_string &severities)
+{
+  disabledIds = ids;
+  disabledSeverities = severities;
+//   if ( !isAnswer() )
+  
+  string str;
+  dpGet(\"_CtrlCommandInterface_StaticTests.Command\", str);
+  update_cb(\"_CtrlCommandInterface_StaticTests.Command\", str);
+}
+
+bool isErrorFiltered(const mapping &err)
+{
+  const string msg = err[\"msg\"];
+  if ( msg == \"\" )
+    return TRUE; // demo licence ?!?!
+  
+  const string id = err[\"id\"];
+  if ( dynContains(disabledIds, id)  )
+    return FALSE;
+    
+  const string severity = err[\"severity\"];
+  if ( dynContains(disabledSeverities, severity)  )
+    return FALSE;
+  
+  return TRUE;
+}
+
+//--------------------------------------------------------------------------------
+void update_cb(const string dpe, const string json)
+{
+  // decode json first
+  mapping map = jsonDecode(json);
+  
+  if ( mappinglen(map) <= 0 )
+    return;
+  
+  // set path
+  string scriptPath = map[\"path\"];
+  shape sh;
+  
+  if ( scriptPath == \"\" )
+    path.visible(FALSE);
+//     scriptPath = \"???\";
+  
+  path.text(scriptPath);
+  
+  // script data
+  mapping scriptData = map[\"script\"];
+  mixed count;
+  bool pass;
+  
+  //------------------------------------------------------------------------------
+  // widget - CCN
+  sh = getShape(\"CCN\");
+  invokeMethod(sh, \"setGoodRange\", \"\");
+  invokeMethod(sh, \"setNumber\", (long)scriptData[\"CCN\"]);
+  invokeMethod(sh, \"setErrorPoints\", \"\");
+    
+  //------------------------------------------------------------------------------
+  // widget - CountOfFunctions
+  // @todo add good range in to ScriptData class
+  sh = getShape(\"countOfLines\");
+  count = (int)scriptData[\"countOfLines\"];
+  int ll = scriptData[\"NLOC.min\"];
+  int hl = scriptData[\"NLOC.max\"];
+  pass = (ll <= count) && (count <= hl);
+  invokeMethod(sh, \"setGoodRange\", ll + \" - \" + hl);
+  invokeMethod(sh, \"setNumber\", count);
+  invokeMethod(sh, \"setErrorPoints\", pass ? 0 : 1);
+    
+  //------------------------------------------------------------------------------
+  // widget - NLOC - NoOfLinesOfCode
+  sh = getShape(\"NLOC\");
+  invokeMethod(sh, \"setGoodRange\", \"\");
+  invokeMethod(sh, \"setNumber\", (long)scriptData[\"NLOC\"]);
+  invokeMethod(sh, \"setErrorPoints\", \"\");
+    
+  //------------------------------------------------------------------------------
+  // widget - COF - CountOfFunctions
+  sh = getShape(\"COF\");
+  count = (int)scriptData[\"countOfFunctions\"];  
+  pass = (scriptData[\"countOfFunctions.min\"] <= count) && (count <= scriptData[\"countOfFunctions.max\"]);
+  invokeMethod(sh, \"setGoodRange\", scriptData[\"countOfFunctions.min\"] + \" - \" + scriptData[\"countOfFunctions.max\"]);
+  invokeMethod(sh, \"setNumber\", count);
+  invokeMethod(sh, \"setErrorPoints\", pass ? 0 : 1) ;
+    
+  //------------------------------------------------------------------------------
+  // widget - avgCCN - average CCN
+  sh = getShape(\"avgCCN\");
+  count = (float)scriptData[\"CCN.avg\"];  
+  pass = count <= scriptData[\"CCN.avg.max\"];
+  invokeMethod(sh, \"setGoodRange\", \"<= \" + scriptData[\"CCN.avg.max\"]);
+  invokeMethod(sh, \"setNumber\", count);
+  invokeMethod(sh, \"setErrorPoints\", pass ? 0 : 1) ;
+  
+  //------------------------------------------------------------------------------
+  // widget - avgCounOfLines - average count of lines (lines per func incl comments and empty lines)
+  sh = getShape(\"avgCounOfLines\");
+  count = (float)scriptData[\"countOfLines.avg\"];  
+  pass = TRUE;
+  invokeMethod(sh, \"setGoodRange\", \"\");
+  invokeMethod(sh, \"setNumber\", count);
+  invokeMethod(sh, \"setErrorPoints\", pass ? 0 : 1) ;  
+  
+  //------------------------------------------------------------------------------
+  // widget - avgNLOC - average count of code lines
+  sh = getShape(\"avgNLOC\");
+  invokeMethod(sh, \"setGoodRange\", \"\");
+  invokeMethod(sh, \"setNumber\", (float)scriptData[\"NLOC.avg\"]);
+  invokeMethod(sh, \"setErrorPoints\", \"\");
+  
+  //------------------------------------------------------------------------------
+  // widget - avgNLOC - average count of params
+  sh = getShape(\"countOfParams\");
+  invokeMethod(sh, \"setGoodRange\", \"\");
+  invokeMethod(sh, \"setNumber\", (float)scriptData[\"countOfParams.avg\"]);
+  invokeMethod(sh, \"setErrorPoints\", \"\");
+    
+  update_ctrlppData(map);
+  
+}
+
+void update_ctrlppData(const mapping &map)
+{
+  //------------------------------------------------------------------------------
+  // cppCheck data
+  // filter by severity
+  int errCount, perfCount, portCount, styleCount;
+  
+  // update details table
+  shape sh = getShape(\"table\");  
+  sh.deleteAllLines();
+  
+  dyn_anytype errors = map[\"ctrlPpCheck\"];
+
+  int newLineIdx = 0;
+  for(int i = 1; i <= dynlen(errors); i++)
+  {
+    mapping err = errors[i];
+    const string id = err[\"id\"];    
+    string severity = err[\"severity\"];
+    
+    if ( (id == \"debug\") || (severity == \"debug\") )
+    {
+      severity = \"style\";
+      string msg = err[\"msg\"];
+      strreplace(msg, \"SymbolDatabase::isFunction found \", \"\");
+      strreplace(msg, \"rreturn type:\", \"return type / void:\");
+      err[\"msg\"] = msg;
+    }
+        
+    if ( !isErrorFiltered(err) )
+      continue;
+    
+    if ( err[\"msg\"] != \"\" )
+    {
+      sh.insertLineN(newLineIdx, \"prio\", severity, \"line\", err[\"line\"], \"descr\", err[\"msg\"], \"ID\", err[\"id\"], \"path\", err[\"path\"]);
+      string verbose = err[\"verbose\"];
+      strreplace(verbose, \". \", \".\\n\"); // every new sentece begin in new line
+      sh.cellToolTipRC(newLineIdx, \"descr\", verbose);
+      newLineIdx++;
+    } 
+    
+    if ( severity == \"error\" || (severity == \"warning\") )
+      errCount++;
+    else if ( severity == \"performance\" )
+      perfCount++;
+    else if ( severity == \"portability\" )
+      portCount++;
+    else if ( (severity == \"information\") || (severity == \"style\") )
+      styleCount++;
+  }
+  
+  sh.sort(makeDynBool(false,true), \"prio\",\"line\");
+  sh.currentCell(0,0);
+    
+  // widget - ctrlPpCheckErrors - count of errors
+  sh = getShape(\"ctrlPpCheckErrors\");
+  invokeMethod(sh, \"setGoodRange\", \"== 0\");
+  invokeMethod(sh, \"setNumber\", errCount);
+  invokeMethod(sh, \"setErrorPoints\", (int) errCount > 0);
+    
+  // widget - ctrlPpCheckPerformance - count of performances problems
+  sh = getShape(\"ctrlPpCheckPerformance\");
+  invokeMethod(sh, \"setGoodRange\", \"== 0\");
+  invokeMethod(sh, \"setNumber\", perfCount);
+  invokeMethod(sh, \"setErrorPoints\", (int) errCount > 0);
+  
+  // widget - ctrlPpCheckPortability - count of portability problems
+  sh = getShape(\"ctrlPpCheckPortability\");
+  invokeMethod(sh, \"setGoodRange\", \"== 0\");
+  invokeMethod(sh, \"setNumber\", portCount);
+  invokeMethod(sh, \"setErrorPoints\", (int) errCount > 0);
+  
+  // widget - ctrlPpCheckInfoStyle - info and style counter
+  sh = getShape(\"ctrlPpCheckInfoStyle\");
+  invokeMethod(sh, \"setGoodRange\", \"== 0\");
+  invokeMethod(sh, \"setNumber\", styleCount);
+  invokeMethod(sh, \"setErrorPoints\", (int) errCount > 0);
+}
+" 0
+ E E E E 1 -1 -1 0  70 10
+""0  1
+E E 3
+"CBRef" "1"
+"EClose" E
+"dpi" "96"
+2 1 0 0 0 0 0
+""
+DISPLAY_LAYER, 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0
+LAYER, 0 
+2
+LANG:10000 0 
+LANG:10001 0 
+28 1
+"registerCard"
+""
+1 0 0 E E E 1 E 1 E N "DavyGrey" E N "white" E E
+ E E
+0 0 0 0 0 0
+E E E
+0
+3
+LANG:10000 0 
+LANG:10001 0 
+LANG:10027 0 
+
+1
+"layoutAlignment" "AlignNone"
+3
+LANG:10000 26 Arial,-1,13,5,50,0,0,0,0,0
+LANG:10001 26 Arial,-1,13,5,50,0,0,0,0,0
+LANG:10027 26 Arial,-1,13,5,50,0,0,0,0,0
+0  -2 -2 882 341
+E3 "dashBoard" 3
+LANG:10000 9 Dashboard
+LANG:10001 9 Dashboard
+LANG:10027 9 Dashboard
+1 "vision/scriptEditor/staticTests/dashBoard.pnl" 2
+LANG:10000 0 
+LANG:10001 0 
+0
+
+"details" 3
+LANG:10000 8 Problems
+LANG:10001 8 Problems
+LANG:10027 8 Problems
+1 "vision/scriptEditor/staticTests/details.pnl" 2
+LANG:10000 0 
+LANG:10001 0 
+0
+
+"settings" 3
+LANG:10000 8 Settings
+LANG:10001 8 Settings
+LANG:10027 8 Settings
+1 "vision/scriptEditor/staticTests/settings.pnl" 2
+LANG:10000 0 
+LANG:10001 0 
+0
+
+
+0
+LAYER, 1 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 2 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 3 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 4 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 5 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 6 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 7 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+4 0 "LAYOUT_GROUP0" -1
+1 0 
+1 
+
+"S 1" "0 0 1 1"
+"" ""
+0 1 0 0
+0

@@ -1,0 +1,5 @@
+assert.missingFiles,Has files
+reason.missingFiles,Application doesn´t contain any scripts, libs or panels.
+syntaxMsgs,Details
+assert.isSyntaxValid,Is syntax valid
+reason.isSyntaxValid,Syntax error found: $msg

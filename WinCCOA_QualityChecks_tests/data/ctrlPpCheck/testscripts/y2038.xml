@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<results version="2">
+    <ctrlppcheck version="2.0"/>
+    <errors>
+        <error id="y2038overflow" severity="warning" msg="Possible value over-flow from time to int" verbose="Possible value over-flow when January 19th, 2038 at 03:14:07 GMT reached. The value of function getCurrentTime() with return type &apos;time&apos; is not safely casted to (int)getCurrentTime()." cwe="758">
+            <location file0="" file="" line="25"/>
+            <symbol>getCurrentTime</symbol>
+            <symbol>int</symbol>
+        </error>
+        <error id="y2038overflow" severity="warning" msg="Possible value over-flow from time to int" verbose="Possible value over-flow when January 19th, 2038 at 03:14:07 GMT reached. The value of c.t of type &apos;time&apos; is not safely casted to variable &apos;i&apos; of type &apos;int&apos;." cwe="758">
+            <location file0="" file="" line="45"/>
+            <symbol>.</symbol>
+            <symbol>i</symbol>
+        </error>
+        <error id="y2038canNotCastError" severity="warning" msg="The value of (string)i of type &apos;string&apos; can not be safely casted to variable &apos;t&apos; of type &apos;time&apos;." verbose="The value of (string)i of type &apos;string&apos; can not be safely casted to variable &apos;t&apos; of type &apos;time&apos;." cwe="758">
+            <location file0="" file="" line="53"/>
+            <symbol>(</symbol>
+            <symbol>t</symbol>
+        </error>
+        <error id="y2038overflow" severity="warning" msg="Possible value over-flow from time to int" verbose="Possible value over-flow when January 19th, 2038 at 03:14:07 GMT reached. The value of variable &apos;t&apos; of type &apos;time&apos; is not safely casted to (int)t." cwe="758">
+            <location file0="" file="" line="56"/>
+            <symbol>t</symbol>
+            <symbol>int</symbol>
+        </error>
+        <error id="y2038overflow" severity="warning" msg="Possible value over-flow from time to int" verbose="Possible value over-flow when January 19th, 2038 at 03:14:07 GMT reached. The value of variable &apos;t&apos; of type &apos;time&apos; is not safely casted to c.i of type &apos;int&apos;." cwe="758">
+            <location file0="" file="" line="65"/>
+            <symbol>t</symbol>
+            <symbol>.</symbol>
+        </error>
+        <error id="y2038overflow" severity="warning" msg="Possible value over-flow from time to int" verbose="Possible value over-flow when January 19th, 2038 at 03:14:07 GMT reached. The value of function getCurrentTime() with return type &apos;time&apos; is not safely casted to variable &apos;i&apos; of type &apos;int&apos;." cwe="758">
+            <location file0="" file="" line="66"/>
+            <symbol>getCurrentTime</symbol>
+            <symbol>i</symbol>
+        </error>
+        <error id="y2038overflow" severity="warning" msg="Possible value over-flow from time to int" verbose="Possible value over-flow when January 19th, 2038 at 03:14:07 GMT reached. The value of function retT() with return type &apos;time&apos; is not safely casted to variable &apos;i&apos; of type &apos;int&apos;." cwe="758">
+            <location file0="" file="" line="67"/>
+            <symbol>retT</symbol>
+            <symbol>i</symbol>
+        </error>
+        <error id="y2038overflow" severity="warning" msg="Possible value over-flow from time to int" verbose="Possible value over-flow when January 19th, 2038 at 03:14:07 GMT reached. The value of function retT() with return type &apos;time&apos; is not safely casted to variable &apos;i&apos; of type &apos;int&apos;." cwe="758">
+            <location file0="" file="" line="68"/>
+            <symbol>retT</symbol>
+            <symbol>i</symbol>
+        </error>
+        <error id="y2038valueLost" severity="warning" msg="Possible value lost from int to time" verbose="Possible value lost when January 19th, 2038 at 03:14:07 GMT reached. The value of variable &apos;i&apos; of type &apos;int&apos; is not safely casted to Argument 2 of function formatTime() of type &apos;time&apos;." cwe="758">
+            <location file0="" file="" line="72"/>
+            <symbol>i</symbol>
+            <symbol>Argument 2 of function formatTime()</symbol>
+        </error>
+        <error id="y2038valueLost" severity="warning" msg="Possible value lost from int to time" verbose="Possible value lost when January 19th, 2038 at 03:14:07 GMT reached. The value of variable &apos;i&apos; of type &apos;int&apos; is not safely casted to variable &apos;tParam&apos; of type &apos;time&apos;." cwe="758">
+            <location file0="" file="" line="78"/>
+            <symbol>i</symbol>
+            <symbol>tParam</symbol>
+        </error>
+    </errors>
+</results>

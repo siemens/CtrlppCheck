@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<results version="2">
+    <cppcheck version=""/>
+    <errors>
+        <error id="badFunc_style_DebugN" severity="style" msg="Use throwError() instead of DebugN() functions" verbose="Use throwError() instead of DebugN() functions">
+            <location file0="" file="" line="4"/>
+        </error>
+        <error id="badFunc_style_DebugN" severity="style" msg="Use throwError() instead of DebugN() functions" verbose="Use throwError() instead of DebugN() functions">
+            <location file0="" file="" line="6"/>
+        </error>
+        <error id="badFunc_style_DebugN" severity="style" msg="Use throwError() instead of DebugN() functions" verbose="Use throwError() instead of DebugN() functions">
+            <location file0="" file="" line="8"/>
+        </error>
+    </errors>
+</results>

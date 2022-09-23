@@ -1,0 +1,327 @@
+V 14
+2
+LANG:10000 0 
+LANG:10001 0 
+PANEL,-1 -1 871 310 N "white" 0
+E E E E E 1 -1 -1 0  40 90
+""0  1
+E E 3
+"CBRef" "1"
+"EClose" E
+"dpi" "96"
+2 1 0 0 0 0 1 0
+""
+DISPLAY_LAYER, 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0
+LAYER, 0 
+2
+LANG:10000 0 
+LANG:10001 0 
+14 6
+"path"
+""
+1 0.8301526717557248 15.8857142857143 E E E 1 E 1 E N "_WindowText" E N "_Window" E E
+ E E
+0 0 0 0 0 0
+E E E
+0
+2
+LANG:10000 0 
+LANG:10001 0 
+
+1
+"layoutAlignment" "AlignNone"
+2
+LANG:10000 26 Arial,-1,12,5,50,0,0,0,0,0
+LANG:10001 26 Arial,-1,12,5,50,0,0,0,0,0
+0  -2 -2 872 22
+2 "0s" 0 0 0 0 0 -1  E E E
+1 263 0 "" 0
+0
+1 271 1 "" 0
+0
+1 279 2 "" 0
+0
+1 287 3 "" 0
+0
+1 295 4 "" 0
+0
+1 303 5 "" 0
+0
+1 311 6 "" 0
+0
+1 319 7 "" 0
+0
+1 327 8 "" 0
+0
+1 335 9 "" 0
+0
+1 343 10 "" 0
+0
+1 351 11 "" 0
+0
+2 91
+"txtCtrlPPCheck"
+""
+1 160 108.5 E E E 1 E 1 E N "DavyGrey" E N "_Window" E E
+ E E
+11 0 0 0 0 0
+E E E
+0
+2
+LANG:10000 0 
+LANG:10001 0 
+
+4
+"sizePolicy" "Fixed Fixed"
+"layoutAlignment" "AlignCenter"
+"dashclr"N "_Transparent"
+"antiAliased" "1"
+E E 0 1 2 1 1 E 5.957741185041178e-017 -0.9 0.972972972972973 5.51091059616309e-017 -103.1216216216216 267.9 0 E 183 108.5 259 123
+0 2 2 "0s" 0 0 0 65 0 0  221 108.5 1
+2
+LANG:10000 26 Arial,-1,12,5,75,0,0,0,0,0
+LANG:10001 26 Arial,-1,12,5,75,0,0,0,0,0
+0 2
+LANG:10000 12 CtrlPP Check
+LANG:10001 12 CtrlPP Check
+2 176
+"txtPerFile"
+""
+1 160 108.5 E E E 1 E 1 E N "DavyGrey" E N "_Window" E E
+ E E
+12 0 0 0 0 0
+E E E
+0
+2
+LANG:10000 0 
+LANG:10001 0 
+
+4
+"sizePolicy" "Fixed Fixed"
+"layoutAlignment" "AlignCenter"
+"dashclr"N "_Transparent"
+"antiAliased" "1"
+E E 0 1 2 1 1 E 5.957741185041178e-017 -0.9038461538461541 0.972972972972973 5.534461496146702e-017 -103.1216216216216 364.7500000000001 0 E 197 108.5 245 123
+0 2 2 "0s" 0 0 0 65 0 0  221 108.5 1
+2
+LANG:10000 26 Arial,-1,12,5,75,0,0,0,0,0
+LANG:10001 26 Arial,-1,12,5,75,0,0,0,0,0
+0 2
+LANG:10000 8 per File
+LANG:10001 8 per File
+2 177
+"txtPerFktn"
+""
+1 160 108.5 E E E 1 E 1 E N "WF_Text" E N "_Window" E E
+ E E
+13 0 0 0 0 0
+E E E
+0
+2
+LANG:10000 0 
+LANG:10001 0 
+
+4
+"sizePolicy" "Fixed Fixed"
+"layoutAlignment" "AlignCenter"
+"dashclr"N "_Transparent"
+"antiAliased" "1"
+E E 0 1 2 1 1 E 5.957741185041178e-017 -0.9107142857142856 0.972972972972973 5.576516674688841e-017 -103.1216216216216 462.2678571428571 0 E 195 108.5 247 123
+0 2 2 "0s" 0 0 0 65 0 0  221 108.5 1
+2
+LANG:10000 26 Arial,-1,12,5,75,0,0,0,0,0
+LANG:10001 26 Arial,-1,12,5,75,0,0,0,0,0
+0 2
+LANG:10000 8 per Fktn
+LANG:10001 8 per Fctn
+32 262
+"SPACER1"
+""
+1 0 309 E E E 1 E 1 E N {0,0,0} E N {255,255,255} E E
+ E E
+14 0 0 0 0 0
+E E E
+0
+2
+LANG:10000 0 
+LANG:10001 0 
+
+3
+"transparentForMouse" ""
+"sizePolicy" "Ignored Expanding"
+"layoutAlignment" "AlignNone"
+ 0 309 870 310 2
+0
+LAYER, 1 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 2 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 3 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 4 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 5 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 6 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 7 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+3 0 "COF" 13
+"layoutAlignment" "AlignNone"
+"UDP title" "string Count of Funct."
+"UDP detailText" "string Count of functions"
+"" ""
+"vision/scriptEditor/staticTests/widgets/dashBoardInfo.pnl" 28 73.5 T 1 1 0 1 629 41.5
+0
+3 1 "avgCCN" 12
+"layoutAlignment" "AlignNone"
+"UDP title" "string Average CCN"
+"UDP detailText" "string Complexity (McCabe)"
+"" ""
+"vision/scriptEditor/staticTests/widgets/dashBoardInfo.pnl" 410.0000000000001 51.99999999999999 T 2 1 0 1 -392.0000000000002 159
+0
+3 2 "countOfLines" 13
+"layoutAlignment" "AlignNone"
+"UDP title" "string All Lines"
+"UDP detailText" "string All lines of file"
+"" ""
+"vision/scriptEditor/staticTests/widgets/dashBoardInfo.pnl" 11.00000000000011 200 T 3 1 0 0.9999999999999994 219.9999999999999 -84.99999999999984
+0
+3 3 "avgCounOfLines" 12
+"layoutAlignment" "AlignNone"
+"UDP title" "string Average Lines"
+"UDP detailText" "string All lines of function"
+"" ""
+"vision/scriptEditor/staticTests/widgets/dashBoardInfo.pnl" 411.0000000000002 202 T 4 1 0 0.9999999999999998 -180.0000000000003 9.000000000000055
+0
+3 4 "ctrlPpCheckErrors" 14
+"layoutAlignment" "AlignNone"
+"UDP detailText" "string CtrlPP Errors & Warnings"
+"UDP title" "string Errors"
+"UDP detailText" "string CtrlPP Errors"
+"" ""
+"vision/scriptEditor/staticTests/widgets/dashBoardInfo.pnl" 410.0000000000001 51.99999999999999 T 5 1 0 0.9999999999999999 -392.0000000000002 -32.99999999999997
+0
+3 5 "CCN" 13
+"layoutAlignment" "AlignNone"
+"UDP title" "string CCN"
+"UDP detailText" "string Complexity (McCabe)"
+"" ""
+"vision/scriptEditor/staticTests/widgets/dashBoardInfo.pnl" 410.0000000000001 51.99999999999999 T 5 1 0 1 -392.0000000000002 63.00000000000001
+0
+3 6 "NLOC" 13
+"layoutAlignment" "AlignNone"
+"UDP title" "string NLOC"
+"UDP detailText" "string All codelines of file"
+"" ""
+"vision/scriptEditor/staticTests/widgets/dashBoardInfo.pnl" 11.00000000000011 200 T 6 1 0 0.9999999999999997 432.9999999999999 -84.9999999999999
+0
+3 7 "avgNLOC" 12
+"layoutAlignment" "AlignNone"
+"UDP title" "string Average NLOC"
+"UDP detailText" "string All codelines of function"
+"" ""
+"vision/scriptEditor/staticTests/widgets/dashBoardInfo.pnl" 411.0000000000002 202 T 7 1 0 0.9999999999999998 32.99999999999977 9.000000000000055
+0
+3 8 "countOfParams" 12
+"layoutAlignment" "AlignNone"
+"UDP title" "string Average Params"
+"UDP detailText" "string Average parameter"
+"" ""
+"vision/scriptEditor/staticTests/widgets/dashBoardInfo.pnl" 28 73.5 T 8 1 0 0.9999999999999999 629 137.5
+0
+3 9 "ctrlPpCheckPerformance" 14
+"layoutAlignment" "AlignNone"
+"UDP title" "string Performance"
+"UDP detailText" "string CtrlPP Performance"
+"" ""
+"vision/scriptEditor/staticTests/widgets/dashBoardInfo.pnl" 410.0000000000001 51.99999999999999 T 9 1 0 0.9999999999999999 -179.0000000000002 -32.99999999999997
+0
+3 10 "ctrlPpCheckPortability" 14
+"layoutAlignment" "AlignNone"
+"UDP title" "string Portability"
+"UDP detailText" "string CtrlPP Portability"
+"" ""
+"vision/scriptEditor/staticTests/widgets/dashBoardInfo.pnl" 410.0000000000001 51.99999999999999 T 10 1 0 0.9999999999999999 33.99999999999987 -32.99999999999997
+0
+3 11 "ctrlPpCheckInfoStyle" 14
+"layoutAlignment" "AlignNone"
+"UDP detailText" "string CtrlPP Info & Style"
+"UDP title" "string InfoStyle"
+"UDP detailText" "string CtrlPP Info/Style"
+"" ""
+"vision/scriptEditor/staticTests/widgets/dashBoardInfo.pnl" 410.0000000000001 51.99999999999999 T 11 0.9999999999999999 0 0.9999999999999999 247 -32.99999999999997
+0
+4 12 "LAYOUT_GROUP1" 15
+1 4 
+177 
+1 3 7 8 
+"S 177" "0 0 1 1"
+"G 1" "1 0 1 1"
+"G 3" "2 0 1 1"
+"G 7" "3 0 1 1"
+"G 8" "4 0 1 1"
+"" ""
+0 1 0 1 0
+4 13 "LAYOUT_GROUP2" 15
+1 4 
+176 
+0 2 5 6 
+"S 176" "0 0 1 1"
+"G 0" "4 0 1 1"
+"G 2" "2 0 1 1"
+"G 5" "1 0 1 1"
+"G 6" "3 0 1 1"
+"" ""
+0 1 0 1 0
+4 14 "LAYOUT_GROUP3" 15
+1 4 
+91 
+4 9 10 11 
+"S 91" "0 0 1 1"
+"G 4" "1 0 1 1"
+"G 9" "2 0 1 1"
+"G 10" "3 0 1 1"
+"G 11" "4 0 1 1"
+"" ""
+0 1 0 1 0
+4 15 "LAYOUT_GROUP4" 16
+1 3 
+6 
+12 13 14 
+"S 6" "0 0 1 1"
+"G 12" "3 0 1 1"
+"G 13" "2 0 1 1"
+"G 14" "1 0 1 1"
+"" ""
+0 2 0 1 0
+4 16 "LAYOUT_GROUP5" -1
+1 1 
+262 
+15 
+"S 262" "1 0 1 1"
+"G 15" "0 0 1 1"
+"" ""
+0 2 0 1 0
+0

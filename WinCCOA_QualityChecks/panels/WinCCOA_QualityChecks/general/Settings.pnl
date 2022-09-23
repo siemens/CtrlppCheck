@@ -1,0 +1,703 @@
+V 14
+2
+LANG:10001 0 
+LANG:10000 0 
+PANEL,-1 -1 1200 600 N "white" 0
+E E E E E 1 -1 -1 0  40 50
+""0  1
+E "#uses \"classes/Variables/Mapping\"
+#uses \"classes/QualityGates/QgSettings\"
+
+dyn_mapping settings;
+dyn_mapping default_settings = QgSettings::getAllSettingsAsMapping(true);
+bool saved = true;
+
+const string IDPATH_DELIMITER  = \".\";
+
+void editSettings(string id)
+{
+  dyn_float float_retValue;
+  dyn_string string_retValue;
+  
+  dyn_string dollarParameter = makeDynString(\"$id:\" + id, \"$description:\" + limitsTree.getText(id, 1),
+                                             \"$low_limit:\" + limitsTree.getText(id, 2),
+                                             \"$high_limit:\" + limitsTree.getText(id, 3),
+                                             \"$reference_values:\" + limitsTree.getText(id, 4),
+                                             \"$score_points:\" + limitsTree.getText(id, 5),
+                                             \"$enabled:\" + limitsTree.getText(id, 6),
+                                             \"$default_low_limit:\" + getDefaultValue(id, \"lowLimit\"),
+                                             \"$default_high_limit:\" + getDefaultValue(id, \"highLimit\"),
+                                             \"$default_reference_values:\" + getDefaultValue(id, \"referenceValues\"),
+                                             \"$default_score_points:\" + getDefaultValue(id, \"scorePoints\"),
+                                             \"$default_enabled:\" + getDefaultValue(id, \"enabled\"));
+      
+  if (limitsTree.getText(id, 7) == \"...\")
+  {
+    ChildPanelOnCentralModalReturn(\"WinCCOA_QualityChecks/general/SettingsEditor.pnl\", \"Settings Editor\", dollarParameter, float_retValue, string_retValue);
+  }
+  
+  if (dynlen(float_retValue) > 0)
+  {
+    //numbers
+    setSettingsValue(id, 2, float_retValue[1], \"lowLimit\");
+    setSettingsValue(id, 3, float_retValue[2], \"highLimit\");
+    setSettingsValue(id, 5, float_retValue[3], \"scorePoints\");
+  }
+
+  if (dynlen(string_retValue) > 0)
+  {
+    //others
+    setSettingsValue(id, 4, string_retValue[1], \"referenceValues\");
+    setSettingsValue(id, 6, (bool) string_retValue[2], \"enabled\");
+  }
+}
+
+
+/** 
+  @param id 
+  @param value 
+  @param setting 
+  @brief Writes an single value to an setting specified by the id
+*/
+void writeChangedValuesToSettings(string id, anytype value, string setting)
+{
+  if ( value == -1 || value == \"-1\" )
+  {
+    return;
+  }
+  
+  mapping check = getCheckSettingFromId(settings, id); 
+
+  if ( mappingHasKey(check, setting) == false )
+  {
+    return;
+  }
+     
+  if ( setting == \"referenceValues\" )
+  {
+    removeSpacesReturns(value);
+    dyn_mixed values = strsplit(value, \",\");
+    
+    if ( compareReferenceValues(values, check[setting]) == false )
+    {
+      check[setting] = values;
+      setCheckSettingForId(settings, id, check, true);
+    }  
+  }
+  else if ( value != check[setting] )
+  {
+    check[setting] = value;
+    setCheckSettingForId(settings, id, check, true);
+  }
+}
+
+bool compareReferenceValues(dyn_mixed ref1, dyn_mixed ref2)
+{
+  if ( dynlen(ref1) != dynlen(ref2) )
+  {
+    return false;  
+  }
+  
+  for ( int i = 1; i <= dynlen(ref1); i++ )
+  {
+    if ( ref1[i] != ref2[i] )
+    {
+      return false;
+    }
+  }  
+  
+  
+  return true;
+}
+
+
+/** 
+  @param _settings Defines if the method sets the new settings for the id in the project or default settings
+  @param id 
+  @param check 
+  @brief Sets an check with all its setting to the settings varibale
+*/
+void setCheckSettingForId(dyn_mapping &_settings, string id, mapping check, bool changed)
+{
+  for (int i = 1; i <= dynlen(_settings); i++)
+  {
+    mapping json_data = _settings[i];
+    
+    if (mappingHasKey(json_data, \"settingsVersion\") == false ||
+        mappingHasKey(json_data, \"checks\") == false )
+    {
+      continue;
+    }
+    
+    //determine machting check for id
+    dyn_mapping checks = json_data[\"checks\"];
+
+    for (int j = 1; j <= dynlen(checks); j++)
+    {      
+      if ( mappingHasKey(checks[j], \"id\") )
+      {
+        if ( id == checks[j][\"id\"] )
+        {
+          checks[j] = check;
+          json_data[\"checks\"] = checks;
+          if ( changed )
+          {
+            saved = false;
+            json_data[\"changed\"] = getBasePart(id);
+          }
+          _settings[i] = json_data;
+          return;
+        }
+      }      
+    }
+    
+  }
+}
+
+/** 
+  @param _settings Defines if the fmethod search in the project or default settings
+  @param id 
+  @return get all settings for a specific id as mapping
+*/
+mapping getCheckSettingFromId(dyn_mapping _settings, string id)
+{
+  for (int i = 1; i <= dynlen(_settings); i++)
+  {
+    mapping json_data = _settings[i];
+    
+    if (mappingHasKey(json_data, \"settingsVersion\") == false ||
+        mappingHasKey(json_data, \"checks\") == false )
+    {
+      continue;
+    }
+    
+    //determine machting check for id
+    dyn_mapping checks = json_data[\"checks\"];
+    mapping check;
+
+    for (int j = 1; j <= dynlen(checks); j++)
+    {      
+
+      if ( mappingHasKey(checks[j], \"id\") )
+      {
+        if ( id == checks[j][\"id\"] )
+        {
+          return checks[j];
+        }
+      }      
+    } 
+  }
+  
+  mapping empty;
+  return empty; 
+}
+
+
+/** 
+  @param id 
+  @param column 
+  @param value 
+  @param setting 
+  @brief sets the value for the given setting to the tree and the settints mapping.
+         Also colors the tree cell if there is an difference to the default.
+*/
+void setSettingsValue(string id, int column, anytype value, string setting)
+{
+  if ( value != -1 && value != \"-1\" )
+  {
+    limitsTree.setText(id, column, value);
+    writeChangedValuesToSettings(id, value, setting);
+    
+    if ( setting == \"enabled\" )
+    {
+      if ( value == true)
+      {
+        limitsTree.setIcon(id, column, \"StandardIcons/apply_20.png\");
+      }
+      else
+      {
+        limitsTree.setIcon(id, column, \"StandardIcons/delete_20.png\");
+      }
+    }
+  }
+  
+  anytype default_value = getDefaultValue(id, setting);
+  
+  if ( setting == \"referenceValues\" )
+  {
+    removeSpacesReturns(value);
+    removeSpacesReturns(default_value);
+  }
+  
+  if ( dynlen(default_settings) > 0 
+       && value != default_value
+       && value != -1
+       && value != \"-1\")
+  {  
+    limitsTree.setBackColor(id, column, \"MikadoYellow\");
+  }
+  else
+  {
+    limitsTree.setBackColor(id, column, \"\");
+  }
+}
+
+/** 
+  @param id 
+  @param setting 
+  @return get a single setting (e.g.: high limit) for a specific id.
+*/
+anytype getDefaultValue(string id, string setting)
+{
+  mapping check = getCheckSettingFromId(default_settings, id);
+  
+  Mapping map = Mapping(check);
+  //read settings depeding on the version
+
+  if ( setting != \"referenceValues\" )
+  {
+    return map.getAt(setting, -1);
+  }
+  else
+  {
+    return getReferenceValuesAsString(map.getAt(setting, makeDynMixed(\"-1\")));
+  }
+  
+       
+  return \"\";
+}
+
+
+/** 
+  @param refValues 
+  @return return referenceValues seperated with \", \" as string
+*/
+string getReferenceValuesAsString(dyn_mixed refValues)
+{
+  string refValueString = \"\";
+  for (int i = 1; i <= dynlen(refValues); i++)
+  {
+    if (refValueString != \"\")
+    {
+      refValueString += \", \";
+    }
+    
+    refValueString += refValues[i] ;
+  }
+  
+  return refValueString;
+}
+
+string removeSpacesReturns(string &referenceValues)
+{
+  strreplace(referenceValues, \" \", \"\");
+  strreplace(referenceValues, \"\\n\", \"\");
+}
+
+string getBasePart(const string &id)
+{
+  return substr(id, 0, strpos(id, IDPATH_DELIMITER));
+}
+  
+" 0
+ 3
+"CBRef" "1"
+"EClose" E
+"dpi" "120"
+2 1 0 0 0 0 0
+""
+DISPLAY_LAYER, 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0
+LAYER, 0 
+1
+LANG:10001 0 
+2 29
+"PRIMITIVE_TEXT1"
+""
+1 77.5 29 E E E 1 E 1 E N "DavyGrey" E N "_Window" E E
+ E E
+28 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+4
+"layoutAlignment" "AlignVCenter"
+"dashclr"N "_Transparent"
+"antiAliased" "0"
+"transformable" "0"
+E E 0 1 3 2 1 E 0.9988465974635842 0 1 -55.41061130365657 -9.5 0 E 77.5 29 511 60
+0 2 2 "0s" 0 0 0 192 0 0  77.5 29 1
+2
+LANG:10001 26 Arial,-1,27,5,50,0,0,0,0,0
+LANG:10000 26 Arial,-1,27,5,50,0,0,0,0,0
+0 2
+LANG:10001 31 WinCCOA Quality Checks Settings
+LANG:10000 36 WinCCOA Quality Checks Einstellungen
+32 30
+"SPACER1"
+""
+1 465.0000000000001 0 E E E 1 E 1 E N {0,0,0} E N {255,255,255} E E
+ E E
+29 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+3
+"transparentForMouse" ""
+"sizePolicy" "Expanding Fixed"
+"layoutAlignment" "AlignNone"
+ 465.0000000000001 0 1198.999999999977 69 1
+4 31
+"LINE2"
+""
+1 1 78 E E E 1 E 1 E N "HeaderText" E N {255,255,255} E E
+ E E
+30 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+3
+"layoutAlignment" "AlignNone"
+"dashclr"N "_Transparent"
+"antiAliased" "1"
+E E 0 1 3 2 1 E  1 78 1198 78
+4 32
+"LINE3"
+""
+1 1 521 E E E 1 E 1 E N "HeaderText" E N {255,255,255} E E
+ E E
+31 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+3
+"layoutAlignment" "AlignNone"
+"dashclr"N "_Transparent"
+"antiAliased" "1"
+E E 0 1 3 2 1 E  1 521 1198 521
+13 35
+"PUSH_BUTTON1"
+""
+1 1055 553 E E E 1 E 1 E N "DarkJungle" E N "_Button" E E
+ E E
+34 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+2
+"minimumSize" "125 35"
+"layoutAlignment" "AlignVCenter"
+2
+LANG:10001 26 Arial,-1,13,5,50,0,0,0,0,0
+LANG:10000 26 Arial,-1,13,5,50,0,0,0,0,0
+0  1053 546 1181 584
+
+T 
+2
+LANG:10001 5 Close
+LANG:10000 10 Schließen
+"#uses \"panel\"
+
+main(mapping event)
+{
+  if ( !saved ) 
+  {
+    dyn_float float_retValue;
+    dyn_string string_retValue;
+  
+    dyn_string dollarParameter = makeDynString(\"$1:\" + getCatStr(\"WinCCOA_gedi_ext\", \"close_without_save\"),
+                                               \"$2:\" + getCatStr(\"general\", \"yes\"),
+                                               \"$3:\" + getCatStr(\"general\", \"no\"));
+    
+    ChildPanelOnCentralModalReturn(\"vision/messages/MessageInfo\", getCatStr(\"general\", \"information\"), dollarParameter, float_retValue, string_retValue);    
+    
+    if ( string_retValue[1] != \"true\" )
+    {
+      return;
+    } 
+  }
+  
+  closeDialog();
+}" 0
+ E E E
+32 36
+"SPACER2"
+""
+1 0 530 E E E 1 E 1 E N {0,0,0} E N {255,255,255} E E
+ E E
+35 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+3
+"transparentForMouse" ""
+"sizePolicy" "Expanding Fixed"
+"layoutAlignment" "AlignNone"
+ 0 530 914.9999999999894 599 1
+29 42
+"limitsTree"
+""
+1 0 87 E E E 1 E 1 E N "_WindowText" E N "_Window" E E
+ E E
+41 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+7
+"frameShape" "enum 0"
+"frameShadow" "enum 16"
+"expandsOnDoubleClick" "bool FALSE"
+"horizontalScrollMode" "enum 1"
+"verticalScrollMode" "enum 0"
+"textElideMode" "enum 2"
+"layoutAlignment" "AlignNone"
+2
+LANG:10001 26 Arial,-1,13,5,50,0,0,0,0,0
+LANG:10000 26 Arial,-1,13,5,50,0,0,0,0,0
+0  0 87 1199 512.000000000004
+10 TreeWidget
+2
+0 "doubleClicked" "(string id, int column)"
+"  editSettings(id);"
+0 "clicked" "(string id, int column)"
+"  if ( column == 7)
+  {
+    editSettings(id);
+  }"
+"main()
+{   
+  initTree();
+  fillWithData();
+  this.expandAll();
+  this.alternatingRowColors(true);
+}
+
+void initTree()    
+{
+  this.addColumn(\"Id\");
+  this.addColumn(\"Description\");
+  this.addColumn(\"Low Limit\");
+  this.addColumn(\"High Limit\");
+  this.addColumn(\"Reference Values\");
+  this.setColumnWidthMode(4, TREE_WIDTH_MANUAL);
+  this.setColumnWidth(4, 120);
+  this.addColumn(\"Score Points\");
+  this.addColumn(\"Enabled\");
+  this.addColumn(\"Edit\");
+}
+
+void fillWithData()
+{
+  settings = QgSettings::getAllSettingsAsMapping();
+  
+  for (int i = 1; i <= dynlen(settings); i++)
+  {
+    mapping json_data = settings[i];
+    
+    if (mappingHasKey(json_data, \"settingsVersion\") == false ||
+        mappingHasKey(json_data, \"checks\") == false )
+    {
+      continue;
+    }
+    
+    //determine machting check for id
+    dyn_mapping checks = json_data[\"checks\"];
+    
+    
+    for (int j = 1; j <= dynlen(checks); j++)
+    {
+      mapping check = checks[j];      
+      
+      if ( mappinglen(check) < 1 )
+      {
+        continue;
+      }    
+    
+      Mapping map = Mapping(check);
+      dyn_string id_parts = strsplit(map.getAt(\"id\"), \".\");
+      string id = \"\";
+      string parent_id = \"\"; 
+      
+      for (int z = 1; z <= dynlen(id_parts); z++)
+      {      
+        if (id != \"\")
+        {     
+          id += \".\";
+        }
+        
+        id += id_parts[z];    
+        
+        if (z > 1)
+        {
+          if (parent_id != \"\")
+          {     
+            parent_id += \".\";
+          }
+          parent_id += id_parts[z-1];
+        }
+        
+        if (!this.itemExists(id))
+        {
+          this.appendItem(parent_id, id, id_parts[z]);
+        }
+      }      
+      
+      //read settings depeding on the version
+      switch(json_data[\"settingsVersion\"])
+      {
+        case 0:
+        default:
+      
+          
+          this.setText(id, 1, map.getAt(\"description\")[getActiveLang()]);
+          
+          setSettingsValue(id, 2, map.getAt(\"lowLimit\", -1), \"lowLimit\");
+          setSettingsValue(id, 3, map.getAt(\"highLimit\", -1), \"highLimit\");
+          setSettingsValue(id, 4, getReferenceValuesAsString(map.getAt(\"referenceValues\", makeDynMixed(\"-1\"))), \"referenceValues\");
+          setSettingsValue(id, 5, map.getAt(\"scorePoints\", -1), \"scorePoints\");
+          setSettingsValue(id, 6, map.getAt(\"enabled\", -1), \"enabled\");
+          
+          this.setText(id, 7, \"...\");
+      }
+    }
+  }
+}" 0
+13 43
+"PUSH_BUTTON2"
+""
+1 923 553 E E E 1 E 1 E N "DarkJungle" E N "_Button" E E
+ E E
+42 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+2
+"minimumSize" "125 35"
+"layoutAlignment" "AlignVCenter"
+2
+LANG:10001 26 Arial,-1,13,5,50,0,0,0,0,0
+LANG:10000 26 Arial,-1,13,5,50,0,0,0,0,0
+0  921 546 1049 584
+
+T 
+2
+LANG:10001 4 Save
+LANG:10000 9 Speichern
+"#uses \"classes/WinCCOA/WinCCOA_Json\"
+
+main(mapping event)
+{
+  saveChanges();
+}
+
+void saveChanges()
+{
+  string path = getPath(DATA_REL_PATH) + \"qualityGates/settings/\";
+  
+  if ( isdir(path) == false )
+  {
+    mkdir(path);
+  }  
+  
+  for ( int i = 1; i <= dynlen(settings); i++ )
+  {
+    mapping setting = settings[i];
+    
+    if ( mappingHasKey(setting, \"changed\") )
+    {
+      string file_name = setting[\"changed\"] + \".json\";
+      mappingRemove(setting, \"changed\");
+      
+      Sl_Jsonfile jsonFile = Sl_Jsonfile(path + file_name, true);
+      jsonFile.write(setting);
+    }
+  }
+  
+  saved = true;
+}
+
+
+
+" 0
+ E E E
+0
+LAYER, 1 
+1
+LANG:10001 0 
+0
+LAYER, 2 
+1
+LANG:10001 0 
+0
+LAYER, 3 
+1
+LANG:10001 0 
+0
+LAYER, 4 
+1
+LANG:10001 0 
+0
+LAYER, 5 
+1
+LANG:10001 0 
+0
+LAYER, 6 
+1
+LANG:10001 0 
+0
+LAYER, 7 
+1
+LANG:10001 0 
+0
+4 5 "LAYOUT_GROUP14" 7
+2 0 
+29 30 
+
+"S 29" "0 0 1 1"
+"S 30" "1 0 1 1"
+"" ""
+0 1 1 20 0 0 0 0
+4 6 "LAYOUT_GROUP15" 7
+3 0 
+36 35 43 
+
+"S 36" "0 0 1 1"
+"S 35" "2 0 1 1"
+"S 43" "1 0 1 1"
+"" ""
+0 1 1 0 20 0 0 0
+4 7 "LAYOUT_GROUP16" -1
+3 2 
+31 32 42 
+5 6 
+"S 31" "1 0 1 1"
+"S 32" "3 0 1 1"
+"S 42" "2 0 1 1"
+"G 5" "0 0 1 1"
+"G 6" "4 0 1 1"
+"" ""
+0 2 0 0
+0

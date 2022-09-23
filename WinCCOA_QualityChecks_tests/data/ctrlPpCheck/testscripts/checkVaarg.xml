@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<results version="2">
+    <cppcheck version="2.0"/>
+    <errors>
+        <error id="checkLibraryFunctionArgCount" severity="warning" msg="The function has invalid count of arguments: va_start()" verbose="The function has invalid count of arguments: va_start()" cwe="628">
+            <location file0="" file="" line="24"/>
+        </error>
+        <error id="checkLibraryFunctionArgCount" severity="warning" msg="The function has invalid count of arguments: va_start()" verbose="The function has invalid count of arguments: va_start()" cwe="628">
+            <location file0="" file="" line="25"/>
+        </error>
+        <error id="checkLibraryFunctionArgCount" severity="warning" msg="The function has invalid count of arguments: va_start()" verbose="The function has invalid count of arguments: va_start()" cwe="628">
+            <location file0="" file="" line="28"/>
+        </error>
+        <error id="checkLibraryFunctionArgCount" severity="warning" msg="The function has invalid count of arguments: va_start()" verbose="The function has invalid count of arguments: va_start()" cwe="628">
+            <location file0="" file="" line="32"/>
+        </error>
+        <error id="va_start_referencePassed" severity="error" msg="Using reference &apos;refParam&apos; as parameter for va_start() results in undefined behaviour." verbose="Using reference &apos;refParam&apos; as parameter for va_start() results in undefined behaviour." cwe="758">
+            <location file0="" file="" line="8"/>
+            <symbol>refParam</symbol>
+        </error>
+        <error id="va_list_usedBeforeStarted" severity="error" msg="va_list &apos;refParam&apos; used before va_start() was called." verbose="va_list &apos;refParam&apos; used before va_start() was called." cwe="664">
+            <location file0="" file="" line="16"/>
+            <symbol>refParam</symbol>
+        </error>
+        <error id="va_end_missing" severity="error" msg="va_list &apos;list&apos; was opened but not closed by va_end()." verbose="va_list &apos;list&apos; was opened but not closed by va_end()." cwe="664">
+            <location file0="" file="" line="33"/>
+            <symbol>list</symbol>
+        </error>
+        <error id="va_end_missing" severity="error" msg="va_list &apos;list&apos; was opened but not closed by va_end()." verbose="va_list &apos;list&apos; was opened but not closed by va_end()." cwe="664">
+            <location file0="" file="" line="42"/>
+            <symbol>list</symbol>
+        </error>
+        <error id="va_start_subsequentCalls" severity="error" msg="va_start() called subsequently on &apos;list&apos; without va_end() in between." verbose="va_start() called subsequently on &apos;list&apos; without va_end() in between." cwe="664">
+            <location file0="" file="" line="53"/>
+            <symbol>list</symbol>
+        </error>
+        <error id="va_list_usedBeforeStarted" severity="error" msg="va_list &apos;list&apos; used before va_start() was called." verbose="va_list &apos;list&apos; used before va_start() was called." cwe="664">
+            <location file0="" file="" line="64"/>
+            <symbol>list</symbol>
+        </error>
+    </errors>
+</results>

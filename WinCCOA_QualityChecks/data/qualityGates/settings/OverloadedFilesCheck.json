@@ -1,0 +1,14 @@
+{
+    "settingsVersion": 0,
+    "checks": [
+        {
+            "id": "OverloadedFilesCheck.isOverloadedAllowed",
+            "description":{ 
+                "de_AT.utf8":"Überprüft, ob das Überladen von Dateien zulässig ist",
+                "en_US.utf8":"Checks if overloading of files is allowed"
+             },
+            "scorePoints": 1,
+            "enabled": true
+        }
+    ]
+}

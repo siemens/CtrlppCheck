@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<results version="2">
+    <cppcheck version="1.0"/>
+    <errors>
+        <error id="uselessAssignmentArg" severity="warning" msg="Assignment of function parameter &apos;a&apos; has no effect outside the function." verbose="Assignment of function parameter &apos;a&apos; has no effect outside the function." cwe="398">
+            <location file0="" file="" line="15"/>
+            <symbol>a</symbol>
+        </error>
+        <error id="uselessAssignmentArg" severity="warning" msg="Assignment of function parameter &apos;b&apos; has no effect outside the function." verbose="Assignment of function parameter &apos;b&apos; has no effect outside the function." cwe="398">
+            <location file0="" file="" line="16"/>
+            <symbol>b</symbol>
+        </error>
+        <error id="uselessAssignmentArg" severity="warning" msg="Assignment of function parameter &apos;db&apos; has no effect outside the function." verbose="Assignment of function parameter &apos;db&apos; has no effect outside the function." cwe="398">
+            <location file0="" file="" line="17"/>
+            <symbol>db</symbol>
+        </error>
+        <error id="uselessAssignmentArg" knownBug="#127" severity="warning" msg="Assignment of function parameter &apos;s&apos; has no effect outside the function." verbose="Assignment of function parameter &apos;s&apos; has no effect outside the function." cwe="398">
+            <location file0="" file="" line="18"/>
+            <symbol>s</symbol>
+        </error>
+        <error id="uselessAssignmentArg" severity="warning" msg="Assignment of function parameter &apos;s&apos; has no effect outside the function." verbose="Assignment of function parameter &apos;s&apos; has no effect outside the function." cwe="398">
+            <location file0="" file="" line="20"/>
+            <symbol>s</symbol>
+        </error>
+        <error id="uselessAssignmentArg" severity="warning" msg="Assignment of function parameter &apos;a&apos; has no effect outside the function." verbose="Assignment of function parameter &apos;a&apos; has no effect outside the function." cwe="398">
+            <location file0="" file="" line="34"/>
+            <symbol>a</symbol>
+        </error>
+        <error id="uselessAssignmentArg" severity="warning" msg="Assignment of function parameter &apos;b&apos; has no effect outside the function." verbose="Assignment of function parameter &apos;b&apos; has no effect outside the function." cwe="398">
+            <location file0="" file="" line="35"/>
+            <symbol>b</symbol>
+        </error>
+        <error id="uselessAssignmentArg" severity="warning" msg="Assignment of function parameter &apos;db&apos; has no effect outside the function." verbose="Assignment of function parameter &apos;db&apos; has no effect outside the function." cwe="398">
+            <location file0="" file="" line="36"/>
+            <symbol>db</symbol>
+        </error>
+        <error id="uselessAssignmentArg" severity="warning" msg="Assignment of function parameter &apos;a&apos; has no effect outside the function." verbose="Assignment of function parameter &apos;a&apos; has no effect outside the function." cwe="398">
+            <location file0="" file="" line="67"/>
+            <symbol>a</symbol>
+        </error>
+        <error id="uselessAssignmentArg" severity="warning" msg="Assignment of function parameter &apos;b&apos; has no effect outside the function." verbose="Assignment of function parameter &apos;b&apos; has no effect outside the function." cwe="398">
+            <location file0="" file="" line="68"/>
+            <symbol>b</symbol>
+        </error>
+        <error id="uselessAssignmentArg" severity="warning" msg="Assignment of function parameter &apos;db&apos; has no effect outside the function." verbose="Assignment of function parameter &apos;db&apos; has no effect outside the function." cwe="398">
+            <location file0="" file="" line="69"/>
+            <symbol>db</symbol>
+        </error>
+        <error id="uselessAssignmentArg" knownBug="#127" severity="warning" msg="Assignment of function parameter &apos;s&apos; has no effect outside the function." verbose="Assignment of function parameter &apos;s&apos; has no effect outside the function." cwe="398">
+            <location file0="" file="" line="70"/>
+            <symbol>s</symbol>
+        </error>
+        <error id="uselessAssignmentArg" severity="warning" msg="Assignment of function parameter &apos;a&apos; has no effect outside the function." verbose="Assignment of function parameter &apos;a&apos; has no effect outside the function." cwe="398">
+            <location file0="" file="" line="74"/>
+            <symbol>a</symbol>
+        </error>
+        <error id="uselessAssignmentArg" severity="warning" msg="Assignment of function parameter &apos;b&apos; has no effect outside the function." verbose="Assignment of function parameter &apos;b&apos; has no effect outside the function." cwe="398">
+            <location file0="" file="" line="75"/>
+            <symbol>b</symbol>
+        </error>
+        <error id="uselessAssignmentArg" knownBug="#127" severity="warning" msg="Assignment of function parameter &apos;s&apos; has no effect outside the function." verbose="Assignment of function parameter &apos;s&apos; has no effect outside the function." cwe="398">
+            <location file0="" file="" line="77"/>
+            <symbol>s</symbol>
+        </error>
+        <error id="uselessAssignmentArg" severity="warning" msg="Assignment of function parameter &apos;db&apos; has no effect outside the function." verbose="Assignment of function parameter &apos;db&apos; has no effect outside the function." cwe="398">
+            <location file0="" file="" line="76"/>
+            <symbol>db</symbol>
+        </error>
+        <error id="uselessAssignmentArg" severity="warning" msg="Assignment of function parameter &apos;a&apos; has no effect outside the function." verbose="Assignment of function parameter &apos;a&apos; has no effect outside the function." cwe="398">
+            <location file0="" file="" line="81"/>
+            <symbol>a</symbol>
+        </error>
+        <error id="uselessAssignmentArg" severity="warning" msg="Assignment of function parameter &apos;b&apos; has no effect outside the function." verbose="Assignment of function parameter &apos;b&apos; has no effect outside the function." cwe="398">
+            <location file0="" file="" line="82"/>
+            <symbol>b</symbol>
+        </error>
+        <error id="uselessAssignmentArg" severity="warning" msg="Assignment of function parameter &apos;db&apos; has no effect outside the function." verbose="Assignment of function parameter &apos;db&apos; has no effect outside the function." cwe="398">
+            <location file0="" file="" line="83"/>
+            <symbol>db</symbol>
+        </error>
+        <error id="uselessAssignmentArg" knownBug="#127" severity="warning" msg="Assignment of function parameter &apos;s&apos; has no effect outside the function." verbose="Assignment of function parameter &apos;s&apos; has no effect outside the function." cwe="398">
+            <location file0="" file="" line="84"/>
+            <symbol>s</symbol>
+        </error>
+        <error id="uselessAssignmentArg" severity="warning" msg="Assignment of function parameter &apos;a&apos; has no effect outside the function." verbose="Assignment of function parameter &apos;a&apos; has no effect outside the function." cwe="398">
+            <location file0="" file="" line="88"/>
+            <symbol>a</symbol>
+        </error>
+        <error id="uselessAssignmentArg" severity="warning" msg="Assignment of function parameter &apos;b&apos; has no effect outside the function." verbose="Assignment of function parameter &apos;b&apos; has no effect outside the function." cwe="398">
+            <location file0="" file="" line="89"/>
+            <symbol>b</symbol>
+        </error>
+        <error id="uselessAssignmentArg" severity="warning" msg="Assignment of function parameter &apos;db&apos; has no effect outside the function." verbose="Assignment of function parameter &apos;db&apos; has no effect outside the function." cwe="398">
+            <location file0="" file="" line="90"/>
+            <symbol>db</symbol>
+        </error>
+        <error id="uselessAssignmentArg" knownBug="#127" severity="warning" msg="Assignment of function parameter &apos;s&apos; has no effect outside the function." verbose="Assignment of function parameter &apos;s&apos; has no effect outside the function." cwe="398">
+            <location file0="" file="" line="91"/>
+            <symbol>s</symbol>
+        </error>
+        <error id="uselessAssignmentArg" severity="warning" msg="Assignment of function parameter &apos;a&apos; has no effect outside the function." verbose="Assignment of function parameter &apos;a&apos; has no effect outside the function." cwe="398">
+            <location file0="" file="" line="99"/>
+            <symbol>a</symbol>
+        </error>
+        <error id="uselessAssignmentArg" severity="warning" msg="Assignment of function parameter &apos;b&apos; has no effect outside the function." verbose="Assignment of function parameter &apos;b&apos; has no effect outside the function." cwe="398">
+            <location file0="" file="" line="100"/>
+            <symbol>b</symbol>
+        </error>
+        <error id="uselessAssignmentArg" severity="warning" msg="Assignment of function parameter &apos;db&apos; has no effect outside the function." verbose="Assignment of function parameter &apos;db&apos; has no effect outside the function." cwe="398">
+            <location file0="" file="" line="101"/>
+            <symbol>db</symbol>
+        </error>
+        <error id="uselessAssignmentArg" knownBug="#127" severity="warning" msg="Assignment of function parameter &apos;s&apos; has no effect outside the function." verbose="Assignment of function parameter &apos;s&apos; has no effect outside the function." cwe="398">
+            <location file0="" file="" line="102"/>
+            <symbol>s</symbol>
+        </error>
+        <error id="uselessAssignmentArg" severity="warning" msg="Assignment of function parameter &apos;a&apos; has no effect outside the function." verbose="Assignment of function parameter &apos;a&apos; has no effect outside the function." cwe="398">
+            <location file0="" file="" line="106"/>
+            <symbol>a</symbol>
+        </error>
+        <error id="uselessAssignmentArg" severity="warning" msg="Assignment of function parameter &apos;b&apos; has no effect outside the function." verbose="Assignment of function parameter &apos;b&apos; has no effect outside the function." cwe="398">
+            <location file0="" file="" line="107"/>
+            <symbol>b</symbol>
+        </error>
+        <error id="uselessAssignmentArg" severity="warning" msg="Assignment of function parameter &apos;db&apos; has no effect outside the function." verbose="Assignment of function parameter &apos;db&apos; has no effect outside the function." cwe="398">
+            <location file0="" file="" line="108"/>
+            <symbol>db</symbol>
+        </error>
+        <error id="uselessAssignmentArg" knownBug="#127" severity="warning" msg="Assignment of function parameter &apos;s&apos; has no effect outside the function." verbose="Assignment of function parameter &apos;s&apos; has no effect outside the function." cwe="398">
+            <location file0="" file="" line="109"/>
+            <symbol>s</symbol>
+        </error>
+        <error id="uselessAssignmentArg" severity="warning" msg="Assignment of function parameter &apos;a&apos; has no effect outside the function." verbose="Assignment of function parameter &apos;a&apos; has no effect outside the function." cwe="398">
+            <location file0="" file="" line="113"/>
+            <symbol>a</symbol>
+        </error>
+        <error id="uselessAssignmentArg" severity="warning" msg="Assignment of function parameter &apos;b&apos; has no effect outside the function." verbose="Assignment of function parameter &apos;b&apos; has no effect outside the function." cwe="398">
+            <location file0="" file="" line="114"/>
+            <symbol>b</symbol>
+        </error>
+        <error id="uselessAssignmentArg" severity="warning" msg="Assignment of function parameter &apos;db&apos; has no effect outside the function." verbose="Assignment of function parameter &apos;db&apos; has no effect outside the function." cwe="398">
+            <location file0="" file="" line="115"/>
+            <symbol>db</symbol>
+        </error>
+        <error id="uselessAssignmentArg" knownBug="#127" severity="warning" msg="Assignment of function parameter &apos;s&apos; has no effect outside the function." verbose="Assignment of function parameter &apos;s&apos; has no effect outside the function." cwe="398">
+            <location file0="" file="" line="116"/>
+            <symbol>s</symbol>
+        </error>
+        <error id="uselessAssignmentArg" severity="warning" msg="Assignment of function parameter &apos;a&apos; has no effect outside the function." verbose="Assignment of function parameter &apos;a&apos; has no effect outside the function." cwe="398">
+            <location file0="" file="" line="120"/>
+            <symbol>a</symbol>
+        </error>
+        <error id="uselessAssignmentArg" severity="warning" msg="Assignment of function parameter &apos;b&apos; has no effect outside the function." verbose="Assignment of function parameter &apos;b&apos; has no effect outside the function." cwe="398">
+            <location file0="" file="" line="121"/>
+            <symbol>b</symbol>
+        </error>
+        <error id="uselessAssignmentArg" severity="warning" msg="Assignment of function parameter &apos;db&apos; has no effect outside the function." verbose="Assignment of function parameter &apos;db&apos; has no effect outside the function." cwe="398">
+            <location file0="" file="" line="122"/>
+            <symbol>db</symbol>
+        </error>
+        <error id="uselessAssignmentArg" knownBug="#127" severity="warning" msg="Assignment of function parameter &apos;s&apos; has no effect outside the function." verbose="Assignment of function parameter &apos;s&apos; has no effect outside the function." cwe="398">
+            <location file0="" file="" line="123"/>
+            <symbol>s</symbol>
+        </error>
+    </errors>
+</results>

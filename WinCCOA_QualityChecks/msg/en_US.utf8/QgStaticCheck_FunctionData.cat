@@ -1,0 +1,8 @@
+assert.function.CCN,CCN (Cyclomatic Complexity No. McCabe-Metric)
+reason.function.CCN,Too complex function '$function.name()' found, CCN = $function.CCN.
+assert.function.NLOC,NLOC (No. Lines Of Code)
+reason.function.NLOC,The function '$function.name()' has invalid lines of code ($function.NLOC)
+assert.function.countOfLines,Count of lines
+reason.function.countOfLines,The function '$function.name()' has invalid count of lines ($function.countOfLines)
+assert.function.paramCount,Count of parameters
+reason.function.paramCount,The function '$function.name()' has too much parameters ($function.paramCount)

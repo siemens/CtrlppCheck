@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<results version="2">
+    <cppcheck version=""/>
+    <errors>
+        <error id="shadowFunction" severity="style" msg="Local variable shadows outer function: &apos;intF&apos;" verbose="Local variable shadows outer function: &apos;intF&apos;" cwe="398">
+            <location file0="" file="" line="9" info="Shadow variable"/>
+            <location file0="" file="" line="4" info="Shadowed declaration"/>
+            <symbol>intF</symbol>
+        </error>
+        <error id="notUniqueFunctionAttributeName" severity="warning" msg="The function parameter is not unique: &apos;dp1&apos;" verbose="The function parameter is not unique: &apos;dp1&apos;" cwe="398">
+            <location file0="" file="" line="13"/>
+            <symbol>dp1</symbol>
+        </error>
+        <error id="shadowVar" severity="style" msg="Local variable shadows outer variable: &apos;val&apos;" verbose="Local variable shadows outer variable: &apos;val&apos;" cwe="398">
+            <location file0="" file="" line="13" info="Shadow variable"/>
+            <location file0="" file="" line="2" info="Shadowed declaration"/>
+            <symbol>val</symbol>
+        </error>
+        <error id="shadowFunction" severity="style" msg="Local variable shadows outer function: &apos;intF&apos;" verbose="Local variable shadows outer function: &apos;intF&apos;" cwe="398">
+            <location file0="" file="" line="21" info="Shadow variable"/>
+            <location file0="" file="" line="4" info="Shadowed declaration"/>
+            <symbol>intF</symbol>
+        </error>
+    </errors>
+</results>

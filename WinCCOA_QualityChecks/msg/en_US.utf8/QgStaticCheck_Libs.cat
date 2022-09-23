@@ -1,0 +1,2 @@
+assert.missingScripts,Has libs
+reason.missingScripts,Application does not contains any libs.

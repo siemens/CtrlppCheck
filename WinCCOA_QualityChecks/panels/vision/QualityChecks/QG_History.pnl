@@ -1,0 +1,202 @@
+V 14
+2
+LANG:10000 0 
+LANG:10001 0 
+PANEL,-1 -1 409 557 N "_3DFace" 1
+"$QgId"
+"main()
+{
+  if ( !isDollarDefined(\"$QgId\") )
+    return;
+  
+  _qgId = $QgId;
+  
+  QgAddOnResultsDir resDir = QgAddOnResultsDir();
+  resDir.setQgId(_qgId);
+  
+  dyn_string histDirs = resDir.getHistoryDirs();
+  
+  for(int i = 1; i <= dynlen(histDirs);  i++)
+  {
+    const string histDirPath = histDirs[i];
+    float score = readScore(histDirPath);
+    string summary = readSummary(histDirPath);
+    
+    QgSumm summ = QgSumm();
+    summ.fromString(summary);
+    time t = (time)(int)baseName(histDirPath);
+    table.appendLine(\"score\", score, \"errorPoints\", summ.errorPoints, \"totalPoints\", summ.totalPoints, \"time\", t, \"_resDir\", histDirPath);
+  }
+  
+  table.lineVisible(0);
+}
+" 0
+ E E E E 1 -1 -1 0  10 0
+""0  1
+E "#uses \"json\"
+
+string _qgId;
+
+struct QgSumm
+{
+  float errorPoints;
+  float totalPoints;
+  fromString(const string s)
+  {
+    mapping map = json_strToVal(s);
+    if ( mappingHasKey(map, \"errorPoints\") )
+      errorPoints = map[\"errorPoints\"];
+    if ( mappingHasKey(map, \"totalPoints\") )
+      totalPoints = map[\"totalPoints\"];
+  }
+};
+
+float readScore(const string &histDirPath)
+{
+  string s;
+  fileToString(histDirPath + \"Score\", s);
+  return (float)s;
+}
+
+/// @todo summary ist in JSON format, der kann man hier umvandeln und als mappe es zurükliefern.
+/// Dann kann man in tabelle die ErrPoint und total points in eigenen spalten machen
+string readSummary(const string &histDirPath)
+{
+  string s;
+  fileToString(histDirPath + \"sum.json\", s);
+  return s;
+}
+
+" 0
+ 3
+"CBRef" "1"
+"EClose" E
+"dpi" "96"
+2 1 0 0 0 0 0
+""
+DISPLAY_LAYER, 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0
+LAYER, 0 
+2
+LANG:10000 0 
+LANG:10001 0 
+25 1
+"table"
+""
+1 -1.3563330008895e-014 0 E E E 1 E 1 E N "DavyGrey" E N "Isabelline" E E
+ E "main(int row, string column)
+{
+  string fileName = this.cellValueRC(row, \"_resDir\") + \"Result\";
+  ChildPanelOnCentralModal(\"vision/QualityChecks/QG_Result.pnl\", getCatStr(\"QG_Names\",_qgId), makeDynString(\"$fileName:\" + fileName));
+}
+" 0
+
+0 0 0 0 0 0
+E E E
+0
+2
+LANG:10000 0 
+LANG:10001 0 
+
+1
+"layoutAlignment" "AlignNone"
+2
+LANG:10000 26 Arial,-1,12,5,50,0,0,0,0,0
+LANG:10001 26 Arial,-1,12,5,50,0,0,0,0,0
+0  -2 -2 410 558
+"main()
+{
+  this.alternatingRowColors(makeDynString(\"Isabelline\",\"White\"));
+  this.columnStretchable(0,TRUE);
+}
+" 0
+E 1 0 1 5 0 "time" 16 1 0 "s" 2
+LANG:10000 4 Zeit
+LANG:10001 4 Time
+E
+2
+LANG:10000 0 
+LANG:10001 0 
+
+160 "score" 4 1 0 "s" 2
+LANG:10000 5 Score
+LANG:10001 5 Score
+E
+2
+LANG:10000 0 
+LANG:10001 0 
+
+50 "totalPoints" 8 1 0 "s" 2
+LANG:10000 6 Punkte
+LANG:10001 6 Points
+E
+2
+LANG:10000 0 
+LANG:10001 0 
+
+60 "errorPoints" 8 1 0 "s" 2
+LANG:10000 6 Fehler
+LANG:10001 6 Errors
+E
+2
+LANG:10000 0 
+LANG:10001 0 
+
+60 "_resDir" 21 0 0 "s" 2
+LANG:10000 7 _resDir
+LANG:10001 7 _resDir
+E
+2
+LANG:10000 0 
+LANG:10001 0 
+
+200 
+21 21 10 0
+2
+LANG:10000 26 Arial,-1,12,5,50,0,0,0,0,0
+LANG:10001 26 Arial,-1,12,5,50,0,0,0,0,0
+0 0 1 1 1 7
+1 0
+0
+LAYER, 1 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 2 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 3 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 4 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 5 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 6 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 7 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+4 0 "LAYOUT_GROUP1" -1
+1 0 
+1 
+
+"S 1" "0 0 1 1"
+"" ""
+0 2 0 0
+0

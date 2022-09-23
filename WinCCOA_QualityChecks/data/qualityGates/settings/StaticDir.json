@@ -1,0 +1,44 @@
+{
+  "settingsVersion": 0,
+  "checks": [
+    {
+      "id": "StaticDir.dir.hasFilesRecursive",
+      "description":{ 
+        "de_AT.utf8":"Bestimmt die Anzahl von rekursiven Dateien",
+        "en_US.utf8":"Determine the number of files recursive"
+       },
+      "lowLimit": 1,
+      "scorePoints": 1,
+      "enabled": true
+    },
+    {
+      "id": "StaticDir.dir.isEmpty",
+      "description":{ 
+        "de_AT.utf8":"Überprüft, ob das Verzeichnis leer ist",
+        "en_US.utf8":"Checks if the directory is empty"
+       },
+      "scorePoints": 1,
+      "enabled": true
+    },
+    {
+      "id": "StaticDir.dir.subDirCount",
+      "description":{ 
+        "de_AT.utf8":"Prüft die Anzahl von Unterverzeichnisse",
+        "en_US.utf8":"Checks number of allowed Subdirectories"
+       },
+      "highLimit": 5,
+      "scorePoints": 1,
+      "enabled": true
+    },
+    {
+      "id": "StaticDir.dir.filesCount",
+      "description":{ 
+        "de_AT.utf8":"Prüft die Anzahl der Dateien im Ordner",
+        "en_US.utf8":"Checks number of allowed files in folder"
+       },
+      "highLimit": 10,
+      "scorePoints": 1,
+      "enabled": true
+    }
+  ]
+}

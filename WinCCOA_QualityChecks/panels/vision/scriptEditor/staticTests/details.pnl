@@ -1,0 +1,231 @@
+V 14
+2
+LANG:10000 0 
+LANG:10001 0 
+PANEL,-1 -1 1160 485 N "_3DFace" 0
+E E E E E 1 -1 -1 0  40 30
+""0  1
+E "
+enum CtrlPppCheckFilterType
+{
+  id,
+  prio
+};
+
+void jumpTo(const int &line, const string filePath)
+{
+  dpSet(\"_CtrlCommandInterface_StaticTests.Command\", \"line:\" + line);
+}
+
+void addFilter(const CtrlPppCheckFilterType &filterType, string filter)
+{
+  dyn_string ids;
+  dyn_string severities;
+  dpGet(\"_CtrlppCheck.filter.id\", ids,
+        \"_CtrlppCheck.filter.severity\", severities);
+  
+  switch(filterType)
+  {
+    case CtrlPppCheckFilterType::id:
+    dynAppend(ids, filter);
+    break;
+    case CtrlPppCheckFilterType::prio:
+    dynAppend(severities, filter);
+    break;
+  }
+  
+  dpSet(\"_CtrlppCheck.filter.id\", ids,
+        \"_CtrlppCheck.filter.severity\", severities);
+}
+
+
+
+" 0
+ 3
+"CBRef" "1"
+"EClose" E
+"dpi" "96"
+2 1 0 0 0 0 0
+""
+DISPLAY_LAYER, 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0
+LAYER, 0 
+2
+LANG:10000 0 
+LANG:10001 0 
+25 1
+"table"
+""
+1 0 0 E E E 1 E 1 E N "DavyGrey" E N "Isabelline" E E
+ "enum PopUpAnswer
+{
+  canceled = 0,
+  jumpTo = 1,
+  hidePrio,
+  hideId
+};
+
+main(int row, string column)
+{
+  string line;
+  getValue(\"\", \"cellValueRC\", row, \"line\", line);
+  string prio;
+  getValue(\"\", \"cellValueRC\", row, \"prio\", prio);
+  string descr;
+  getValue(\"\", \"cellValueRC\", row, \"descr\", descr);
+  string id;
+  getValue(\"\", \"cellValueRC\", row, \"ID\", id);
+  string path;
+  getValue(\"\", \"cellValueRC\", row, \"path\", path);
+  
+  string jumpTo;
+  if ( isfile(path) )
+    jumpTo = \"Jump to \" + baseName() + \" (\" + line + \")\";
+  else
+    jumpTo = \"Jump to line \" + line;
+  
+  
+  int answer; 
+  dyn_string items = makeDynString(\"PUSH_BUTTON, \" + jumpTo + \", 1, 1\", 
+                                   \"SEPARATOR\", // separator 
+                                   \"PUSH_BUTTON, Hide priority: \" + prio + \", 2, 1\", 
+                                   \"PUSH_BUTTON, Hide ID: \" + id + \", 3, 1\");
+  popupMenu(items, answer); 
+  
+  switch((PopUpAnswer)answer)
+  {
+    case PopUpAnswer::jumpTo:
+    {
+      jumpTo(line, path);
+      break;
+    }
+    case PopUpAnswer::hidePrio:
+    {
+      addFilter(CtrlPppCheckFilterType::prio, prio);
+      break;
+    }
+    case PopUpAnswer::hideId:
+    {
+      addFilter(CtrlPppCheckFilterType::id, id);
+      break;
+    }
+  }
+}
+" 0
+ "main(int row, string column)
+{
+  string line;
+  getValue(\"\", \"cellValueRC\", row, \"line\", line);
+  dpSet(\"_CtrlCommandInterface_StaticTests.Command\", \"line:\" + line);
+}
+" 0
+
+0 0 0 0 0 0
+E E E
+0
+2
+LANG:10000 0 
+LANG:10001 0 
+
+1
+"layoutAlignment" "AlignNone"
+2
+LANG:10000 26 Arial,-1,12,5,50,0,0,0,0,0
+LANG:10001 26 Arial,-1,12,5,50,0,0,0,0,0
+0  -2 -2 1161 486
+"main()
+{
+  this.alternatingRowColors(makeDynString(\"Isabelline\",\"White\"));
+  this.columnStretchable(2,true);
+  this.sort(false,\"prio\");
+}" 0
+E 1 0 1 5 0 "prio" 12 1 0 "s" 2
+LANG:10000 8 Severity
+LANG:10001 8 Severity
+E
+2
+LANG:10000 0 
+LANG:10001 0 
+
+120 "line" 5 1 0 "[0s,,,ALIGNMENT_CENTER]" 2
+LANG:10000 5 Zeile
+LANG:10001 4 Line
+E
+2
+LANG:10000 0 
+LANG:10001 0 
+
+60 "descr" 65 1 0 "s" 2
+LANG:10000 12 Beschreibung
+LANG:10001 11 Description
+E
+2
+LANG:10000 0 
+LANG:10001 0 
+
+600 "ID" 16 1 0 "s" 2
+LANG:10000 2 ID
+LANG:10001 2 ID
+E
+2
+LANG:10000 0 
+LANG:10001 0 
+
+200 "path" 12 0 0 "s" 2
+LANG:10000 4 path
+LANG:10001 4 path
+E
+2
+LANG:10000 0 
+LANG:10001 0 
+
+100 
+21 21 10 0
+2
+LANG:10000 26 Arial,-1,12,5,50,0,0,0,0,0
+LANG:10001 26 Arial,-1,12,5,50,0,0,0,0,0
+0 0 2 2 1 7
+1 0
+0
+LAYER, 1 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 2 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 3 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 4 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 5 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 6 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 7 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+4 0 "LAYOUT_GROUP0" -1
+1 0 
+1 
+
+"S 1" "0 0 1 1"
+"" ""
+0 2 0 0
+0

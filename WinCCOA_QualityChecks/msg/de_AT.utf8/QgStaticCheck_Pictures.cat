@@ -1,0 +1,15 @@
+reasonMissingPictures,Application does not contain any pictures
+assert.missingPictures,Has pictures
+reason.missingPictures,Application does not contain any pictures
+assert.dir.isEmpty,Is empty
+reason.dir.isEmpty,Directory '$dir.name' does not contain any files or sub directories.
+assert.dir.subDirCount,Count of sub directories
+reason.dir.subDirCount,Too much sub directories ($dir.subDirCount) found in '$dir.name'.
+assert.dir.filesCount,Count of files
+reason.dir.filesCount,Too much files ($dir.filesCount) found in '$dir.name'.
+filesList,Files
+subDirsList,Sub directories
+assert.file.size,Size
+reason.file.size,The picture '$file.name' is too big ($file.size).
+assert.file.extention,Extention
+reason.file.extention,The picture '$file.name' has an invalid extention '$file.extention'.

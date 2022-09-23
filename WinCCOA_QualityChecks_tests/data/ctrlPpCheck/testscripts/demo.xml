@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<results version="2">
+    <cppcheck version=""/>
+    <errors>
+        <error id="ignoredReturnValue" severity="warning" msg="Return value of function is not used: dpSubStr()" verbose="Return value of function is not used: dpSubStr()" cwe="252">
+            <location file0="" file="" line="58"/>
+            <symbol>dpSubStr</symbol>
+        </error>
+        <error id="checkLibraryFunction" severity="information" msg="--check-library: There is no matching configuration for function subfunc()" verbose="--check-library: There is no matching configuration for function subfunc()" cwe="628">
+            <location file0="" file="" line="8"/>
+        </error>
+        <error id="checkLibraryFunction" severity="information" msg="--check-library: There is no matching configuration for function subfunc2()" verbose="--check-library: There is no matching configuration for function subfunc2()" cwe="628">
+            <location file0="" file="" line="9"/>
+        </error>
+        <error id="checkLibraryFunction" severity="information" msg="--check-library: There is no matching configuration for function subfunc3()" verbose="--check-library: There is no matching configuration for function subfunc3()" cwe="628">
+            <location file0="" file="" line="10"/>
+        </error>
+        <error id="checkLibraryFunction" severity="information" msg="--check-library: There is no matching configuration for function semicol()" verbose="--check-library: There is no matching configuration for function semicol()" cwe="628">
+            <location file0="" file="" line="11"/>
+        </error>
+        <error id="multiCondition" severity="style" msg="Expression is always false because &apos;else if&apos; condition matches previous condition at line 17." verbose="Expression is always false because &apos;else if&apos; condition matches previous condition at line 17." cwe="398">
+            <location file0="" file="" line="21"/>
+        </error>
+        <error id="unreachableCode" severity="style" msg="Statements following return, break, continue, goto or throw will never be executed." verbose="Statements following return, break, continue, goto or throw will never be executed." cwe="561">
+            <location file0="" file="" line="61"/>
+        </error>
+        <error id="suspiciousSemicolon" severity="warning" msg="Suspicious use of ; at the end of &apos;if&apos; statement." verbose="Suspicious use of ; at the end of &apos;if&apos; statement." cwe="398" inconclusive="true">
+            <location file0="" file="" line="69"/>
+        </error>
+        <error id="suspiciousSemicolon" severity="warning" msg="Suspicious use of ; at the end of &apos;if&apos; statement." verbose="Suspicious use of ; at the end of &apos;if&apos; statement." cwe="398" inconclusive="true">
+            <location file0="" file="" line="77"/>
+        </error>
+        <error id="emptyScope" severity="warning" msg="The scope is empty: &apos;if&apos;" verbose="The scope is empty: &apos;if&apos;" cwe="398" inconclusive="true">
+            <location file0="" file="" line="13"/>
+        </error>
+        <error id="emptyScope" severity="warning" msg="The scope is empty: &apos;if&apos;" verbose="The scope is empty: &apos;if&apos;" cwe="398" inconclusive="true">
+            <location file0="" file="" line="17"/>
+        </error>
+        <error id="emptyScope" severity="warning" msg="The scope is empty: &apos;if&apos;" verbose="The scope is empty: &apos;if&apos;" cwe="398" inconclusive="true">
+            <location file0="" file="" line="21"/>
+        </error>
+        <error id="emptyScope" severity="warning" msg="The scope is empty: &apos;if&apos;" verbose="The scope is empty: &apos;if&apos;" cwe="398" inconclusive="true">
+            <location file0="" file="" line="42"/>
+        </error>
+        <error id="emptyScope" severity="warning" msg="The scope is empty: &apos;else&apos;" verbose="The scope is empty: &apos;else&apos;" cwe="398" inconclusive="true">
+            <location file0="" file="" line="46"/>
+        </error>
+        <error id="emptyScope" severity="warning" msg="The scope is empty: &apos;if&apos;" verbose="The scope is empty: &apos;if&apos;" cwe="398" inconclusive="true">
+            <location file0="" file="" line="73"/>
+        </error>
+        <error id="undefinedVariable" severity="warning" msg="Undefined variable: B" verbose="The variable B is not defined. Maybe it&apos;s added by addGlobal() or #uses is missing" cwe="758">
+            <location file0="" file="" line="13"/>
+            <symbol>B</symbol>
+        </error>
+        <error id="unreadVariable" severity="warning" msg="Variable is assigned a value that is never used: &apos;iB&apos;" verbose="Variable is assigned a value that is never used: &apos;iB&apos;" cwe="563">
+            <location file0="" file="" line="4"/>
+            <symbol>iB</symbol>
+        </error>
+        <error id="badFunc_style_DebugTN" severity="style" msg="Use throwError() instead of DebugTN() functions" verbose="Use throwError() instead of DebugTN() functions">
+            <location file0="" file="" line="27"/>
+        </error>
+        <error id="badFunc_style_DebugTN" severity="style" msg="Use throwError() instead of DebugTN() functions" verbose="Use throwError() instead of DebugTN() functions">
+            <location file0="" file="" line="78"/>
+        </error>
+        <error id="badFunc_style_DebugTN" severity="style" msg="Use throwError() instead of DebugTN() functions" verbose="Use throwError() instead of DebugTN() functions">
+            <location file0="" file="" line="84"/>
+        </error>
+    </errors>
+</results>

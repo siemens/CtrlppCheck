@@ -1,0 +1,3 @@
+00001,QualityGates does not run succesfully !!!
+00010,Assertion return error: $1
+00011,Assertion works: $1

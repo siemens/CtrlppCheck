@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<results version="2">
+    <cppcheck version="2.0"/>
+    <errors>
+        <error id="invalidPrintfArgType_s" severity="warning" msg="%s in format string (no. 1) requires &apos;string&apos; but the argument type is &apos;bool&apos;." verbose="%s in format string (no. 1) requires &apos;string&apos; but the argument type is &apos;bool&apos;." cwe="686">
+            <location file="checkio.ctl" line="30"/>
+        </error>
+        <error id="invalidPrintfArgType_uint" severity="warning" msg="%u in format string (no. 1) requires &apos;unsigned&apos; but the argument type is &apos;const char *&apos;." verbose="%u in format string (no. 1) requires &apos;unsigned&apos; but the argument type is &apos;const char *&apos;." cwe="686">
+            <location file="checkio.ctl" line="31"/>
+        </error>
+        <error id="invalidPrintfArgType_uint" severity="warning" msg="%u in format string (no. 1) requires &apos;unsigned&apos; but the argument type is &apos;int&apos;." verbose="%u in format string (no. 1) requires &apos;unsigned&apos; but the argument type is &apos;int&apos;." cwe="686">
+            <location file="checkio.ctl" line="32"/>
+        </error>
+        <error id="wrongPrintfScanfArgNum" severity="error" msg="sprintf format string requires 2 parameters but only 1 is given." verbose="sprintf format string requires 2 parameters but only 1 is given." cwe="685">
+            <location file="checkio.ctl" line="32"/>
+        </error>
+        <error id="wrongPrintfScanfArgNum" severity="warning" msg="sprintf format string requires 0 parameters but 1 is given." verbose="sprintf format string requires 0 parameters but 1 is given." cwe="685">
+            <location file="checkio.ctl" line="33"/>
+        </error>
+        <error id="invalidScanfArgType_s" severity="warning" msg="%s in format string (no. 1) requires a &apos;string&apos; but the argument type is &apos;int&apos;." verbose="%s in format string (no. 1) requires a &apos;string&apos; but the argument type is &apos;int&apos;." cwe="686">
+            <location file="checkio.ctl" line="38"/>
+        </error>
+        <error id="invalidScanfArgType_int" severity="warning" msg="%x in format string (no. 1) requires &apos;int&apos; but the argument type is &apos;const char *&apos;." verbose="%x in format string (no. 1) requires &apos;int&apos; but the argument type is &apos;const char *&apos;." cwe="686">
+            <location file="checkio.ctl" line="44"/>
+        </error>
+        <error id="invalidScanfArgType_int" severity="warning" msg="%X in format string (no. 1) requires &apos;int&apos; but the argument type is &apos;const char *&apos;." verbose="%X in format string (no. 1) requires &apos;int&apos; but the argument type is &apos;const char *&apos;." cwe="686">
+            <location file="checkio.ctl" line="45"/>
+        </error>
+        <error id="invalidScanfArgType_int" severity="warning" msg="%u in format string (no. 1) requires &apos;int&apos; but the argument type is &apos;const char *&apos;." verbose="%u in format string (no. 1) requires &apos;int&apos; but the argument type is &apos;const char *&apos;." cwe="686">
+            <location file="checkio.ctl" line="46"/>
+        </error>
+        <error id="invalidScanfArgType_int" severity="warning" msg="%o in format string (no. 1) requires &apos;int&apos; but the argument type is &apos;const char *&apos;." verbose="%o in format string (no. 1) requires &apos;int&apos; but the argument type is &apos;const char *&apos;." cwe="686">
+            <location file="checkio.ctl" line="47"/>
+        </error>
+        <error id="invalidScanfArgType_int" severity="warning" msg="%d in format string (no. 1) requires &apos;int&apos; but the argument type is &apos;const char *&apos;." verbose="%d in format string (no. 1) requires &apos;int&apos; but the argument type is &apos;const char *&apos;." cwe="686">
+            <location file="checkio.ctl" line="48"/>
+        </error>
+        <error id="invalidScanfArgType_int" severity="warning" msg="%n in format string (no. 1) requires &apos;int&apos; but the argument type is &apos;const char *&apos;." verbose="%n in format string (no. 1) requires &apos;int&apos; but the argument type is &apos;const char *&apos;." cwe="686">
+            <location file="checkio.ctl" line="49"/>
+        </error>
+        <error id="invalidScanfArgType_int" severity="warning" msg="%x in format string (no. 1) requires &apos;int&apos; but the argument type is &apos;string&apos;." verbose="%x in format string (no. 1) requires &apos;int&apos; but the argument type is &apos;string&apos;." cwe="686">
+            <location file="checkio.ctl" line="51"/>
+        </error>
+        <error id="invalidScanfArgType_int" severity="warning" msg="%X in format string (no. 1) requires &apos;int&apos; but the argument type is &apos;string&apos;." verbose="%X in format string (no. 1) requires &apos;int&apos; but the argument type is &apos;string&apos;." cwe="686">
+            <location file="checkio.ctl" line="52"/>
+        </error>
+        <error id="invalidScanfArgType_int" severity="warning" msg="%u in format string (no. 1) requires &apos;int&apos; but the argument type is &apos;string&apos;." verbose="%u in format string (no. 1) requires &apos;int&apos; but the argument type is &apos;string&apos;." cwe="686">
+            <location file="checkio.ctl" line="53"/>
+        </error>
+        <error id="invalidScanfArgType_int" severity="warning" msg="%o in format string (no. 1) requires &apos;int&apos; but the argument type is &apos;string&apos;." verbose="%o in format string (no. 1) requires &apos;int&apos; but the argument type is &apos;string&apos;." cwe="686">
+            <location file="checkio.ctl" line="54"/>
+        </error>
+        <error id="invalidScanfArgType_int" severity="warning" msg="%d in format string (no. 1) requires &apos;int&apos; but the argument type is &apos;string&apos;." verbose="%d in format string (no. 1) requires &apos;int&apos; but the argument type is &apos;string&apos;." cwe="686">
+            <location file="checkio.ctl" line="55"/>
+        </error>
+        <error id="invalidScanfArgType_int" severity="warning" msg="%n in format string (no. 1) requires &apos;int&apos; but the argument type is &apos;string&apos;." verbose="%n in format string (no. 1) requires &apos;int&apos; but the argument type is &apos;string&apos;." cwe="686">
+            <location file="checkio.ctl" line="56"/>
+        </error>
+        <error id="invalidScanfArgType_int" severity="warning" msg="%lx in format string (no. 1) requires &apos;long&apos; but the argument type is &apos;int&apos;." verbose="%lx in format string (no. 1) requires &apos;long&apos; but the argument type is &apos;int&apos;." cwe="686">
+            <location file="checkio.ctl" line="65"/>
+        </error>
+        <error id="invalidScanfArgType_int" severity="warning" msg="%lX in format string (no. 1) requires &apos;long&apos; but the argument type is &apos;int&apos;." verbose="%lX in format string (no. 1) requires &apos;long&apos; but the argument type is &apos;int&apos;." cwe="686">
+            <location file="checkio.ctl" line="66"/>
+        </error>
+        <error id="invalidScanfArgType_int" severity="warning" msg="%lu in format string (no. 1) requires &apos;long&apos; but the argument type is &apos;int&apos;." verbose="%lu in format string (no. 1) requires &apos;long&apos; but the argument type is &apos;int&apos;." cwe="686">
+            <location file="checkio.ctl" line="67"/>
+        </error>
+        <error id="invalidScanfArgType_int" severity="warning" msg="%lo in format string (no. 1) requires &apos;long&apos; but the argument type is &apos;int&apos;." verbose="%lo in format string (no. 1) requires &apos;long&apos; but the argument type is &apos;int&apos;." cwe="686">
+            <location file="checkio.ctl" line="68"/>
+        </error>
+        <error id="invalidScanfArgType_int" severity="warning" msg="%ld in format string (no. 1) requires &apos;long&apos; but the argument type is &apos;int&apos;." verbose="%ld in format string (no. 1) requires &apos;long&apos; but the argument type is &apos;int&apos;." cwe="686">
+            <location file="checkio.ctl" line="69"/>
+        </error>
+        <error id="invalidScanfArgType_int" severity="warning" msg="%ln in format string (no. 1) requires &apos;long&apos; but the argument type is &apos;int&apos;." verbose="%ln in format string (no. 1) requires &apos;long&apos; but the argument type is &apos;int&apos;." cwe="686">
+            <location file="checkio.ctl" line="70"/>
+        </error>
+        <error id="invalidScanfArgType_float" severity="warning" msg="%e in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;const char *&apos;." verbose="%e in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;const char *&apos;." cwe="686">
+            <location file="checkio.ctl" line="74"/>
+        </error>
+        <error id="invalidScanfArgType_float" severity="warning" msg="%E in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;const char *&apos;." verbose="%E in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;const char *&apos;." cwe="686">
+            <location file="checkio.ctl" line="75"/>
+        </error>
+        <error id="invalidScanfArgType_float" severity="warning" msg="%f in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;const char *&apos;." verbose="%f in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;const char *&apos;." cwe="686">
+            <location file="checkio.ctl" line="76"/>
+        </error>
+        <error id="invalidScanfArgType_float" severity="warning" msg="%g in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;const char *&apos;." verbose="%g in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;const char *&apos;." cwe="686">
+            <location file="checkio.ctl" line="77"/>
+        </error>
+        <error id="invalidScanfArgType_float" severity="warning" msg="%G in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;const char *&apos;." verbose="%G in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;const char *&apos;." cwe="686">
+            <location file="checkio.ctl" line="78"/>
+        </error>
+        <error id="invalidScanfArgType_float" severity="warning" msg="%a in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;const char *&apos;." verbose="%a in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;const char *&apos;." cwe="686">
+            <location file="checkio.ctl" line="79"/>
+        </error>
+        <error id="invalidScanfArgType_float" severity="warning" msg="%e in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;string&apos;." verbose="%e in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;string&apos;." cwe="686">
+            <location file="checkio.ctl" line="81"/>
+        </error>
+        <error id="invalidScanfArgType_float" severity="warning" msg="%E in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;string&apos;." verbose="%E in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;string&apos;." cwe="686">
+            <location file="checkio.ctl" line="82"/>
+        </error>
+        <error id="invalidScanfArgType_float" severity="warning" msg="%f in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;string&apos;." verbose="%f in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;string&apos;." cwe="686">
+            <location file="checkio.ctl" line="83"/>
+        </error>
+        <error id="invalidScanfArgType_float" severity="warning" msg="%g in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;string&apos;." verbose="%g in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;string&apos;." cwe="686">
+            <location file="checkio.ctl" line="84"/>
+        </error>
+        <error id="invalidScanfArgType_float" severity="warning" msg="%G in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;string&apos;." verbose="%G in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;string&apos;." cwe="686">
+            <location file="checkio.ctl" line="85"/>
+        </error>
+        <error id="invalidScanfArgType_float" severity="warning" msg="%a in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;string&apos;." verbose="%a in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;string&apos;." cwe="686">
+            <location file="checkio.ctl" line="86"/>
+        </error>
+        <error id="invalidScanfArgType_float" severity="warning" msg="%e in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;int&apos;." verbose="%e in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;int&apos;." cwe="686">
+            <location file="checkio.ctl" line="95"/>
+        </error>
+        <error id="invalidScanfArgType_float" severity="warning" msg="%E in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;int&apos;." verbose="%E in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;int&apos;." cwe="686">
+            <location file="checkio.ctl" line="96"/>
+        </error>
+        <error id="invalidScanfArgType_float" severity="warning" msg="%f in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;int&apos;." verbose="%f in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;int&apos;." cwe="686">
+            <location file="checkio.ctl" line="97"/>
+        </error>
+        <error id="invalidScanfArgType_float" severity="warning" msg="%g in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;int&apos;." verbose="%g in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;int&apos;." cwe="686">
+            <location file="checkio.ctl" line="98"/>
+        </error>
+        <error id="invalidScanfArgType_float" severity="warning" msg="%G in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;int&apos;." verbose="%G in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;int&apos;." cwe="686">
+            <location file="checkio.ctl" line="99"/>
+        </error>
+        <error id="invalidScanfArgType_float" severity="warning" msg="%a in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;int&apos;." verbose="%a in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;int&apos;." cwe="686">
+            <location file="checkio.ctl" line="100"/>
+        </error>
+        <error id="invalidPrintfArgType_s" severity="warning" msg="%s in format string (no. 1) requires &apos;string&apos; but the argument type is &apos;int&apos;." verbose="%s in format string (no. 1) requires &apos;string&apos; but the argument type is &apos;int&apos;." cwe="686">
+            <location file="checkio.ctl" line="105"/>
+        </error>
+        <error id="invalidPrintfArgType_uint" severity="warning" msg="%c in format string (no. 1) requires &apos;int&apos; but the argument type is &apos;const char *&apos;." verbose="%c in format string (no. 1) requires &apos;int&apos; but the argument type is &apos;const char *&apos;." cwe="686">
+            <location file="checkio.ctl" line="108"/>
+        </error>
+        <error id="invalidPrintfArgType_uint" severity="warning" msg="%x in format string (no. 1) requires &apos;int&apos; but the argument type is &apos;const char *&apos;." verbose="%x in format string (no. 1) requires &apos;int&apos; but the argument type is &apos;const char *&apos;." cwe="686">
+            <location file="checkio.ctl" line="109"/>
+        </error>
+        <error id="invalidPrintfArgType_uint" severity="warning" msg="%o in format string (no. 1) requires &apos;int&apos; but the argument type is &apos;const char *&apos;." verbose="%o in format string (no. 1) requires &apos;int&apos; but the argument type is &apos;const char *&apos;." cwe="686">
+            <location file="checkio.ctl" line="111"/>
+        </error>
+        <error id="invalidPrintfArgType_uint" severity="warning" msg="%c in format string (no. 1) requires &apos;int&apos; but the argument type is &apos;string&apos;." verbose="%c in format string (no. 1) requires &apos;int&apos; but the argument type is &apos;string&apos;." cwe="686">
+            <location file="checkio.ctl" line="113"/>
+        </error>
+        <error id="invalidPrintfArgType_uint" severity="warning" msg="%x in format string (no. 1) requires &apos;int&apos; but the argument type is &apos;string&apos;." verbose="%x in format string (no. 1) requires &apos;int&apos; but the argument type is &apos;string&apos;." cwe="686">
+            <location file="checkio.ctl" line="114"/>
+        </error>
+        <error id="invalidPrintfArgType_uint" severity="warning" msg="%o in format string (no. 1) requires &apos;int&apos; but the argument type is &apos;string&apos;." verbose="%o in format string (no. 1) requires &apos;int&apos; but the argument type is &apos;string&apos;." cwe="686">
+            <location file="checkio.ctl" line="116"/>
+        </error>
+        <error id="invalidPrintfArgType_uint" severity="warning" msg="%lc in format string (no. 1) requires &apos;long&apos; but the argument type is &apos;int&apos;." verbose="%lc in format string (no. 1) requires &apos;long&apos; but the argument type is &apos;int&apos;." cwe="686">
+            <location file="checkio.ctl" line="118"/>
+        </error>
+        <error id="invalidPrintfArgType_uint" severity="warning" msg="%lx in format string (no. 1) requires &apos;long&apos; but the argument type is &apos;int&apos;." verbose="%lx in format string (no. 1) requires &apos;long&apos; but the argument type is &apos;int&apos;." cwe="686">
+            <location file="checkio.ctl" line="119"/>
+        </error>
+        <error id="invalidPrintfArgType_uint" severity="warning" msg="%lo in format string (no. 1) requires &apos;long&apos; but the argument type is &apos;int&apos;." verbose="%lo in format string (no. 1) requires &apos;long&apos; but the argument type is &apos;int&apos;." cwe="686">
+            <location file="checkio.ctl" line="121"/>
+        </error>
+        <error id="invalidPrintfArgType_sint" severity="warning" msg="%d in format string (no. 1) requires &apos;int&apos; but the argument type is &apos;const char *&apos;." verbose="%d in format string (no. 1) requires &apos;int&apos; but the argument type is &apos;const char *&apos;." cwe="686">
+            <location file="checkio.ctl" line="124"/>
+        </error>
+        <error id="invalidPrintfArgType_sint" severity="warning" msg="%d in format string (no. 1) requires &apos;int&apos; but the argument type is &apos;string&apos;." verbose="%d in format string (no. 1) requires &apos;int&apos; but the argument type is &apos;string&apos;." cwe="686">
+            <location file="checkio.ctl" line="126"/>
+        </error>
+        <error id="invalidPrintfArgType_sint" severity="warning" msg="%ld in format string (no. 1) requires &apos;long&apos; but the argument type is &apos;int&apos;." verbose="%ld in format string (no. 1) requires &apos;long&apos; but the argument type is &apos;int&apos;." cwe="686">
+            <location file="checkio.ctl" line="128"/>
+        </error>
+        <error id="invalidPrintfArgType_float" severity="warning" msg="%e in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;const char *&apos;." verbose="%e in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;const char *&apos;." cwe="686">
+            <location file="checkio.ctl" line="133"/>
+        </error>
+        <error id="invalidPrintfArgType_float" severity="warning" msg="%E in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;const char *&apos;." verbose="%E in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;const char *&apos;." cwe="686">
+            <location file="checkio.ctl" line="134"/>
+        </error>
+        <error id="invalidPrintfArgType_float" severity="warning" msg="%f in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;const char *&apos;." verbose="%f in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;const char *&apos;." cwe="686">
+            <location file="checkio.ctl" line="135"/>
+        </error>
+        <error id="invalidPrintfArgType_float" severity="warning" msg="%g in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;const char *&apos;." verbose="%g in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;const char *&apos;." cwe="686">
+            <location file="checkio.ctl" line="136"/>
+        </error>
+        <error id="invalidPrintfArgType_float" severity="warning" msg="%G in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;const char *&apos;." verbose="%G in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;const char *&apos;." cwe="686">
+            <location file="checkio.ctl" line="137"/>
+        </error>
+        <error id="invalidPrintfArgType_float" severity="warning" msg="%e in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;string&apos;." verbose="%e in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;string&apos;." cwe="686">
+            <location file="checkio.ctl" line="139"/>
+        </error>
+        <error id="invalidPrintfArgType_float" severity="warning" msg="%E in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;string&apos;." verbose="%E in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;string&apos;." cwe="686">
+            <location file="checkio.ctl" line="140"/>
+        </error>
+        <error id="invalidPrintfArgType_float" severity="warning" msg="%f in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;string&apos;." verbose="%f in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;string&apos;." cwe="686">
+            <location file="checkio.ctl" line="141"/>
+        </error>
+        <error id="invalidPrintfArgType_float" severity="warning" msg="%g in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;string&apos;." verbose="%g in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;string&apos;." cwe="686">
+            <location file="checkio.ctl" line="142"/>
+        </error>
+        <error id="invalidPrintfArgType_float" severity="warning" msg="%G in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;string&apos;." verbose="%G in format string (no. 1) requires &apos;float&apos; but the argument type is &apos;string&apos;." cwe="686">
+            <location file="checkio.ctl" line="143"/>
+        </error>
+        <error id="fflushOnInputStream" severity="portability" msg="fflush() called on input stream &apos;stdin&apos; may result in undefined behaviour on non-linux systems." verbose="fflush() called on input stream &apos;stdin&apos; may result in undefined behaviour on non-linux systems." cwe="398">
+            <location file="checkio.ctl" line="149"/>
+        </error>
+        <error id="useClosedFile" severity="error" msg="Used file that is not opened." verbose="Used file that is not opened." cwe="910">
+            <location file="checkio.ctl" line="154"/>
+        </error>
+        <error id="useClosedFile" severity="error" msg="Used file that is not opened." verbose="Used file that is not opened." cwe="910">
+            <location file="checkio.ctl" line="155"/>
+        </error>
+        <error id="useClosedFile" severity="error" msg="Used file that is not opened." verbose="Used file that is not opened." cwe="910">
+            <location file="checkio.ctl" line="156"/>
+        </error>
+        <error id="useClosedFile" severity="error" msg="Used file that is not opened." verbose="Used file that is not opened." cwe="910">
+            <location file="checkio.ctl" line="159"/>
+        </error>
+        <error id="useClosedFile" severity="error" msg="Used file that is not opened." verbose="Used file that is not opened." cwe="910">
+            <location file="checkio.ctl" line="160"/>
+        </error>
+        <error id="useClosedFile" severity="error" msg="Used file that is not opened." verbose="Used file that is not opened." cwe="910">
+            <location file="checkio.ctl" line="161"/>
+        </error>
+        <error id="useClosedFile" severity="error" msg="Used file that is not opened." verbose="Used file that is not opened." cwe="910">
+            <location file="checkio.ctl" line="164"/>
+        </error>
+        <error id="useClosedFile" severity="error" msg="Used file that is not opened." verbose="Used file that is not opened." cwe="910">
+            <location file="checkio.ctl" line="165"/>
+        </error>
+        <error id="useClosedFile" severity="error" msg="Used file that is not opened." verbose="Used file that is not opened." cwe="910">
+            <location file="checkio.ctl" line="166"/>
+        </error>
+        <error id="useClosedFile" severity="error" msg="Used file that is not opened." verbose="Used file that is not opened." cwe="910">
+            <location file="checkio.ctl" line="169"/>
+        </error>
+        <error id="useClosedFile" severity="error" msg="Used file that is not opened." verbose="Used file that is not opened." cwe="910">
+            <location file="checkio.ctl" line="172"/>
+        </error>
+        <error id="useClosedFile" severity="error" msg="Used file that is not opened." verbose="Used file that is not opened." cwe="910">
+            <location file="checkio.ctl" line="173"/>
+        </error>
+        <error id="useClosedFile" severity="error" msg="Used file that is not opened." verbose="Used file that is not opened." cwe="910">
+            <location file="checkio.ctl" line="174"/>
+        </error>
+        <error id="seekOnAppendedFile" severity="warning" msg="Repositioning operation performed on a file opened in append mode has no effect." verbose="Repositioning operation performed on a file opened in append mode has no effect." cwe="398">
+            <location file="checkio.ctl" line="177"/>
+        </error>
+        <error id="readWriteOnlyFile" severity="error" msg="Read operation on a file that was opened only for writing." verbose="Read operation on a file that was opened only for writing." cwe="664">
+            <location file="checkio.ctl" line="180"/>
+        </error>
+        <error id="readWriteOnlyFile" severity="error" msg="Read operation on a file that was opened only for writing." verbose="Read operation on a file that was opened only for writing." cwe="664">
+            <location file="checkio.ctl" line="181"/>
+        </error>
+        <error id="readWriteOnlyFile" severity="error" msg="Read operation on a file that was opened only for writing." verbose="Read operation on a file that was opened only for writing." cwe="664">
+            <location file="checkio.ctl" line="182"/>
+        </error>
+        <error id="IOWithoutPositioning" severity="error" msg="Read and write operations without a call to a positioning function (fseek or rewind) or fflush in between result in undefined behaviour." verbose="Read and write operations without a call to a positioning function (fseek or rewind) or fflush in between result in undefined behaviour." cwe="664">
+            <location file="checkio.ctl" line="186"/>
+        </error>
+        <error id="IOWithoutPositioning" severity="error" msg="Read and write operations without a call to a positioning function (fseek or rewind) or fflush in between result in undefined behaviour." verbose="Read and write operations without a call to a positioning function (fseek or rewind) or fflush in between result in undefined behaviour." cwe="664">
+            <location file="checkio.ctl" line="191"/>
+        </error>
+        <error id="writeReadOnlyFile" severity="error" msg="Write operation on a file that was opened only for reading." verbose="Write operation on a file that was opened only for reading." cwe="664">
+            <location file="checkio.ctl" line="194"/>
+        </error>
+        <error id="writeReadOnlyFile" severity="error" msg="Write operation on a file that was opened only for reading." verbose="Write operation on a file that was opened only for reading." cwe="664">
+            <location file="checkio.ctl" line="195"/>
+        </error>
+        <error id="writeReadOnlyFile" severity="error" msg="Write operation on a file that was opened only for reading." verbose="Write operation on a file that was opened only for reading." cwe="664">
+            <location file="checkio.ctl" line="196"/>
+        </error>
+    </errors>
+</results>

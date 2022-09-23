@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!--  online editor for reg exp https://regex101.com/ -->
+
+<!-- enablde token lists:
+ normal
+ raw
+ simple
+-->
+
+<!-- TEST RULES -->
+<!-- OK rule -->
+<rule version="1">
+    <pattern> substr \( \w , \w , 1 \) </pattern>
+    <message>
+    <id>TokenSubStrAt0Test</id>
+    <severity>error</severity>
+    <summary>substr(s, pos, 1) is a slow way to say s[pos]</summary>
+    </message>
+</rule>
+<!-- bad pattern test -->
+<rule version="1">
+    <pattern>[a-b][a</pattern>
+    <message>
+    <id>badPattern</id>
+    <severity>error</severity>
+    <summary>substr(s, pos, 1) is a slow way to say s[pos]</summary>
+    </message>
+</rule>
+<!-- empty pattern test -->
+<rule version="1">
+    <pattern></pattern>
+    <message>
+    <id>emptyPattern</id>
+    <severity>error</severity>
+    <summary>substr(s, pos, 1) is a slow way to say s[pos]</summary>
+    </message>
+</rule>
+<!-- empty ID test -->
+<rule version="1">
+    <pattern>[a-b][a</pattern>
+    <message>
+    <id></id>
+    <severity>error</severity>
+    <summary>substr(s, pos, 1) is a slow way to say s[pos]</summary>
+    </message>
+</rule>
+<!-- empty severity test -->
+<rule version="1">
+    <pattern>[a-b][a</pattern>
+    <message>
+    <id>emptySeverity</id>
+    <severity></severity>
+    <summary>substr(s, pos, 1) is a slow way to say s[pos]</summary>
+    </message>
+</rule>
+<!-- END OF: TEST RULES -->
+
+

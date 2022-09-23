@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--  online editor for reg exp https://regex101.com/ -->
+
+<!-- enablde token lists:
+ normal
+ raw
+ simple
+-->
+
+
+<rule version="1">
+	<tokenlist>normal</tokenlist>
+	<pattern>%fileName%</pattern>
+	<message>
+		<id>Class_Name</id>
+		<severity>style</severity>
+		<summary>The specified regular expression checks all class names.</summary>
+	</message>
+</rule>

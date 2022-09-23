@@ -1,0 +1,325 @@
+V 14
+2
+LANG:10000 0 
+LANG:10001 0 
+PANEL,-1 -1 1005 375 N "_3DFace" 0
+E E E E E 1 -1 -1 0  880 398
+""0  1
+E E 3
+"CBRef" "1"
+"EClose" E
+"dpi" "96"
+2 0 1 0
+""
+DISPLAY_LAYER, 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0
+LAYER, 0 
+2
+LANG:10000 0 
+LANG:10001 0 
+13 1
+"resetDefaultSettings"
+""
+1 794 27 E E E 1 E 1 E N "DarkJungle" E N "_Button" E E
+ E E
+0 0 0 0 0 0
+E E E
+8
+2
+LANG:10000 0 
+LANG:10001 0 
+
+2
+"minimumSize" "111 51"
+"layoutAlignment" "AlignNone"
+2
+LANG:10000 26 Arial,-1,12,5,50,0,0,0,0,0
+LANG:10001 26 Arial,-1,12,5,50,0,0,0,0,0
+0  792 7 997 61
+
+T 
+2
+LANG:10000 16 Reset to default
+LANG:10001 16 Reset to default
+"main(mapping event)
+{
+  dpSet(\"_CtrlppCheck.filter.id\", makeDynString(\"voidReturnValueMissingInformation\", \"uninitvar\"),
+        \"_CtrlppCheck.filter.severity\", makeDynString(\"\"),
+        \"_CtrlppCheck.settings.enableHeadersCheck\", TRUE,
+        \"_CtrlppCheck.settings.includeSubProjects\", FALSE,
+        \"_CtrlppCheck.settings.enableLibCheck\", FALSE,
+        \"_CtrlppCheck.settings.inconclusive\", TRUE,
+        \"_CtrlppCheck.settings.verbose\", FALSE,
+        \"_CtrlppCheck.settings.inlineSuppressions\", FALSE);
+}
+
+" 0
+ E E E
+29 7
+"disabledIDs"
+""
+1 9 30 E E E 1 E 1 E N "DavyGrey" E N "_Window" E E
+ E E
+6 0 0 0 0 0
+E "main()
+{
+  while ( !dpExists(\"_CtrlppCheck\") )
+    delay(1);
+  dpSet(\"_CtrlppCheck.filter.id\", strsplit(this.text(), \"\\n\"));
+}
+" 0
+ E
+0
+2
+LANG:10000 0 
+LANG:10001 0 
+
+1
+"layoutAlignment" "AlignNone"
+2
+LANG:10000 26 Arial,-1,12,5,50,0,0,0,0,0
+LANG:10001 26 Arial,-1,12,5,50,0,0,0,0,0
+0  9 30 391.9999999999999 365
+15 PVSS.TextEdit.1
+1
+0 "ReturnPressed" "()"
+"//   dpSet(\"_CtrlppCheck.filter.id\", strsplit(this.text(), \"\\n\"));"
+"main()
+{
+  while ( !dpExists(\"_CtrlppCheck\") )
+    delay(1);
+  dpConnect(\"ids_cb\", \"_CtrlppCheck.filter.id\");
+}
+
+ids_cb(const string dpe, const dyn_string ids)
+{
+  this.text(strjoin(ids, \"\\n\"));
+}
+" 0
+14 8
+"TEXT_FIELD1"
+""
+1 8.999999999999996 14.60000000000001 E E E 1 E 1 E N "DavyGrey" E N "_Window" E E
+ E E
+7 0 0 0 0 0
+E E E
+0
+2
+LANG:10000 0 
+LANG:10001 0 
+
+2
+"minimumSize" "-1 20"
+"layoutAlignment" "AlignNone"
+2
+LANG:10000 26 Arial,-1,12,5,75,0,0,0,0,0
+LANG:10001 26 Arial,-1,12,5,75,0,0,0,0,0
+0  7 7 393.9999999999999 31
+2 "0s" 0 0 0 0 0 -1  E "main()
+{
+  this.text(\"Filtered IDs\");
+}
+" 0
+ E
+29 9
+"disabledSeverities"
+""
+1 399 30 E E E 1 E 1 E N "DavyGrey" E N "_Window" E E
+ E E
+8 0 0 0 0 0
+E "main()
+{
+  dpSet(\"_CtrlppCheck.filter.severity\", strsplit(this.text(), \"\\n\"));
+}
+" 0
+ E
+0
+2
+LANG:10000 0 
+LANG:10001 0 
+
+1
+"layoutAlignment" "AlignNone"
+2
+LANG:10000 26 Arial,-1,12,5,50,0,0,0,0,0
+LANG:10001 26 Arial,-1,12,5,50,0,0,0,0,0
+0  399 30 782 365
+15 PVSS.TextEdit.1
+1
+0 "ReturnPressed" "()"
+"//   dpSet(\"_CtrlppCheck.filter.id\", strsplit(this.text(), \"\\n\"));"
+"main()
+{
+  while ( !dpExists(\"_CtrlCommandInterface_StaticTests\") )
+    delay(1);
+  dpConnect(\"ids_cb\", \"_CtrlppCheck.filter.severity\");
+}
+
+ids_cb(const string dpe, const dyn_string ids)
+{
+  this.text(strjoin(ids, \"\\n\"));
+}
+" 0
+14 10
+"TEXT_FIELD2"
+""
+1 399 14.59999999999999 E E E 1 E 1 E N "DavyGrey" E N "_Window" E E
+ E E
+9 0 0 0 0 0
+E E E
+0
+2
+LANG:10000 0 
+LANG:10001 0 
+
+1
+"layoutAlignment" "AlignNone"
+2
+LANG:10000 26 Arial,-1,12,5,75,0,0,0,0,0
+LANG:10001 26 Arial,-1,12,5,75,0,0,0,0,0
+0  397 7 784 31
+2 "0s" 0 0 0 0 0 -1  E "main()
+{
+  this.text(\"Filtered Severities\");
+}
+" 0
+ E
+32 12
+"SPACER2"
+""
+1 794 66 E E E 1 E 1 E N {0,0,0} E N {255,255,255} E E
+ E E
+11 0 0 0 0 0
+E E E
+0
+2
+LANG:10000 0 
+LANG:10001 0 
+
+3
+"transparentForMouse" ""
+"sizePolicy" "Ignored Expanding"
+"layoutAlignment" "AlignNone"
+ 794 66 995 161 2
+1 13 3 "" 1
+0
+1 15 4 "" 1
+0
+1 17 5 "" 1
+0
+1 19 6 "" 1
+0
+1 21 7 "" 1
+0
+1 23 8 "" 1
+0
+0
+LAYER, 1 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 2 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 3 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 4 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 5 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 6 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 7 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+4 0 "LAYOUT_GROUP0" 9
+2 0 
+7 8 
+
+"S 7" "1 0 1 1"
+"S 8" "0 0 1 1"
+"" ""
+0 2 0 1 0
+4 1 "LAYOUT_GROUP1" 9
+2 0 
+10 9 
+
+"S 10" "0 0 1 1"
+"S 9" "1 0 1 1"
+"" ""
+0 2 0 1 0
+3 4 "PANEL_REF4" 2
+"layoutAlignment" "AlignNone"
+"UDP DPE" "string _CtrlppCheck.settings.enableLibCheck"
+"UDP text" "string Check library config file"
+"" ""
+"vision/scriptEditor/staticTests/widgets/ctrlppCheckSettingsCbx.pnl" 460 320 T 14 0.3850574712643679 0 0.2327586206896549 620.7241379310347 139.1551724137932
+0
+3 5 "PANEL_REF5" 2
+"layoutAlignment" "AlignNone"
+"UDP DPE" "string _CtrlppCheck.settings.inconclusive"
+"UDP text" "string Inconclusive"
+"" ""
+"vision/scriptEditor/staticTests/widgets/ctrlppCheckSettingsCbx.pnl" 460 320 T 15 0.3850574712643679 0 0.2327586206896551 620.7241379310347 173.1551724137931
+0
+3 6 "PANEL_REF6" 2
+"layoutAlignment" "AlignNone"
+"UDP DPE" "string _CtrlppCheck.settings.includeSubProjects"
+"UDP text" "string Include Sub-Projects"
+"" ""
+"vision/scriptEditor/staticTests/widgets/ctrlppCheckSettingsCbx.pnl" 460 320 T 16 0.3850574712643679 0 0.2327586206896552 620.7241379310347 207.1551724137931
+0
+3 7 "PANEL_REF7" 2
+"layoutAlignment" "AlignNone"
+"UDP DPE" "string _CtrlppCheck.settings.verbose"
+"UDP text" "string Verbose"
+"" ""
+"vision/scriptEditor/staticTests/widgets/ctrlppCheckSettingsCbx.pnl" 460 320 T 17 0.3850574712643679 0 0.2327586206896551 620.7241379310347 241.1551724137931
+0
+3 8 "PANEL_REF8" 2
+"layoutAlignment" "AlignNone"
+"UDP DPE" "string _CtrlppCheck.settings.inlineSuppressions"
+"UDP text" "string Inline suppressions"
+"" ""
+"vision/scriptEditor/staticTests/widgets/ctrlppCheckSettingsCbx.pnl" 460 320 T 18 0.3850574712643679 0 0.2327586206896553 620.7241379310347 275.1551724137931
+0
+4 2 "LAYOUT_GROUP2" 9
+2 6 
+1 12 
+3 4 5 6 7 8 
+"S 1" "0 0 1 1"
+"S 12" "1 0 1 1"
+"G 3" "2 0 1 1"
+"G 4" "3 0 1 1"
+"G 5" "4 0 1 1"
+"G 6" "5 0 1 1"
+"G 7" "6 0 1 1"
+"G 8" "7 0 1 1"
+"" ""
+0 2 1 5 0 0 0 0
+4 9 "LAYOUT_GROUP9" -1
+0 3 
+
+0 1 2 
+"G 0" "0 0 1 1"
+"G 1" "1 0 1 1"
+"G 2" "2 0 1 1"
+"" ""
+0 1 0 0
+0

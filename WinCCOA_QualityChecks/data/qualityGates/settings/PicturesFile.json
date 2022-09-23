@@ -1,0 +1,25 @@
+{
+    "settingsVersion": 0,
+    "checks": [
+        {
+            "id": "PicturesFile.file.size",
+            "description":{ 
+                "de_AT.utf8":"Überprüft die Dateigröße (in Bytes) der Bilddatei",
+                "en_US.utf8":"Checks the file size (in bytes) of the picture file"
+             },
+            "highLimit": 1048576,
+            "scorePoints": 1,
+            "enabled": true
+        },
+        {
+            "id": "PicturesFile.file.extention",
+            "description":{ 
+                "de_AT.utf8":"Überprüft die Dateierweiterung des Bildes",
+                "en_US.utf8":"Checks the file extension of the picture"
+             },
+            "referenceValues": ["bmp", "xpm", "jpg", "png", "svg", "jpeg", "gif", "mng", "ico", "wmf"],
+            "scorePoints": 1,
+            "enabled": true
+        }
+    ]
+}

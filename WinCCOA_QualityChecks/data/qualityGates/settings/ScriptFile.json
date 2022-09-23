@@ -1,0 +1,33 @@
+{
+    "settingsVersion": 0,
+    "checks": [
+        {
+            "id": "ScriptFile.file.isExampleFile",
+            "description":{ 
+                "de_AT.utf8":"Überprüft, ob es sich bei der Datei um eine Beispieldatei handelt",
+                "en_US.utf8":"Check if the file is an example file"
+             },
+            "scorePoints": 1,
+            "enabled": true
+        },
+        {
+            "id": "ScriptFile.file.extention",
+            "description":{ 
+                "de_AT.utf8":"Überprüft Dateien auf die angegebenen Erweiterungen",
+                "en_US.utf8":"Checks files for the specified extensions"
+             },
+            "referenceValues": ["ctl", "ctc"],
+            "scorePoints": 1,
+            "enabled": true
+        },
+        {
+            "id": "ScriptFile.file.isCalculated",
+            "description":{ 
+                "de_AT.utf8":"Überprüft, ob die Datei zur Validierung berechnet wurde",
+                "en_US.utf8":"Checks if the file is calculated for validation"
+             },
+            "scorePoints": 1,
+            "enabled": true
+        }
+    ]
+}

@@ -1,0 +1,2 @@
+assert.missingScripts,Has scripts
+reason.missingScripts,Application doesn´t contains any scripts.

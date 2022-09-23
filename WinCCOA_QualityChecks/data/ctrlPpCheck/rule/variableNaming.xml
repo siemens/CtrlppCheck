@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!--  online editor for reg exp https://regex101.com/ -->
+
+<!-- enablde token lists:
+ normal
+ raw
+ simple
+-->
+
+<rule version="1">
+	<pattern>^[A-Z0-9\\-\\_]+$</pattern>
+	<message>
+		<id>const</id>
+		<summary>The variable name can not consist of lowercase letters.</summary>
+	</message>
+</rule>
+
+<rule version="1">
+	<pattern>^.+$</pattern>
+	<message>
+		<id>const * argument</id>
+		<summary>The const rule should not apply to functional arguments.</summary>
+	</message>
+</rule>
+
+<!--
+<rule version="1">
+	<pattern></pattern>
+	<message>
+		<id>int</id>
+		<summary></summary>
+	</message>
+</rule>
+
+<rule version="1">
+	<pattern></pattern>
+	<message>
+		<id>local</id>
+		<summary></summary>
+	</message>
+</rule>
+
+<rule version="1">
+	<pattern></pattern>
+	<message>
+		<id>argument</id>
+		<summary></summary>
+	</message>
+</rule>
+
+<rule version="1">
+	<pattern></pattern>
+	<message>
+		<id>global</id>
+		<summary></summary>
+	</message>
+</rule>
+-->
+

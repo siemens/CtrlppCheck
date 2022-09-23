@@ -1,0 +1,45 @@
+assert.missingPanels,Has panels
+reason.missingPanels,Application does not contains any panels.
+assert.panel.CCN,CCN (Cyclomatic Complexity No. McCabe-Metric
+reason.panel.CCN,The panel '($panel.name)' has too high CCN ($panel.CCN).
+assert.panel.avgCCN,Average complexity (McCabe-Metric)
+reason.panel.avgCCN,The panel '($panel.name)' has too high average of CCN ($panel.avgCCN).
+assert.panel.NLOC,NLOC (No. Lines Of Code)
+reason.panel.NLOC,The panel '($panel.name)' has too much lines of code ($panel.NLOC).
+assert.panel.avgNLOC,Average lines of code per function
+reason.panel.avgNLOC,The panel '($panel.name)' has too high average lines of code ($panel.avgNLOC).
+assert.panel.isCalculated,Is calculated
+reason.panel.isCalculated,Sorry, the panel '($panel.name)' can't be calculated.
+assert.panel.isExampleFile,Is example
+reason.panel.isExampleFile,The panel '($panel.name)' is an example file. Examples are ignored.
+assert.panel.extention,Extention
+reason.panel.extention,The panel '$panel.name' has an invalid extention '$panel.extention'.
+assert.panel.isBackUp,Backup panel (.bak)
+reason.panel.isBackUp,Sorry, the panel '($panel.name)' is a backup, can't be calculated.
+assert.panel.isCrypted,Is encrypted.
+reason.panel.isCrypted,The panel '($panel.name)' is crypted, can't be calculated.
+assert.panel.countOfProperties,Count of properties.
+reason.panel.countOfProperties,Too much properties ($panel.countOfProperties) found in $panel.name.
+assert.panel.countOfEvents,Count of events.
+reason.panel.countOfEvents,Too much events ($panel.countOfEvents) found in $panel.name.
+assert.panel.countOfShapes,Count of shapes.
+reason.panel.countOfShapes,Too much shapes ($panel.countOfShapes) found in $panel.name.
+assert.shape.countOfProperties,Count of properties.
+reason.shape.countOfProperties,Too much properties ($shape.countOfProperties) found in $shape.name.
+assert.shape.countOfEvents,Count of events.
+reason.shape.countOfEvents,Too much events ($shape.countOfEvents) found in $shape.name.
+assert.shape.countOfShapes,Count of shapes.
+reason.shape.countOfShapes,Too much shapes ($shape.countOfShapes) found in $shape.name.
+assert.shape.CCN,CCN (Cyclomatic Complexity No. McCabe-Metric
+reason.shape.CCN,The shape '($shape.name)' has too high CCN ($shape.CCN).
+assert.shape.avgCCN,Average complexity (McCabe-Metric)
+reason.shape.avgCCN,The shape '($shape.name)' has too high average of CCN ($shape.avgCCN).
+assert.shape.NLOC,Lines of code
+reason.shape.NLOC,The shape '($shape.name)' has too much lines of code ($shape.NLOC).
+assert.shape.avgNLOC,Average lines of code per function
+reason.shape.avgNLOC,The shape '($shape.name)' has too high average of lines of code ($shape.avgNLOC).
+panel.properties,Properties
+panel.shapes,Shapes
+panel.events,Events
+shape.properties,Properties
+shape.events,Events

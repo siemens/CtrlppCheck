@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<results version="2">
+    <cppcheck version=""/>
+    <errors>
+        <error id="emptyScope" severity="warning" msg="The scope is empty: &apos;if&apos;" verbose="The scope is empty: &apos;if&apos;" cwe="398" inconclusive="true">
+            <location file0="" file="" line="6"/>
+        </error>
+        <error id="emptyScope" severity="warning" msg="The scope is empty: &apos;if&apos;" verbose="The scope is empty: &apos;if&apos;" cwe="398" inconclusive="true">
+            <location file0="" file="" line="11"/>
+        </error>
+        <error id="emptyScope" severity="warning" msg="The scope is empty: &apos;else&apos;" verbose="The scope is empty: &apos;else&apos;" cwe="398" inconclusive="true">
+            <location file0="" file="" line="15"/>
+        </error>
+        <error id="emptyScope" severity="warning" msg="The scope is empty: &apos;for&apos;" verbose="The scope is empty: &apos;for&apos;" cwe="398" inconclusive="true">
+            <location file0="" file="" line="25"/>
+        </error>
+        <error id="emptyScope" severity="warning" msg="The scope is empty: &apos;while&apos;" verbose="The scope is empty: &apos;while&apos;" cwe="398" inconclusive="true">
+            <location file0="" file="" line="27"/>
+        </error>
+        <error id="emptyScope" severity="warning" msg="The scope is empty: &apos;do&apos;" verbose="The scope is empty: &apos;do&apos;" cwe="398" inconclusive="true">
+            <location file0="" file="" line="29"/>
+        </error>
+        <error id="emptyScope" severity="warning" msg="The scope is empty: &apos;switch&apos;" verbose="The scope is empty: &apos;switch&apos;" cwe="398" inconclusive="true">
+            <location file0="" file="" line="34"/>
+        </error>
+        <error id="emptyScope" severity="warning" msg="The scope is empty: &apos;try&apos;" verbose="The scope is empty: &apos;try&apos;" cwe="398" inconclusive="true">
+            <location file0="" file="" line="38"/>
+        </error>
+        <error id="emptyScope" severity="warning" msg="The scope is empty: &apos;catch&apos;" verbose="The scope is empty: &apos;catch&apos;" cwe="398" inconclusive="true">
+            <location file0="" file="" line="41"/>
+        </error>
+        <error id="emptyScope" severity="warning" msg="The scope is empty: &apos;emptyFunc&apos;" verbose="The scope is empty: &apos;emptyFunc&apos;" cwe="398" inconclusive="true">
+            <location file0="" file="" line="46"/>
+        </error>
+        <error id="emptyScope" severity="warning" msg="The scope is empty: &apos;class&apos;" verbose="The scope is empty: &apos;class&apos;" cwe="398" inconclusive="true">
+            <location file0="" file="" line="50"/>
+        </error>
+        <error id="emptyScope" severity="warning" msg="The scope is empty: &apos;struct&apos;" verbose="The scope is empty: &apos;struct&apos;" cwe="398" inconclusive="true">
+            <location file0="" file="" line="51"/>
+        </error>
+    </errors>
+</results>

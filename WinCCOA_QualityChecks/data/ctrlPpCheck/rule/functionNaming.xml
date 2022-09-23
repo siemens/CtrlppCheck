@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!--  online editor for reg exp https://regex101.com/ -->
+
+<!-- enablde token lists:
+ normal
+ raw
+ simple
+-->
+
+<rule version="1">
+	<tokenlist>normal</tokenlist>
+	<pattern>^(f_)(.*)</pattern>
+	<message>
+		<id>Function_Static</id>
+		<severity>style</severity>
+		<summary>The specified regular expression checks all static functions.</summary>
+	</message>
+</rule>
+<rule version="1">
+	<tokenlist>normal</tokenlist>
+	<pattern>^(f_)(.*)</pattern>
+	<message>
+		<id>Function_Inline</id>
+		<severity>style</severity>
+		<summary>The specified regular expression checks all inline functions.</summary>
+	</message>
+</rule>
+<rule version="1">
+	<tokenlist>normal</tokenlist>
+	<pattern>(.*)</pattern>
+	<message>
+		<id>Function_Default</id>
+		<severity>style</severity>
+		<summary>The specified regular expression checks all normal functions.</summary>
+	</message>
+</rule>

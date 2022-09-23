@@ -1,0 +1,151 @@
+<?xml version="1.0"?>
+<!--  online editor for reg exp https://regex101.com/ -->
+
+<!-- enablde token lists:
+ normal
+ raw
+ simple
+-->
+
+
+<!-- BRANDING ISSUES -->
+<rule version="1">
+	<tokenlist>normal</tokenlist>
+	<pattern><![CDATA[".\S*PVSS.\S*"|"PVSS.\S*"]]></pattern>
+	<message>
+	    <id>brandig_PVSS</id>
+		<severity>style</severity>
+		<summary>Use getComponentName() instead of hardcoded manager name $symbol</summary>
+	</message>
+</rule>
+<rule version="1">
+	<tokenlist>normal</tokenlist>
+	<pattern><![CDATA[".\S*WCC.\S*"|".\S*wcc.\S*"|"WCC.\S*"|"wcc.\S*"|"WCC"|"wcc"]]></pattern>
+	<message>
+	    <id>brandig_OA</id>
+		<severity>error</severity>
+		<summary>Use getComponentName() instead of hardcoded manager name $symbol</summary>
+	</message>
+</rule>
+<!-- END OF: BRANDING ISSUES -->
+
+<!-- BAD FUNCTIONS -->
+<rule version="1">
+	<tokenlist>normal</tokenlist>
+	<pattern><![CDATA[ foo\d| foo  | foo_|_foo |_foo\d|\dfoo|\dfoo_]]></pattern>
+	<message>
+	    <id>usageOfFoo</id>
+		<severity>style</severity>
+		<summary>It is some develop version?, The funcion foo() or variable foo is found</summary>
+	</message>
+</rule>
+<!-- END OF: BAD FUNCTIONS -->
+
+<!-- SAFETY -->
+<rule version="1">
+	<tokenlist>normal</tokenlist>
+	<pattern><![CDATA[ exit \( ]]></pattern>
+	<message>
+	    <id>badFunc_safety_exit</id>
+		<severity>error</severity>
+		<summary>It is potentially a safety issue to use the function exit()</summary>
+	</message>
+</rule>
+<rule version="1">
+	<tokenlist>normal</tokenlist>
+	<pattern><![CDATA[ addGlobal \( ]]></pattern>
+	<message>
+	    <id>badFunc_safety_addGlobal</id>
+		<severity>warning</severity>
+		<summary>It is potentially a safety issue to use the function addGlobal()</summary>
+	</message>
+</rule>
+<rule version="1">
+	<tokenlist>normal</tokenlist>
+	<pattern><![CDATA[ removeGlobal \( ]]></pattern>
+	<message>
+	    <id>badFunc_safety_removeGlobal</id>
+		<severity>error</severity>
+		<summary>It is potentially a safety issue to use the function removeGlobal()</summary>
+	</message>
+</rule>
+<!-- END OF: SAFETY -->
+
+<!-- SECURITY -->
+<!-- END OF: SECURITY -->
+
+<!-- PERFORMANCE -->
+<rule version="1">
+	<tokenlist>normal</tokenlist>
+	<pattern><![CDATA[ delay \( ]]></pattern>
+	<message>
+	    <id>badFunc_performance_delay</id>
+		<severity>performance</severity>
+		<summary>It is really neccessary to use the function delay()</summary>
+	</message>
+</rule>
+<rule version="1">
+	<tokenlist>raw</tokenlist>
+    <pattern> substr \( \w , \w , 1 \) </pattern>
+    <message>
+    <id>TokenSubStrAt0</id>
+    <severity>error</severity>
+    <summary>substr(s, pos, 1) is a slow way to say s[pos]</summary>
+    </message>
+</rule>
+<rule version="1">
+    <pattern>  strlen \( \S+ \) > 0  </pattern>
+    <message>
+        <id>StrlenNotEmptyString</id>
+        <severity>performance</severity>
+        <summary>Using strlen() to check if a string is not empty, is not efficient.</summary>
+    </message>
+</rule>
+<rule version="1">
+    <pattern>  strlen \( \S+ \) == 0 </pattern>
+    <message>
+        <id>StrlenEmptyString</id>
+        <severity>performance</severity>
+        <summary>Using strlen() to check if a string is empty, is not efficient.</summary>
+    </message>
+</rule>
+<rule version="1">
+	<tokenlist>normal</tokenlist>
+    <pattern>strpos \( \S+ , \S+ \) == 0 </pattern>
+    <message>
+        <id>strPosEq0</id>
+        <severity>performance</severity>
+        <summary>Using strpos(s) == 0 to check if the string start with other string is not efficient.</summary>
+    </message>
+</rule>
+<!-- END OF: PERFORMANCE -->
+
+<!-- DEBUG -->
+<rule version="1">
+	<tokenlist>normal</tokenlist>
+	<pattern><![CDATA[ Debug \( ]]></pattern>
+	<message>
+	    <id>badFunc_style_Debug</id>
+		<severity>style</severity>
+		<summary>Use throwError() instead of Debug() functions</summary>
+	</message>
+</rule>
+<rule version="1">
+	<tokenlist>normal</tokenlist>
+	<pattern><![CDATA[ DebugN \( ]]></pattern>
+	<message>
+	    <id>badFunc_style_DebugN</id>
+		<severity>style</severity>
+		<summary>Use throwError() instead of DebugN() functions</summary>
+	</message>
+</rule>
+<rule version="1">
+	<tokenlist>normal</tokenlist>
+	<pattern><![CDATA[ DebugTN \( ]]></pattern>
+	<message>
+	    <id>badFunc_style_DebugTN</id>
+		<severity>style</severity>
+		<summary>Use throwError() instead of DebugTN() functions</summary>
+	</message>
+</rule>
+<!-- END OF: DEBUG -->

@@ -1,0 +1,8 @@
+assert.dir.NLOC,NLOC (No. Lines Of Code)
+reason.dir.NLOC,Count of code-lines ($dir.NLOC) in the '$dir.name' is not valid.
+assert.dir.avgNLOC,Average NLOC (No. Lines Of Code)
+reason.dir.avgNLOC,Average NLOC ($dir.avgNLOC) in the '$dir.name' is not valid.
+assert.dir.CCN,CCN (Cyclomatic Complexity No. McCabe-Metric)
+reason.dir.CCN,The CCN ($dir.CCN) in the '$dir.name' is too high.
+assert.dir.avgCCN,Average CCN (Cyclomatic Complexity No. McCabe-Metric)
+reason.dir.avgCCN,The average CCN ($dir.avgCCN) in the '$dir.name' is too high.

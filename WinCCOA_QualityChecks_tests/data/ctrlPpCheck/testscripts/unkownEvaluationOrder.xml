@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<results version="2">
+    <ctrlppcheck version="2.0"/>
+    <errors>
+        <error id="unknownEvaluationOrder" severity="warning" msg="Expression &apos;chars[++i],chars[++i]&apos; depends on order of evaluation of side effects" verbose="Expression &apos;chars[++i],chars[++i]&apos; depends on order of evaluation of side effects" cwe="768">
+            <location file="" line="21"/>
+        </error>
+        <error id="unknownEvaluationOrder" severity="warning" msg="Expression &apos;chars[++i],chars[++i],chars[++i]&apos; depends on order of evaluation of side effects" verbose="Expression &apos;chars[++i],chars[++i],chars[++i]&apos; depends on order of evaluation of side effects" cwe="768">
+            <location file="" line="22"/>
+        </error>
+        <error id="unknownEvaluationOrder" severity="warning" msg="Expression &apos;chars[++i],chars[++i],chars[++i],chars[++i]&apos; depends on order of evaluation of side effects" verbose="Expression &apos;chars[++i],chars[++i],chars[++i],chars[++i]&apos; depends on order of evaluation of side effects" cwe="768">
+            <location file="" line="23"/>
+        </error>
+        <error id="unknownEvaluationOrder" severity="warning" msg="Expression &apos;chars[++i],chars[++i],chars[++i],chars[++i],chars[++i]&apos; depends on order of evaluation of side effects" verbose="Expression &apos;chars[++i],chars[++i],chars[++i],chars[++i],chars[++i]&apos; depends on order of evaluation of side effects" cwe="768">
+            <location file="" line="24"/>
+        </error>
+    </errors>
+</results>

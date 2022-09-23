@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<results version="2">
+    <cppcheck version="2.0"/>
+    <errors>
+        <error id="syntaxError" severity="error" msg="Syntax error: Unmatched bracket &apos;(&apos;" verbose="The bracket &apos;(&apos; which was opened at line number &apos;7&apos; was not closed.">
+            <location file0="" file="" line="7"/>
+        </error>
+    </errors>
+</results>

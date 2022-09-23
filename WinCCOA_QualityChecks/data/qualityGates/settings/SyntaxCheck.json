@@ -1,0 +1,14 @@
+{
+    "settingsVersion": 0,
+    "checks": [
+        {
+            "id": "SyntaxCheck.isSyntaxValid",
+            "description":{ 
+                "de_AT.utf8":"Überprüft die Ergebnisse der Syntaxprüfung",
+                "en_US.utf8":"Validates the syntax checks results"
+             },
+            "scorePoints": 1,
+            "enabled": true
+        }
+    ]
+}

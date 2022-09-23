@@ -1,0 +1,116 @@
+{
+    "settingsVersion": 0,
+    "checks": [
+        {
+            "id": "PanelCheck.panel.isExampleFile",
+            "description":{ 
+                "de_AT.utf8":"Prüft, ob das Panel ein Beispiel ist (Diese Panels werden nicht geprüft)",
+                "en_US.utf8":"Checks if the panel is an example (These panels won't be checked (ignored))"
+             },
+            "scorePoints": 1,
+            "enabled": true
+        },
+        {
+            "id": "PanelCheck.panel.isBackUp",
+            "description":{ 
+                "de_AT.utf8":"Überprüft, ob das Panel ein Backup ist",
+                "en_US.utf8":"Checks if the panel is an backup"
+             },
+            "scorePoints": 1,
+            "enabled": true
+        },
+        {
+            "id": "PanelCheck.panel.extention",
+            "description":{ 
+                "de_AT.utf8":"Überprüft Dateien auf die angegebene Erweiterung",
+                "en_US.utf8":"Checks files for the specified extentions"
+             },
+            "referenceValues": ["pnl", "xml"],
+            "scorePoints": 1,
+            "enabled": true
+        },
+        {
+            "id": "PanelCheck.panel.isCrypted",
+            "description":{ 
+                "de_AT.utf8":"Überprüft, ob das Panel verschlüsselt ist",
+                "en_US.utf8":"Checks if the panel is encrypted"
+             },
+            "scorePoints": 1,
+            "enabled": true
+        },
+        {
+            "id": "PanelCheck.panel.isCalculated",
+            "description":{ 
+                "de_AT.utf8":"Überprüft, ob das Panel für die Validierung berechnet worden ist",
+                "en_US.utf8":"Checks if the panel is caclutated for validation"
+             },
+            "scorePoints": 1,
+            "enabled": true
+        },
+        {
+            "id": "PanelCheck.panel.countOfProperties",
+            "description":{ 
+                "de_AT.utf8":"Überprüft die Anzahl der Eigenschaften für das Panel",
+                "en_US.utf8":"Validates the count of properties for the panel"
+             },
+            "scorePoints": 1,
+            "enabled": true
+        },
+        {
+            "id": "PanelCheck.panel.countOfEvents",
+            "description":{ 
+                "de_AT.utf8":"Überprüft, ob die Anzahl der Ereignisse innerhalb des Grenzwerts liegt",
+                "en_US.utf8":"Checks if the count of events is within the limit"
+             },
+            "highLimit": 100,
+            "scorePoints": 1,
+            "enabled": true
+        },
+        {
+            "id": "PanelCheck.panel.countOfShapes",
+            "description":{ 
+                "de_AT.utf8":"Überprüft, ob die Anzahl der Formen innerhalb des Grenzwerts liegt",
+                "en_US.utf8":"Checks if the shape count is within the limit"
+             },
+            "highLimit": 100,
+            "scorePoints": 1,
+            "enabled": true
+        },
+        {
+            "id": "PanelCheck.panel.CCN",
+            "description":{ 
+                "de_AT.utf8":"Validiert die zyklomatische Komplexitätsnummer für das Panel",
+                "en_US.utf8":"Validates the cyclomatic complexity number for the panel"
+             },
+            "scorePoints": 1,
+            "enabled": true
+        },
+        {
+            "id": "PanelCheck.panel.avgCCN",
+            "description":{ 
+                "de_AT.utf8":"Validiert die durchschnittliche zyklomatische Komplexitätszahl für das Panel",
+                "en_US.utf8":"Validates the average cyclomatic complexity number for the panel"
+             },
+            "scorePoints": 1,
+            "enabled": true
+        },
+        {
+            "id": "PanelCheck.panel.NLOC",
+            "description":{ 
+                "de_AT.utf8":"Überprüft die Anzahl der Zeilen für das Panel",
+                "en_US.utf8":"Validates the number of lines for the panel"
+             },
+            "scorePoints": 1,
+            "enabled": true
+        },
+        {
+            "id": "PanelCheck.panel.avgNLOC",
+            "description":{ 
+                "de_AT.utf8":"Überprüft die durchschnittliche Zeilenanzahl für das Panel",
+                "en_US.utf8":"Validates the average number of lines for the panel"
+             },
+            "scorePoints": 1,
+            "enabled": true
+        }
+    ]
+}

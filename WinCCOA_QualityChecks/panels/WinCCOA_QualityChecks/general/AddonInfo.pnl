@@ -1,0 +1,671 @@
+V 14
+2
+LANG:10000 18 Add-on Information
+LANG:10001 0 
+PANEL,-1 -1 611 491 N "white" 1
+"$dpName"
+"#uses \"panel\"
+
+main()
+{
+  string itemNr = $dpName, prodCode, pictureName, provider, version, number, extendedtechnicalname;
+  langString description, name = dpGetDescription(itemNr + \".\", 0);
+  int unitCount;
+
+  if ( !dpExists(itemNr) )
+  {
+    return;
+  }
+
+  dpGet(itemNr + \".provider\", provider,
+        itemNr + \".description\", description,
+        itemNr + \".versionname\", version,
+        itemNr + \".extendedtechnicalname\", extendedtechnicalname);
+
+  addonName.text(name);
+  addonProvider.text(provider);
+  addonVersion.text(version);
+  addonNumber.text(itemNr);
+  string pictureName = extendedtechnicalname;
+  strreplace(pictureName,\" \",\"_\");
+  addonIcon.fill(\"[pattern,[fit,any,\" + pictureName + \"/\" + pictureName + \".png\" + \"]]\");
+
+}
+
+
+
+" 0
+ E E E E 1 -1 -1 0  250 160
+""0  1
+E "// WinCCOA:NO_ENCRYPT
+" 0
+ 5
+"CBRef" "1"
+"EClose" E
+"dpi" "96"
+"pdpi" "96"
+"sizePolicy" "MinimumExpanding MinimumExpanding"
+2 1 0 0 0 0 0
+""
+DISPLAY_LAYER, 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0
+LAYER, 0 
+2
+LANG:10000 0 
+LANG:10001 0 
+4 2
+"LINE2"
+""
+1 1 77 E E E 1 E 1 E N "HeaderText" E N {255,255,255} E E
+ E E
+1 0 0 0 0 0
+E E E
+0
+2
+LANG:10000 0 
+LANG:10001 0 
+
+3
+"layoutAlignment" "AlignNone"
+"dashclr"N "_Transparent"
+"antiAliased" "1"
+E E 0 1 3 2 1 E  1 77 609 77
+6 3
+"RECTANGLE1"
+""
+1 30 10 E E E 1 E 1 E N "_Transparent" E N {255,255,255} E E
+ E E
+2 0 0 0 0 0
+E E E
+0
+2
+LANG:10000 0 
+LANG:10001 0 
+
+6
+"minimumSize" "40 40"
+"maximumSize" "40 40"
+"sizePolicy" "Fixed Fixed"
+"layoutAlignment" "AlignVCenter"
+"dashclr"N "_Transparent"
+"antiAliased" "0"
+E E 0 1 3 2 1 E 0.7799999999999999 0 0.7799999999999999 -3.399999999999999 7.700000000000001 2  1 0  "pictures/SysMgm/40x40/WinCCOA_QualityChecks.png" 4294967295 E 30 10 80 60
+2 4
+"PRIMITIVE_TEXT1"
+""
+1 77.5 29 E E E 1 E 1 E N "DavyGrey" E N "_Window" E E
+ E E
+3 0 0 0 0 0
+E E E
+0
+2
+LANG:10000 0 
+LANG:10001 0 
+
+4
+"layoutAlignment" "AlignVCenter"
+"dashclr"N "_Transparent"
+"antiAliased" "0"
+"transformable" "0"
+E E 0 1 3 2 1 E 0.9984732824427482 0 1 -9.381679389312993 -9.5 0 E 77.5 29 399 60
+0 2 2 "0s" 0 0 0 192 0 0  77.5 29 1
+2
+LANG:10000 26 Arial,-1,27,5,50,0,0,0,0,0
+LANG:10001 26 Arial,-1,27,5,50,0,0,0,0,0
+0 2
+LANG:10000 22 WinCCOA Quality Checks
+LANG:10001 22 WinCCOA Quality Checks
+32 5
+"SPACER1"
+""
+1 404 0 E E E 1 E 1 E N {0,0,0} E N {255,255,255} E E
+ E E
+4 0 0 0 0 0
+E E E
+0
+2
+LANG:10000 0 
+LANG:10001 0 
+
+3
+"transparentForMouse" ""
+"sizePolicy" "Expanding Fixed"
+"layoutAlignment" "AlignNone"
+ 404 0 610 69 1
+6 6
+"addonIcon"
+""
+1 70 120 E E E 1 E 1 E N "_Transparent" E N "white" E E
+ E E
+5 0 0 0 0 0
+E E E
+0
+2
+LANG:10000 0 
+LANG:10001 0 
+
+5
+"minimumSize" "250 250"
+"maximumSize" "250 250"
+"layoutAlignment" "AlignNone"
+"dashclr"N "_Transparent"
+"antiAliased" "0"
+E E 0 1 3 2 1 E 0.5413043478260869 0 0.6073170731707317 -17.89130434782609 32.1219512195122 1 E 70 120 530 530
+2 7
+"PRIMITIVE_TEXT2"
+""
+1 527 158 E E E 1 E 1 E N "DavyGrey" E N "_Window" E E
+ E E
+6 0 0 0 0 0
+E E E
+0
+2
+LANG:10000 0 
+LANG:10001 0 
+
+4
+"layoutAlignment" "AlignVCenter"
+"dashclr"N "_Transparent"
+"antiAliased" "0"
+"transformable" "0"
+E E 0 1 3 2 1 E 2.395348837209303 0 1 -984.3488372093027 -50.5 0 E 527 158 570 173
+0 2 2 "0s" 0 0 0 192 0 0  527 158 1
+2
+LANG:10000 26 Arial,-1,13,5,75,0,0,0,0,0
+LANG:10001 26 Arial,-1,13,5,75,0,0,0,0,0
+0 2
+LANG:10000 5 Name:
+LANG:10001 5 Name:
+2 8
+"PRIMITIVE_TEXT3"
+""
+1 527 206 E E E 1 E 1 E N "DavyGrey" E N "_Window" E E
+ E E
+7 0 0 0 0 0
+E E E
+0
+2
+LANG:10000 0 
+LANG:10001 0 
+
+4
+"layoutAlignment" "AlignVCenter"
+"dashclr"N "_Transparent"
+"antiAliased" "0"
+"transformable" "0"
+E E 0 1 3 2 1 E 1.716666666666667 0 0.9999999999999993 -626.6833333333335 -72.49999999999986 0 E 527 206 587 221
+0 2 2 "0s" 0 0 0 192 0 0  527 206 1
+2
+LANG:10000 26 Arial,-1,13,5,75,0,0,0,0,0
+LANG:10001 26 Arial,-1,13,5,75,0,0,0,0,0
+0 2
+LANG:10000 9 Provider:
+LANG:10001 9 Provider:
+2 10
+"PRIMITIVE_TEXT5"
+""
+1 525 419 E E E 1 E 1 E N "DavyGrey" E N "_Window" E E
+ E E
+9 0 0 0 0 0
+E E E
+0
+2
+LANG:10000 0 
+LANG:10001 0 
+
+4
+"layoutAlignment" "AlignVCenter"
+"dashclr"N "_Transparent"
+"antiAliased" "0"
+"transformable" "0"
+E E 0 1 3 2 1 E 1.907407407407407 0 0.9999999999999998 -723.3888888888887 -259.4999999999999 0 E 525 419 578 434
+0 2 2 "0s" 0 0 0 192 0 0  525 419 1
+2
+LANG:10000 26 Arial,-1,13,5,75,0,0,0,0,0
+LANG:10001 26 Arial,-1,13,5,75,0,0,0,0,0
+0 2
+LANG:10000 8 Version:
+LANG:10001 8 Version:
+2 11
+"PRIMITIVE_TEXT6"
+""
+1 525 484 E E E 1 E 1 E N "DavyGrey" E N "_Window" E E
+ E E
+10 0 0 0 0 0
+E E E
+0
+2
+LANG:10000 0 
+LANG:10001 0 
+
+4
+"layoutAlignment" "AlignVCenter"
+"dashclr"N "_Transparent"
+"antiAliased" "0"
+"transformable" "0"
+E E 0 1 3 2 1 E 0.9999999999999998 0 0.9999999999999992 -246.9999999999999 -298.4999999999996 0 E 525 484 630 499
+0 2 2 "0s" 0 0 0 192 0 0  525 484 1
+2
+LANG:10000 26 Arial,-1,13,5,75,0,0,0,0,0
+LANG:10001 26 Arial,-1,13,5,75,0,0,0,0,0
+0 2
+LANG:10000 15 Artikel Nummer:
+LANG:10001 12 Item Number:
+2 13
+"addonName"
+""
+1 625 156 E E E 1 E 1 E N "DarkJungle" E N "_Window" E E
+ E E
+12 0 0 0 0 0
+E E E
+0
+2
+LANG:10000 0 
+LANG:10001 0 
+
+4
+"layoutAlignment" "AlignVCenter"
+"dashclr"N "_Transparent"
+"antiAliased" "0"
+"transformable" "0"
+E E 0 1 3 2 1 E 1.197674418604651 0 1 -356.546511627907 -48.5 0 E 625 156 711 171
+0 2 2 "0s" 0 0 0 192 0 0  625 156 1
+2
+LANG:10000 26 Arial,-1,13,5,50,0,0,0,0,0
+LANG:10001 26 Arial,-1,13,5,50,0,0,0,0,0
+0 2
+LANG:10000 13 Beispiel Name
+LANG:10001 12 Example Name
+2 14
+"addonProvider"
+""
+1 648 205.5 E E E 1 E 1 E N "DarkJungle" E N "_Window" E E
+ E E
+13 0 0 0 0 0
+E E E
+0
+2
+LANG:10000 0 
+LANG:10001 0 
+
+4
+"layoutAlignment" "AlignVCenter"
+"dashclr"N "_Transparent"
+"antiAliased" "0"
+"transformable" "0"
+E E 0 1 3 2 1 E 1.051020408163266 0 0.9677419354838711 -289.0612244897964 -65.37096774193552 0 E 648 205.5 746 221
+0 2 2 "0s" 0 0 0 192 0 0  648 205.5 1
+2
+LANG:10000 26 Arial,-1,13,5,50,0,0,0,0,0
+LANG:10001 26 Arial,-1,13,5,50,0,0,0,0,0
+0 2
+LANG:10000 17 Beispiel Provider
+LANG:10001 16 Example Provider
+2 16
+"addonVersion"
+""
+1 806 419.5 E E E 1 E 1 E N "DarkJungle" E N "_Window" E E
+ E E
+15 0 0 0 0 0
+E E E
+0
+2
+LANG:10000 0 
+LANG:10001 0 
+
+4
+"layoutAlignment" "AlignVCenter"
+"dashclr"N "_Transparent"
+"antiAliased" "0"
+"transformable" "0"
+E E 0 1 3 2 1 E 1.072916666666666 0 0.9677419354838711 -472.7708333333328 -246.467741935484 0 E 806 419.5 901 435
+0 2 2 "0s" 0 0 0 192 0 0  806 419.5 1
+2
+LANG:10000 26 Arial,-1,13,5,50,0,0,0,0,0
+LANG:10001 26 Arial,-1,13,5,50,0,0,0,0,0
+0 2
+LANG:10000 16 Beispiel Version
+LANG:10001 15 Example Version
+2 17
+"addonNumber"
+""
+1 808 486 E E E 1 E 1 E N "DarkJungle" E N "_Window" E E
+ E E
+16 0 0 0 0 0
+E E E
+0
+2
+LANG:10000 0 
+LANG:10001 0 
+
+4
+"layoutAlignment" "AlignVCenter"
+"dashclr"N "_Transparent"
+"antiAliased" "0"
+"transformable" "0"
+E E 0 1 3 2 1 E 0.9999999999999998 0 0.9999999999999999 -413.9999999999998 -300.4999999999999 0 E 808 486 909 501
+0 2 2 "0s" 0 0 0 192 0 0  808 486 1
+2
+LANG:10000 26 Arial,-1,13,5,50,0,0,0,0,0
+LANG:10001 26 Arial,-1,13,5,50,0,0,0,0,0
+0 2
+LANG:10000 15 Beispiel Nummer
+LANG:10001 14 Example Number
+4 19
+"LINE3"
+""
+1 1 413 E E E 1 E 1 E N "HeaderText" E N {255,255,255} E E
+ E E
+18 0 0 0 0 0
+E E E
+0
+2
+LANG:10000 0 
+LANG:10001 0 
+
+3
+"layoutAlignment" "AlignNone"
+"dashclr"N "_Transparent"
+"antiAliased" "1"
+E E 0 1 3 2 1 E  1 413 609 413
+13 20
+"PUSH_BUTTON1"
+""
+1 335 444 E E E 1 E 1 E N "DarkJungle" E N "_Button" E E
+ E E
+19 0 0 0 0 0
+E E E
+0
+2
+LANG:10000 0 
+LANG:10001 0 
+
+2
+"minimumSize" "125 35"
+"layoutAlignment" "AlignVCenter"
+2
+LANG:10000 26 Arial,-1,13,5,50,0,0,0,0,0
+LANG:10001 26 Arial,-1,13,5,50,0,0,0,0,0
+0  333 437 461 475
+
+T 
+2
+LANG:10000 5 Store
+LANG:10001 5 Store
+"main(mapping event)
+{
+  openUrl(\"https://store.slooptools.com/addon/quality-check-ctrlppcheck\");
+}" 0
+ E E E
+32 21
+"SPACER2"
+""
+1 0 421 E E E 1 E 1 E N {0,0,0} E N {255,255,255} E E
+ E E
+20 0 0 0 0 0
+E E E
+0
+2
+LANG:10000 0 
+LANG:10001 0 
+
+3
+"transparentForMouse" ""
+"sizePolicy" "Expanding Fixed"
+"layoutAlignment" "AlignNone"
+ 0 421 328.0000000000001 490 1
+32 22
+"SPACER3"
+""
+1 0 361 E E E 1 E 1 E N {0,0,0} E N {255,255,255} E E
+ E E
+21 0 0 0 0 0
+E E E
+0
+2
+LANG:10000 0 
+LANG:10001 0 
+
+4
+"transparentForMouse" ""
+"minimumSize" "-1 20"
+"sizePolicy" "Ignored Expanding"
+"layoutAlignment" "AlignNone"
+ 0 361 610 405 2
+32 23
+"SPACER4"
+""
+1 504 105 E E E 1 E 1 E N {0,0,0} E N {255,255,255} E E
+ E E
+22 0 0 0 0 0
+E E E
+0
+2
+LANG:10000 0 
+LANG:10001 0 
+
+3
+"transparentForMouse" ""
+"sizePolicy" "Expanding Ignored"
+"layoutAlignment" "AlignNone"
+ 504 105 590 202 1
+29 26
+"txt_versioninfo"
+""
+1 41.08728179551117 -14.15625 E E E 1 E 1 E N "DarkJungle" E N "_Transparent" E E
+ E E
+25 0 0 0 0 0
+E E E
+0
+2
+LANG:10000 0 
+LANG:10001 0 
+
+8
+"currentFont" "font Arial,-1,13,5,50,0,0,0,0,0"
+"frameShape" "enum 0"
+"currentColor" "color DarkJungle"
+"readOnly" "bool TRUE"
+"minimumSize" "-1 100"
+"maximumSize" "-1 100"
+"sizePolicy" "Expanding Preferred"
+"layoutAlignment" "AlignNone"
+2
+LANG:10000 26 Arial,-1,13,5,50,0,0,0,0,0
+LANG:10001 25 Arial,-1,8,5,50,0,0,0,0,0
+0  276 255 590 354
+15 PVSS.TextEdit.1
+0
+"#uses \"checkQClicense\"
+
+main()
+{
+  this.text = checkQClicense();
+}" 0
+13 27
+"btnClose"
+""
+1 273 680.0833333333333 E E E 1 E 1 E N "DarkJungle" E N "_Button" E E
+ E E
+26 0 0 0 0 0
+E E E
+0
+2
+LANG:10000 0 
+LANG:10001 0 
+
+2
+"minimumSize" "125 35"
+"layoutAlignment" "AlignVCenter"
+2
+LANG:10000 26 Arial,-1,12,5,50,0,0,0,0,0
+LANG:10001 26 Arial,-1,12,5,50,0,0,0,0,0
+0  464 437 592 475
+
+T 
+2
+LANG:10000 10 Schließen
+LANG:10001 5 Close
+"main(mapping event)
+{
+  closeDialog();
+}" 0
+ E E E
+2 28
+"PRIMITIVE_TEXT7"
+""
+1 525 484 E E E 1 E 1 E N "DavyGrey" E N "_Window" E E
+ E E
+27 0 0 0 0 0
+E E E
+0
+2
+LANG:10000 0 
+LANG:10001 0 
+
+4
+"layoutAlignment" "AlignVCenter"
+"dashclr"N "_Transparent"
+"antiAliased" "0"
+"transformable" "0"
+E E 0 1 3 2 1 E 5.740740740740741 0 0.9999999999999992 -2735.888888888889 -262.4999999999996 0 E 525 484 578 499
+0 2 2 "0s" 0 0 0 192 0 0  525 484 1
+2
+LANG:10000 26 Arial,-1,13,5,75,0,0,0,0,0
+LANG:10001 26 Arial,-1,13,5,75,0,0,0,0,0
+0 2
+LANG:10000 8 Version:
+LANG:10001 8 Version:
+0
+LAYER, 1 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 2 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 3 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 4 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 5 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 6 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 7 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+4 0 "LAYOUT_GROUP0" 12
+3 0 
+3 4 5 
+
+"S 3" "0 0 1 1"
+"S 4" "1 0 1 1"
+"S 5" "2 0 1 1"
+"" ""
+0 1 1 20 0 0 0 0
+4 1 "LAYOUT_GROUP1" 8
+2 0 
+7 13 
+
+"S 7" "0 0 1 1"
+"S 13" "1 0 1 1"
+"" ""
+0 1 0 0
+4 2 "LAYOUT_GROUP2" 8
+2 0 
+8 14 
+
+"S 8" "0 0 1 1"
+"S 14" "1 0 1 1"
+"" ""
+0 1 0 0
+4 4 "LAYOUT_GROUP4" 8
+2 0 
+10 16 
+
+"S 10" "0 0 1 1"
+"S 16" "1 0 1 1"
+"" ""
+0 1 0 0
+4 5 "LAYOUT_GROUP5" 8
+2 0 
+11 17 
+
+"S 11" "0 0 1 1"
+"S 17" "1 0 1 1"
+"" ""
+0 1 0 0
+4 7 "LAYOUT_GROUP7" 12
+3 0 
+21 20 27 
+
+"S 21" "0 0 1 1"
+"S 20" "1 0 1 1"
+"S 27" "2 0 1 1"
+"" ""
+0 1 1 0 20 0 0 0
+4 8 "LAYOUT_GROUP8" 9
+0 4 
+
+1 2 4 5 
+"G 1" "0 0 1 1"
+"G 2" "1 0 1 1"
+"G 4" "2 0 1 1"
+"G 5" "3 0 1 1"
+"" ""
+0 2 0 1 6
+4 9 "LAYOUT_GROUP9" 10
+1 1 
+23 
+8 
+"S 23" "1 0 1 1"
+"G 8" "0 0 1 1"
+"" ""
+0 1 0 0
+4 10 "LAYOUT_GROUP10" 11
+2 1 
+28 26 
+9 
+"S 28" "1 0 1 1"
+"S 26" "2 0 1 1"
+"G 9" "0 0 1 1"
+"" ""
+0 2 0 0
+4 11 "LAYOUT_GROUP11" 12
+1 1 
+6 
+10 
+"S 6" "0 0 1 1"
+"G 10" "1 0 1 1"
+"" ""
+0 1 1 20 20 20 0 0
+4 12 "LAYOUT_GROUP12" -1
+3 3 
+2 19 22 
+0 7 11 
+"S 2" "1 0 1 1"
+"S 19" "4 0 1 1"
+"S 22" "3 0 1 1"
+"G 0" "0 0 1 1"
+"G 7" "5 0 1 1"
+"G 11" "2 0 1 1"
+"" ""
+0 2 0 0
+0

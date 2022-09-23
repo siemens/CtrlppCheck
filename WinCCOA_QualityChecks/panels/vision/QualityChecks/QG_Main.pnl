@@ -1,0 +1,178 @@
+V 14
+2
+LANG:10000 0 
+LANG:10001 0 
+PANEL,-1 -1 373 760 N "white" 0
+"#uses \"classes/QualityGates/AddOn/FileSys/QgAddOnResultsDir\"
+
+main()
+{
+  while ( tab.registerCount() > 1 )
+    tab.deleteRegister(1);
+  
+  if ( isEvConnOpen() )
+  {
+    while( !dpExists(\"_WinCCOA_qgCmd\") )
+      delay(1);  // wait till created by update script
+
+    dpConnect(\"newResultCb\", FALSE, \"_WinCCOA_qgCmd.Command\");
+  }
+  
+  newResultCb(\"\", \"\");
+}
+
+newResultCb(string dpe, string cmd)
+{
+  string updatedQgId;
+  bool isStarted = strpos(cmd, \":START\") > 0;
+  bool isFinished = strpos(cmd, \":DONE\") > 0;
+  if ( cmd != \"\" )
+  {
+    updatedQgId = substr(cmd, 0, strpos(cmd, \":\"));
+  }
+  
+  if ( isStarted )
+  {
+    showBusy(updatedQgId, TRUE);
+    tab.activeRegister(0);
+  }
+  
+  if ( isFinished )
+  {
+    showBusy(updatedQgId, FALSE);
+  }
+  
+  dyn_string qgIds = QgAddOnResultsDir::getRunningQgs();
+  while ( tab.registerCount() > 1 )
+    tab.deleteRegister(1);
+
+  for(int i = 1; i <= dynlen(qgIds); i++)
+  {
+    const int regIdx = i;
+    const string qgId = qgIds[i];
+    tab.insertRegister(regIdx);
+    tab.registerName(regIdx, qgId);
+    
+    if (strpos(getCatStr(\"QG_Names\",qgId),\"not found\") >= 0)
+      tab.registerHeader(regIdx, (langString)qgId);
+    else
+      tab.registerHeader(regIdx, getCatStr(\"QG_Names\",qgId));
+
+    tab.registerPanel(regIdx, \"vision/QualityChecks/QG_History.pnl\", makeDynString(\"$QgId:\" + qgId));
+  }
+  
+  if ( isFinished )
+  {
+    if ( (updatedQgId != \"\") && (dynContains(qgIds, updatedQgId) > 0) )
+      tab.namedActiveRegister(updatedQgId);
+    else
+      tab.activeRegister(0);
+  }
+}
+
+synchronized showBusy(const string &updatedQgId, const bool &bussy)
+{
+  if ( !shapeExists(\"eff_\" + updatedQgId) )
+  {
+    return;
+  }
+  
+  {
+    setValue(\"btn_\" + updatedQgId, \"enabled\", !bussy); // dissable start button when bussy
+    shape s = getShape(\"eff_\" + updatedQgId);
+    if ( bussy )
+      s.start();
+    else
+      s.stop();
+  }  
+}
+" 0
+ E E E E 1 -1 -1 0  20 20
+""0  1
+E E 3
+"CBRef" "1"
+"EClose" E
+"dpi" "120"
+2 1 0 0 0 0 0
+""
+DISPLAY_LAYER, 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0
+LAYER, 0 
+2
+LANG:10000 0 
+LANG:10001 0 
+28 1
+"tab"
+""
+1 0 -0.665789473684212 E E E 1 E 1 E N "DavyGrey" E N "Isabelline" E E
+ E E
+0 0 0 0 0 0
+E E E
+0
+2
+LANG:10000 0 
+LANG:10001 0 
+
+2
+"layoutAlignment" "AlignNone"
+"selchangedcb" "main()
+{
+  this.registerIcon(this.activeRegister(), \"\");
+}
+"
+2
+LANG:10000 26 Arial,-1,12,5,50,0,0,0,0,0
+LANG:10001 26 Arial,-1,12,5,50,0,0,0,0,0
+0  -2 -2 374 761
+E1 "#1" 2
+LANG:10000 10 Willkommen
+LANG:10001 7 Welcome
+1 "vision/gedi/welcomePage.pnl" 2
+LANG:10000 0 
+LANG:10001 0 
+0
+
+
+0
+LAYER, 1 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 2 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 3 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 4 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 5 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 6 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 7 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+4 0 "LAYOUT_GROUP1" -1
+1 0 
+1 
+
+"S 1" "0 0 1 1"
+"" ""
+0 2 0 0
+0

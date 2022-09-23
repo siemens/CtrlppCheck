@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<results version="2">
+    <ctrlppcheck version="2.0"/>
+    <errors>
+        <error id="unreadVariable" severity="warning" msg="Variable is assigned a value that is never used: &apos;s&apos;" verbose="Variable is assigned a value that is never used: &apos;s&apos;" cwe="563">
+            <location file0="" file="" line="17"/>
+            <symbol>s</symbol>
+        </error>
+        <error id="unreadVariable" severity="warning" msg="Variable is assigned a value that is never used: &apos;i&apos;" verbose="Variable is assigned a value that is never used: &apos;i&apos;" cwe="563">
+            <location file0="" file="" line="20"/>
+            <symbol>i</symbol>
+        </error>
+        <error id="unreadVariable" severity="warning" msg="Variable is assigned a value that is never used: &apos;c.count&apos;" verbose="Variable is assigned a value that is never used: &apos;c.count&apos;" cwe="563">
+            <location file0="" file="" line="23"/>
+            <symbol>c.count</symbol>
+        </error>
+        <error id="unreadVariable" severity="warning" msg="Variable is assigned a value that is never used: &apos;i2&apos;" verbose="Variable is assigned a value that is never used: &apos;i2&apos;" cwe="563">
+            <location file0="" file="" line="27"/>
+            <symbol>i2</symbol>
+        </error>
+    </errors>
+</results>

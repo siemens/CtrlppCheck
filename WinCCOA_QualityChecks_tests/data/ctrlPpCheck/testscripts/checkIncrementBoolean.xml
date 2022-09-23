@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<results version="2">
+    <cppcheck version="2.0"/>
+    <errors>
+        <error id="incrementboolean" severity="warning" msg="Incrementing/Decrementing a variable/expression &apos;b&apos; of type &apos;bool&apos; with operator++ is not allowed. You should assign it the value &apos;true&apos; or &apos;false&apos; instead." verbose="You should assign it the value &apos;true&apos; or &apos;false&apos; instead." cwe="398">
+            <location file0="" file="" line="22"/>
+            <symbol>b</symbol>
+        </error>
+        <error id="incrementboolean" severity="warning" msg="Incrementing/Decrementing a variable/expression &apos;b&apos; of type &apos;bool&apos; with ++operator is not allowed. You should assign it the value &apos;true&apos; or &apos;false&apos; instead." verbose="You should assign it the value &apos;true&apos; or &apos;false&apos; instead." cwe="398">
+            <location file0="" file="" line="23"/>
+            <symbol>b</symbol>
+        </error>
+        <error id="incrementboolean" severity="warning" msg="Incrementing/Decrementing a variable/expression &apos;db&apos; of type &apos;bool&apos; with ++operator is not allowed. You should assign it the value &apos;true&apos; or &apos;false&apos; instead." verbose="You should assign it the value &apos;true&apos; or &apos;false&apos; instead." cwe="398">
+            <location file0="" file="" line="28"/>
+            <symbol>db</symbol>
+        </error>
+        <error id="incrementboolean" severity="warning" msg="Incrementing/Decrementing a variable/expression &apos;db&apos; of type &apos;bool&apos; with operator++ is not allowed. You should assign it the value &apos;true&apos; or &apos;false&apos; instead." verbose="You should assign it the value &apos;true&apos; or &apos;false&apos; instead." cwe="398">
+            <location file0="" file="" line="29"/>
+            <symbol>db</symbol>
+        </error>
+        <error id="incrementboolean" severity="warning" msg="Incrementing/Decrementing a variable/expression &apos;ddb&apos; of type &apos;bool&apos; with operator++ is not allowed. You should assign it the value &apos;true&apos; or &apos;false&apos; instead." verbose="You should assign it the value &apos;true&apos; or &apos;false&apos; instead." cwe="398">
+            <location file0="" file="" line="30"/>
+            <symbol>ddb</symbol>
+        </error>
+        <error id="incrementboolean" severity="warning" msg="Incrementing/Decrementing a variable/expression &apos;isTrue(...)&apos; of type &apos;bool&apos; with operator++ is not allowed. You should assign it the value &apos;true&apos; or &apos;false&apos; instead." verbose="You should assign it the value &apos;true&apos; or &apos;false&apos; instead." cwe="398">
+            <location file0="" file="" line="32"/>
+            <symbol>isTrue(...)</symbol>
+        </error>
+        <error id="incrementboolean" severity="warning" msg="Incrementing/Decrementing a variable/expression &apos;isTrue(...)&apos; of type &apos;bool&apos; with ++operator is not allowed. You should assign it the value &apos;true&apos; or &apos;false&apos; instead." verbose="You should assign it the value &apos;true&apos; or &apos;false&apos; instead." cwe="398">
+            <location file0="" file="" line="33"/>
+            <symbol>isTrue(...)</symbol>
+        </error>
+        <error id="incrementboolean" severity="warning" msg="Incrementing/Decrementing a variable/expression &apos;scriptBool&apos; of type &apos;bool&apos; with operator++ is not allowed. You should assign it the value &apos;true&apos; or &apos;false&apos; instead." verbose="You should assign it the value &apos;true&apos; or &apos;false&apos; instead." cwe="398">
+            <location file0="" file="" line="35"/>
+            <symbol>scriptBool</symbol>
+        </error>
+        <error knownBug="#50" id="incrementboolean" severity="warning" msg="Incrementing/Decrementing a variable/expression &apos;gb&apos; of type &apos;bool&apos; with operator++ is not allowed. You should assign it the value &apos;true&apos; or &apos;false&apos; instead." verbose="You should assign it the value &apos;true&apos; or &apos;false&apos; instead." cwe="398">
+            <location file0="" file="" line="37"/>
+            <symbol>gb</symbol>
+        </error>
+        <error id="incrementboolean" severity="warning" msg="Incrementing/Decrementing a variable/expression &apos;b&apos; of type &apos;bool&apos; with operator++ is not allowed. You should assign it the value &apos;true&apos; or &apos;false&apos; instead." verbose="You should assign it the value &apos;true&apos; or &apos;false&apos; instead." cwe="398">
+            <location file0="" file="" line="40"/>
+            <symbol>c.b</symbol>
+        </error>
+        <error id="incrementboolean" severity="warning" msg="Incrementing/Decrementing a variable/expression &apos;staticB&apos; of type &apos;bool&apos; with operator++ is not allowed. You should assign it the value &apos;true&apos; or &apos;false&apos; instead." verbose="You should assign it the value &apos;true&apos; or &apos;false&apos; instead." cwe="398">
+            <location file0="" file="" line="42"/>
+            <symbol>staticB</symbol>
+        </error>
+        <error id="incrementboolean" severity="warning" msg="Incrementing/Decrementing a variable/expression &apos;b&apos; of type &apos;bool&apos; with operator-- is not allowed. You should assign it the value &apos;true&apos; or &apos;false&apos; instead." verbose="You should assign it the value &apos;true&apos; or &apos;false&apos; instead." cwe="398">
+            <location file0="" file="" line="54"/>
+            <symbol>b</symbol>
+        </error>
+        <error id="incrementboolean" severity="warning" msg="Incrementing/Decrementing a variable/expression &apos;scriptBool&apos; of type &apos;bool&apos; with operator-- is not allowed. You should assign it the value &apos;true&apos; or &apos;false&apos; instead." verbose="You should assign it the value &apos;true&apos; or &apos;false&apos; instead." cwe="398">
+            <location file0="" file="" line="56"/>
+            <symbol>scriptBool</symbol>
+        </error>
+        <error knownBug="#50" id="incrementboolean" severity="warning" msg="Incrementing/Decrementing a variable/expression &apos;gb&apos; of type &apos;bool&apos; with operator++ is not allowed. You should assign it the value &apos;true&apos; or &apos;false&apos; instead." verbose="You should assign it the value &apos;true&apos; or &apos;false&apos; instead." cwe="398">
+            <location file0="" file="" line="57"/>
+            <symbol>gb</symbol>
+        </error>
+        <error id="incrementboolean" severity="warning" msg="Incrementing/Decrementing a variable/expression &apos;b&apos; of type &apos;bool&apos; with operator-- is not allowed. You should assign it the value &apos;true&apos; or &apos;false&apos; instead." verbose="You should assign it the value &apos;true&apos; or &apos;false&apos; instead." cwe="398">
+            <location file0="" file="" line="60"/>
+            <symbol>b</symbol>
+        </error>
+        <error id="incrementboolean" severity="warning" msg="Incrementing/Decrementing a variable/expression &apos;staticB&apos; of type &apos;bool&apos; with operator-- is not allowed. You should assign it the value &apos;true&apos; or &apos;false&apos; instead." verbose="You should assign it the value &apos;true&apos; or &apos;false&apos; instead." cwe="398">
+            <location file0="" file="" line="62"/>
+            <symbol>staticB</symbol>
+        </error>
+        <error id="incrementboolean" severity="warning" msg="Incrementing/Decrementing a variable/expression &apos;b&apos; of type &apos;bool&apos; with operator+= is not allowed. You should assign it the value &apos;true&apos; or &apos;false&apos; instead." verbose="You should assign it the value &apos;true&apos; or &apos;false&apos; instead." cwe="398">
+            <location file0="" file="" line="69"/>
+            <symbol>b</symbol>
+        </error>
+        <error id="incrementboolean" severity="warning" msg="Incrementing/Decrementing a variable/expression &apos;scriptBool&apos; of type &apos;bool&apos; with operator+= is not allowed. You should assign it the value &apos;true&apos; or &apos;false&apos; instead." verbose="You should assign it the value &apos;true&apos; or &apos;false&apos; instead." cwe="398">
+            <location file0="" file="" line="71"/>
+            <symbol>scriptBool</symbol>
+        </error>
+        <error knownBug="#50" id="incrementboolean" severity="warning" msg="Incrementing/Decrementing a variable/expression &apos;gb&apos; of type &apos;bool&apos; with operator++ is not allowed. You should assign it the value &apos;true&apos; or &apos;false&apos; instead." verbose="You should assign it the value &apos;true&apos; or &apos;false&apos; instead." cwe="398">
+            <location file0="" file="" line="72"/>
+            <symbol>gb</symbol>
+        </error>
+        <error id="incrementboolean" severity="warning" msg="Incrementing/Decrementing a variable/expression &apos;b&apos; of type &apos;bool&apos; with operator+= is not allowed. You should assign it the value &apos;true&apos; or &apos;false&apos; instead." verbose="You should assign it the value &apos;true&apos; or &apos;false&apos; instead." cwe="398">
+            <location file0="" file="" line="75"/>
+            <symbol>b</symbol>
+        </error>
+        <error id="incrementboolean" severity="warning" msg="Incrementing/Decrementing a variable/expression &apos;staticB&apos; of type &apos;bool&apos; with operator+= is not allowed. You should assign it the value &apos;true&apos; or &apos;false&apos; instead." verbose="You should assign it the value &apos;true&apos; or &apos;false&apos; instead." cwe="398">
+            <location file0="" file="" line="77"/>
+            <symbol>C::staticB</symbol>
+        </error>
+        <error id="incrementboolean" severity="warning" msg="Incrementing/Decrementing a variable/expression &apos;b&apos; of type &apos;bool&apos; with operator-= is not allowed. You should assign it the value &apos;true&apos; or &apos;false&apos; instead." verbose="You should assign it the value &apos;true&apos; or &apos;false&apos; instead." cwe="398">
+            <location file0="" file="" line="84"/>
+            <symbol>b</symbol>
+        </error>
+        <error id="incrementboolean" severity="warning" msg="Incrementing/Decrementing a variable/expression &apos;scriptBool&apos; of type &apos;bool&apos; with operator-= is not allowed. You should assign it the value &apos;true&apos; or &apos;false&apos; instead." verbose="You should assign it the value &apos;true&apos; or &apos;false&apos; instead." cwe="398">
+            <location file0="" file="" line="86"/>
+            <symbol>scriptBool</symbol>
+        </error>
+        <error id="incrementboolean" severity="warning" msg="Incrementing/Decrementing a variable/expression &apos;dpExists(...)&apos; of type &apos;bool&apos; with +=operator is not allowed. You should assign it the value &apos;true&apos; or &apos;false&apos; instead." verbose="You should assign it the value &apos;true&apos; or &apos;false&apos; instead." cwe="398">
+            <location file0="" file="" line="92"/>
+            <symbol>dpExists(...)</symbol>
+        </error>
+        <error id="incrementboolean" severity="warning" msg="Incrementing/Decrementing a variable/expression &apos;( 1 == 2 )&apos; of type &apos;bool&apos; with operator++ is not allowed. You should assign it the value &apos;true&apos; or &apos;false&apos; instead." verbose="You should assign it the value &apos;true&apos; or &apos;false&apos; instead." cwe="398">
+            <location file0="" file="" line="101"/>
+            <symbol>( 1 == 2 )</symbol>
+        </error>
+        <error id="incrementboolean" severity="warning" msg="Incrementing/Decrementing a variable/expression &apos;( a == b )&apos; of type &apos;bool&apos; with operator++ is not allowed. You should assign it the value &apos;true&apos; or &apos;false&apos; instead." verbose="You should assign it the value &apos;true&apos; or &apos;false&apos; instead." cwe="398">
+            <location file0="" file="" line="103"/>
+            <symbol>( a == b )</symbol>
+        </error>
+    </errors>
+</results>

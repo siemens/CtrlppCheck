@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<results version="2">
+    <cppcheck version=""/>
+    <errors>
+        <error id="undefinedVariable" knownBug="#85" severity="warning" msg="Undefined variable: unknownVar" verbose="The variable unknownVar is not defined. Maybe it&apos;s added by addGlobal() or #uses is missing" cwe="758">
+            <location file0="" file="" line="3"/>
+            <symbol>unknownVar</symbol>
+        </error>
+        <error id="undefinedVariable" severity="warning" msg="Undefined variable: unknownVar" verbose="The variable unknownVar is not defined. Maybe it&apos;s added by addGlobal() or #uses is missing" cwe="758">
+            <location file0="" file="" line="12"/>
+            <symbol>unknownVar</symbol>
+        </error>
+        <error id="undefinedVariable" severity="warning" msg="Undefined variable: unknownVar" verbose="The variable unknownVar is not defined. Maybe it&apos;s added by addGlobal() or #uses is missing" cwe="758">
+            <location file0="" file="" line="16"/>
+            <symbol>unknownVar</symbol>
+        </error>
+        <error id="undefinedVariable" severity="warning" msg="Undefined variable: unknownVar" verbose="The variable unknownVar is not defined. Maybe it&apos;s added by addGlobal() or #uses is missing" cwe="758">
+            <location file0="" file="" line="18"/>
+            <symbol>unknownVar</symbol>
+        </error>
+        <error id="undefinedVariable" severity="warning" msg="Undefined variable: unknownVar" verbose="The variable unknownVar is not defined. Maybe it&apos;s added by addGlobal() or #uses is missing" cwe="758">
+            <location file0="" file="" line="25"/>
+            <symbol>unknownVar</symbol>
+        </error>
+        <error id="undefinedVariable" severity="warning" msg="Undefined variable: unknownVar" verbose="The variable unknownVar is not defined. Maybe it&apos;s added by addGlobal() or #uses is missing" cwe="758">
+            <location file0="" file="" line="28"/>
+            <symbol>unknownVar</symbol>
+        </error>
+        <error id="undefinedVariable" severity="warning" msg="Undefined variable: unknownVar" verbose="The variable unknownVar is not defined. Maybe it&apos;s added by addGlobal() or #uses is missing" cwe="758">
+            <location file0="" file="" line="29"/>
+            <symbol>unknownVar</symbol>
+        </error>
+        <error id="undefinedVariable" severity="warning" msg="Undefined variable: unknownVar" verbose="The variable unknownVar is not defined. Maybe it&apos;s added by addGlobal() or #uses is missing" cwe="758">
+            <location file0="" file="" line="30"/>
+            <symbol>unknownVar</symbol>
+        </error>
+        <error id="undefinedVariable" severity="warning" msg="Undefined variable: unknownVar" verbose="The variable unknownVar is not defined. Maybe it&apos;s added by addGlobal() or #uses is missing" cwe="758">
+            <location file0="" file="" line="31"/>
+            <symbol>unknownVar</symbol>
+        </error>
+        <error id="undefinedVariable" severity="warning" msg="Undefined variable: unknownVar" verbose="The variable unknownVar is not defined. Maybe it&apos;s added by addGlobal() or #uses is missing" cwe="758">
+            <location file0="" file="" line="32"/>
+            <symbol>unknownVar</symbol>
+        </error>
+        <error id="undefinedVariable" severity="warning" msg="Undefined variable: unknownVar" verbose="The variable unknownVar is not defined. Maybe it&apos;s added by addGlobal() or #uses is missing" cwe="758">
+            <location file0="" file="" line="33"/>
+            <symbol>unknownVar</symbol>
+        </error>
+        <error id="undefinedVariable" severity="warning" msg="Undefined variable: unknownVar" verbose="The variable unknownVar is not defined. Maybe it&apos;s added by addGlobal() or #uses is missing" cwe="758">
+            <location file0="" file="" line="34"/>
+            <symbol>unknownVar</symbol>
+        </error>
+        <error id="undefinedVariable" severity="warning" msg="Undefined variable: unknownVar" verbose="The variable unknownVar is not defined. Maybe it&apos;s added by addGlobal() or #uses is missing" cwe="758">
+            <location file0="" file="" line="40"/>
+            <symbol>unknownVar</symbol>
+        </error>
+        <error id="undefinedVariable" severity="warning" msg="Undefined variable: unknownVar" verbose="The variable unknownVar is not defined. Maybe it&apos;s added by addGlobal() or #uses is missing" cwe="758">
+            <location file0="" file="" line="41"/>
+            <symbol>unknownVar</symbol>
+        </error>
+        <error id="undefinedVariable" severity="warning" msg="Undefined variable: unknownVar" verbose="The variable unknownVar is not defined. Maybe it&apos;s added by addGlobal() or #uses is missing" cwe="758">
+            <location file0="" file="" line="42"/>
+            <symbol>unknownVar</symbol>
+        </error>
+        <error id="undefinedVariable" severity="warning" msg="Undefined variable: unknownVar" verbose="The variable unknownVar is not defined. Maybe it&apos;s added by addGlobal() or #uses is missing" cwe="758">
+            <location file0="" file="" line="45"/>
+            <symbol>unknownVar</symbol>
+        </error>
+        <error id="undefinedVariable" severity="warning" msg="Undefined variable: uk1" verbose="The variable uk1 is not defined. Maybe it&apos;s added by addGlobal() or #uses is missing" cwe="758">
+            <location file0="" file="" line="64"/>
+            <symbol>uk1</symbol>
+        </error>
+        <error id="undefinedVariable" severity="warning" msg="Undefined variable: uk2" verbose="The variable uk2 is not defined. Maybe it&apos;s added by addGlobal() or #uses is missing" cwe="758">
+            <location file0="" file="" line="66"/>
+            <symbol>uk2</symbol>
+        </error>
+        <error id="undefinedVariable" severity="warning" msg="Undefined variable: uk1" verbose="The variable uk1 is not defined. Maybe it&apos;s added by addGlobal() or #uses is missing" cwe="758">
+            <location file0="" file="" line="67"/>
+            <symbol>uk1</symbol>
+        </error>
+        <error id="undefinedVariable" severity="warning" msg="Undefined variable: uk1" verbose="The variable uk1 is not defined. Maybe it&apos;s added by addGlobal() or #uses is missing" cwe="758">
+            <location file0="" file="" line="70"/>
+            <symbol>uk1</symbol>
+        </error>
+        <error id="undefinedVariable" severity="warning" msg="Undefined variable: uk1" verbose="The variable uk1 is not defined. Maybe it&apos;s added by addGlobal() or #uses is missing" cwe="758">
+            <location file0="" file="" line="71"/>
+            <symbol>uk1</symbol>
+        </error>
+        <error id="undefinedVariable" severity="warning" msg="Undefined variable: uk1" verbose="The variable uk1 is not defined. Maybe it&apos;s added by addGlobal() or #uses is missing" cwe="758">
+            <location file0="" file="" line="72"/>
+            <symbol>uk1</symbol>
+        </error>
+        <error id="undefinedVariable" severity="warning" msg="Undefined variable: uk2" verbose="The variable uk2 is not defined. Maybe it&apos;s added by addGlobal() or #uses is missing" cwe="758">
+            <location file0="" file="" line="74"/>
+            <symbol>uk2</symbol>
+        </error>
+        <error id="undefinedVariable" severity="warning" msg="Undefined variable: uk1" verbose="The variable uk1 is not defined. Maybe it&apos;s added by addGlobal() or #uses is missing" cwe="758">
+            <location file0="" file="" line="77"/>
+            <symbol>uk1</symbol>
+        </error>
+        <error id="undefinedVariable" severity="warning" msg="Undefined variable: i3" verbose="The variable i3 is not defined. Maybe it&apos;s added by addGlobal() or #uses is missing" cwe="758">
+            <location file0="" file="" line="92"/>
+            <symbol>i3</symbol>
+        </error>
+        <error id="undefinedVariable" severity="warning" msg="Undefined variable: int_var" verbose="The variable int_var is not defined. Maybe it&apos;s added by addGlobal() or #uses is missing" cwe="758">
+            <location file0="" file="" line="105"/>
+            <symbol>int_var</symbol>
+        </error>
+        <error id="undefinedVariable" severity="warning" msg="Undefined variable: float_var" verbose="The variable float_var is not defined. Maybe it&apos;s added by addGlobal() or #uses is missing" cwe="758">
+            <location file0="" file="" line="114"/>
+            <symbol>float_var</symbol>
+        </error>
+        <error id="undefinedVariable" severity="warning" msg="Undefined variable: bool_var" verbose="The variable bool_var is not defined. Maybe it&apos;s added by addGlobal() or #uses is missing" cwe="758">
+            <location file0="" file="" line="127"/>
+            <symbol>bool_var</symbol>
+        </error>
+        <error id="undefinedVariable" severity="warning" msg="Undefined variable: bool_var" verbose="The variable bool_var is not defined. Maybe it&apos;s added by addGlobal() or #uses is missing" cwe="758">
+            <location file0="" file="" line="141"/>
+            <symbol>bool_var</symbol>
+        </error>
+        <error id="undefinedVariable" severity="warning" msg="Undefined variable: errClass_var" verbose="The variable errClass_var is not defined. Maybe it&apos;s added by addGlobal() or #uses is missing" cwe="758">
+            <location file0="" file="" line="147"/>
+            <symbol>errClass_var</symbol>
+        </error>
+    </errors>
+</results>

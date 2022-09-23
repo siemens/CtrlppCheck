@@ -1,0 +1,2 @@
+assert.hasErr,$file
+reason.hasErr,$errText

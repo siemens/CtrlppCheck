@@ -1,0 +1,24 @@
+tools,WinCCOA
+tool_QualityGates,Quality Checks
+tool_QualityGates_QgStaticCheck_Panels,Panels check (static)
+tool_QualityGates_QgStaticCheck_Scripts,Ctrl-script check (static)
+tool_QualityGates_QgStaticCheck_Libs,Libs check (static)
+tool_QualityGates_QgStaticCheck_Pictures,Pictures check (static)
+tool_QualityGates_QgSyntaxCheck,Syntax check (simple)
+tool_QualityGates_QgOverloadedFilesCheck,Check overloaded files
+tool_QualityGates_UnitTests,Unit tests
+tool_QualityGates_InternallCheck,Internal version check
+tool_QualityGates_BuildDoku,Generate doxydocu
+open_Docu,Open Online Help
+open_Result,Open Results
+open_Dock,Open Dock-Module
+tool_QualityGates_QgStaticCheck_CtrlppCheck,CtrlPPCheck (static)
+licenceInfo_panelName,License information
+welcomeText,With the WinCCOA Quality Checks we want to improve the code quality of WinCC OA projects and offer a comprehensive service.
+licenceInfo_FREE,FREE Version:\nCtrlPPCheck for script files and recursive project check are included. Limitations: Max. 1 error per error ID will be shown.
+licenceInfo_DEMO,DEMO Version:\nCtrlPPCheck for script files and recursive project check are included. Limitations: Max. 1 error per error ID will be shown.
+licenceInfo_FULL,FULL Version:\nScript files with unlimited lines and an unlimited amount of files for recursive project check are included. All errors will be shown. Thank you for trusting in CtrlPPCheck & Have fun!
+settingsInfo,Coming soon:\n- Set your own limits for the Quality checks\n(e.g. lines per function,...)\n- Check your coding guidelines\n(e.g. functions always start with prefix "xy_")\n- ...
+licenceInfo_maxErrors,Version is limited to max. 1 error per error ID.
+licenceInfo_maxErrors-verbose,Visit the https://store.slooptools.com/addon/quality-check-ctrlppcheck for more information.
+close_without_save,Close without saving?

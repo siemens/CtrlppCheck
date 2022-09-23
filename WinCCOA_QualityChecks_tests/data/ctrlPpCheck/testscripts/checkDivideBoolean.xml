@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<results version="2">
+    <cppcheck version="2.0"/>
+    <errors>
+        <error id="divideBool" severity="warning" msg="Dividation variable/expression &apos;b1&apos; of type &apos;bool&apos; is not allowed." verbose="Dividation variable/expression &apos;b1&apos; of type &apos;bool&apos; is not allowed." cwe="398">
+            <location file0="" file="" line="21"/>
+            <symbol>b1</symbol>
+        </error>
+        <error id="divideBool" severity="warning" msg="Dividation variable/expression &apos;b2&apos; of type &apos;bool&apos; is not allowed." verbose="Dividation variable/expression &apos;b2&apos; of type &apos;bool&apos; is not allowed." cwe="398">
+            <location file0="" file="" line="21"/>
+            <symbol>b2</symbol>
+        </error>
+        <error id="divideBool" severity="warning" msg="Dividation variable/expression &apos;db&apos; of type &apos;bool&apos; is not allowed." verbose="Dividation variable/expression &apos;db&apos; of type &apos;bool&apos; is not allowed." cwe="398">
+            <location file0="" file="" line="21"/>
+            <symbol>db</symbol>
+        </error>
+        <error id="divideBool" severity="warning" msg="Dividation variable/expression &apos;b1&apos; of type &apos;bool&apos; is not allowed." verbose="Dividation variable/expression &apos;b1&apos; of type &apos;bool&apos; is not allowed." cwe="398">
+            <location file0="" file="" line="27"/>
+            <symbol>b1</symbol>
+        </error>
+        <error id="divideBool" severity="warning" msg="Dividation variable/expression &apos;( b2 &amp;&amp; b1 )&apos; of type &apos;bool&apos; is not allowed." verbose="Dividation variable/expression &apos;( b2 &amp;&amp; b1 )&apos; of type &apos;bool&apos; is not allowed." cwe="398">
+            <location file0="" file="" line="27"/>
+            <symbol>( b2 &amp;&amp; b1 )</symbol>
+        </error>
+        <error id="divideBool" severity="warning" msg="Dividation variable/expression &apos;true&apos; of type &apos;bool&apos; is not allowed." verbose="Dividation variable/expression &apos;true&apos; of type &apos;bool&apos; is not allowed." cwe="398">
+            <location file0="" file="" line="33"/>
+            <symbol>true</symbol>
+        </error>
+        <error id="divideBool" severity="warning" msg="Dividation variable/expression &apos;b1&apos; of type &apos;bool&apos; is not allowed." verbose="Dividation variable/expression &apos;b1&apos; of type &apos;bool&apos; is not allowed." cwe="398">
+            <location file0="" file="" line="39"/>
+            <symbol>b1</symbol>
+        </error>
+        <error id="divideBool" severity="warning" msg="Dividation variable/expression &apos;getTrue(...)&apos; of type &apos;bool&apos; is not allowed." verbose="Dividation variable/expression &apos;getTrue(...)&apos; of type &apos;bool&apos; is not allowed." cwe="398">
+            <location file0="" file="" line="39"/>
+            <symbol>getTrue(...)</symbol>
+        </error>
+    </errors>
+</results>

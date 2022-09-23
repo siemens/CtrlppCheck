@@ -1,0 +1,23 @@
+{
+    "settingsVersion": 0,
+    "checks": [
+        {
+            "id": "InternalCheck.exist",
+            "description":{ 
+                "de_AT.utf8":"Überprüft, ob bestimmte Dateien vorhanden sind",
+                "en_US.utf8":"Check if specific files exist"
+             },
+            "scorePoints": 1,
+            "enabled": true
+        },
+        {
+            "id": "InternalCheck.WinCCOALicenseCtrlExtExist",
+            "description":{ 
+                "de_AT.utf8":"Überprüft, ob das Add-on WinCCOALicenseCtrlExt nicht existiert",
+                "en_US.utf8":"Checks if the add-on WinCCOALicenseCtrlExt does not exist?"
+             },
+            "scorePoints": 1,
+            "enabled": true
+        }
+    ]
+}

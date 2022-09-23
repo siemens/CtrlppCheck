@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<results version="2">
+    <cppcheck version="2.0"/>
+    <errors>
+        <error id="bitwiseOnBoolean" severity="warning" msg="Boolean variable/expression &apos;b1&apos; is used in bitwise operation. Did you mean &apos;&amp;&amp;&apos;?" verbose="Boolean variable/expression &apos;b1&apos; is used in bitwise operation. Did you mean &apos;&amp;&amp;&apos;?" cwe="398" inconclusive="true">
+            <location file0="" file="" line="27"/>
+            <symbol>b1</symbol>
+        </error>
+        <error id="bitwiseOnBoolean" severity="warning" msg="Boolean variable/expression &apos;b2&apos; is used in bitwise operation. Did you mean &apos;&amp;&amp;&apos;?" verbose="Boolean variable/expression &apos;b2&apos; is used in bitwise operation. Did you mean &apos;&amp;&amp;&apos;?" cwe="398" inconclusive="true">
+            <location file0="" file="" line="27"/>
+            <symbol>b2</symbol>
+        </error>
+        <error id="bitwiseOnBoolean" severity="warning" msg="Boolean variable/expression &apos;db&apos; is used in bitwise operation. Did you mean &apos;&amp;&amp;&apos;?" verbose="Boolean variable/expression &apos;db&apos; is used in bitwise operation. Did you mean &apos;&amp;&amp;&apos;?" cwe="398" inconclusive="true">
+            <location file0="" file="" line="27"/>
+            <symbol>db</symbol>
+        </error>
+        <error id="bitwiseOnBoolean" severity="warning" msg="Boolean variable/expression &apos;b1&apos; is used in bitwise operation. Did you mean &apos;&amp;&amp;&apos;?" verbose="Boolean variable/expression &apos;b1&apos; is used in bitwise operation. Did you mean &apos;&amp;&amp;&apos;?" cwe="398" inconclusive="true">
+            <location file0="" file="" line="33"/>
+            <symbol>b1</symbol>
+        </error>
+        <error id="bitwiseOnBoolean" severity="warning" msg="Boolean variable/expression &apos;( b2 &amp;&amp; b1 )&apos; is used in bitwise operation. Did you mean &apos;&amp;&amp;&apos;?" verbose="Boolean variable/expression &apos;( b2 &amp;&amp; b1 )&apos; is used in bitwise operation. Did you mean &apos;&amp;&amp;&apos;?" cwe="398" inconclusive="true">
+            <location file0="" file="" line="33"/>
+            <symbol>( b2 &amp;&amp; b1 )</symbol>
+        </error>
+        <error id="bitwiseOnBoolean" severity="warning" msg="Boolean variable/expression &apos;true&apos; is used in bitwise operation. Did you mean &apos;&amp;&amp;&apos;?" verbose="Boolean variable/expression &apos;true&apos; is used in bitwise operation. Did you mean &apos;&amp;&amp;&apos;?" cwe="398" inconclusive="true">
+            <location file0="" file="" line="39"/>
+            <symbol>true</symbol>
+        </error>
+        <error id="bitwiseOnBoolean" severity="warning" msg="Boolean variable/expression &apos;b1&apos; is used in bitwise operation. Did you mean &apos;&amp;&amp;&apos;?" verbose="Boolean variable/expression &apos;b1&apos; is used in bitwise operation. Did you mean &apos;&amp;&amp;&apos;?" cwe="398" inconclusive="true">
+            <location file0="" file="" line="45"/>
+            <symbol>b1</symbol>
+        </error>
+        <error id="bitwiseOnBoolean" severity="warning" msg="Boolean variable/expression &apos;getTrue(...)&apos; is used in bitwise operation. Did you mean &apos;&amp;&amp;&apos;?" verbose="Boolean variable/expression &apos;getTrue(...)&apos; is used in bitwise operation. Did you mean &apos;&amp;&amp;&apos;?" cwe="398" inconclusive="true">
+            <location file0="" file="" line="45"/>
+            <symbol>getTrue(...)</symbol>
+        </error>
+        <error id="bitwiseOnBoolean" severity="warning" msg="Boolean variable/expression &apos;b1&apos; is used in bitwise operation. Did you mean &apos;&amp;&amp;&apos;?" verbose="Boolean variable/expression &apos;b1&apos; is used in bitwise operation. Did you mean &apos;&amp;&amp;&apos;?" cwe="398" inconclusive="true">
+            <location file0="" file="" line="52"/>
+            <symbol>b1</symbol>
+        </error>
+        <error  knownBug="#162" id="bitwiseOnBoolean" severity="warning" msg="Boolean variable/expression &apos;c1.b&apos; is used in bitwise operation. Did you mean &apos;&amp;&amp;&apos;?" verbose="Boolean variable/expression &apos;b1&apos; is used in bitwise operation. Did you mean &apos;&amp;&amp;&apos;?" cwe="398" inconclusive="true">
+            <location file0="" file="" line="52"/>
+            <symbol>c1.b</symbol>
+        </error>
+        <error id="bitwiseOnBoolean" severity="warning" msg="Boolean variable/expression &apos;b1&apos; is used in bitwise operation. Did you mean &apos;&amp;&amp;&apos;?" verbose="Boolean variable/expression &apos;b1&apos; is used in bitwise operation. Did you mean &apos;&amp;&amp;&apos;?" cwe="398" inconclusive="true">
+            <location file0="" file="" line="58"/>
+            <symbol>b1</symbol>
+        </error>
+        <error knownBug="#162" id="bitwiseOnBoolean" severity="warning" msg="Boolean variable/expression &apos;C::staticB&apos; is used in bitwise operation. Did you mean &apos;&amp;&amp;&apos;?" verbose="Boolean variable/expression &apos;b1&apos; is used in bitwise operation. Did you mean &apos;&amp;&amp;&apos;?" cwe="398" inconclusive="true">
+            <location file0="" file="" line="58"/>
+            <symbol>C::staticB</symbol>
+        </error>
+        <error id="bitwiseOnBoolean" severity="warning" msg="Boolean variable/expression &apos;b1&apos; is used in bitwise operation. Did you mean &apos;||&apos;?" verbose="Boolean variable/expression &apos;b1&apos; is used in bitwise operation. Did you mean &apos;||&apos;?" cwe="398" inconclusive="true">
+            <location file0="" file="" line="64"/>
+            <symbol>b1</symbol>
+        </error>
+        <error id="bitwiseOnBoolean" severity="warning" msg="Boolean variable/expression &apos;b2&apos; is used in bitwise operation. Did you mean &apos;&amp;&amp;&apos;?" verbose="Boolean variable/expression &apos;b2&apos; is used in bitwise operation. Did you mean &apos;&amp;&amp;&apos;?" cwe="398" inconclusive="true">
+            <location file0="" file="" line="64"/>
+            <symbol>b2</symbol>
+        </error>
+    </errors>
+</results>

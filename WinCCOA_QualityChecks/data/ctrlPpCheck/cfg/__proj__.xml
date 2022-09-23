@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<def format="2">
+  <!-- project specific constants -->
+<!-- this hall be somehow generated dynamically depended on project -->
+  <define name="PROJ" value="someProject" type="string"/>
+  <define name="PROJ_PATH" value="somePath " type="string"/>
+  <define name="DATA_PATH" value="somePath/data/" type="string"/>
+</def>

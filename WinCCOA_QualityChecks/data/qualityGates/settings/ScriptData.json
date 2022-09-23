@@ -1,0 +1,55 @@
+{
+    "settingsVersion": 0,
+    "checks": [
+        {
+            "id": "ScriptData.script.isCalculated",
+            "description":{ 
+                "de_AT.utf8":"Überprüft, ob das Skript für die Validierung berechnet wurde",
+                "en_US.utf8":"Checks if the script calculated for validation"
+             },
+            "scorePoints": 1,
+            "enabled": true
+        },
+        {
+            "id": "ScriptData.script.countOfFunctions",
+            "description":{ 
+                "de_AT.utf8":"Prüft, ob die Funktionsanzahl innerhalb der Grenzen liegt",
+                "en_US.utf8":"Checks if the function number is within the limits"
+             },
+            "lowLimit": 0,
+            "highLimit": 100,
+            "scorePoints": 1,
+            "enabled": true
+        },
+        {
+            "id": "ScriptData.script.avgCCN",
+            "description":{ 
+                "de_AT.utf8":"Prüft den berechneten CCN wert ob dieser innerhalb des Limits liegt",
+                "en_US.utf8":"Checks the calculated CCN within the limit"
+             },
+            "highLimit": 10.0,
+            "scorePoints": 1,
+            "enabled": true
+        },
+        {
+            "id": "ScriptData.script.NLOC",
+            "description":{ 
+                "de_AT.utf8":"Überprüft, ob die Anzahl der Skriptzeilen innerhalb der Grenzen liegt",
+                "en_US.utf8":"Checks if the script line count is within the limits"
+             },
+            "lowLimit": 1,
+            "highLimit": 600,
+            "scorePoints": 1,
+            "enabled": true
+        },
+        {
+            "id": "ScriptData.script.avgNLOC",
+            "description":{ 
+                "de_AT.utf8":"Überprüft, ob die durchschnittliche Anzahl der Skriptzeilen innerhalb des Grenzwerts liegt",
+                "en_US.utf8":"Checks if the average script line count is within the limit"
+             },
+            "scorePoints": 1,
+            "enabled": true
+        }
+    ]
+}

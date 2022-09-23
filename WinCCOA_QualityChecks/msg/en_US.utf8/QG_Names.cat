@@ -1,0 +1,7 @@
+QgStaticCheck_Libs,Libs (static)
+QgStaticCheck_Panels,Panels (static)
+QgStaticCheck_Pictures,Pictures (static)
+QgStaticCheck_Scripts,Scripts (static) 
+QgStaticCheck_OverloadedFiles,Overloaded Files
+QgSyntaxCheck,Syntax Check
+QgCtrlppCheck,CtrlPPCheck

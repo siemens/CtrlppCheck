@@ -1,0 +1,60 @@
+{
+    "settingsVersion": 0,
+    "checks": [
+        {
+            "id": "PanelFileShape.shape.countOfProperties",
+            "description":{ 
+                "de_AT.utf8":"Bestimmt die Anzahl der Eigenschaften für das Panel",
+                "en_US.utf8":"Determine the number of properties for the panel"
+             },
+            "scorePoints": 1,
+            "enabled": true
+        },
+        {
+            "id": "PanelFileShape.shape.countOfEvents",
+            "description":{ 
+                "de_AT.utf8":"Überprüft die Anzahl der Ereignisse für Panel Elemente",
+                "en_US.utf8":"Checks the count of events for panel shapes"
+             },
+            "highLimit": 100,
+            "scorePoints": 1,
+            "enabled": true
+        },
+        {
+            "id": "PanelFileShape.shape.CCN",
+            "description":{ 
+                "de_AT.utf8":"Validiert die zyklomatische Komplexitätsnummer für die Panel Elemente",
+                "en_US.utf8":"Validates the cyclomatic complexity number for the panel shapes"
+             },
+            "scorePoints": 1,
+            "enabled": true
+        },
+        {
+            "id": "PanelFileShape.shape.avgCCN",
+            "description":{ 
+                "de_AT.utf8":"Validiert die durchschnittliche zyklomatische Komplexitätszahl für die Panel Elemente",
+                "en_US.utf8":"Validates the average cyclomatic compexity number for the panel shapes"
+             },
+            "scorePoints": 1,
+            "enabled": true
+        },
+        {
+            "id": "PanelFileShape.shape.NLOC",
+            "description":{ 
+                "de_AT.utf8":"Überprüft die Anzahl der Codezeilen für die Panel Elemente",
+                "en_US.utf8":"Validates the number of lines for the panel shapes"
+             },
+            "scorePoints": 1,
+            "enabled": true
+        },
+        {
+            "id": "PanelFileShape.shape.avgNLOC",
+            "description":{ 
+                "de_AT.utf8":"Überprüft die durchschnittliche Anzahl der Linien für die Panel Elemente",
+                "en_US.utf8":"Validates the avarage number of lines for the panel shapes"
+             },
+            "scorePoints": 1,
+            "enabled": true
+        }
+    ]
+}

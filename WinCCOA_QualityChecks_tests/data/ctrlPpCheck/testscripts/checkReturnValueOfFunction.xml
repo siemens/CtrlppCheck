@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<results version="2">
+    <ctrlppcheck version="2.0"/>
+    <errors>
+        <error id="missingFunctionReturnValueError" severity="error" msg="Missing return value in non void function." verbose="The function must returns value of type &apos;int&apos;." cwe="704">
+            <location file0="" file="" line="23"/>
+        </error>
+        <error id="returnValueNotMatchError" severity="warning" msg="Return value &apos;string&apos; does not match with declaration &apos;int&apos;." verbose="Return value &apos;string&apos; does not match with declaration &apos;int&apos;." cwe="704" inconclusive="true">
+            <location file0="" file="" line="40"/>
+        </error>
+        <error id="voidFunctionReturnValueError" severity="error" msg="The function declared as void returns value." verbose="Function declared as void can not returns value." cwe="704">
+            <location file0="" file="" line="59"/>
+        </error>
+        <error id="voidFunctionReturnValueError" severity="error" msg="The function declared as void returns value." verbose="Function declared as void can not returns value." cwe="704">
+            <location file0="" file="" line="63"/>
+        </error>
+        <error id="voidFunctionReturnValueError" severity="error" msg="The function declared as void returns value." verbose="Function declared as void can not returns value." cwe="704">
+            <location file0="" file="" line="67"/>
+        </error>
+        <error id="voidFunctionReturnValueError" severity="error" msg="The function declared as void returns value." verbose="Function declared as void can not returns value." cwe="704">
+            <location file0="" file="" line="82"/>
+        </error>
+        <error id="voidFunctionReturnValueError" severity="error" msg="The function declared as void returns value." verbose="Function declared as void can not returns value." cwe="704">
+            <location file0="" file="" line="86"/>
+        </error>
+        <error id="voidFunctionReturnValueError" severity="error" msg="The function declared as void returns value." verbose="Function declared as void can not returns value." cwe="704">
+            <location file0="" file="" line="90"/>
+        </error>
+        <error id="voidReturnValueMissingInformation" severity="information" msg="Void function without void return type." verbose="Void function without void return type." cwe="704">
+            <location file0="" file="" line="94"/>
+        </error>
+        <error id="voidReturnValueMissingInformation" severity="information" msg="Void function without void return type." verbose="Void function without void return type." cwe="704">
+            <location file0="" file="" line="98"/>
+        </error>
+        <error id="missingFunctionReturnValueError" severity="error" msg="Missing return value in non void function." verbose="The function must returns value of type &apos;int&apos;." cwe="704">
+            <location file0="" file="" line="107"/>
+        </error>
+        <error id="voidFunctionReturnValueError" severity="error" msg="The function declared as void returns value." verbose="Function declared as void can not returns value." cwe="704">
+            <location file0="" file="" line="115"/>
+        </error>
+    </errors>
+</results>

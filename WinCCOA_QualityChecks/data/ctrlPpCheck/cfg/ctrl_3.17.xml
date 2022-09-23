@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<!-- wincc oa version specific config -->
+<!-- add here all differences between WinCC OA 3.17 and 3.15. See also ctrl.xml file -->
+<def format="2">
+	<!-- constants -->
+	<!-- this shall be somehow generated dynamically depended on WinCC OA version and location -->
+	<define name="VERSION" value="3.17" type="string"/>
+	<define name="VERSION_DISP" value="3.17" type="string"/>
+	<define name="VERSION_NUMERIC" value="317000"/>
+	<define name="PVSS_BIN_PATH" value="C:/Siemens/Automation/WinCC_OA/3.17/bin/" type="string"/>
+	<define name="WINCCOA_BIN_PATH" value="C:/Siemens/Automation/WinCC_OA/3.17/bin/" type="string"/>
+	<define name="PVSS_PATH" value="C:/Siemens/Automation/WinCC_OA/3.17/" type="string"/>
+	<define name="WINCCOA_PATH" value="C:/Siemens/Automation/WinCC_OA/3.17/" type="string"/>
+	<!-- functions -->
+	<function name="secureRandom">
+		<const/>
+		<noreturn>false</noreturn>
+	</function>
+	<!-- debug functions -->
+	<function name="formatDebug">
+		<use-retval/>
+		<returnValue type="string"/>
+		<arg nr="1"/>
+	</function>
+	<!-- dyn functions -->
+	<function name="dynAppendConst">
+		<const/>
+		<returnValue type="int"/>
+		<arg nr="1"/>
+		<arg nr="2"/>
+	</function>
+	<function name="dynInsertAtConst">
+		<const/>
+		<returnValue type="int"/>
+		<arg nr="1"/>
+		<arg nr="2"/>
+		<arg nr="3"/>
+	</function>
+	<!-- math functions -->
+	<function name="srand">
+		<use-retval/>
+		<returnValue type="int"/>
+		<arg nr="1" default=""/>
+	</function>
+	<function name="rand">
+		<use-retval/>
+		<returnValue type="int"/>
+	</function>
+	<function name="secureRandom">
+		<use-retval/>
+		<returnValue type="int"/>
+	</function>
+	<!-- threads, scripts -->
+	<function name="startThread">
+		<returnValue type="int"/>
+		<arg nr="1" default=""/>
+		<arg nr="2">
+			<variadic/>
+		</arg>
+	</function>
+	<function name="evalScript">
+		<returnValue type="int"/>
+		<arg nr="1"/>
+		<arg nr="2"/>
+		<arg nr="3" default="">
+			<variadic/>
+		</arg>
+	</function>
+	<function name="execScript">
+		<returnValue type="int"/>
+		<arg nr="1"/>
+		<arg nr="2" default="">
+			<variadic/>
+		</arg>
+	</function>
+	<function name="startScript">
+		<returnValue type="int"/>
+		<arg nr="1"/>
+		<arg nr="2" default=""/>
+		<arg nr="3" default=""/>
+		<arg nr="4" default=""/>
+	</function>
+	<!-- other functions -->
+	<function name="fswAddPath">
+		<returnValue type="int"/>
+		<arg nr="1"/>
+	</function>
+	<function name="fswRemovePath">
+		<returnValue type="int"/>
+		<arg nr="1"/>
+	</function>
+	<function name="findExecutable">
+		<use-retval/>
+		<returnValue type="string"/>
+		<arg nr="1"/>
+	</function>
+	<function name="setThrowErrorAsException">
+		<returnValue type="int"/>
+		<arg nr="1" default="true"/>
+	</function>
+</def>

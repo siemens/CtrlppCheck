@@ -1,0 +1,5 @@
+details,WinCCOA internal files
+assert.exist,File '$file.name' exist?
+reason.exist,The file '$file.name' does not exist
+assert.WinCCOALicenseCtrlExtExist,Contains WinCCOALicenseCtrlExt extention?
+reason.WinCCOALicenseCtrlExtExist,Contains WinCCOALicenseCtrlExt.

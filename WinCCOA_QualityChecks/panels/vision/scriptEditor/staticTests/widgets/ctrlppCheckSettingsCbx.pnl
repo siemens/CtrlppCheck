@@ -1,0 +1,163 @@
+V 14
+2
+LANG:10000 0 
+LANG:10001 0 
+PANEL,-1 -1 523 117 N "_3DFace" 0
+"main()
+{
+  cbxSettings.text(0, text);
+  while ( !dpExists(dpe) )
+    delay(0, 100);
+  
+  dpConnect(\"updateValue_cb\", dpe);
+}
+
+void updateValue_cb(string dp, bool value)
+{
+  cbxSettings.state(0, value);
+  cbxSettings.toolTipText(dpGetDescription(dpe, -2));
+}
+
+" 0
+ E E E E 1 -1 -1 0  10 50
+""0  1
+E "
+string dpe;
+string text;
+
+#property string DPE
+#property string text
+
+public string getDPE()
+{
+  return dpe;
+}
+
+public void setDPE(const string &str)
+{
+  dpe = str;
+}
+
+public string getText()
+{
+  return text;
+}
+
+public void setText(const string &str)
+{
+  text = str;
+  cbxSettings.text(0, text);
+}
+
+
+" 0
+ 3
+"CBRef" "1"
+"EClose" E
+"dpi" "96"
+1 1 0 0 1 1 1 0
+""
+DISPLAY_LAYER, 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0
+LAYER, 0 
+2
+LANG:10000 0 
+LANG:10001 0 
+20 1
+"cbxSettings"
+"WinCCOA"
+1 0 1 E E E 1 E 1 E N "DavyGrey" E N "_3DFace" E E
+ E E
+0 0 0 0 0 0
+E E E
+0
+2
+LANG:10000 0 
+LANG:10001 0 
+
+2
+"sizePolicy" "Preferred Minimum"
+"layoutAlignment" "AlignNone"
+2
+LANG:10000 26 Arial,-1,12,5,50,0,0,0,0,0
+LANG:10001 26 Arial,-1,12,5,50,0,0,0,0,0
+0  -2 -1 524 21
+1
+T 
+2
+LANG:10000 3 ???
+LANG:10001 3 ???
+
+0 
+2
+LANG:10000 0 
+LANG:10001 0 
+E E
+0 0 0 0 0
+0
+E"main(int button, int state)
+{
+  dpSet(dpe, state);
+}
+" 0
+32 2
+"SPACER1"
+""
+1 0 26 E E E 1 E 1 E N {0,0,0} E N {255,255,255} E E
+ E E
+1 0 0 0 0 0
+E E E
+0
+2
+LANG:10000 0 
+LANG:10001 0 
+
+3
+"transparentForMouse" ""
+"sizePolicy" "Ignored Expanding"
+"layoutAlignment" "AlignNone"
+ 0 26 522 115 2
+0
+LAYER, 1 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 2 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 3 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 4 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 5 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 6 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+LAYER, 7 
+2
+LANG:10000 0 
+LANG:10001 0 
+0
+4 0 "LAYOUT_GROUP0" -1
+2 0 
+1 2 
+
+"S 1" "0 0 1 1"
+"S 2" "1 0 1 1"
+"" ""
+0 2 0 0
+0

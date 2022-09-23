@@ -1,0 +1,12 @@
+assert.dir.isCalculated,Is calculated
+reason.dir.isCalculated,Sorry, the directory '($dir.name)' can't be calculated.
+assert.dir.hasFilesRecursive,Count of files recursive
+reason.dir.hasFilesRecursive,Directory  '$dir.name' or sub directories doesn´t contain any files. Delete all empty dirs.
+assert.dir.isEmpty,Is empty
+reason.dir.isEmpty,Directory '$dir.name' doesn´t contains any files or sub directories.
+assert.dir.subDirCount,Count of sub directories
+reason.dir.subDirCount,Too much sub directories ($dir.subDirCount) found in '$dir.name'.
+assert.dir.filesCount,Count of files
+reason.dir.filesCount,Too much files ($dir.filesCount) found in '$dir.name'.
+filesList,Files
+subDirsList,Sub directories

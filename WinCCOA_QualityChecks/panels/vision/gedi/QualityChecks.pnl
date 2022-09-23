@@ -1,0 +1,132 @@
+V 14
+2
+LANG:10001 32 WinCCOA - Quality checks results
+LANG:10000 35 WinCCOA - Quality Checks Ergebnisse
+PANEL,-1 -1 1127 751 N "White" 0
+E E E E E 1 -1 -1 0  112 39.5
+""0  1
+E E 3
+"CBRef" "1"
+"EClose" E
+"dpi" "120"
+1 0 0
+""
+DISPLAY_LAYER, 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0
+LAYER, 0 
+1
+LANG:10001 0 
+1 16 0 "" 1
+0
+2 13
+"WinCCOA_-_Quality_checks_results"
+""
+1 395.5 59.5 E E E 1 E 1 E N "WF_Text" E N "_Transparent" E E
+ E E
+5 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+4
+"sizePolicy" "Fixed Fixed"
+"layoutAlignment" "AlignCenter"
+"dashclr"N "_Transparent"
+"antiAliased" "0"
+E E 0 1 1 0 1 E 0.9973474801061414 0 0.9655172413793097 -382.9509283819789 -45.94827586206893 0 E 395.5 59.5 584 74
+0 0 0 "0s" 0 0 0 192 0 0  395.5 59.5 1
+2
+LANG:10001 26 Arial,-1,12,5,50,0,0,0,0,0
+LANG:10000 26 Arial,-1,12,5,50,0,0,0,0,0
+0 2
+LANG:10001 33 WinCC OA - Quality checks results
+LANG:10000 35 WinCCOA - Quality Checks Ergebnisse
+32 14
+"SPACER1"
+""
+1 207 11 E E E 1 E 1 E N {0,0,0} E N {255,255,255} E E
+ E E
+6 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+3
+"transparentForMouse" ""
+"sizePolicy" "Expanding Ignored"
+"layoutAlignment" "AlignNone"
+ 207 11 1114.999999999964 24.9999999999998 1
+32 15
+"SPACER2"
+""
+1 11 740 E E E 1 E 1 E N {0,0,0} E N {255,255,255} E E
+ E E
+7 0 0 0 0 0
+E E E
+0
+2
+LANG:10001 0 
+LANG:10000 0 
+
+3
+"transparentForMouse" ""
+"sizePolicy" "Ignored Expanding"
+"layoutAlignment" "AlignNone"
+ 11 740 1115.000000000014 741 2
+0
+LAYER, 1 
+1
+LANG:10001 0 
+0
+LAYER, 2 
+1
+LANG:10001 0 
+0
+LAYER, 3 
+1
+LANG:10001 0 
+0
+LAYER, 4 
+1
+LANG:10001 0 
+0
+LAYER, 5 
+1
+LANG:10001 0 
+0
+LAYER, 6 
+1
+LANG:10001 0 
+0
+LAYER, 7 
+1
+LANG:10001 0 
+0
+3 0 "PANEL_REF0" 2
+"minimumSize" "360 -1"
+"sizePolicy" "Expanding Preferred"
+"layoutAlignment" "AlignNone"
+"" ""
+"vision/QualityChecks/QG_Main.pnl" 94 53 T 1 2.967741935483907 0 0.920948616600757 -208.6129032258091 2.60869565217502
+0
+4 1 "LAYOUT_GROUP1" 2
+2 0 
+13 14 
+
+"S 13" "0 0 1 1"
+"S 14" "1 0 1 1"
+"" ""
+0 1 0 0
+4 2 "LAYOUT_GROUP2" -1
+1 2 
+15 
+0 1 
+"S 15" "2 0 1 1"
+"G 0" "1 0 1 1"
+"G 1" "0 0 1 1"
+"" ""
+0 2 0 0
+0

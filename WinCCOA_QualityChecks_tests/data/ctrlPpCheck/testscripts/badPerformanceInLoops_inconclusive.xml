@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<results version="2">
+    <cppcheck version=""/>
+    <errors>
+        <error id="badPerformanceInLoops" severity="performance" msg="Non-performing usage of a function in a loop: dpGet" verbose="Non-performing usage of a function in a loop: dpGet" cwe="398" inconclusive="true">
+            <location file0="" file="" line="40"/>
+        </error>
+        <error id="badPerformanceInLoops" severity="performance" msg="Non-performing usage of a function in a loop: dpSet" verbose="Non-performing usage of a function in a loop: dpSet" cwe="398" inconclusive="true">
+            <location file0="" file="" line="42"/>
+        </error>
+    </errors>
+</results>

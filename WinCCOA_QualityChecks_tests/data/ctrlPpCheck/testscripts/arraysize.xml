@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<results version="2">
+    <ctrlppcheck version="2.0"/>
+    <errors>
+        <error id="negativeIndex" severity="error" msg="Array &apos;ds&apos; accessed at index -1, which is out of bounds." verbose="Array &apos;ds&apos; accessed at index -1, which is out of bounds." cwe="786">
+            <location file="arraysize.ctl" line="34" info="Negative array index"/>
+        </error>
+        <error id="negativeIndex" severity="error" msg="Array &apos;ds1[0]&apos; accessed at index -1, which is out of bounds." verbose="Array &apos;ds1[0]&apos; accessed at index -1, which is out of bounds." cwe="786">
+            <location file="arraysize.ctl" line="35" info="Negative array index"/>
+        </error>
+        <error id="arrayIndexOutOfBounds" severity="error" msg="Array &apos;ds2[1]&apos; accessed at index -1, which is out of bounds." verbose="Array &apos;ds2[1]&apos; accessed at index -1, which is out of bounds." cwe="788">
+            <location file="arraysize.ctl" line="36" info="Array index out of bounds"/>
+        </error>
+        <error id="arrayIndexOutOfBounds" severity="error" msg="Array &apos;ds2[1]&apos; accessed at index 0, which is out of bounds." verbose="Array &apos;ds2[1]&apos; accessed at index 0, which is out of bounds." cwe="788">
+            <location file="arraysize.ctl" line="40" info="Array index out of bounds"/>
+        </error>
+        <error id="arrayIndexOutOfBounds" severity="error" msg="Array &apos;ds2[1]&apos; accessed at index 2, which is out of bounds." verbose="Array &apos;ds2[1]&apos; accessed at index 2, which is out of bounds." cwe="788">
+            <location file="arraysize.ctl" line="47" info="Array index out of bounds"/>
+        </error>
+        <error id="arrayIndexOutOfBounds" severity="error" msg="Array &apos;ds3[3]&apos; accessed at index 4, which is out of bounds." verbose="Array &apos;ds3[3]&apos; accessed at index 4, which is out of bounds." cwe="788">
+            <location file="arraysize.ctl" line="49" info="Array index out of bounds"/>
+        </error>
+        <error id="uninitvar" severity="information" msg="Uninitialized variable: ds" verbose="Uninitialized variable: ds" cwe="908">
+            <location file="arraysize.ctl" line="34"/>
+            <symbol>ds</symbol>
+        </error>
+        <error id="uninitvar" severity="information" msg="Uninitialized variable: ds" verbose="Uninitialized variable: ds" cwe="908">
+            <location file="arraysize.ctl" line="38"/>
+            <symbol>ds</symbol>
+        </error>
+        <error id="uninitvar" severity="information" msg="Uninitialized variable: ds" verbose="Uninitialized variable: ds" cwe="908">
+            <location file="arraysize.ctl" line="42"/>
+            <symbol>ds</symbol>
+        </error>
+        <error id="uninitvar" severity="information" msg="Uninitialized variable: ds" verbose="Uninitialized variable: ds" cwe="908">
+            <location file="arraysize.ctl" line="45"/>
+            <symbol>ds</symbol>
+        </error>
+        <error id="negativeContainerIndex" severity="error" msg="Array index -1 is out of bounds." verbose="Array index -1 is out of bounds." cwe="786">
+            <location file="arraysize.ctl" line="34" info="Negative array index"/>
+        </error>
+        <error id="negativeContainerIndex" severity="error" msg="Array index -1 is out of bounds." verbose="Array index -1 is out of bounds." cwe="786">
+            <location file="arraysize.ctl" line="35" info="Negative array index"/>
+        </error>
+        <error id="negativeContainerIndex" severity="error" msg="Array index -1 is out of bounds." verbose="Array index -1 is out of bounds." cwe="786">
+            <location file="arraysize.ctl" line="36" info="Negative array index"/>
+        </error>
+    </errors>
+</results>

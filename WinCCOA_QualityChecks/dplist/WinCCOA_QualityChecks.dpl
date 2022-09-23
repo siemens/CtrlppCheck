@@ -1,0 +1,38 @@
+# ascii dump of database				
+				
+# DpType				
+TypeName				
+_CtrlppCheck._CtrlppCheck	1			
+	filter	1		
+		id	9	
+		severity	9	
+	settings	1		
+		enableLibCheck	23	
+		enableHeadersCheck	23	
+		inconclusive	23	
+		includeSubProjects	23	
+		verbose	23	
+		inlineSuppressions	23	
+				
+# Datapoint/DpId				
+DpName	TypeName			
+_CtrlCommandInterface_StaticTests	_CtrlCommandInterface			
+_CtrlppCheck	_CtrlppCheck			
+_WinCCOA_qgCmd	_CtrlCommandInterface			
+				
+# Aliases/Comments				
+AliasId	AliasName	CommentName		
+_CtrlppCheck.settings.enableLibCheck		"lt:3 LANG:10000 ""option --check-headers=no"		
+"\\nTurn off checking of included files, to make the analysis faster @@"" LANG:10001 ""option --check-headers=no"				
+"\\nTurn off checking of included files, to make the analysis faster @@"" LANG:10027 ""@@"" "				
+				
+# DpValue				
+ElementName	TypeName	_original.._value	_original.._status64	_original.._stime
+_CtrlppCheck.filter.id	_CtrlppCheck	"voidReturnValueMissingInformation", "uninitvar"	0x8300000000000101	23.05.2019 13:56
+_CtrlppCheck.filter.severity	_CtrlppCheck		0x8300000000000101	23.05.2019 13:56
+_CtrlppCheck.settings.enableLibCheck	_CtrlppCheck	0	0x8300000000300101	27.05.2019 19:30
+_CtrlppCheck.settings.enableHeadersCheck	_CtrlppCheck	1	0x8300000000000101	23.05.2019 13:56
+_CtrlppCheck.settings.inconclusive	_CtrlppCheck	1	0x8300000000000101	23.05.2019 13:56
+_CtrlppCheck.settings.includeSubProjects	_CtrlppCheck	0	0x8300000000000101	23.05.2019 13:56
+_CtrlppCheck.settings.verbose	_CtrlppCheck	0	0x8300000000300101	26.05.2019 19:50
+_CtrlppCheck.settings.inlineSuppressions	_CtrlppCheck	0	0x8300000000000101	23.05.2019 13:56
