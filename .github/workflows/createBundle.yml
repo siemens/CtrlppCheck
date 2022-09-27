@@ -45,4 +45,6 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: ctrlppcheck
-        path: ${{github.workspace}}/build/ctrlppcheck/bin/ctrlppcheck*
+        path: |
+          ${{github.workspace}}/build/ctrlppcheck/bin/Release/ctrlppcheck.exe
+          ${{github.workspace}}/build/ctrlppcheck/bin/ctrlppcheck
