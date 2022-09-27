@@ -12,10 +12,14 @@ env:
 
 jobs:
   build:
+    strategy:
+      matrix:
+        os: [windows-2019, ubuntu-20.04]
+
     # The CMake configure and build commands are platform agnostic and should work equally well on Windows or Mac.
     # You can convert this to a matrix build if you need cross-platform coverage.
     # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
-    runs-on: ubuntu-20.04
+    runs-on: ${{ matrix.os }}
 
     steps:
     - uses: actions/checkout@v3
@@ -30,7 +34,7 @@ jobs:
       # Build your program with the given configuration
       run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
     
-    # no ctest tests for ctrlppcheck binary available
+    # no ctest tests for modified cppcheck, they were just thrown away
     #- name: Test
     #  working-directory: ${{github.workspace}}/build
     #  # Execute tests defined by the CMake configuration.  
@@ -41,4 +45,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: ctrlppcheck
-        path: ${{github.workspace}}/build/ctrlppcheck/bin/ctrlppcheck
+        path: ${{github.workspace}}/build/ctrlppcheck/bin/ctrlppcheck*
