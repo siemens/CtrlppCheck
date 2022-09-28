@@ -9,31 +9,149 @@ on:
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
   BUILD_TYPE: Release
+  NINJA_VERSION: 1.11.1
+  SCCACHE_VERSION: 0.3.0
 
 jobs:
   build:
     strategy:
       matrix:
-        os: [windows-2019, ubuntu-20.04]
+        config:
+        - {
+            name: "Windows 2019 MSVC",
+            artifact: "ctrlppcheck/bin/ctrlppcheck.exe",
+            os: windows-2019,
+            cc: "cl", cxx: "cl",
+            environment_script: "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
+          }
+        - {
+            name: "Ubuntu 2004 GCC",
+            artifact: "ctrlppcheck/bin/ctrlppcheck",
+            os: ubuntu-20.04,
+            cc: "gcc", cxx: "g++"
+          }
 
     # The CMake configure and build commands are platform agnostic and should work equally well on Windows or Mac.
     # You can convert this to a matrix build if you need cross-platform coverage.
     # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.config.os }}
 
     steps:
     - uses: actions/checkout@v3
 
+    # Based on the work of https://cristianadam.eu/20200113/speeding-up-c-plus-plus-github-actions-using-ccache/
+    # and https://github.com/cristianadam/HelloWorld
+    - name: Download Ninja and sccache
+      shell: cmake -P {0}
+      run: |
+        set(ninja_version $ENV{NINJA_VERSION})
+        set(sccache_version $ENV{SCCACHE_VERSION})
+        if ("${{ runner.os }}" STREQUAL "Windows")
+          set(ninja_suffix "win.zip")
+          set(sccache_suffix "x86_64-pc-windows-msvc")
+          set(sccache_ext ".tar.gz")
+          set(sccache_dir "sccache-v${sccache_version}-${sccache_suffix}")
+        elseif ("${{ runner.os }}" STREQUAL "Linux")
+          set(ninja_suffix "linux.zip")
+          set(sccache_suffix "x86_64-unknown-linux-musl")
+          set(sccache_ext ".tar.gz")
+          set(sccache_dir "sccache-v${sccache_version}-${sccache_suffix}")
+        endif()
+        set(ninja_url "https://github.com/ninja-build/ninja/releases/download/v${ninja_version}/ninja-${ninja_suffix}")
+        file(DOWNLOAD "${ninja_url}" ./ninja.zip SHOW_PROGRESS)
+        message(STATUS "Download ${ninja_url}")
+        execute_process(COMMAND ${CMAKE_COMMAND} -E tar xvf ./ninja.zip)
+        set(sccache_url "https://github.com/mozilla/sccache/releases/download/v${sccache_version}/${sccache_dir}${sccache_ext}")
+        message(STATUS "Download ${sccache_url}")
+        file(DOWNLOAD "${sccache_url}" ./sccache.tar.gz SHOW_PROGRESS)
+        execute_process(COMMAND ${CMAKE_COMMAND} -E tar xvf ./sccache.tar.gz)
+        file(GLOB_RECURSE mydirs LIST_DIRECTORIES true)
+        message(STATUS "${mydirs}")
+        set(path_separator ":")
+        if ("${{ runner.os }}" STREQUAL "Windows")
+          set(path_separator ";")
+        endif()
+        file(TO_NATIVE_PATH "$ENV{GITHUB_WORKSPACE}/${sccache_dir}" sccache_dir)
+        file(APPEND "$ENV{GITHUB_PATH}" "$ENV{GITHUB_WORKSPACE}${path_separator}${sccache_dir}")
+        if (NOT "${{ runner.os }}" STREQUAL "Windows")
+          execute_process(
+            COMMAND chmod +x ninja
+            COMMAND chmod +x ${sccache_dir}/sccache
+          )
+        endif()
+
+    - name: sccache cache files
+      uses: actions/cache@v2
+      with:
+        path: .sccache
+        key: ${{ matrix.config.name }}-sccache
+
+    - name: Version info
+      run: ninja --version && sccache --version && cmake --version
+
     - name: Configure CMake
-      # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
-      # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
-      # We need to configure with USE_MATCHCOMPILER=Off, as release build is broken due to changes to cppcheck sources
-      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DUSE_MATCHCOMPILER=Off
+      shell: cmake -P {0}
+      run: |
+        set(ENV{CC} ${{ matrix.config.cc }})
+        set(ENV{CXX} ${{ matrix.config.cxx }})
+        if ("${{ runner.os }}" STREQUAL "Windows" AND NOT "x${{ matrix.config.environment_script }}" STREQUAL "x")
+          execute_process(
+            COMMAND "${{ matrix.config.environment_script }}" && set
+            OUTPUT_FILE environment_script_output.txt
+          )
+          file(STRINGS environment_script_output.txt output_lines)
+          foreach(line IN LISTS output_lines)
+            if (line MATCHES "^([a-zA-Z0-9_-]+)=(.*)$")
+              set(ENV{${CMAKE_MATCH_1}} "${CMAKE_MATCH_2}")
+            endif()
+          endforeach()
+        endif()
+        execute_process(
+          COMMAND cmake
+            -S .
+            -B $ENV{GITHUB_WORKSPACE}/build
+            -D CMAKE_BUILD_TYPE=$ENV{BUILD_TYPE}
+            -G Ninja
+            -D CMAKE_C_COMPILER_LAUNCHER=sccache
+            -D CMAKE_CXX_COMPILER_LAUNCHER=sccache
+            -D USE_MATCHCOMPILER=Off
+          RESULT_VARIABLE result
+        )
+        if (NOT result EQUAL 0)
+          message(FATAL_ERROR "Bad exit status")
+        endif()
 
     - name: Build
-      # Build your program with the given configuration
-      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
-    
+      shell: cmake -P {0}
+      run: |
+        set(ENV{NINJA_STATUS} "[%f/%t %o/sec] ")
+        if ("${{ runner.os }}" STREQUAL "Windows" AND NOT "x${{ matrix.config.environment_script }}" STREQUAL "x")
+          file(STRINGS environment_script_output.txt output_lines)
+          foreach(line IN LISTS output_lines)
+            if (line MATCHES "^([a-zA-Z0-9_-]+)=(.*)$")
+              set(ENV{${CMAKE_MATCH_1}} "${CMAKE_MATCH_2}")
+            endif()
+          endforeach()
+        endif()
+        file(TO_CMAKE_PATH "$ENV{GITHUB_WORKSPACE}/.sccache" sccache_dir)
+        set(ENV{SCCACHE_DIR} "${sccache_dir}")
+        set(ENV{SCCACHE_CACHE_SIZE} "100M")
+        execute_process(
+          COMMAND cmake --build $ENV{GITHUB_WORKSPACE}/build --config $ENV{BUILD_TYPE}
+          RESULT_VARIABLE result
+          OUTPUT_VARIABLE output
+          ERROR_VARIABLE output
+          ECHO_OUTPUT_VARIABLE ECHO_ERROR_VARIABLE
+        )
+        if (NOT result EQUAL 0)
+          string(REGEX MATCH "FAILED:.*$" error_message "${output}")
+          string(REPLACE "\n" "%0A" error_message "${error_message}")
+          message("::error::${error_message}")
+          message(FATAL_ERROR "Build failed")
+        else()
+          execute_process(COMMAND sccache --show-stats)
+        endif()
+
     # no ctest tests for modified cppcheck, they were just thrown away
     #- name: Test
     #  working-directory: ${{github.workspace}}/build
@@ -45,6 +163,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: ctrlppcheck
-        path: |
-          ${{github.workspace}}/build/ctrlppcheck/bin/Release/ctrlppcheck.exe
-          ${{github.workspace}}/build/ctrlppcheck/bin/ctrlppcheck
+        path: ${{github.workspace}}/build/${{ matrix.config.artifact }}
