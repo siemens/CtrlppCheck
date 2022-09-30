@@ -40,7 +40,7 @@ class Mapping
   /** @brief Function returns value of mapping variable.
    * @return value of variable.
    */
-  public float get()
+  public mapping get()
   {
     return _var;
   }

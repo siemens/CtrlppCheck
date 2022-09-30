@@ -415,7 +415,7 @@ class ScriptData
         assertion.setMsgCatName("QgStaticCheck_ScriptData");
         assertion.setAssertionText("assert.script.avgCCN");
         assertion.setReasonText("reason.script.avgCCN", makeMapping("script.name", getName(),
-                                                                  "avgCCN", getAvgCCN));
+                                                                  "avgCCN", getAvgCCN()));
         assertion.assertLessEqual(getAvgCCN(), getMaxAvgCCN(), settings.getScorePoints());
         result.addChild(assertion);
       }

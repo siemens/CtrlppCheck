@@ -18,7 +18,7 @@ class StaticCodeDir :StaticDir
     setDir(dirPath);
   }
 
-  public anytype makeChekFile(const string &fullPath)
+  public anytype makeCheckFile(const string &fullPath)
   {
     return NULL;
   }
@@ -59,7 +59,7 @@ class StaticCodeDir :StaticDir
     {
       string fullPath = makeNativePath(getDirPath() + fileNames[i]);
 
-      anytype checkFile = makeChekFile(fullPath);
+      anytype checkFile = makeCheckFile(fullPath);
 
       _allFilesCount++;
 

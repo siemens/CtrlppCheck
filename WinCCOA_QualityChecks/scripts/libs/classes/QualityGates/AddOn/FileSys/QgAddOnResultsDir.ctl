@@ -18,7 +18,7 @@ class QgAddOnResultsDir
   public QgAddOnResultsDir()
   {
     if ( _buildNo <= 0 )
-      _buildNo = (int)getCurrentTime();
+      _buildNo = (long)getCurrentTime();
     if ( Qg::getId() != "" )
       setQgId(Qg::getId());
   }
@@ -114,7 +114,7 @@ class QgAddOnResultsDir
     return _resultDir;
   }
   
-  int _buildNo;
+  long _buildNo;
   string _resultDir;
   string _qgId;
 };

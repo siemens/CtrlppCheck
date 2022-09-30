@@ -114,7 +114,7 @@ class StTest
     if ( !isdir(dir) )
       mkdir(dir);
   
-    string timeStamp = (int)getCurrentTime();
+    string timeStamp = (long)getCurrentTime();
     
     dir += timeStamp + "/";   
     mkdir(dir);

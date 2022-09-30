@@ -43,7 +43,7 @@ class ScriptsDir : StaticCodeDir
   }
     
   //------------------------------------------------------------------------------
-  public ScriptFile makeChekFile(const string &fullPath)
+  public ScriptFile makeCheckFile(const string &fullPath)
   {
     ScriptFile p = ScriptFile(fullPath);
     return p;

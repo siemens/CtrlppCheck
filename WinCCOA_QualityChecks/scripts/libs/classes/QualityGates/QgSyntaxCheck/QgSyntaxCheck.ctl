@@ -16,7 +16,7 @@
 
 //--------------------------------------------------------------------------------
 /**
-  @brief QualityChek OA-syntax check.
+  @brief QualityCheck OA-syntax check.
 
   @details Start classic WinCC OA syntax check.
 

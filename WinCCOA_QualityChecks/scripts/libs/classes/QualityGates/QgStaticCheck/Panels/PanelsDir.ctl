@@ -23,7 +23,7 @@ class PanelsDir : StaticCodeDir
   }
     
   //------------------------------------------------------------------------------
-  public PanelCheck makeChekFile(const string &fullPath)
+  public PanelCheck makeCheckFile(const string &fullPath)
   {
     PanelCheck p = PanelCheck(fullPath);
     return p;

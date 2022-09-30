@@ -283,11 +283,12 @@ class QgApp
     }
     
     mapping addOnInfo;
+	mapping data = jsonDecode(json); 
+	
     try
     {
       addOnInfo["addon_extended_technical_name"] = (string)getenv("EXTENDED_TECHNICAL_NAME");
       
-      mapping data = jsonDecode(json); 
       addOnInfo["addon_name"]          = (string)data["data"][1]["name"];
       addOnInfo["addon_description"]   = (string)data["data"][1]["description"];
       addOnInfo["addon_item_number"]   = (string)data["data"][1]["item_number"];

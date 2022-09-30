@@ -46,7 +46,9 @@ class PanelFileShape
   
   public int getCountOfShapes()
   {
-    return dynlen(_shapes);
+    //TODO
+    //return dynlen(_shapes);
+    return 0;
   }
   
   public mapping getEvents()
@@ -132,7 +134,7 @@ class PanelFileShape
   public int validate()
   {
     QgVersionResult::lastErr = "";
-    result = new QgVersionResult;
+    result = new QgVersionResult();
     result.text = getName();
    
     validateCountOfProperties();

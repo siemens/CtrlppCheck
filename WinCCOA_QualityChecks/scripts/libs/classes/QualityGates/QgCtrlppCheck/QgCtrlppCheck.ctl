@@ -16,7 +16,7 @@
 
 //--------------------------------------------------------------------------------
 /**
-  @brief QualityChek ctrlppcheck.
+  @brief QualityCheck ctrlppcheck.
   
   @details Start ctrlppcheck.
 */

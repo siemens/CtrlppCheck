@@ -21,7 +21,7 @@ class PicturesDir : StaticDir
   }
   
   //------------------------------------------------------------------------------
-  public static PicturesFile makeChekFile(const string &fullPath)
+  public static PicturesFile makeCheckFile(const string &fullPath)
   {
     PicturesFile pict = PicturesFile(fullPath);
     return pict;

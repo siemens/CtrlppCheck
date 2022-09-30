@@ -40,7 +40,7 @@ class OaSyntaxCheck
       cmd = getPath(BIN_REL_PATH, getComponentName(UI_COMPONENT));
     else
     {
-      _stdErr = "this platform is not implemented";
+      stdErr = "this platform is not implemented";
       DebugFTN("OaSyntaxCheck", __FUNCTION__, stdErr);
       return -1;
     }

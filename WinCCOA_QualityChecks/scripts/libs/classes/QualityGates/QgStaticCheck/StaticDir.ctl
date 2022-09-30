@@ -51,7 +51,7 @@ class StaticDir : Dir
     {
       string fullPath = makeNativePath(getDirPath() + fileNames[i]);
       
-      anytype checkFile = makeChekFile(fullPath);
+      anytype checkFile = makeCheckFile(fullPath);
       
       _allFilesCount++;
       
