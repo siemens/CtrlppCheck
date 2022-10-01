@@ -3,9 +3,11 @@ name: CI
 on:
   push:
     branches: [ "main", "release/*" ]
-    tags: ["v*"]
+#    tags: ["v*"]
   pull_request:
     branches: [ "main", "release/*" ]
+  release:
+    types: [created]
 
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
@@ -192,11 +194,12 @@ jobs:
         path: ${{github.workspace}}/install/*
 
   release:
-    if: contains(github.ref, 'tags/v')
+    if: github.event_name == 'release'
     name: Release
     runs-on: ubuntu-latest
     needs: package
     steps:
+
     - name: Get the version
       id: get_version
       run: echo ::set-output name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3)
@@ -209,21 +212,10 @@ jobs:
 
     - name: Add x bit to Linux binary
       run: |
-        chmod +x ${{github.workspace}}/install/WinCCOA_QualityChecks/bin/ctrlppcheck/ctrlppcheck
+        chmod +x ${{ github.workspace }}/install/WinCCOA_QualityChecks/bin/ctrlppcheck/ctrlppcheck
 
     - name: Zip Folder
-      run: cd ${{github.workspace}}/install/ && zip -r ${{github.workspace}}/release.zip *
-
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
-        draft: false
-        prerelease: false
+      run: cd ${{ github.workspace }}/install/ && zip -r ${{ github.workspace }}/release.zip *
 
     - name: Upload to Release
       id: upload_to_release
@@ -231,7 +223,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        upload_url: ${{ github.event.release.upload_url }}
         asset_path: release.zip
-        asset_name: WinCCOA_QualityChecks_${{ steps.get_version.outputs.VERSION }}.zip
+        asset_name: WinCCOA_QualityChecks_${{ github.event.release.tag_name }}.zip
         asset_content_type: application/zip
