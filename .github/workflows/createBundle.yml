@@ -197,6 +197,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: package
     steps:
+    - name: Get the version
+      id: get_version
+      run: echo ::set-output name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3)
+
     - name: Download artifact
       uses: actions/download-artifact@v2
       with:
@@ -229,5 +233,5 @@ jobs:
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: release.zip
-        asset_name: WinCCOA_QualityChecks_${{ github.ref }}.zip
+        asset_name: WinCCOA_QualityChecks_${{ steps.get_version.outputs.VERSION }}.zip
         asset_content_type: application/zip
