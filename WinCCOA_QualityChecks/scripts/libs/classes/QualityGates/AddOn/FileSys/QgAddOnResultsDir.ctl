@@ -8,7 +8,7 @@
 //
 
 
-#uses "classes/WinCCOA/FileSys/Dir"
+#uses "classes/FileSys/Dir"
 #uses "classes/QualityGates/Qg"
 #uses "classes/QualityGates/QgApp"
 #uses "classes/QualityGates/AddOn/FileSys/QgAddOnSourceDir"

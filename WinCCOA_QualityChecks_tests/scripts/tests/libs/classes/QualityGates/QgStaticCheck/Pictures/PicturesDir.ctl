@@ -7,7 +7,7 @@
 //--------------------------------------------------------------------------------
 // used libraries (#uses)
 #uses "classes/QualityGates/QgStaticCheck/Pictures/PicturesDir"/*!< tested object */
-#uses "classes/WinCCOA/StTest" /*!< oaTest basic class */
+#uses "classes/StTest" /*!< oaTest basic class */
 
 //--------------------------------------------------------------------------------
 // declare variables and constans

@@ -11,7 +11,7 @@
 // used libraries (#uses)
 #uses "classes/QualityGates/QgMsgCat"
 #uses "classes/Variables/Float"
-#uses "classes/WinCCOA/StTest"
+#uses "classes/StTest"
 #uses "CtrlOaUnit"
 
 //--------------------------------------------------------------------------------

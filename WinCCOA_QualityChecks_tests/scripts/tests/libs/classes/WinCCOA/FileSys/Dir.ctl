@@ -7,8 +7,8 @@
 
 //--------------------------------------------------------------------------------
 // used libraries (#uses)
-#uses "classes/WinCCOA/FileSys/Dir" /*!< tested object */
-#uses "classes/WinCCOA/StTest" /*!< oaTest basic class */
+#uses "classes/FileSys/Dir" /*!< tested object */
+#uses "classes/StTest" /*!< oaTest basic class */
 
 //--------------------------------------------------------------------------------
 // declare variables and constans

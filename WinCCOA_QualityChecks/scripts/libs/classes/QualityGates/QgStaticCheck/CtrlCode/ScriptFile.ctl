@@ -9,7 +9,7 @@
 
 #uses "classes/QualityGates/QgBase"
 #uses "classes/QualityGates/QgStaticCheck/CtrlCode/ScriptData"
-#uses "classes/WinCCOA/FileSys/File"
+#uses "classes/FileSys/File"
 #uses "classes/QualityGates/QgSettings"
 
 class ScriptFile : File

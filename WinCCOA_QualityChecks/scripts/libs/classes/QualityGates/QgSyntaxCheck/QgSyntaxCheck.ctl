@@ -7,7 +7,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 //
 
-#uses "classes/WinCCOA/FileSys/Dir"
+#uses "classes/FileSys/Dir"
 #uses "classes/QualityGates/Tools/OaSyntaxCheck/OaSyntaxCheck"
 #uses "classes/QualityGates/Qg"
 #uses "classes/QualityGates/QgBase"
