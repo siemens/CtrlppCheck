@@ -7,7 +7,7 @@
 //--------------------------------------------------------------------------------
 // used libraries (#uses)
 #uses "classes/Variables/Float" /*!< tested object */
-#uses "classes/WinCCOA/StTest" /*!< oaTest basic class */
+#uses "classes/StTest" /*!< oaTest basic class */
 
 //--------------------------------------------------------------------------------
 // declare variables and constans

@@ -606,7 +606,7 @@ T
 2
 LANG:10001 4 Save
 LANG:10000 9 Speichern
-"#uses \"classes/WinCCOA/WinCCOA_Json\"
+"#uses \"classes/WinCCOA_Json\"
 
 main(mapping event)
 {

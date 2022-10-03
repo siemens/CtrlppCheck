@@ -8,7 +8,7 @@
 //
 
 #uses "classes/QualityGates/Tools/CppCheck/CppCheckError"
-#uses "classes/WinCCOA/FileSys/File"
+#uses "classes/FileSys/File"
 #uses "classes/QualityGates/Tools/CppCheck/CppCheck"
 #uses "classes/QualityGates/Qg"
 #uses "classes/QualityGates/QgBase"

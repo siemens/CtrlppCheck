@@ -14,7 +14,7 @@
 #uses "CtrlOaUnit"
 #uses "classes/QualityGates/Tools/CppCheck/CppCheck"
 #uses "classes/QualityGates/Qg" /*!< tested object */
-#uses "classes/WinCCOA/StTest" /*!< oaTest basic class */
+#uses "classes/StTest" /*!< oaTest basic class */
 
 //--------------------------------------------------------------------------------
 // declare variables and constans

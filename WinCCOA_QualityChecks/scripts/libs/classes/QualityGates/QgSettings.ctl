@@ -10,7 +10,7 @@
 //-----------------------------------------------------------------------------
 // used libraries (#uses)
 #uses "classes/Variables/Mapping"
-#uses "classes/WinCCOA/WinCCOA_Json"
+#uses "classes/WinCCOA_Json"
 
 //-----------------------------------------------------------------------------
 // declare variables and constans

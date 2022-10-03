@@ -8,7 +8,7 @@
 //
 
 #uses "classes/QualityGates/QgVersionResult"
-#uses "classes/WinCCOA/FileSys/File"
+#uses "classes/FileSys/File"
 #uses "classes/QualityGates/QgBase"
 #uses "classes/QualityGates/QgAddOnResultErr"
 #uses "classes/QualityGates/QgStaticCheck/Panels/PanelFile/PanelFile"

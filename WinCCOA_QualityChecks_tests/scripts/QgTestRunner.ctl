@@ -9,7 +9,7 @@
 
 #uses "classes/Math/Math"
 #uses "CtrlXml"
-#uses "classes/WinCCOA/FileSys/Dir"
+#uses "classes/FileSys/Dir"
 #uses "classes/QualityGates/QgTest"
 #uses "classes/QualityGates/AddOn/Output/QgAddOnResult"
 #uses "classes/QualityGates/QgApp"

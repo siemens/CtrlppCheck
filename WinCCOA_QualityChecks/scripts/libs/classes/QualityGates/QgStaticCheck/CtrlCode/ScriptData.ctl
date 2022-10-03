@@ -8,7 +8,7 @@
 //
 
 #uses "classes/QualityGates/Tools/Python/Python"
-#uses "classes/WinCCOA/FileSys/File"
+#uses "classes/FileSys/File"
 #uses "classes/QualityGates/QgBase"
 #uses "csv"
 #uses "CtrlOaUnit"

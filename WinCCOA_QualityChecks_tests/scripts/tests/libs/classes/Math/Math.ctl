@@ -7,7 +7,7 @@
 //--------------------------------------------------------------------------------
 // used libraries (#uses)
 #uses "classes/Math/Math"         /*!< tested object */
-#uses "classes/WinCCOA/StTest" /*!< oaTest basic class */
+#uses "classes/StTest" /*!< oaTest basic class */
 
 //--------------------------------------------------------------------------------
 // declare variables and constans

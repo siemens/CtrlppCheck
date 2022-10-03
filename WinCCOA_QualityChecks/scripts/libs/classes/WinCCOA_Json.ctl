@@ -8,7 +8,7 @@
 //
 
 #uses "json"
-#uses "classes/WinCCOA/WinCCOA_Logger"
+#uses "classes/WinCCOA_Logger"
 
 //---------------------------------------------------------------------------------------------------------------------------------------
 /*!JSON file handler.

@@ -8,7 +8,7 @@
 //
 
 #uses "classes/QualityGates/QgBase"
-#uses "classes/WinCCOA/FileSys/Dir"
+#uses "classes/FileSys/Dir"
 #uses "classes/QualityGates/QgSettings"
 
 class StaticDir : Dir

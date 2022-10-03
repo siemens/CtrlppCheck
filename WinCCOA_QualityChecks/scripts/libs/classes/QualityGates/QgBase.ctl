@@ -11,7 +11,7 @@
 // used libraries (#uses)
 #uses "classes/QualityGates/AddOn/FileSys/QgAddOnTmpSourceDir"
 #uses "classes/QualityGates/QgResultPublisher"
-#uses "classes/WinCCOA/StTest"
+#uses "classes/StTest"
 #uses "classes/QualityGates/Qg"
 #uses "classes/QualityGates/QgMsgCat"
 #uses "classes/QualityGates/QgVersionResult"
