@@ -22,14 +22,14 @@ jobs:
         config:
         - {
             name: "Windows 2019 MSVC",
-            artifact: "ctrlppcheck/bin/ctrlppcheck.exe",
+            artifact: "bin/ctrlppcheck.exe",
             os: windows-2019,
             cc: "cl", cxx: "cl",
             environment_script: "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
           }
         - {
             name: "Ubuntu 2004 GCC",
-            artifact: "ctrlppcheck/bin/ctrlppcheck",
+            artifact: "bin/ctrlppcheck",
             os: ubuntu-20.04,
             cc: "gcc", cxx: "g++"
           }
@@ -111,7 +111,7 @@ jobs:
         endif()
         execute_process(
           COMMAND cmake
-            -S .
+            -S ctrlppcheck
             -B $ENV{GITHUB_WORKSPACE}/build
             -D CMAKE_BUILD_TYPE=$ENV{BUILD_TYPE}
             -G Ninja
