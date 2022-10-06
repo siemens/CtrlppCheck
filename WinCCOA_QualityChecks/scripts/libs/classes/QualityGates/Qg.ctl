@@ -55,7 +55,7 @@ class Qg
   public static dyn_string getAllIds()
   {
     return makeDynString("QgStaticCheck_Pictures", "QgStaticCheck_Scripts", "QgStaticCheck_Panels",
-                         "QgEncryptSource", "QgSyntaxCheck", 
+                         "QgSyntaxCheck", 
                          "QgStaticCheck_OverloadedFiles", "Documentation",
                          "UnitTests", "CtrlCoverage", "QgCtrlppCheck",
                          "QgStaticCheck_Libs");

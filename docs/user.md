@@ -206,10 +206,6 @@ In the check syntax, all syntax errors of the files are listed in the add-on. On
 Check per file Good range
 Syntax is valid - without syntax error TRUE
 
-### Encryption (QgEncryptSource)
-
-This check verifies that all supplied panels, scripts and libraries can be encrypted. All files are automatically encrypted for reasons of know-how protection. Automatic encryption can be prevented by details on Prevent Encryption. However, if a file is not encrypted, but this contains a license check, this creates an entry in this check. The file is still encrypted to prevent misuse.
-
 ## Use From Within GEDI
 
 TDB  

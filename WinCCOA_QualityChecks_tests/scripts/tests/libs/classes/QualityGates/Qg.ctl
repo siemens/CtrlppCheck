@@ -37,7 +37,7 @@ class TstQg : StTest
       case "Qg::getAllIds()":
       {
         oaUnitAssertEqual(tcId, Qg::getAllIds(), makeDynString("QgStaticCheck_Pictures", "QgStaticCheck_Scripts", "QgStaticCheck_Panels",
-                                                               "QgEncryptSource", "QgSyntaxCheck", 
+                                                               "QgSyntaxCheck", 
                                                                "QgStaticCheck_OverloadedFiles", "Documentation",
                                                                "UnitTests", "CtrlCoverage", "QgCtrlppCheck",
                                                                "QgStaticCheck_Libs"));
