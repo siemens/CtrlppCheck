@@ -1,16 +1,13 @@
 # Security Policy
 
-## Supported Versions
+## Supported Version
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
+The CtrlppCheck tool follows the rolling release policy and therefore only
+supports the most recent version.
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 0.0.1   | :white_check_mark: |
-| 0.0.2   | :white_check_mark: |
-| 0.0.3   | :white_check_mark: |
-| 1.x.x   | :white_check_mark: |
+| 1.87.x  | :white_check_mark: |
 
 ## Reporting a Vulnerability
 
