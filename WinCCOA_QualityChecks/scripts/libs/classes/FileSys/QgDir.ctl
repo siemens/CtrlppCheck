@@ -19,7 +19,7 @@
  * @details Class to handle with directories.
  * @author lschopp
  */
-class Dir
+class QgDir
 {
 //--------------------------------------------------------------------------------
 //@public members
@@ -28,7 +28,7 @@ class Dir
   /** @brief Default c-tor.
     @param dirPath Full path to directory.
   */
-  public Dir(string dirPath = "")
+  public QgDir(string dirPath = "")
   {
     setDirPath(dirPath);
   }

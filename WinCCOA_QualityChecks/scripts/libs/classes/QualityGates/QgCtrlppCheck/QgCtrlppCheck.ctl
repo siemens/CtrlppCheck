@@ -8,7 +8,7 @@
 //
 
 #uses "classes/QualityGates/Tools/CppCheck/CppCheckError"
-#uses "classes/FileSys/File"
+#uses "classes/FileSys/QgFile"
 #uses "classes/QualityGates/Tools/CppCheck/CppCheck"
 #uses "classes/QualityGates/Qg"
 #uses "classes/QualityGates/QgBase"
@@ -80,7 +80,7 @@ class QgCtrlppCheck : QgBase
     {
       CppCheckError error = check.errList[i];
       
-      File f = File(error.path);
+      QgFile f = QgFile(error.path);
       if ( f.isExample() || f.isTest() || !f.isPatternMatch(includeFilesPattern) )
         continue;
         

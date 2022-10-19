@@ -8,7 +8,7 @@
 //
 
 
-#uses "classes/FileSys/Dir"
+#uses "classes/FileSys/QgDir"
 #uses "classes/QualityGates/Qg"
 #uses "classes/QualityGates/QgApp"
 #uses "classes/QualityGates/AddOn/FileSys/QgAddOnSourceDir"
@@ -22,12 +22,12 @@ class QgAddOnResultsDir
     if ( Qg::getId() != "" )
       setQgId(Qg::getId());
   }
-  
+
   public void setQgId(const string &qgId)
   {
     _qgId = qgId;
   }
-  
+
   public string getLastDirPath()
   {
     dyn_string histDirs = getHistoryDirs();
@@ -36,12 +36,12 @@ class QgAddOnResultsDir
     else
       return "";
   }
-  
+
   public static dyn_string getRunningQgs()
   {
-    Dir dir = Dir(PROJ_PATH + DATA_REL_PATH + "QualityGates/");
+    QgDir dir = QgDir(PROJ_PATH + DATA_REL_PATH + "QualityGates/");
     dyn_string subdirs = dir.getSubDirNames();
-    
+
     for(int i = dynlen(subdirs); i >= 1; i--)
     {
       //settings folder must be ignored,
@@ -50,15 +50,15 @@ class QgAddOnResultsDir
       {
         dynRemove(subdirs, i);
       }
-    }      
-                         
+    }
+
     return subdirs;
   }
-  
+
   public dyn_string getHistoryDirs()
   {
     const string qgResDir = PROJ_PATH + DATA_REL_PATH + "QualityGates/" + _qgId + "/";
-    Dir dir = Dir(qgResDir);
+    QgDir dir = QgDir(qgResDir);
     dyn_string histDirs = dir.getSubDirNames();
     dynSort(histDirs, FALSE);
     for(int i = 1; i <= dynlen(histDirs); i++)
@@ -67,24 +67,24 @@ class QgAddOnResultsDir
     }
     return histDirs;
   }
-  
+
   public bool exists()
   {
     return isdir(getDirPath());
   }
-  
+
   public int create()
   {
     if ( exists() )
       cleanUp();
-    
-    Dir dir = Dir(getDirPath());
+
+    QgDir dir = QgDir(getDirPath());
     if ( dir.mk() )
       return -2;
-    
+
     return 0;
   }
-  
+
   public int cleanUp()
   {
     if ( exists() )
@@ -92,9 +92,9 @@ class QgAddOnResultsDir
 
     return 0;
   }
-  
-  
-  
+
+
+
   public string getDirPath()
   {
     if ( _resultDir == "" )
@@ -110,10 +110,10 @@ class QgAddOnResultsDir
         _resultDir = makeNativePath(app.getSourcePath() + "QgResult/" + Qg::getId() + "/");
       }
     }
-    
+
     return _resultDir;
   }
-  
+
   long _buildNo;
   string _resultDir;
   string _qgId;
