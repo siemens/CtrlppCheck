@@ -9,10 +9,10 @@
 
 #uses "classes/QualityGates/QgBase"
 #uses "classes/QualityGates/QgStaticCheck/CtrlCode/ScriptData"
-#uses "classes/FileSys/File"
+#uses "classes/FileSys/QgFile"
 #uses "classes/QualityGates/QgSettings"
 
-class ScriptFile : File
+class ScriptFile : QgFile
 {
 //--------------------------------------------------------------------------------
 //@public members

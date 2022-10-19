@@ -8,17 +8,17 @@
 //
 
 #uses "classes/QualityGates/QgBase"
-#uses "classes/FileSys/Dir"
+#uses "classes/FileSys/QgDir"
 #uses "classes/QualityGates/QgSettings"
 
-class StaticDir : Dir
+class StaticDir : QgDir
 {
   
   public setDir(const string &dirPath)
   {
     dynClear(_files);
     dynClear(_childs);
-    Dir::setDirPath(dirPath);
+    QgDir::setDirPath(dirPath);
   }
   
   //------------------------------------------------------------------------------

@@ -8,7 +8,7 @@
 //
 
 #uses "classes/QualityGates/QgVersionResult"
-#uses "classes/FileSys/File"
+#uses "classes/FileSys/QgFile"
 #uses "classes/QualityGates/QgBase"
 #uses "classes/QualityGates/QgAddOnResultErr"
 #uses "classes/QualityGates/QgStaticCheck/Panels/PanelFile/PanelFile"
@@ -21,7 +21,7 @@
  * @author lschopp
  * @details Class is created to handle, checks oa-panels.
  */
-class PanelCheck : File
+class PanelCheck : QgFile
 {
 //--------------------------------------------------------------------------------
 //@public members

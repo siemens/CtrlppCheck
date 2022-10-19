@@ -19,7 +19,7 @@
  * @details Class to handle with files.
  * @author lschopp
  */
-class File
+class QgFile
 {
 //--------------------------------------------------------------------------------
 //@public members
@@ -28,7 +28,7 @@ class File
   /** @brief Default c-tor.
     @param dirPath Full path to directory.
   */
-  public File(string filePath = "")
+  public QgFile(string filePath = "")
   {
     setFilePath(filePath);
   }

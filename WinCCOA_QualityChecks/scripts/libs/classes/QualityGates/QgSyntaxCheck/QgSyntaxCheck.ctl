@@ -7,7 +7,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 //
 
-#uses "classes/FileSys/Dir"
+#uses "classes/FileSys/QgDir"
 #uses "classes/QualityGates/Tools/OaSyntaxCheck/OaSyntaxCheck"
 #uses "classes/QualityGates/Qg"
 #uses "classes/QualityGates/QgBase"
@@ -49,8 +49,8 @@ class QgSyntaxCheck : QgBase
 
     QgVersionResult::showErrorsOnly = TRUE;
 
-    Dir panelsDir = Dir(PROJ_PATH + PANELS_REL_PATH);
-    Dir scriptsDir = Dir(PROJ_PATH + SCRIPTS_REL_PATH);
+    QgDir panelsDir = QgDir(PROJ_PATH + PANELS_REL_PATH);
+    QgDir scriptsDir = QgDir(PROJ_PATH + SCRIPTS_REL_PATH);
 
     if ( !panelsDir.exists() && !scriptsDir.exists() )
       setMinValidScore("QgSyntaxCheck", "assert.missingFiles", "reason.missingFiles");
