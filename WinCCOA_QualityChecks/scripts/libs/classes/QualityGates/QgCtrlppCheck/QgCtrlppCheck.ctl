@@ -17,7 +17,7 @@
 //--------------------------------------------------------------------------------
 /**
   @brief QualityCheck ctrlppcheck.
-  
+
   @details Start ctrlppcheck.
 */
 class QgCtrlppCheck : QgBase
@@ -25,7 +25,7 @@ class QgCtrlppCheck : QgBase
 //--------------------------------------------------------------------------------
 //@public members
 //--------------------------------------------------------------------------------
-  
+
   //------------------------------------------------------------------------------
   /** @brief Calculates / start ctrlppcheck.
     @return 0 when successfull, otherwise -1.
@@ -35,12 +35,12 @@ class QgCtrlppCheck : QgBase
   {
     return checkDir(PROJ_PATH + SCRIPTS_REL_PATH);
   }
-  
+
   //------------------------------------------------------------------------------
   /** @brief Function validates this quality-check.
     @details Validate all all errors from ctrlppcheck.
     Errors are filtered by function isErrorFiltered().
-    
+
     @todo calculate somehow the score.
     @return 0 when successfull, otherwise -1.
     @attention override from QgBase::validate()
@@ -49,11 +49,11 @@ class QgCtrlppCheck : QgBase
   {
     QgVersionResult::lastErr = "";
     _result = new QgVersionResult();
-    
+
     _result.setMsgCatName("QgCtrlppCheck");
     _result.setAssertionText("checks");
-    
-    
+
+
     if ( dpExists("_CtrlppCheck") )
     {
       dpGet("_CtrlppCheck.filter.id", disabledIds,
@@ -75,32 +75,32 @@ class QgCtrlppCheck : QgBase
       disabledSeverities = makeDynString("debug", "information");
       includeFilesPattern = "*";
     }
-    
+
     for(int i = 1; i <= dynlen(check.errList); i++)
     {
       CppCheckError error = check.errList[i];
-      
+
       QgFile f = QgFile(error.path);
       if ( f.isExample() || f.isTest() || !f.isPatternMatch(includeFilesPattern) )
         continue;
-        
+
       if ( isErrorFiltered(error) )
         continue;
-      
+
       string relPath = f.getRelPath(SCRIPTS_REL_PATH);
-           
-      shared_ptr <QgVersionResult> assertion = new QgVersionResult();  
+
+      shared_ptr <QgVersionResult> assertion = new QgVersionResult();
       assertion.setMsgCatName("QgCtrlppCheck");
-      assertion.setAssertionText(relPath + " : " + error.line);      
-      assertion.setReasonText(error.msg + " (" + error.id + ")");      
+      assertion.setAssertionText(relPath + " : " + error.line);
+      assertion.setReasonText(error.msg + " (" + error.id + ")");
       assertion.assertEqual(error.severity, "");
       _result.addChild(assertion);
-        
+
     }
     return 0;
   }
-  
-  
+
+
 //--------------------------------------------------------------------------------
 //@protected members
 //--------------------------------------------------------------------------------
@@ -115,7 +115,7 @@ class QgCtrlppCheck : QgBase
   protected int checkDir(const string &path)
   {
     dirPath = path;
-    
+
     if ( dpExists("_CtrlppCheck") )
     {
       dpGet("_CtrlppCheck.settings.enableLibCheck", check.settings.enableLibCheck,
@@ -138,48 +138,48 @@ class QgCtrlppCheck : QgBase
     {
       check.settings.enableCheckLibrary(FALSE);
     }
-    
+
     // load configs
-    check.settings.addLibraryFile(getPath(DATA_REL_PATH, "ctrlPpCheck/cfg/ctrl.xml")); // general
-    check.settings.addLibraryFile(getPath(DATA_REL_PATH, "ctrlPpCheck/cfg/ctrl_" + VERSION + ".xml")); // version specific
+    check.settings.addLibraryFile(getPath(DATA_REL_PATH, "DevTools/Base/ctrl.xml")); // general
+    check.settings.addLibraryFile(getPath(DATA_REL_PATH, "DevTools/Base/ctrl_" + VERSION + ".xml")); // version specific
     check.settings.addLibraryFile(getPath(DATA_REL_PATH, "ctrlPpCheck/cfg/__proj__.xml")); // proj specific
-    
+
     // load rules
     check.settings.addRuleFile(getPath(DATA_REL_PATH, "ctrlPpCheck/rule/ctrl.xml")); // general
     check.settings.addRuleFile(getPath(DATA_REL_PATH, "ctrlPpCheck/rule/ctrl_" + VERSION + ".xml")); // version specific
     check.settings.addRuleFile(getPath(DATA_REL_PATH, "ctrlPpCheck/rule/__proj__.xml")); // proj specific
-    
+
     check.settings.addEnabled("all");
     check.settings.enableXmlFormat(TRUE);
-    
+
     check.checkFile(dirPath);
-    
+
     return check.rc;
   }
-  
+
   //------------------------------------------------------------------------------
   /// Checks if the error shall be filtered.
   protected bool isErrorFiltered(const CppCheckError &error)
   {
     if ( error.msg == "" )
       return TRUE;
-    
+
     const string id = error.id;
-    
+
     if ( dynContains(disabledIds, id)  )
       return TRUE;
-    
+
     const string severity = error.severity;
     if ( dynContains(disabledSeverities, severity)  )
       return TRUE;
-  
+
     return FALSE;
   }
-  
+
 //--------------------------------------------------------------------------------
 //@private members
 //--------------------------------------------------------------------------------
-  
+
   CppCheck check;
 };
 

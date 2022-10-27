@@ -14,8 +14,8 @@
   + ctrlPP check
   + CCN
   + count of funcions
-  + No. of lines  
-  
+  + No. of lines
+
   */
 
 //---------------------------------------------------------------------------------------------------------------------------------------
@@ -33,7 +33,7 @@ void makeScriptEditorToolbar()
   int tbID = moduleAddToolBar("CtrlPPCheck");
   /// @todo translate label by msgCat
   actionId = moduleAddAction("CtrlPPCheck", "", "", -1, tbID, "ctrlPPCheck");
-    
+
   while( !dpExists("_CtrlCommandInterface_StaticTests") )
   {
     // ctrlppcheck-suppress badPerformanceInLoops // wait till created by update script
@@ -46,20 +46,20 @@ void makeScriptEditorToolbar()
 //---------------------------------------------------------------------------------------------------------------------------------------
 void ctrlPPCheck()
 {
-  
+
   // disable scriptEditor button
   moduleSetAction(actionId, "enabled", FALSE);
-  
+
   string path; // script path;
   mapping map; // mapping with checked data
-  
+
   // get current script path;
   if ( isFunctionDefined("seGetFileName") )
-   path = seGetFileName(); 
+   path = seGetFileName();
 
-  // store path;  
+  // store path;
   map["path"] = path;
-  
+
   bool tmpFileUsed = FALSE;
   if ( path == "" ) // panel or version < 3.16
   {
@@ -69,24 +69,24 @@ void ctrlPPCheck()
     So it is fine when we commented the lines out. In that case can ctrlppcheck parse the code
     again. I want to delete the lines, but there are some helpfully informations, there
     can be used in ctrlppcheck in future.
-    
+
     That means we need to read the code here now, and comment out all bad lines.
   */
     path = tmpnam() + ".ctl";
     file f = fopen(path, "wb+");
-    
+
     string script = getScript();
     dyn_string lines = strsplit(script, "\n");
     for(int i = 1; i <= dynlen(lines) ; i++)
     {
       if ( lines[i] == "" )
         continue;
-            
+
       char firstChar = lines[i][0];
       bool isDelim = firstChar == (char)226;
       if ( isDelim )
         lines[i] = "//" + lines[i];
-      
+
     }
     script = strjoin(lines, "\n");
     fputs(script, f);
@@ -100,67 +100,67 @@ void ctrlPPCheck()
     script.calculate();
 //     script.validate();
     mapping res;
-    
+
     res["isCalculated"] = script.isCalculated();
-    
+
     res["countOfFunctions"] = script.getCountOfFunctions();
     res["countOfFunctions.min"] = script.getMinCountOfFunctions();
     res["countOfFunctions.max"] = script.getMaxCountOfFunctions();
-    
+
     res["countOfLines"] = script.getCountOfLines();
     res["countOfLines.avg"] = script.getAvgLines();
-    
+
     res["CCN"] = script.getCCN();
     res["CCN.avg"] = script.getAvgCCN();
     res["CCN.avg.max"] = script.getMaxAvgCCN();
-    
+
     res["NLOC"] = script.getNLOC();
     res["NLOC.max"] = script.getMaxNLOC();
     res["NLOC.min"] = script.getMinNLOC();
     res["NLOC.avg"] = script.getAvgNLOC();
-    
+
     res["countOfParams.avg"] = script.getAvgParamCount();
-    
-    
+
+
     map["script"] = res;//script.result.toMap();
   }
-  
-  
+
+
   { // in new scope to eliminate memory usage
     CppCheck ctrlPpCheck;
-    
+
     dpGet("_CtrlppCheck.settings.enableLibCheck", ctrlPpCheck.settings.enableLibCheck,
           "_CtrlppCheck.settings.enableHeadersCheck", ctrlPpCheck.settings.enableHeadersCheck,
           "_CtrlppCheck.settings.inconclusive", ctrlPpCheck.settings.inconclusive,
           "_CtrlppCheck.settings.includeSubProjects", ctrlPpCheck.settings.includeSubProjects,
           "_CtrlppCheck.settings.verbose", ctrlPpCheck.settings.verbose,
           "_CtrlppCheck.settings.inlineSuppressions", ctrlPpCheck.settings.inlineSuppressions);
-    
+
     // load configs
-    ctrlPpCheck.settings.addLibraryFile(getPath(DATA_REL_PATH, "ctrlPpCheck/cfg/ctrl.xml")); // general
-    ctrlPpCheck.settings.addLibraryFile(getPath(DATA_REL_PATH, "ctrlPpCheck/cfg/ctrl_" + VERSION + ".xml")); // version specific
+    ctrlPpCheck.settings.addLibraryFile(getPath(DATA_REL_PATH, "DevTools/Base/ctrl.xml")); // general
+    ctrlPpCheck.settings.addLibraryFile(getPath(DATA_REL_PATH, "DevTools/Base/ctrl_" + VERSION + ".xml")); // version specific
     ctrlPpCheck.settings.addLibraryFile(getPath(DATA_REL_PATH, "ctrlPpCheck/cfg/__proj__.xml")); // proj specific
-    
+
     // load rules
     ctrlPpCheck.settings.addRuleFile(getPath(DATA_REL_PATH, "ctrlPpCheck/rule/ctrl.xml")); // general
     ctrlPpCheck.settings.addRuleFile(getPath(DATA_REL_PATH, "ctrlPpCheck/rule/ctrl_" + VERSION + ".xml")); // version specific
     ctrlPpCheck.settings.addRuleFile(getPath(DATA_REL_PATH, "ctrlPpCheck/rule/__proj__.xml")); // proj specific
-    
+
     ctrlPpCheck.settings.addEnabled("all");
     ctrlPpCheck.settings.enableXmlFormat(TRUE);
     ctrlPpCheck.checkFile(path);
-    
+
     map["ctrlPpCheck"] = ctrlPpCheck.errList;
-  } 
+  }
 
   if ( tmpFileUsed )
     remove(path); // remove temp file
-  
-  
+
+
   // open result panel
   showResult(map);
-  
- 
+
+
   // anable scriptEditor button
   moduleSetAction(actionId, "enabled", TRUE);
 }
@@ -181,17 +181,17 @@ void showResult(const mapping &result)
     // ctrlppcheck-suppress badPerformanceInLoops
     delay(0, 20);
   }
-  
+
   // open module and wait till is opened
   ModuleOnWithPanel("CtrlPPCheck", -2, -2, 100, 200, 1, 1, "", "vision/scriptEditor/staticTests.pnl", "staticTests",
                     makeDynString());
-  
+
   while ( !isPanelOpen("staticTests", "CtrlPPCheck") )
   {
     // ctrlppcheck-suppress badPerformanceInLoops
     delay(0, 100);
   }
-  
+
   // send result to panel via ctrlCommandInterface
   delay(0, 100); // wait till is panel connected
   dpSet("_CtrlCommandInterface_StaticTests.Command", jsonEncode(result, TRUE));
@@ -203,7 +203,7 @@ void update_cb(const string dpe, const string cmd)
 {
   if ( strpos(cmd, "line:") != 0 )
     return;
-  
+
   string line = substr(cmd, strlen("line:"));
   seSetCursorPos((int)line -1, 0);
 }
