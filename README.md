@@ -35,11 +35,7 @@ user documentation:
 
 technical documentation:
 
-- https://github.com/siemens/ctrlppchecheck/docs/contributor.md
-
-Frequently Asked Questions (FAQ):
-
-- See [FAQ file](FAQ.md)
+- https://github.com/siemens/ctrlppcheck/docs/contributor.md
 
 Licensing:
 

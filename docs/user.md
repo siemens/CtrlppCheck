@@ -208,12 +208,7 @@ Syntax is valid - without syntax error TRUE
 
 ## Use From Within GEDI
 
-TDB  
-
-## Use From The Command Line
-
-TDB  
-
+TDB
 
 # Ctrlppcheck
 
@@ -250,11 +245,20 @@ You can describe the reason for the suppression with a commentary. For this a se
 // ctrlppcheck-suppress undefinedVariable // some comment
 ```
 
-## Usege From Within GEDI
+## Use From The Command Line
 
-TDB
+Syntax:
+    ctrlppcheck [OPTIONS] [files or paths]
 
-## Usage From The Command Line
+If a directory is given instead of a filename, *.ctl files are
+ checked recursively from the given directory.
+ 
+For all options start without parameters or pass -h, --help.
+
+Example usage to check whole WinCC OA project:
+```shell
+ctrlppcheck --enable=all --quiet --rule-file=rule/ctrl.xml --naming-rule-file=rule/ctrl.xml --library=cfg/ctrl.xml --suppressions-list=custom/warnings.txt --winccoa-projectName=XYZ <path-to-XYZ>\scripts
+```
 
 ### Check one file
 
@@ -276,7 +280,7 @@ void functionA()
 Execute:
 
 ```bash
-cppcheck <proj_path>\scripts\file1.ctl
+ctrlppcheck <proj_path>\scripts\file1.ctl
 ```
 
 The output from CtrlPPcheck will then be:
@@ -293,7 +297,7 @@ debugMessage:: SymbolDatabase::isFunction found CTRL function 'main' without a r
 Normally a project has many source files and all of them should be checked. CtrlppCheck can check all source files in a directory:
 
 ```bash
-cppcheck <proj_path>\scripts\
+ctrlppcheck <proj_path>\scripts\
 ```
 
 And this will be the output
@@ -306,7 +310,7 @@ Checking path/file2.cpp... 2/2 files checked 100% done
 ### Check allfFiles in sub directory
 
 ```bash
-cppcheck <proj_path>\scripts\libs\classes\
+ctrlppcheck <proj_path>\scripts\libs\classes\
 ```
 
 It's not necessary to register the projects. That means you can also check source direct from a workspace.
@@ -317,7 +321,7 @@ There are two options to exclude fiels or folders from checking:
 The **first option** is to only provide the paths and files you want to check.
 
 ```bash
-cppcheck src/a src/b
+ctrlppcheck src/a src/b
 ```
 
 All files under src/a and src/b are then checked.  
@@ -325,13 +329,13 @@ All files under src/a and src/b are then checked.
 The **second option** is to use -i, with it you specify files/paths to ignore. With this command no files in src/c are checked:
 
 ```bash
-cppcheck -i src/c src
+ctrlppcheck -i src/c src
 ```
 
 This option does not work with the --project option and is only valid when supplying an input directory. To ignore multiple directories supply the -i switch multiple times. The following command ignores both the src/b and src/c directories.
 
 ```bash
-cppcheck -i src/b -i src/c
+ctrlppcheck -i src/b -i src/c
 ```
 
 ### Enable Messages
@@ -341,43 +345,43 @@ By default, only error messages are shown. Through the --enable switch more chec
 enable warning messages
 
 ```bash
-cppcheck --enable=warning file.c
+ctrlppcheck --enable=warning file.c
 ```
 
 enable performance messages
 
 ```bash
-cppcheck --enable=performance file.c
+ctrlppcheck --enable=performance file.c
 ```
 
 enable information messages
 
 ```bash
-cppcheck --enable=information file.c 4 Getting started (command line)
+ctrlppcheck --enable=information file.c 4 Getting started (command line)
 ```
 
 For historical reasons, --enable=style enables warning, performance, portability and style messages. These are all reported as "style" when using the old xml format.
 
 ```bash
-cppcheck --enable=style file.c
+ctrlppcheck --enable=style file.c
 ```
 
 enable warning and performance messages
 
 ```bash
-cppcheck --enable=warning,performance file.c
+ctrlppcheck --enable=warning,performance file.c
 ```
 
 enable unusedFunction checking. This is not enabled by --enable=style because it doesn't work well on libraries.
 
 ```bash
-cppcheck --enable=unusedFunction file.c
+ctrlppcheck --enable=unusedFunction file.c
 ````
 
 enable all messages
 
 ```bash
-cppcheck --enable=all
+ctrlppcheck --enable=all
 ```
 
 **Please note** that --enable=unusedFunction should only be used when the whole project is scanned. Therefore, --enable=all should also only be used when the whole project is scanned. Otherwise you might get a lot of flase positives of "unused function" if all the calls are out of scope.
@@ -387,13 +391,13 @@ cppcheck --enable=all
 **Redirection:** simply use shell redirection for piping output to a file.
 
 ```bash
-cppcheck file1.c 2> err.txt
+ctrlppcheck file1.c 2> err.txt
 ```
 
 **XML output:** Ctrlppcheck can generate output in XML format. Use --xml to enable this format. A sample command to check a file and output errors in the XML format:
 
 ```bash
-cppcheck --xml file1.cpp
+ctrlppcheck --xml file1.cpp
 ```
 
 Here is a sample report:
@@ -401,7 +405,7 @@ Here is a sample report:
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <results version="2">
-  <cppcheck version="1.66">
+  <ctrlppcheck version="1.66">
   <errors>
     <error id="someError" severity="error" msg="short error text" verbose="long error text" inconclusive="true" cwe="312">
       <location file0="file.c" file="file.h" line="1"/>
@@ -446,7 +450,7 @@ The filename may include the wildcard characters * or ?, which match any sequenc
 The --suppress= command line option is used to specify suppressions on the command line. Example:
 
 ```bash
-cppcheck --suppress=memleak:src/file1.cpp src/
+ctrlppcheck --suppress=memleak:src/file1.cpp src/
 ```
 
 ### Define suppressions in a file
@@ -471,7 +475,7 @@ Note that you may add empty lines and comments in the suppressions file.
   
 Use the suppressions file.
 
-cppcheck --suppressions-list=suppressions.txt src/
+ctrlppcheck --suppressions-list=suppressions.txt src/
 
 XML suppressions
 Suppressions may also be spcified in a XML file.  
@@ -492,7 +496,7 @@ Example file:
 You can use the suppressions file like this:
 
 ```bash
-cppcheck --suppress-xml=suppressions.xml src/
+ctrlppcheck --suppress-xml=suppressions.xml src/
 ```
 
 ### In code suppressions
@@ -524,7 +528,7 @@ To suppress the error message:
 void main()
 {
   int i;
-  // cppcheck-suppress uninitvar
+  // ctrlppcheck-suppress uninitvar
   if ( i > 0 )
   {
     i++;
@@ -532,23 +536,23 @@ void main()
 }
 ```
 
-Now the --inline-suppr flag can be used to suppress the warning. No error is reported when invoking cppcheck this way:
+Now the --inline-suppr flag can be used to suppress the warning. No error is reported when invoking ctrlppcheck this way:
 
 ```bash
-cppcheck --inline-suppr file1.ctl
+ctrlppcheck --inline-suppr file1.ctl
 ```
 
 A suppression may be limited to a certain symbol. In the example below the uninitvar error is limited only to arr. Alll other findings for this error will not be suppressed
 
 ```cpp
-// cppcheck-suppress uninitvar symbolName=arr
+// ctrlppcheck-suppress uninitvar symbolName=arr
 ```
 
 Comments may be combined with in code suppressions.  Itis recommended to use ";" or "//" to specify where they start:
 
 ```cpp
-// cppcheck-suppress uninitvar ; some comment
-// cppcheck-suppress uninitvar // some comment
+// ctrlppcheck-suppress uninitvar ; some comment
+// ctrlppcheck-suppress uninitvar // some comment
 ```
 
 ### Define Naming rules

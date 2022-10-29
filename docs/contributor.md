@@ -164,4 +164,4 @@ Der Check selbst (was tut er, findet) ist beschrieben in:  keine Beschreibung ge
 Das ist ein ziemlich kleiner check daher in check, daher auc nicht in eingenem file implementiert  
 
 check 2038  
-implementiert in  check2038.h ud 2038.cpp
+implemented in check2038.h ud 2038.cpp
