@@ -1,7 +1,7 @@
 CtrlppCheck Licensing
 =====================
 
-The Ctrlppcheck is primarily licensed under the terms of the GNU
+The CtrlppCheck is primarily licensed under the terms of the GNU
 General Public License version 3.
 
 Each of its source code files contains a license declaration in its header.
