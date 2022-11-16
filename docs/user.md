@@ -232,7 +232,7 @@ For all options start without parameters or pass -h, --help.
 
 Example usage to check whole WinCC OA project:
 ```shell
-ctrlppcheck --enable=all --quiet --rule-file=rule/ctrl.xml --naming-rule-file=rule/ctrl.xml --library=cfg/ctrl.xml --suppressions-list=custom/warnings.txt --winccoa-projectName=XYZ <path-to-XYZ>\scripts
+ctrlppcheck --enable=all --quiet --rule-file=rule/ctrl_rules.xml --naming-rule-file=rule/variableNaming.xml --library=<winccoa_install_path>/data/DevTools/Base/ctrl.xml --suppressions-list=custom/warnings.txt --winccoa-projectName=XYZ <path-to-XYZ>\scripts
 ```
 
 ### Check one file
@@ -553,8 +553,10 @@ See namingCheck.md for detailed explanation of this check and documentation of t
 --library=/full/path/to/WinCCOA_QualityChecks/data/ctrlPpCheck/cfg/__proj__.xml
 Include libs for your WinCC OA version
 
---library=/full/path/to/WinCCOA_QualityChecks/data/ctrlPpCheck/cfg/ctrl.xml
-Note: The xml file must be adapted to the WinCC OA version used. This configuration was implemented for WinCC OA 3.16.
+--library=<winccoa_install_path>/data/DevTools/Base/ctrl.xml
+Note:  
+This file is shipped with every WinCC OA base installation V3.19 and following and always contains the complete and current language description of CONTROL.  
+Additional "--library" parameters can be used to make own CTRL libraries or extensions known to the tool.
 
 ### Helpful options
 **--platform** can be used to test for a specific operating system. Is helpful if the check is only carried out on one operating system.
