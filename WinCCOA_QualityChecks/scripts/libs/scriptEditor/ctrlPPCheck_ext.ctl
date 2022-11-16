@@ -30,9 +30,9 @@ int actionId;
 //---------------------------------------------------------------------------------------------------------------------------------------
 void makeScriptEditorToolbar()
 {
-  int tbID = moduleAddToolBar("CtrlPPCheck");
+  int tbID = moduleAddToolBar("CtrlppCheck");
   /// @todo translate label by msgCat
-  actionId = moduleAddAction("CtrlPPCheck", "", "", -1, tbID, "ctrlPPCheck");
+  actionId = moduleAddAction("CtrlppCheck", "", "", -1, tbID, "ctrlPPCheck");
 
   while( !dpExists("_CtrlCommandInterface_StaticTests") )
   {
@@ -173,20 +173,20 @@ void ctrlPPCheck()
 /// @warning The panel functions needs active connection to event. Dont try it to start with -n option.
 void showResult(const mapping &result)
 {
-  if ( isModuleOpen("CtrlPPCheck") )
-    moduleOff("CtrlPPCheck");
+  if ( isModuleOpen("CtrlppCheck") )
+    moduleOff("CtrlppCheck");
 
-  while ( isModuleOpen("CtrlPPCheck") )
+  while ( isModuleOpen("CtrlppCheck") )
   {
     // ctrlppcheck-suppress badPerformanceInLoops
     delay(0, 20);
   }
 
   // open module and wait till is opened
-  ModuleOnWithPanel("CtrlPPCheck", -2, -2, 100, 200, 1, 1, "", "vision/scriptEditor/staticTests.pnl", "staticTests",
+  ModuleOnWithPanel("CtrlppCheck", -2, -2, 100, 200, 1, 1, "", "vision/scriptEditor/staticTests.pnl", "staticTests",
                     makeDynString());
 
-  while ( !isPanelOpen("staticTests", "CtrlPPCheck") )
+  while ( !isPanelOpen("staticTests", "CtrlppCheck") )
   {
     // ctrlppcheck-suppress badPerformanceInLoops
     delay(0, 100);
