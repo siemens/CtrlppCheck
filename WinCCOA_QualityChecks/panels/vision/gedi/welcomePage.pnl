@@ -856,8 +856,8 @@ E E 0 1 1 0 1 E 0.9969418960244484 0 0.9655172413793099 -383.2905198776693 43.05
 LANG:10001 26 Arial,-1,12,5,75,0,0,0,0,0
 LANG:10000 26 Arial,-1,12,5,75,0,0,0,0,0
 0 2
-LANG:10001 28 CtrlPPCheck - whole project:
-LANG:10000 33 CtrlPPCheck - komplettes Projekt:
+LANG:10001 28 CtrlppCheck - whole project:
+LANG:10000 33 CtrlppCheck - komplettes Projekt:
 2 47
 "PRIMITIVE_TEXT5"
 ""

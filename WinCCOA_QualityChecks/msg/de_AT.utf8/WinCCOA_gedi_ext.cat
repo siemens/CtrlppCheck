@@ -12,12 +12,12 @@ tool_QualityGates_BuildDoku,Generate doxydocu
 open_Docu,Öffne Online Hilfe
 open_Result,Öffne Ergebnisse
 open_Dock,Öffne Dock-Modul
-tool_QualityGates_QgStaticCheck_CtrlppCheck,CtrlPPCheck (static)
+tool_QualityGates_QgStaticCheck_CtrlppCheck,CtrlppCheck (static)
 licenceInfo_panelName,Lizenzinformation
 welcomeText,Mit den WinCCOA Quality Checks wollen wir die Code-Qualität von WinCC OA Projekten verbessern und ein umfangreiches Service bieten.
-licenceInfo_FREE,FREE Version:\nCtrlPPCheck für Skriptdateien sowie der rekursive Projektprüfung sind enthalten. Limitierung: Max. 1 Fehler pro Fehler ID wird angezeigt.
-licenceInfo_DEMO,DEMO Version:\nCtrlPPCheck für Skriptdateien sowie der rekursive Projektprüfung sind enthalten. Limitierung: Max. 1 Fehler pro Fehler ID wird angezeigt.
-licenceInfo_FULL,FULL Version:\nSkriptdateien mit unbegrenzten Zeilen und einer unbegrenzten Anzahl von Dateien für die rekursive Projektprüfung sind enthalten. Vielen Dank für Ihr Vertrauen in CtrlPPCheck und viel Spaß!
+licenceInfo_FREE,FREE Version:\nCtrlppCheck für Skriptdateien sowie der rekursive Projektprüfung sind enthalten. Limitierung: Max. 1 Fehler pro Fehler ID wird angezeigt.
+licenceInfo_DEMO,DEMO Version:\nCtrlppCheck für Skriptdateien sowie der rekursive Projektprüfung sind enthalten. Limitierung: Max. 1 Fehler pro Fehler ID wird angezeigt.
+licenceInfo_FULL,FULL Version:\nSkriptdateien mit unbegrenzten Zeilen und einer unbegrenzten Anzahl von Dateien für die rekursive Projektprüfung sind enthalten. Vielen Dank für Ihr Vertrauen in CtrlppCheck und viel Spaß!
 settingsInfo,In Kürze:\n- Legen Sie Ihre eigenen Grenzen für die Qualitätsprüfungen fest \n(z. B. Zeilen pro Funktion, ...)\n- Überprüfen Sie Ihre Codingsrichtlinien\n(z.B. Funktionen beginnen immer mit dem Präfix "xy_")\n - ...
 licenceInfo_maxErrors,Version ist limitiert auf max. 1 Fehler pro Fehler ID.
 licenceInfo_maxErrors-verbose,Visit the https://store.slooptools.com/addon/quality-check-ctrlppcheck for more information.

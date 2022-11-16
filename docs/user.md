@@ -21,7 +21,7 @@ Quality checks check panels and ctrl code based on the following software metric
 - Overloaded files from the version, for maintenance purposes
 - and other
 
-## CtrlPPCheck
+## CtrlppCheck
 
 CtrlppCheck provides static code analysis for the WinCC OA Ctrl/Ctrl++ language.  
 Included are, among many others, these checks:
@@ -39,9 +39,9 @@ Please understand that there are limits of Ctrlppcheck. Ctrlppcheck is rarely wr
 
 Both types of checks can be used in WinCC OA's GEDI editor via. They are started from the IDE and results are displayed in the IDE:
 
-- Drop-Down menu in the GEDI menu bar
+- Drop-Down menu "Quality Checks" in the GEDI menu bar
 - Dock-Module for the GEDI with results
-- Script check via button in the script editor
+- Script check via button "CtrlppCheck" in the script editor
 
 ## Execution From Command Line
 
@@ -70,13 +70,12 @@ python must be installed; min. V3.6
 ## Usage in WinCC OA project
 
 1. Create new WinCC OA Project (With DB)
-2. Add following sub-project
+1. Add subproject **_WinCCOA_QualityChecks_**
+1. Import Dp-List WinCCOA_QualityChecks\dplist\WinCCOA_QualityChecks.dpl
+1. Restart your gedi
+1. [Optional] Adapt following script to find python executable
 
-- Subprojects\QualityCheck\SLT_QualityChecks
-
-3. Adapt following script to find python executable
-
-Subprojects\QualityCheck\SLT_QualityChecks\scripts\libs\classes\QualityGates\Tools\Python\Python.ctl
+WinCCOA_QualityChecks\scripts\libs\classes\QualityGates\Tools\Python\Python.ctl
 
 ``` cpp
 public static synchronized string getExecutable()
@@ -84,10 +83,6 @@ public static synchronized string getExecutable()
   return findExecutable("python");
 }
 ```
-
-4. Build ctrlppcheck and copy it from Subprojects\QualityCheck\ctrlppcheck\build\bin\Release\ctrlppcheck.exe to Subprojects\QualityCheck\SLT_QualityChecks\ctrlppcheck
-5. Import Dp-List Subprojects\QualityCheck\SLT_QualityChecks\dplist\SLT_QualityChecks.dpl
-6. Restart your gedi
 
 # Quality Checks
 
@@ -184,31 +179,11 @@ PANELS_REL_PATH + "vision / aes / _ES_propFilterExtended.pnl"
 |---|---|
 |Is file overloaded - Overloaded File | FALSE <> |
 
-SloopTools Internal Check - statisch (QgStaticCheck_Internal)
-This check checks whether certain files, for SloopTools internal functions, eg. the installation completion of the add-on, are present.
+WinCCOA Internal Check - statisch (QgStaticCheck_Internal)
+This check checks whether certain files, for WinCCOA internal functions, eg. the installation completion of the add-on, are present.
 
 | Check | Good range |
 | File exists - File exists | TRUE |
-
-### License Activation (QgApplyLicense)
-
-This check verifies that the license check has been included in the code. The provider must use the functions from the SLTLicenseCtrlExt independently and sensibly in his code. For licensing details for the add-on, please refer to License Information for Providers. Gladly we take the time to think together in which places which license function should be used.
-
-If no license check has been installed in an add-on, this check is set to 0 and the add-on is locked before release. This is to prevent that by a mistake of the provider his add-ons without license check in the store is available. Exceptions are the following:
-
-Add-ons without panels, scripts and libraries (eg .: EWOs, API Manager, Picture / Graphic libraries)
-Add-ons of the category "Demo"
-Check per file	Good range
-Count of implemented license check - number of license checks	> = 1
-Syntax Check (QgSyntaxCheck)
-In the check syntax, all syntax errors of the files are listed in the add-on. Only the files with syntax errors are listed.
-
-Check per file Good range
-Syntax is valid - without syntax error TRUE
-
-## Use From Within GEDI
-
-TDB
 
 # Ctrlppcheck
 
@@ -560,7 +535,7 @@ Comments may be combined with in code suppressions.  Itis recommended to use ";"
 Run the ctrlppcheck from /bin directory.
 
 **Option 2**
-Run ctrlppcheck with option --rule-file to include rules files for naming conventions. These rules files define naming conventions for classes, functions, variables etc.. Examples can be found under the pathr: SLT_QualityChecks\data\ctrlPpCheck\rule\
+Run ctrlppcheck with option --rule-file to include rules files for naming conventions. These rules files define naming conventions for classes, functions, variables etc.. Examples can be found under the pathr: WinCCOA_QualityChecks\data\ctrlPpCheck\rule\
 
 use this option with the full path to the rule file:  
 --rule-file=/full/path/to/rules.xml
@@ -568,18 +543,17 @@ use this option with the full path to the rule file:
 Note: Each rule must be specified and used individually. Example:
 
 ```bash
---rule-file=/full/path/to/SLT_QualityChecks/data/ctrlPpCheck/rule/crl.xml --rule-file=/full/path/to/SLT_QualityChecks/data/ctrlPpCheck/rule/functionNaming.xml
+--rule-file=/full/path/to/WinCCOA_QualityChecks/data/ctrlPpCheck/rule/crl.xml --rule-file=/full/path/to/WinCCOA_QualityChecks/data/ctrlPpCheck/rule/functionNaming.xml
 ```
 
 See namingCheck.md for detailed explanation of this check and documentation of the rule files.
 
 ### Include lib for your project
 
---library=/full/path/to/SLT_QualityChecks/data/ctrlPpCheck/cfg/__proj__.xml
+--library=/full/path/to/WinCCOA_QualityChecks/data/ctrlPpCheck/cfg/__proj__.xml
 Include libs for your WinCC OA version
 
---library=/full/path/to/SLT_QualityChecks/data/ctrlPpCheck/cfg/ctrl_3.16.xml
---library=/full/path/to/SLT_QualityChecks/data/ctrlPpCheck/cfg/ctrl.xml
+--library=/full/path/to/WinCCOA_QualityChecks/data/ctrlPpCheck/cfg/ctrl.xml
 Note: The xml file must be adapted to the WinCC OA version used. This configuration was implemented for WinCC OA 3.16.
 
 ### Helpful options
