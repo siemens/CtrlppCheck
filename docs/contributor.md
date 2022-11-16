@@ -134,21 +134,21 @@ Testresults will be written to: "<project_dir>/log/ctrlPpCheck/testscripts/suspi
 ## Tests: configs and rules
 
 **config files** are loaded from 
-<OA install path>/data/DevTools/Base/ctrl.xml")); // general  
-WinCCOA_QualityChecks/data/ctrlPpCheck/cfg/__proj__.xml")); // proj specific  
+<winccoa_install_path>/data/DevTools/Base/ctrl.xml // general  
+WinCCOA_QualityChecks/data/ctrlPpCheck/cfg/__proj__.xml // proj specific  
 
 configs define Ctrl Language specific stuff. Konstants, intrfaces of functions, ...
 
 **rules** are loaded from
-<OA install path>/data/DevTools/Base/ctrl.xml")); // general  
-WinCCOA_QualityChecks/data/ctrlPpCheck/rule/__proj__.xml")); // proj specific  
+<winccoa_install_path>/data/DevTools/Base/ctrl.xml // general  
+WinCCOA_QualityChecks/data/ctrlPpCheck/rule/__proj__.xml // proj specific  
 
 Rules files define patterns
 for namees (variables,files, ...), performance issues (do not use delay(), branding etc.
 for a description of file format see: /Documentation/namingCheck.md
 to create new rules and config files, see: /Documentation/namingCheck.md
 
-exa,ples:  
+examples:  
 
 suspicious semicolon
 

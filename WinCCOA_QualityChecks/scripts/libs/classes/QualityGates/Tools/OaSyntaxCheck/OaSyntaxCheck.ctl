@@ -70,7 +70,7 @@ class OaSyntaxCheck
     string line;
     for(int i = 1; i <= dynlen(lines); i++)
     {
-      if ( strpos(lines[i], "WCCOAui") >= 0 )
+      if ( strpos(lines[i], getComponentName(UI_COMPONENT)) >= 0 )
       {
         if ( line != "" )
           dynAppend(msgs, line);

@@ -174,10 +174,8 @@ class Sl_Logger
   {
     if ( ret < 0 )
     {
-      if (DEBUG)
-      {
-        DebugTN(__FUNCTION__, error);
-      }
+      DebugTN(__FUNCTION__, error);
+
       //LOGGER
       throwError(error);
       return true;
