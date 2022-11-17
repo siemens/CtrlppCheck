@@ -312,7 +312,7 @@ void CheckY2038::checkConversion(const Token *left, const Token *right)
 
       else if ( valTypeLeft->isType(ValueType::Type::UNKNOWN_TYPE) )
       {
-        y2038unkownTypeError(left);
+        y2038unknownTypeError(left);
       }
 
       // unsafe cast with value overflow
@@ -372,7 +372,7 @@ void CheckY2038::checkConversion(const Token *left, const Token *right)
 
       else if ( valTypeRight->isType(ValueType::Type::UNKNOWN_TYPE) )
       {
-        y2038unkownTypeError(right);
+        y2038unknownTypeError(right);
       }
 
       // unsafe cast with value lost
@@ -426,7 +426,7 @@ void CheckY2038::checkConversion(const Token *left, const Token *right)
 
 
 //---------------------------------------------------------------------------
-void CheckY2038::y2038unkownTypeError(const Token *tok)
+void CheckY2038::y2038unknownTypeError(const Token *tok)
 {
   if ( tok && !mSettings->inconclusive )
     return;
@@ -434,7 +434,7 @@ void CheckY2038::y2038unkownTypeError(const Token *tok)
   std::string errmsg = "$symbol:" + tokName + "\n"+
                        "Handling of unknown variable type '" + tokName + "' into time variable.\n"
                        "Unknown variable type of '" + tokName + "' leads to undefined scenario. Check if the variable can by casted in to time variable.";
-  reportError(tok, Severity::warning, "y2038unkownTypeError", errmsg, CWE704, true);
+  reportError(tok, Severity::warning, "y2038unknownTypeError", errmsg, CWE704, true);
 }
 
 //---------------------------------------------------------------------------
