@@ -21,6 +21,12 @@ Quality checks check panels and ctrl code based on the following software metric
 - Overloaded files from the version, for maintenance purposes
 - and other
 
+## Definition of Metrics
+| Metric | Definition |
+|--------|------------|
+| NLOC   | Number Lines of Code - all lines of a file that are not comment lines or empty lines. |
+| CCN | Cyclomatic Complexity - https://en.wikipedia.org/wiki/Cyclomatic_complexity |
+
 ## CtrlppCheck
 
 CtrlppCheck provides static code analysis for the WinCC OA Ctrl/Ctrl++ language.  
@@ -72,7 +78,8 @@ python must be installed; min. V3.6
 1. Create new WinCC OA Project (With DB)
 1. Add subproject **_WinCCOA_QualityChecks_**
 1. Import Dp-List WinCCOA_QualityChecks\dplist\WinCCOA_QualityChecks.dpl
-1. Restart your gedi
+1. Put the ctrlppcheck binary in a folder called "ctrlppcheck" in the bin folder of the **_WinCCOA_QualityChecks_** subproject. (If you want to put it in a different folder you must add the path to it to the config file: [qualityChecks] ctrlppcheckPath="yourpathtobinary")
+1. Restart your GEdi
 1. [Optional] Adapt following script to find python executable
 
 WinCCOA_QualityChecks\scripts\libs\classes\QualityGates\Tools\Python\Python.ctl
@@ -86,13 +93,19 @@ public static synchronized string getExecutable()
 
 # Quality Checks
 
-Each of the quality checks documented below) can return a score between 0 and 100. The sum of all performed checks gives the quality score. To avoid problems with problems that e.g. do not contain panels, a score of 1 will be returned for the related exam(s).
+Each of the quality checks documented below can return a score between 0 and 100.  
+The score is calculated like this:  
+Each check in a qualitycheck represents a point.  
+Each check not passed is rewarded an error point.  
+The final result (score) is the percentage or checks not passed in relation to the number of test in total.  
+Checks disabled in the settings dialogue are not counted.  
+A check can be weighed by assigning it a higher number of points in the settings dialogue. If such a chek fails it will also be awarded a higher number or error points.
 
 ## Available Checks
 
 ### General static check
 
-These checks give an initial assessment of the entire folder and its files and are therefore carried out for all folder checks.
+These checks give an initial assessment of the entire folder and its files and are therefore carried out for all folder checks (e.g. pictures, scripts).
 
 | Check per folder | Good range | Reason |
 |----- | ------|-----|
@@ -110,7 +123,7 @@ These checks give an initial assessment of the entire folder and its files and a
 
 ### Images Check - static (QgStaticCheck_Pictures)
 
-| Check per | file Good range |
+| Check per file | Good range |
 |---|---|
 | Size - File size | 1 MB |
 | Extention file type | bmp, xpm, jpg, png, svg, jpeg, gif, mng, ico, wmf |
@@ -118,11 +131,13 @@ These checks give an initial assessment of the entire folder and its files and a
 ### Script Check - static (QgStaticCheck_Scripts)
 
 | Check per script | Good range | Reason |
+|---|---|---|
 | Is an example file - Ex. File | FALSE | Ex. Scripts (under the folder Examples) are not included in the calculation |
 | Is calculated - is calculated | TRUE | It can not be calculated because it eg. is encrypted. |
 | NLOC code lines | 4-600 | The entire script is difficult to analyze over 600 lines |
 
 | Check per function | Good range | Reason |
+|---|---|---|
 | NLOC (No. Lines Of Code) - Code Lines | 4-80 | More than 80 lines of code are difficult to understand in one function |
 | Count of Parameter - Transfer parameter of function | <= 10 | More than 10 parameters make a function difficult to read |
 | Count of lines - total lines | NA | This number compared to the lines of code suggests the comment style |
@@ -130,9 +145,9 @@ These checks give an initial assessment of the entire folder and its files and a
 
 ### Library check - static (QgStaticCheck_Libs)
 
-This check is similar to the script check, but refers to the library folder.
+This check is similar to the script check and refers to the library folder.
 
-#### Panels Check - static (QgStaticCheck_Panels)
+### Panels Check - static (QgStaticCheck_Panels)
 
 | Check per panel | Good range | Reason |
 |---|---|---|
@@ -157,10 +172,10 @@ This check is similar to the script check, but refers to the library folder.
 | Count of lines - total lines | NA | This number compared to the lines of code suggests the comment style |
 | CCN (Cyclomatic Complexity No. McCabe-Metric) | <= 15 | Complexity greater than 15 makes a function difficult to analyze later |
 
+### Overloaded Files Check - static (QgStaticCheck_OverloadedFiles)
 
-#### Overloaded Files Check - static (QgStaticCheck_OverloadedFiles)
-
-The Check "Overloaded Files Check" checks if files from the product have been overwriten in the project. This overloading of files is generally possible, but carries risks when upgrading the product and should therefore be carefully considered. However, there are some files that may or may be overloaded in certain cases. These exceptions were provided in the check and are therefore allowed.  
+The Check "Overloaded Files Check" checks if files from the product have been overwritten in the project.  
+This overloading of files is generally possible, but carries risks when upgrading the product and should therefore be carefully considered. However, there are some files that may be overloaded in certain cases. These exceptions were provided in the check and are therefore allowed.  
 Allowed files are:
 
 ```text
@@ -177,7 +192,7 @@ PANELS_REL_PATH + "vision / aes / _ES_propFilterExtended.pnl"
 
 | Check | Good range |
 |---|---|
-|Is file overloaded - Overloaded File | FALSE <> |
+| Is file overloaded | FALSE |
 
 WinCCOA Internal Check - statisch (QgStaticCheck_Internal)
 This check checks whether certain files, for WinCCOA internal functions, eg. the installation completion of the add-on, are present.
