@@ -20,5 +20,5 @@ licenceInfo_DEMO,DEMO Version:\nCtrlppCheck für Skriptdateien sowie der rekursi
 licenceInfo_FULL,FULL Version:\nSkriptdateien mit unbegrenzten Zeilen und einer unbegrenzten Anzahl von Dateien für die rekursive Projektprüfung sind enthalten. Vielen Dank für Ihr Vertrauen in CtrlppCheck und viel Spaß!
 settingsInfo,In Kürze:\n- Legen Sie Ihre eigenen Grenzen für die Qualitätsprüfungen fest \n(z. B. Zeilen pro Funktion, ...)\n- Überprüfen Sie Ihre Codingsrichtlinien\n(z.B. Funktionen beginnen immer mit dem Präfix "xy_")\n - ...
 licenceInfo_maxErrors,Version ist limitiert auf max. 1 Fehler pro Fehler ID.
-licenceInfo_maxErrors-verbose,Visit the https://store.slooptools.com/addon/quality-check-ctrlppcheck for more information.
+licenceInfo_maxErrors-verbose,Visit the https://www.winccoa.com for more information.
 close_without_save,Schließen ohne zu Speichern?

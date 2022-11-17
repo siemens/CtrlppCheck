@@ -113,6 +113,7 @@ void main()
 ## Tests: scripts and results
 
 testscritpts are stored in:  
+
 WinCCOA_QualityChecks_tests/scripts/tests/ctrlppCheck/testscripts
 
 result files (.xml) are stored in:  
@@ -134,6 +135,7 @@ Testresults will be written to: "<project_dir>/log/ctrlPpCheck/testscripts/suspi
 ## Tests: configs and rules
 
 **config files** are loaded from 
+
 <winccoa_install_path>/data/DevTools/Base/ctrl.xml // general  
 WinCCOA_QualityChecks/data/ctrlPpCheck/cfg/__proj__.xml // proj specific  
 
@@ -155,6 +157,7 @@ suspicious semicolon
 testscript: D:/Repos/Ctrlppcheck_gulasch/WinCCOA_QualityChecks_tests/scripts/tests/ctrlppCheck/testscripts/suspiciousSemicolon.ctl  
 (naming should be: test_suspiciousSemicolon.ctl)  
 resultfile: D:/Repos/Ctrlppcheck_gulasch/WinCCOA_QualityChecks_tests/data/ctrlPpCheck/testscriptssuspiciousSemiclon.xml  
+
 (naming should be: test_suspiciousSemicolon.ctl)  
 the ceck itself:  
 D:/Repos/Ctrlppcheck_gulasch/ctrlppcheck/lib/checks/checkother.h, checkother.cpp Zeile 141 ff  

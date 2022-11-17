@@ -168,9 +168,9 @@ void tool_QualityGates_OpenResult()
 void open_Docu()
 {
   if (getLocale(getActiveLang()) == "de_AT.iso88591" || getLocale(getActiveLang()) == "de_AT.utf8")
-    openUrl("https://docu.slooptools.com/de/services/qc.html");
+    openUrl("https://www.winccoa.com/documentation/WinCCOA/3.18/en_US/index.html");
   else
-    openUrl("https://docu.slooptools.com/en/services/qc.html");
+    openUrl("https://www.winccoa.com/documentation/WinCCOA/3.18/en_US/index.html");
 }
 
 void tool_QualityGates_BuildDocu()

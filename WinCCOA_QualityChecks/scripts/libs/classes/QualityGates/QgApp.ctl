@@ -260,7 +260,7 @@ class QgApp
     string serverUrl = getenv("SERVER_HOST_NAME");
     string token = getenv("WinCCOA_TOKEN");
     if ( serverUrl == "" )
-      serverUrl = "store.slooptools.com";
+      serverUrl = "WinCCOA.com";
     
     string url = "https://" + token + 
                  serverUrl + 

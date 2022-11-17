@@ -20,5 +20,5 @@ licenceInfo_DEMO,DEMO Version:\nCtrlppCheck for script files and recursive proje
 licenceInfo_FULL,FULL Version:\nScript files with unlimited lines and an unlimited amount of files for recursive project check are included. All errors will be shown. Thank you for trusting in CtrlppCheck & Have fun!
 settingsInfo,Coming soon:\n- Set your own limits for the Quality checks\n(e.g. lines per function,...)\n- Check your coding guidelines\n(e.g. functions always start with prefix "xy_")\n- ...
 licenceInfo_maxErrors,Version is limited to max. 1 error per error ID.
-licenceInfo_maxErrors-verbose,Visit the https://store.slooptools.com/addon/quality-check-ctrlppcheck for more information.
+licenceInfo_maxErrors-verbose,Visit the https://www.winccoa.com for more information.
 close_without_save,Close without saving?

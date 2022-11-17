@@ -16,30 +16,30 @@
  */
 class Sl_Jsonfile
 {
-  private static Sl_Logger LOGGER = Sl_Logger(); /*!< SloopTools logger */
+  private static Sl_Logger LOGGER = Sl_Logger();
   private string filePath;  /*!< full path to the json file */
-  
+
   //---------------------------------------------------------------------------------------------------------------------------------------
-  /** 
+  /**
     JSON file handler.
-    
+
     @param filePath Absolute filepath of an (existing) file.
     @param createFile When TRUE file will be created when it is not existing
-    
+
     @author           ataker
   */
   public Sl_Jsonfile(const string filePath = "", bool createFile = false)
   {
     this.filePath = filePath;
-    
-    if ( createFile && !(this.exists()) ) 
+
+    if ( createFile && !(this.exists()) )
     {
       this.create();
     }
   }
-  
+
   //---------------------------------------------------------------------------------------------------------------------------------------
-  /** 
+  /**
     Function the absolute file path to the jenkisn file
     @return absolute path to jenkins file
   */
@@ -47,20 +47,20 @@ class Sl_Jsonfile
   {
     return this.filePath;
   }
-  
+
   //---------------------------------------------------------------------------------------------------------------------------------------
-  /** 
+  /**
     Function sets path to the jenkins file.
-    
+
     @param filePath <B>Absolute filepath</B> of an (existing) file.
   */
   public void setPath(string filePath)
   {
     this.filePath = filePath;
   }
-  
+
   //---------------------------------------------------------------------------------------------------------------------------------------
-  /** 
+  /**
     Function checks if the file exists.
     @return Returns TRUE if the file exists, otherwise FALSE.
   */
@@ -69,9 +69,9 @@ class Sl_Jsonfile
     LOGGER.info("["+__FUNCTION__+"] Check if file exist.");
     return isfile(this.filePath);
   }
-  
+
   //---------------------------------------------------------------------------------------------------------------------------------------
-  /** 
+  /**
     Function creates the file if it does not exist.
     @return error code:
     \li  0 File was created successfully.
@@ -86,8 +86,8 @@ class Sl_Jsonfile
       LOGGER.warning("["+__FUNCTION__+"] Missing file path.");
       return -1;
     }
-    
-    if ( this.exists() ) 
+
+    if ( this.exists() )
     {
       LOGGER.warning("["+__FUNCTION__+"] File already exists.");
       return -2;
@@ -104,19 +104,19 @@ class Sl_Jsonfile
   }
 
   //-------------------------------------------------------------------------------------------------------------------------------------
-  /** 
+  /**
     Function reads a file and returns the decrypted JSON string.
     @param jsonVal Reference value which contains the decrypted JSON string
     @return error code:
       \li 0 Data was read successfully.
       \li -1 File can't be read.
       \li -2 Missing internal arguments.
-      
+
     @warning refrence value jsonVal are not cleared in case of error.
   */
   public int read(anytype &jsonVal)
   {
-    
+
     if ( access(this.filePath, R_OK) )
     {
       LOGGER.severe("["+__FUNCTION__+"] File can't be read.");
@@ -138,7 +138,7 @@ class Sl_Jsonfile
   }
 
   //-------------------------------------------------------------------------------------------------------------------------------------
-  /** 
+  /**
     Writes data in the form of a JSON string to the specified file.
     @param data Data to be written to the files.
     @param compactFormat Format of JSON string. True means compact, False means human readable format.
@@ -155,7 +155,7 @@ class Sl_Jsonfile
       LOGGER.severe("["+__FUNCTION__+"] File is not available.");
       return -1;
     }
-    
+
     LOGGER.info("["+__FUNCTION__+"] Opening file. File path: " + this.filePath);
     file f = fopen(this.filePath, "wb+");
 
@@ -171,13 +171,13 @@ class Sl_Jsonfile
     LOGGER.info("["+__FUNCTION__+"] Write json string into file.");
     err = fputs(json, f);
     fclose(f);
-    
+
     if ( err >= 0 )
     {
       LOGGER.severe("["+__FUNCTION__+"] Couldn't write string into file");
       return -3;
     }
-    
+
     return 0;
   }
 };

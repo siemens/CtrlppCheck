@@ -35,7 +35,7 @@ class Sl_Logger
    */
   public Sl_Logger ()
   {
-    string path = getPath(DATA_REL_PATH) + "SloopTools/";
+    string path = getPath(DATA_REL_PATH) + "WinCCOA/";
     if ( !isdir(path) )
     {
       mkdir(path);
@@ -141,7 +141,7 @@ class Sl_Logger
   */
   private void writeToLog(string type, const string &msg, const anytype &obj)
   {
-     string logPath = getPath(DATA_REL_PATH) + "SloopTools/";
+     string logPath = getPath(DATA_REL_PATH) + "WinCCOA/";
 
      if ( !isdir(logPath) )
      {
