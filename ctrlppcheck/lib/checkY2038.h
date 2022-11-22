@@ -59,7 +59,7 @@ private:
     std::string getVarName(const Token *tok);
 
     // Error messages..
-    void y2038unkownTypeError(const Token *tok);
+    void y2038unknownTypeError(const Token *tok);
     void y2038canNotCastError(const Token *left, const Token *right, Severity::SeverityType prio, bool inconclusive);
     void y2038overflow(const Token *left, const Token *right, Severity::SeverityType prio, bool inconclusive);
     void y2038valueLost(const Token *left, const Token *right, Severity::SeverityType prio, bool inconclusive);
@@ -67,7 +67,7 @@ private:
     void getErrorMessages(ErrorLogger *errorLogger, const Settings *settings) const OVERRIDE {
         CheckY2038 c(nullptr, settings, errorLogger);
 
-        c.y2038unkownTypeError(nullptr);
+        c.y2038unknownTypeError(nullptr);
         c.y2038canNotCastError(nullptr, nullptr, Severity::SeverityType::error, false);
         c.y2038overflow(nullptr, nullptr, Severity::SeverityType::error, false);
         c.y2038valueLost(nullptr, nullptr, Severity::SeverityType::error, false);

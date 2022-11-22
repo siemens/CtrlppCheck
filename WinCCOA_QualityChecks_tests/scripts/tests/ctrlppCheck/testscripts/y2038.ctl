@@ -1,5 +1,5 @@
 // start options:
-// error id: y2038valueLost, y2038overflow, y2038canNotCastError, y2038unkownTypeError
+// error id: y2038valueLost, y2038overflow, y2038canNotCastError, y2038unknownTypeError
 // check handling of time variable after year 2038
 
 struct C
