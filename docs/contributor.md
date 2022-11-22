@@ -146,9 +146,12 @@ configs define Ctrl Language specific stuff. Konstants, intrfaces of functions, 
 WinCCOA_QualityChecks/data/ctrlPpCheck/rule/__proj__.xml // proj specific  
 
 Rules files define patterns
-for namees (variables,files, ...), performance issues (do not use delay(), branding etc.
+performance issues (do not use delay(), branding etc.
 for a description of file format see: /Documentation/namingCheck.md
 to create new rules and config files, see: /Documentation/namingCheck.md
+
+Naming rules files difine patterns 
+for names (variables, files, functions,...)
 
 examples:  
 
