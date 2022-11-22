@@ -561,7 +561,7 @@ use this option with the full path to the rule file:
 Run the ctrlppcheck from /bin directory.
 
 **Option 2**
-Run ctrlppcheck with option --naming-rule-file to include rules files for naming conventions. These rules files define naming conventions for classes, functions, variables etc.. Examples can be found under the pathr: WinCCOA_QualityChecks\data\ctrlPpCheck\rule\*naming.xml
+Run ctrlppcheck with option --naming-rule-file to include rules files for naming conventions. These rules files define naming conventions for classes, functions, variables etc.. Examples can be found under the path: WinCCOA_QualityChecks\data\ctrlPpCheck\rule\*naming.xml
 
 use this option with the full path to the rule file:  
 --naming-rule-file=/full/path/to/namingRules.xml

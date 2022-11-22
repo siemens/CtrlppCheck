@@ -150,7 +150,7 @@ performance issues (do not use delay(), branding etc.
 for a description of file format see: /Documentation/namingCheck.md
 to create new rules and config files, see: /Documentation/namingCheck.md
 
-Naming rules files difine patterns 
+Naming rules files define patterns 
 for names (variables, files, functions,...)
 
 examples:  
