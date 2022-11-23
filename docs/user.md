@@ -545,23 +545,34 @@ Comments may be combined with in code suppressions.  Itis recommended to use ";"
 // ctrlppcheck-suppress uninitvar // some comment
 ```
 
+###Define special rules
+**Option1**
+Run the ctrlppcheck from /bin directory.
+
+**Option 2**
+Run ctrlppcheck with option --rule-file to include rules files for naming conventions. These rules files define special rules like performance issues (do not use delay(), branding etc.), safety issues or debugging. Example can be found under the path: WinCCOA_QualityChecks\data\ctrlPpCheck\rule\ctrl_rules.xml
+
+use this option with the full path to the rule file:  
+--rule-file=/full/path/to/Rules.xml
+
+
 ### Define Naming rules
 **Option 1**
 Run the ctrlppcheck from /bin directory.
 
 **Option 2**
-Run ctrlppcheck with option --rule-file to include rules files for naming conventions. These rules files define naming conventions for classes, functions, variables etc.. Examples can be found under the pathr: WinCCOA_QualityChecks\data\ctrlPpCheck\rule\
+Run ctrlppcheck with option --naming-rule-file to include rules files for naming conventions. These rules files define naming conventions for classes, functions, variables etc.. Examples can be found under the path: WinCCOA_QualityChecks\data\ctrlPpCheck\rule\*naming.xml
 
 use this option with the full path to the rule file:  
---rule-file=/full/path/to/rules.xml
+--naming-rule-file=/full/path/to/namingRules.xml
 
 Note: Each rule must be specified and used individually. Example:
 
 ```bash
---rule-file=/full/path/to/WinCCOA_QualityChecks/data/ctrlPpCheck/rule/crl.xml --rule-file=/full/path/to/WinCCOA_QualityChecks/data/ctrlPpCheck/rule/functionNaming.xml
+--naming-rule-file=/full/path/to/WinCCOA_QualityChecks/data/ctrlPpCheck/rule/functionNaming.xml
 ```
 
-See namingCheck.md for detailed explanation of this check and documentation of the rule files.
+See namingCheck.md for detailed explanation of this check and documentation of the naming rule files.
 
 ### Include lib for your project
 
