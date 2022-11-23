@@ -550,7 +550,7 @@ Comments may be combined with in code suppressions.  Itis recommended to use ";"
 Run the ctrlppcheck from /bin directory.
 
 **Option 2**
-Run ctrlppcheck with option --rule-file to include rules files for naming conventions. These rules files define special rules like performance issues (do not use delay(), branding etc.), safety issues or debugging. Example can be found under the pathr: WinCCOA_QualityChecks\data\ctrlPpCheck\rule\ctrl_rules.xml
+Run ctrlppcheck with option --rule-file to include rules files for naming conventions. These rules files define special rules like performance issues (do not use delay(), branding etc.), safety issues or debugging. Example can be found under the path: WinCCOA_QualityChecks\data\ctrlPpCheck\rule\ctrl_rules.xml
 
 use this option with the full path to the rule file:  
 --rule-file=/full/path/to/Rules.xml
