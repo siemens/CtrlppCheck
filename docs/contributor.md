@@ -1,6 +1,6 @@
 # How to Build CtrlppCheck
 
-We use connan to build.
+We use conan to build.
 
 ## On first Usage
 
@@ -26,14 +26,17 @@ cd build
 cmake --build .  --config Release
 ```
 
-# How to Test CtrlPPcheck
+# How to Extend CtrlppCheck
 
-## How to convert cppcheckTest
+# How to Test CtrlppCheck - Unit Tests
 
-+ visit this site: <https://github.com/danmar/cppcheck/tree/master/test> and download some one test file.  (e.g. testautovariables.cpp)
-+ open GEDI and create new ctrl script in the /scripts/tests/ctrlppCheck directory with the same name. ( testautovariables.ctl)
-+ paste the content of cpp file into ctrl file
-+ comment this block
+## How to add new tests for CtrlppCheck from scratch
+
++ copy the Project "WinCCOA_QualityChecks_tests" from the repository to your projects and add it as a subproject to your current project.
++ visit this site: <https://github.com/danmar/cppcheck/tree/master/test> and download a test file (e.g. testautovariables.cpp).
++ open GEDI and create new ctrl script in the /scripts/tests/CtrlppCheck directory of the "WinCCOA_QualityChecks_tests" subproject with the same name. (testautovariables.ctl)
++ paste the content of cpp file into the ctrl file
++ comment this block out
 
 ```cpp
 #include "checkautovariables.h"
@@ -42,27 +45,19 @@ cmake --build .  --config Release
 #include "tokenize.h"
 ```
 
-+ change the class to struct - so are the interface public for ctrl script
++ change the class to struct - so the interfaces are public for ctrl script
 
 ```cpp
 cpp style
  class TestAutoVariables : public TestFixture {
- --> 
+
+--> 
+
 ctrl style
   struct estAutoVariables : TestFixture {
 ```
 
-+ change the class to struct - so are the interface public for ctrl script
-
-```cpp
-cpp style
- class TestAutoVariables : public TestFixture {
- --> 
- ctrl style
-  struct estAutoVariables : TestFixture {
-```
-
-+ remove the key `public:` and `private:`
++ remove the keywords `public:` and `private:`
 + remove the unecessary constructor and Settings member variable.
 
 ```cpp
@@ -72,12 +67,15 @@ TestAutoVariables() : TestFixture("TestAutoVariables") {
 Settings settings; 
 ```
 
-+ remove also function check(). It is defined in class TestFixture
++ also remove the function check(). It is defined in class TestFixture
 + remove OVERRIDE in the run() definition
 
 ```cpp
 cpp style
 void run() OVERRIDE { ... }
+
+-->
+
 ctrl style
 void run()  { ... }
 ```
@@ -85,7 +83,12 @@ void run()  { ... }
 + replace `REGISTER_TEST` by `main()` function like following example
 
 ```cpp
-// REGISTER_TEST(TestAutoVariables)
+cpp style
+REGISTER_TEST(TestAutoVariables)
+
+-->
+
+ctrl style
 void main()
 {
   TestAutoVariables test;
@@ -93,31 +96,29 @@ void main()
 }
 ```
 
-+ add uses  `#uses "classes/QualityGates/Tools/CppCheck/TestFixture"`
-+ save the script and try it to run from oa-console.
++ add add  `#uses "classes/QualityGates/Tools/CppCheck/TestFixture"`
++ save the script and try to it run from OA-console with a Ctrl Manager - All assertions and results are written to log.
 
- All assertions are thrown in log.
+### How to add new tests for CtrlppCheck - the easy way
 
-## How to make new test for CtrlPPcheck
+The steps described in the chapter above have already been made and a template is available:
 
-+ Make a copy the file scripts/tests/ctrlppCheck/template.ctl
++ Make a copy the file scripts/tests/CtrlppCheck/template.ctl
 + Open the file and edit the test.
-+ save the script and try it to run from oa-console.
-
- All assertions are thrown in log.
++ save the script and try it to run from oa-console with a Ctrl-Manager - All assertions and results are written to log.
 
 **Don't forgot to document new testcases!**
 
-# How To Test CtrlppCheck
+# How To Test CtrlppCheck - using ctrl scripts
 
 ## Tests: scripts and results
 
 testscritpts are stored in:  
 
-WinCCOA_QualityChecks_tests/scripts/tests/ctrlppCheck/testscripts
+WinCCOA_QualityChecks_tests/scripts/**tests**/CtrlppCheck/testscripts
 
 result files (.xml) are stored in:  
-WinCCOA_QualityChecks_tests/data/ctrlPpCheck/testscripts
+WinCCOA_QualityChecks_tests/**data**/CtrlppCheck/testscripts
 
 example:  
 y2038.ctl  
@@ -130,20 +131,20 @@ Errors will be thrown, if for a .ctl file no .xml can be found.
 If there is an error is in the .ctl file and no corresponding <error> in the .xml file the test will pass.  
 if  no error is in the .ctl file and an <error> is in the .xml file a warning will be issued.  
 
-Testresults will be written to: "<project_dir>/log/ctrlPpCheck/testscripts/suspiciousSemicolon.xml"
+Testresults will be written to: "<project_dir>/log/CtrlppCheck/testscripts/suspiciousSemicolon.xml"
 
 ## Tests: configs and rules
 
 **config files** are loaded from 
 
 <winccoa_install_path>/data/DevTools/Base/ctrl.xml // general  
-WinCCOA_QualityChecks/data/ctrlPpCheck/cfg/__proj__.xml // proj specific  
+WinCCOA_QualityChecks/data/CtrlppCheck/cfg/__proj__.xml // proj specific  
 
 configs define Ctrl Language specific stuff. Konstants, intrfaces of functions, ...
 
 **rules** are loaded from
 <winccoa_install_path>/data/DevTools/Base/ctrl.xml // general  
-WinCCOA_QualityChecks/data/ctrlPpCheck/rule/__proj__.xml // proj specific  
+WinCCOA_QualityChecks/data/CtrlppCheck/rule/__proj__.xml // proj specific  
 
 Rules files define patterns
 performance issues (do not use delay(), branding etc.
@@ -157,13 +158,13 @@ examples:
 
 suspicious semicolon
 
-testscript: D:/Repos/Ctrlppcheck_gulasch/WinCCOA_QualityChecks_tests/scripts/tests/ctrlppCheck/testscripts/suspiciousSemicolon.ctl  
+testscript: D:/Repos/CtrlppCheck_gulasch/WinCCOA_QualityChecks_tests/scripts/tests/CtrlppCheck/testscripts/suspiciousSemicolon.ctl  
 (naming should be: test_suspiciousSemicolon.ctl)  
-resultfile: D:/Repos/Ctrlppcheck_gulasch/WinCCOA_QualityChecks_tests/data/ctrlPpCheck/testscriptssuspiciousSemiclon.xml  
+resultfile: D:/Repos/CtrlppCheck_gulasch/WinCCOA_QualityChecks_tests/data/CtrlppCheck/testscriptssuspiciousSemiclon.xml  
+(naming should be: test_suspiciousSemicolon.xml)  
 
-(naming should be: test_suspiciousSemicolon.ctl)  
 the ceck itself:  
-D:/Repos/Ctrlppcheck_gulasch/ctrlppcheck/lib/checks/checkother.h, checkother.cpp Zeile 141 ff  
+D:/Repos/CtrlppCheck_gulasch/CtrlppCheck/lib/checks/checkother.h, checkother.cpp Zeile 141 ff  
 Der Check selbst (was tut er, findet) ist beschrieben in:  keine Beschreibung gefunden, ausser im Kommentar im Code  
 Das ist ein ziemlich kleiner check daher in check, daher auc nicht in eingenem file implementiert  
 

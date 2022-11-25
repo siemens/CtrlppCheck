@@ -51,7 +51,7 @@ Both types of checks can be used in WinCC OA's GEDI editor via. They are started
 
 ## Execution From Command Line
 
-Both types of checks may also be executed from the command line to facilitate integration in automated build environemnts for continuous integration. Results are provided via result files for further processing.  
+Both types of checks may also be executed from the command line to facilitate integration in automated build environments for continuous integration. Results are provided via result files for further processing.  
 
 # System Requirements And Installation
 
