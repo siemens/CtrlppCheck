@@ -33,17 +33,11 @@ A rule file consists of several rule tags. Each rule consists of a pattern and a
 </rule>
 ```
 
-### pattern
+### tag pattern
 
 Defines a regular expression which will be applied to the variable name. If the expression does not match, an error is returned.
 
-**Example:** regular expression
-
-```XML
-  <pattern>^[A-Z0-9_]+$</pattern>
-```
-
-| character | Explanation (Source <https://regexr.com/>) |
+| Character | Explanation (Source <https://regexr.com/>) |
 |---|---|
 | ^ | Beginning. Matches the beginning of the string, or the beginning of a line if the multiline flag (m) is enabled.|
 | [ | Character set. Match any character in the set.|
@@ -54,7 +48,7 @@ Defines a regular expression which will be applied to the variable name. If the 
 | + | Quantifier. Match 1 or more of the preceding token. |
 | $ | End. Matches the end of the string, or the end of a line if the multiline flag (m) is enabled. |
 
-
+**Examples:**
 Pattern | Variable Type and Name | Result of Check
 --------|---------------|-----
 ^[A-Z0-9_]+$| const I_VAR | <span style="color:green">**OK**</span>
@@ -68,14 +62,13 @@ Pattern | Example
 %fileName_allUpper% | b_AESAutoRestart
 %fileName_allLower% | b_aesAutoRestart
 
-### Summary
+### tag summary
 
-Defines the message that will be used when the regualr expression does not apply.
+Defines the message that will be used when the variable name does not match the pattern.
 
-### id
+### tag id
 
-The id indicates to which variables the regular expression should be applied. Each variable has a type and is available within a specific scope.  
-In addition, it can be modified by specific keywords like *const*.
+The id indicates to which variables the regular expression should be applied. Each variable has a type, is available within a specific scope and it can be modified by specific keywords like *const*.
 For the check process the categories of each variable will be automatically defined by the tool.
 The id is structured in following categories:
 
@@ -85,18 +78,18 @@ The id is structured in following categories:
 
 **Example**: <id>const int argument</id>
 
-#### modifier
+#### category modifier
 
-Special keyword for detailed analytics
+Special keyword for detailed analytics:
 
-- const
-- nonconst
+- const - only apply to constant variables
+- nonconst - apply to all variables
 
-#### type
+#### category type
 
 See list of supportes types in the document below
 
-#### scope
+#### category scope
 
 Scope where variable is in use
 
@@ -104,19 +97,21 @@ Scope where variable is in use
 - argument - Included in a function declaration e.g. funcA(string sVar1, string sVar2, ...)
 - local - All others
 
-For **type** and **scope** only one value can be defined.
-
-Either all three categories of values must be defined or only for one.  
+For categories **type** and **scope** only one value can be defined.
+Either all three categories must be defined or only one.  
 
 ## Check process
 
-1. It will be searched through the rules if there is a perfect match for an **id** 
+1. All rules will be searched if theere is a perfect match between an variable and a certain id:  
 
-***Example** for a **const int** variable in a **global** scope if a specific rule is available:
+**Example**:
+Variable:
 
 ```c
 const global int g_IAES_VAR
 ```
+
+for a **const int** variable in a **global** scope if a specific rule is available:
 
 ```XML
 <rule version="1">
@@ -128,15 +123,18 @@ const global int g_IAES_VAR
 </rule>
 ```
 
-This rule will be checked because all 3 categories are matching.
+So this rule will be applied because all 3 categories are matching.
 
-2. If there is no dedicated rule found the categories will be split and the rules found for each categoriy will be checked individually. If no rule for a category is found, it wont be checked.
+2. If there is no rule that perfectly matches the variable declaration the defined rules for each category will be applied separately. If no rule for a certain category is found, the category will go unchecked.
 
-**Examples** for a **const int** variable in an **global** scope if no specific rule is available:
+**Example**
+Variable
 
 ```c
 const global int g_IAES_VAR
 ```
+
+For a **const int** variable in **global** no specific rule is available. but there are rules for **const** and **int** variables:
 
 ```XML
 <rule version="1">
@@ -158,25 +156,21 @@ const global int g_IAES_VAR
 </rule>
 ```
 
-```XML
-<!-- A rule for "global" couldn't be found. -->
-```
+So the rules for **const** and **int** will be applied to *g_IAES_VAR*.
 
-The two existing rules are applied.
-
-**Attention:** Due to this logic, it is necessary that the single category rules can be combined with each other. Otherwise it would always come with certain combination errors.
+**Attention:**  
+Due to this logic, it is necessary that the single category rules can be combined with each other. Otherwise it would always come with certain combination errors.
 
 **Some examples:**
 
-ID      | Pattern                  | const int local					 | const int local   | (nonconst) int global | (nonconst) int global | 
+id      | pattern                  | const int local IAES_VAR      | const int local iAES_VAR  | (nonconst) int global g_i_CountFlags | (nonconst) int global i_CountFlags |
 --------|--------------------------|-------------------------------------|-------------------|-----------------------|-----------------------|
-Variable Name|                     | IAES_VAR    					 	 | iAES_VAR          | g_i_CountFlags		 | i_CountFlags
 const   |^[A-Z0-9_]+$              | <span style="color:green">OK</span> | <span style="color:red">NOK</span> | ignored | ignored
 int     |^(i\|I)(.*)               | <span style="color:green">OK</span> | <span style="color:green">OK</span> | <span style="color:green">OK</span> | <span style="color:green">OK</span>
-float   |^(f\|F)(.*)               | ignored							 | ignored | ignored | ignored
+float   |^(f\|F)(.*)               | ignored        | ignored | ignored | ignored
 local   |"(.*)(%fileName%_)(.*)"   | <span style="color:green">OK</span> | <span style="color:green">OK</span> | ignored | ignored
-global  |^(g\|G)(.*)               | ignored							 | ignored | <span style="color:green">OK</span> | <span style="color:red">NOK</span>
-Total   | 						   | <span style="color:green">**OK**</span> | <span style="color:red">**NOK**</span> | <span style="color:green">**OK**</span> | <span style="color:red">**NOK**</span>
+global  |^(g\|G)(.*)               | ignored        | ignored | <span style="color:green">OK</span> | <span style="color:red">NOK</span>
+Total check result  |          | <span style="color:green">**OK**</span> | <span style="color:red">**NOK**</span> | <span style="color:green">**OK**</span> | <span style="color:red">**NOK**</span>
 
 
 ## Create your own rule file
@@ -185,84 +179,37 @@ If a separate rule file is required, this can be specified with the command line
 
 -------
 
-The following values are currently available as <type> in **id**:
+## Allowed values for category type
 
-**Types:**
+The following values are currently available as *type* in **id**:
 
-- anytype
-- atime
-- bit32
-- bit64
-- blob
-- bool
-- char
-- double
-- errClass
-- file
-- float
-- function_ptr
-- int
-- uint
-- long
-- ulong
-- langString
-- mixed
-- mapping
-- va_list
-- string
-- time
-- unsigned
-- dbRecordset
-- dbConnection
-- dbCommand
-- shape
-- idispatch
-
-*dyn variables*
-
-- dyn_anytype
-- dyn_atime
-- dyn_bit32
-- dyn_bit64
-- dyn_blob
-- dyn_bool
-- dyn_char
-- dyn_errClass
-- dyn_float
-- dyn_int
-- dyn_uint
-- dyn_long
-- dyn_ulong
-- dyn_langString
-- dyn_mapping
-- dyn_string
-- dyn_time
-- dyn_shape
-
-*dyn_dyn variables*
-
-- dyn_dyn_anytype
-- dyn_dyn_atime
-- dyn_dyn_bit32
-- dyn_dyn_bit64
-- dyn_dyn_bool
-- dyn_dyn_char
-- dyn_dyn_errClass
-- dyn_dyn_float
-- dyn_dyn_int
-- dyn_dyn_uint
-- dyn_dyn_long
-- dyn_dyn_ulong
-- dyn_dyn_langString
-- dyn_dyn_string
-- dyn_dyn_time
-
-**Functions**
-
-- Function_Static
-- Function_Inline
-- Function_Default
-
-**Class Names**
-
-- Class_Name
+*variables*  | *dyn variables* | *dyn_dyn variables* | *functions* | *class names |
+|--|--|--|--|--|
+| anytype        | dyn_anytype  | dyn_dyn_anytype | Function_Static |Class_Name |
+| atime          | dyn_atime   | dyn_dyn_atime | Function_Inline |           |
+| bit32          | dyn_bit32   | dyn_dyn_bit32 | Function_Default|         |
+| bit64          | dyn_bit64   | dyn_dyn_bit64 |              |           |
+| blob           | dyn_blob   | dyn_dyn_bool  |             |               |
+| bool           | dyn_bool   | dyn_dyn_char  |             |               |
+| char           | dyn_char   | dyn_dyn_errClass |          |               |
+| double         | dyn_errClass  | dyn_dyn_float |              |           |
+| errClass       | dyn_float   | dyn_dyn_int  |                 |           |
+| file           | dyn_int   | dyn_dyn_uint  |             |               |
+| float          | dyn_uint   | dyn_dyn_long  |             |               |
+| function_ptr   | dyn_long   | dyn_dyn_ulong |              |           |
+| int            | dyn_ulong   | dyn_dyn_langString |           |           |
+| uint           | dyn_langString |  dyn_dyn_string  |         |               |
+| long           | dyn_mapping  | dyn_dyn_time  |              |               |
+| ulong          | dyn_string  |               |            |               |
+| langString     | dyn_time   |                  |            |               |
+| mixed          | dyn_shape   |                  |            |               |
+| mapping        |         |                  |               |            |
+| va_list        |         |                  |               |            |
+| string         |         |                  |               |            |
+| time           |         |                  |               |            |
+| unsigned       |         |                  |               |            |
+| dbRecordset    |         |                  |               |            |
+| dbConnection   |         |                  |               |            |
+| dbCommand   |               |                  |               |            |
+| shape    |                |                  |               |            |
+| idispatch   |               |                  |               |            |
