@@ -1,12 +1,9 @@
 # How to Build CtrlppCheck
 
-We use conan to build.
-
 ## On first Usage
 
 ```bash
 cd build
-conan install .. -s compiler.runtime=MT -s compiler.toolset=v140
 cmake .. -G "Visual Studio 16 2019" -A x64
 cmake --build .  --config Release
 ```
@@ -14,7 +11,6 @@ cmake --build .  --config Release
 ## Debug
 
 ```bash 
-conan install .. -s compiler.runtime=MTd -s compiler.toolset=v140 -s build_type=Debug --build=missing
 cmake .. -G "Visual Studio 16 2019" -A x64
 cmake --build .  --config Debug
 ```
