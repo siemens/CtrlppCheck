@@ -568,12 +568,16 @@ void CppCheck::checkSimplifiedTokens(const Tokenizer &tokenizer)
 //----------------------------------------------------------------------------------------------------------------------------------------
 void CppCheck::executeRules(const std::string &tokenlist, const Tokenizer &tokenizer)
 {
+  // Step 1:
+  // Should there be rules to execute?
+  if (mSettings.rules.empty())
+    return;
+
   (void)tokenlist;
   (void)tokenizer;
 
-  // Step 1:
+  // Step 2:
   // Are there rules to execute?
-  
   // check if some rule exist, performance , otherwise is unnecessary genereated source from tokenize in next step.
   bool isrule = false;
   for (std::list<Settings::Rule>::const_iterator it = mSettings.rules.begin(); it != mSettings.rules.end(); ++it) {
@@ -597,13 +601,13 @@ void CppCheck::executeRules(const std::string &tokenlist, const Tokenizer &token
         "There is no rule to execute. Tokenlist: " + tokenlist,
         "ruleCheck_noRule",
         false);
-
+    
     reportErr(errmsg);
 
     return;
   }
 
-  // Step 2:
+  // Step 3:
   // Write all tokens in a string that can be parsed by regExp
   std::ostringstream ostr;
   for (const Token *tok = tokenizer.tokens(); tok; tok = tok->next())
@@ -613,7 +617,7 @@ void CppCheck::executeRules(const std::string &tokenlist, const Tokenizer &token
   if (mSettings.verbose)
     mErrorLogger.reportOut("source:" + str);
 
-  // Step 3:
+  // Step 4:
   // check the source for rules
   for (std::list<Settings::Rule>::const_iterator it = mSettings.rules.begin(); it != mSettings.rules.end(); ++it)
   {
@@ -640,7 +644,7 @@ void CppCheck::executeRules(const std::string &tokenlist, const Tokenizer &token
     if ( mSettings.verbose )
         mErrorLogger.reportOut("pattern:" + rule.pattern);
     
-    // Step 4:
+    // Step 5:
     // do regExp
     try
     { 
