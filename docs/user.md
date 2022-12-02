@@ -1,6 +1,6 @@
 # Introduction to WinCC OA Qualitycheck
 
-The tool is implemented as a WinCC OA Subproject and is devided into two parts:
+The tool is implemented as a WinCC OA Subproject and is divided into two parts:
 
 - Quality Checks
 - Ctrlppcheck
@@ -39,7 +39,7 @@ Included are, among many others, these checks:
 - Comparison is always true / false
 - Return value of a specific function is not used e.g. return from dpExists ()
 
-Please understand that there are limits of Ctrlppcheck. Ctrlppcheck is rarely wrong about reported errors. But there are many bugs that it doesn't detect. You will find more bugs in your software by testing your software carefully.
+Please understand that there are limits of CtrlppCheck. CtrlppCheck is rarely wrong about reported errors. But there are many bugs that it doesn't detect. You will find more bugs in your software by testing your software carefully.
 
 ## GEDI Integration
 
@@ -126,7 +126,7 @@ These checks give an initial assessment of the entire folder and its files and a
 | Check per file | Good range |
 |---|---|
 | Size - File size | 1 MB |
-| Extention file type | bmp, xpm, jpg, png, svg, jpeg, gif, mng, ico, wmf |
+| File Extension / File Type | bmp, xpm, jpg, png, svg, jpeg, gif, mng, ico, wmf |
 
 ### Script Check - static (QgStaticCheck_Scripts)
 
@@ -194,13 +194,13 @@ PANELS_REL_PATH + "vision / aes / _ES_propFilterExtended.pnl"
 |---|---|
 | Is file overloaded | FALSE |
 
-WinCCOA Internal Check - statisch (QgStaticCheck_Internal)
+WinCCOA Internal Check - static (QgStaticCheck_Internal)
 This check checks whether certain files, for WinCCOA internal functions, eg. the installation completion of the add-on, are present.
 
 | Check | Good range |
 | File exists - File exists | TRUE |
 
-# Ctrlppcheck
+# CtrlppCheck
 
 ## Available Checks
 
@@ -307,7 +307,7 @@ It's not necessary to register the projects. That means you can also check sourc
 
 ### Excluding A File Or Folder From Checking
 
-There are two options to exclude fiels or folders from checking:  
+There are two options to exclude files or folders from checking:  
 The **first option** is to only provide the paths and files you want to check.
 
 ```bash
@@ -374,7 +374,7 @@ enable all messages
 ctrlppcheck --enable=all
 ```
 
-**Please note** that --enable=unusedFunction should only be used when the whole project is scanned. Therefore, --enable=all should also only be used when the whole project is scanned. Otherwise you might get a lot of flase positives of "unused function" if all the calls are out of scope.
+**Please note** that --enable=unusedFunction should only be used when the whole project is scanned. Therefore, --enable=all should also only be used when the whole project is scanned. Otherwise you might get a lot of false positives of "unused function" if all the calls are out of scope.
 
 ### Saving results in a file
 
@@ -416,7 +416,7 @@ Each error is reported in an `<error>` element. Its attributes are:
 | cwe | CWE ID for the message. This attribute is only used when the CWE ID for the message is known. |
 
 The `<location>` element  
-All error locations are reported as location elemnts on the error element. The primary location is listed first. Its attributes are:  
+All error locations are reported as location elements on the error element. The primary location is listed first. Its attributes are:  
 | Attribute | Description |
 |--|--|
 | file | filename. Both relative and absolute paths are possible |
@@ -468,7 +468,7 @@ Use the suppressions file.
 ctrlppcheck --suppressions-list=suppressions.txt src/
 
 XML suppressions
-Suppressions may also be spcified in a XML file.  
+Suppressions may also be specified in a XML file.  
 Example file:
 
 ```xml
@@ -538,7 +538,7 @@ A suppression may be limited to a certain symbol. In the example below the unini
 // ctrlppcheck-suppress uninitvar symbolName=arr
 ```
 
-Comments may be combined with in code suppressions.  Itis recommended to use ";" or "//" to specify where they start:
+Comments may be combined with in code suppressions.  Its recommended to use ";" or "//" to specify where they start:
 
 ```cpp
 // ctrlppcheck-suppress uninitvar ; some comment
@@ -594,5 +594,5 @@ Possible parameter options:
 --platform=unix32
 --platform=native
 
-**--inconclusive** allows Ctrlppcheck to report results even though the analysis is inconclusive. With this option there can be false positive cases. Each result must be carefully examined before you know whether it is actually a error.  
+**--inconclusive** allows CtrlppCheck to report results even though the analysis is inconclusive. With this option there can be false positive cases. Each result must be carefully examined before you know whether it is actually a error.  
 Use this if no or no more errors can be found without this option.
