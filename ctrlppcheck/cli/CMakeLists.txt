@@ -9,7 +9,6 @@ list(REMOVE_ITEM srcs ${mainfile})
 
 add_library(cli_objs OBJECT ${hdrs} ${srcs}) 
 add_executable(ctrlppcheck ${hdrs} ${mainfile} $<TARGET_OBJECTS:cli_objs> $<TARGET_OBJECTS:lib_objs> $<TARGET_OBJECTS:tinyxml2_objs> $<TARGET_OBJECTS:simplecpp_objs>) #$<TARGET_OBJECTS:tinyxml_objs> 
-target_link_libraries(ctrlppcheck ${CONAN_LIBS})
 
 if (WIN32 AND NOT BORLAND)
     target_link_libraries(ctrlppcheck Shlwapi.lib)
