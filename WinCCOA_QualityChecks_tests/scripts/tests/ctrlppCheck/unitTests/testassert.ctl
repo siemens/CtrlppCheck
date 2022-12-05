@@ -110,39 +110,6 @@ struct TestAssert : public TestFixture
           "   assert( !SquarePack::isRank1Or8(push2) );\n"
           "}\n");
     ASSERT_EQUALS("[test.cpp:8]: (warning) Assert statement calls a function which may have desired side effects: 'isRank1Or8'.\n", errout.str());
-    /* Makes no sense in Ctrl
-    check("struct Square {\n"
-          "  static void dummy(){1+1;}\n"
-          "};\n"
-          "\n"
-          "\n""struct SquarePack {\n"
-          "   static bool isRank1Or8( Square *sq ) {\n"
-          "      *sq &= 0x38;\n"
-          "      return *sq == 0 || *sq == 0x38;\n"
-          "    }\n"
-          "};\n"
-          "void foo() {\n"
-          "   Square* push2;\n"
-          "   assert( !SquarePack::isRank1Or8(push2) );\n"
-          "}\n");
-    ASSERT_EQUALS("[test.cpp:8]: (warning) Assert statement calls a function which may have desired side effects: 'isRank1Or8'.\n", errout.str());
-
-    check("struct Square {\n"
-          "  static void dummy(){1+1;}\n"
-          "};\n"
-          "\n"
-          "struct SquarePack {\n"
-          "   static bool isRank1Or8( Square *sq ) {\n"
-          "      sq &= 0x38;\n"
-          "      return sq == 0 || sq == 0x38;\n"
-          "    }\n"
-          "};\n"
-          "void foo() {\n"
-          "   Square* push2;\n"
-          "   assert( !SquarePack::isRank1Or8(push2) );\n"
-          "}\n");
-    ASSERT_EQUALS("", errout.str());
-    */
   }
 
   void memberFunctionCallInAssert()
@@ -154,15 +121,7 @@ struct TestAssert : public TestFixture
           "   assert( s.Foo() );\n"
           "}");
     ASSERT_EQUALS("[test.cpp:5]: (warning) Assert statement calls a function which may have desired side effects: 'Foo'.\n", errout.str());
-    /* Makes no sense in Ctrl
-    check("struct SquarePack {\n"
-          "   const void Foo() {}\n"
-          "};\n"
-          "void foo(SquarePack& s) {\n"
-          "   assert( s.Foo() );\n"
-          "}");
-    ASSERT_EQUALS("", errout.str());
-    */
+
     check("struct SquarePack {\n"
           "   static void Foo(){}\n"
           "};\n"
@@ -226,17 +185,6 @@ struct TestAssert : public TestFixture
           "    assert(a--);\n"
           "}\n");
     ASSERT_EQUALS("[test.cpp:3]: (warning) Assert statement modifies 'a'.\n", errout.str());
-
-    /*
-    check("bool f() {\n"
-          "  assert(std::all_of(first, last, []() {\n" //Ctrl does not support lambda functions
-          "                  auto tmp = x.someValue();\n"
-          "                  auto const expected = someOtherValue;\n"
-          "                  return tmp == expected;\n"
-          "                }));\n"
-          "}\n");
-    ASSERT_EQUALS("", errout.str());
-    */
   }
 };
 
