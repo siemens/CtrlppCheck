@@ -10,7 +10,6 @@
 <!-- TEST RULES -->
 <!-- OK rule -->
 <rule version="1">
-  <tokenlist>normal</tokenlist>
     <pattern> substr \( \w , \w , 1 \) </pattern>
     <message>
     <id>TokenSubStrAt0Test</id>
@@ -20,7 +19,6 @@
 </rule>
 <!-- bad pattern test -->
 <rule version="1">
-   <tokenlist>normal</tokenlist>
     <pattern>[a-b][a</pattern>
     <message>
     <id>badPattern</id>
@@ -30,7 +28,6 @@
 </rule>
 <!-- empty pattern test -->
 <rule version="1">
-  <tokenlist>normal</tokenlist>
     <pattern></pattern>
     <message>
     <id>emptyPattern</id>
@@ -40,7 +37,6 @@
 </rule>
 <!-- empty ID test -->
 <rule version="1">
-  <tokenlist>normal</tokenlist>
     <pattern>[a-b][a</pattern>
     <message>
     <id></id>
@@ -50,7 +46,6 @@
 </rule>
 <!-- empty severity test -->
 <rule version="1">
-  <tokenlist>normal</tokenlist>
     <pattern>[a-b][a</pattern>
     <message>
     <id>emptySeverity</id>
