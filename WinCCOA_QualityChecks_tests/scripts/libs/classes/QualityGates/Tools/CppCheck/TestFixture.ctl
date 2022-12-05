@@ -81,13 +81,14 @@ class TestFixture
     string totalPath = makeNativePath(PROJ_PATH + SCRIPTS_REL_PATH + "test.ctl");
     string relativePath = SCRIPTS_REL_PATH + "test.ctl";
     strreplace(expVal, "test.cpp", makeNativePath("scripts/test.ctl"));
+
     strreplace(expVal, "\r", "");
+    strreplace(val, "\r", "");
 
     strreplace(val, "(error) There is no rule to execute. Tokenlist: raw\n",    "");
     strreplace(val, "(error) There is no rule to execute. Tokenlist: normal\n", "");
     strreplace(val, "(error) There is no rule to execute. Tokenlist: simple\n", "");
 
-    strreplace(val, "\r", "");
     strreplace(relativePath, "\\", "/");
     strreplace(val, totalPath, relativePath);
 
