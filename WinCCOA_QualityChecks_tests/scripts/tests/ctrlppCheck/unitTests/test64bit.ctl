@@ -39,16 +39,16 @@ struct Test64BitPortability : public TestFixture {
         TEST_CASE(novardecl);
         TEST_CASE(functionpar);
         TEST_CASE(functionparWinCCOA);
-        
+
         TEST_CASE(structmember);
         TEST_CASE(structmemberWinCC_OA);
-        
+
         TEST_CASE(ptrcompare);
         TEST_CASE(ptrcompareWinCC_OA);
-        
+
         TEST_CASE(ptrarithmetic);
         TEST_CASE(ptrarithmeticWinCC_OA);
-        
+
         TEST_CASE(returnIssues);
         TEST_CASE(returnIssuesWinCC_OA);
     }
@@ -59,7 +59,8 @@ struct Test64BitPortability : public TestFixture {
               "{\n"
               "    a = p;\n"
               "}");
-        ASSERT_EQUALS("", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:3]: (warning) Undefined variable: a\n"
+                      "[scripts/test.ctl:3]: (warning) Undefined variable: p\n", errout.str());
     }
 
     void functionpar() {
@@ -158,7 +159,7 @@ struct Test64BitPortability : public TestFixture {
               "    int i = foo.p;\n"
               "}");
     }
-        
+
     void ptrcompare() {
         // Ticket #2892
         check("void foo(int *p) {\n"
@@ -169,10 +170,6 @@ struct Test64BitPortability : public TestFixture {
     }
 
     void ptrcompareWinCC_OA() {
-        check("void foo(int p) {\n"
-              "    int a = (p != NULL);\n"
-              "}");
-        ASSERT_EQUALS("", errout.str());
         check("void foo(int p) {\n"
               "    int a = (p != nullptr);\n"
               "}");
@@ -209,7 +206,7 @@ struct Test64BitPortability : public TestFixture {
         ASSERT_EQUALS("WinCC OA syntax error at pos: 13", errout.str());
 //         ASSERT_EQUALS("", errout.str());
     }
-    
+
     /// @todo ptr aritmetic for WinCC OA
     void ptrarithmeticWinCC_OA() {
     }
@@ -217,7 +214,7 @@ struct Test64BitPortability : public TestFixture {
     void returnIssues() {
         check("void* foo(int i) {\n"
               "    return i;\n"
-              "}");        
+              "}");
         ASSERT_EQUALS("WinCC OA syntax error at pos: 4", errout.str());
 //         ASSERT_EQUALS("[test.cpp:2]: (portability) Returning an integer in a function with pointer return type is not portable.\n", errout.str());
 
@@ -304,8 +301,8 @@ struct Test64BitPortability : public TestFixture {
         ASSERT_EQUALS("WinCC OA syntax error at pos: 9", errout.str());
 //         ASSERT_EQUALS("", errout.str());
     }
-    
-    
+
+
     void returnIssuesWinCC_OA() {
         check("int foo() {\n"
               "    return 0;\n"
