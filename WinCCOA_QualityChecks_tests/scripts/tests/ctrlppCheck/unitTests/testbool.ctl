@@ -23,7 +23,7 @@
 // #include "settings.h"
 // #include "testsuite.h"
 // #include "tokenize.h"
-// 
+//
 
 struct TestBool : public TestFixture {
 // public
@@ -71,24 +71,24 @@ struct TestBool : public TestFixture {
 
         TEST_CASE(returnNonBool);
         TEST_CASE(returnNonBoolWinCC_OA);
-        
+
         TEST_CASE(winCC_OA_const);
-        
-        
-        
+
+
+
     }
 
-//     void check(const char code[], bool experimental = false, const char filename[] = "test.cpp") {
+//     void check(const char code[], bool experimental = false, const char filename[] = "scripts/test.ctl") {
         // Clear the error buffer..
 //         errout.str("");
-// 
+//
 //         settings.experimental = experimental;
-// 
+//
         // Tokenize..
 //         Tokenizer tokenizer(&settings, this);
 //         std::istringstream istr(code);
 //         tokenizer.tokenize(istr, filename);
-// 
+//
         // Check...
 //         CheckBool checkBool(&tokenizer, &settings, this);
 //         checkBool.runChecks(&tokenizer, &settings, this);
@@ -102,25 +102,25 @@ struct TestBool : public TestFixture {
               "    p = false;\n"
               "}");
         ASSERT_EQUALS("WinCC OA syntax error at pos: 14", errout.str());
-//         ASSERT_EQUALS("[test.cpp:2]: (error) Boolean value assigned to pointer.\n", errout.str());
+//         ASSERT_EQUALS("[scripts/test.ctl:2]: (error) Boolean value assigned to pointer.\n", errout.str());
 
         check("void foo(bool *p) {\n"
               "    p = (x<y);\n"
               "}");
         ASSERT_EQUALS("WinCC OA syntax error at pos: 14", errout.str());
-//         ASSERT_EQUALS("[test.cpp:2]: (error) Boolean value assigned to pointer.\n", errout.str());
+//         ASSERT_EQUALS("[scripts/test.ctl:2]: (error) Boolean value assigned to pointer.\n", errout.str());
 
         check("void foo(bool *p) {\n"
               "    p = (x||y);\n"
               "}");
         ASSERT_EQUALS("WinCC OA syntax error at pos: 14", errout.str());
-//         ASSERT_EQUALS("[test.cpp:2]: (error) Boolean value assigned to pointer.\n", errout.str());
+//         ASSERT_EQUALS("[scripts/test.ctl:2]: (error) Boolean value assigned to pointer.\n", errout.str());
 
         check("void foo(bool *p) {\n"
               "    p = (x&&y);\n"
               "}");
         ASSERT_EQUALS("WinCC OA syntax error at pos: 14", errout.str());
-//         ASSERT_EQUALS("[test.cpp:2]: (error) Boolean value assigned to pointer.\n", errout.str());
+//         ASSERT_EQUALS("[scripts/test.ctl:2]: (error) Boolean value assigned to pointer.\n", errout.str());
 
         // check against potential false positives
         check("void foo(bool *p) {\n"
@@ -148,13 +148,13 @@ struct TestBool : public TestFixture {
               "    s.p = true;\n"
               "}\n");
         ASSERT_EQUALS("WinCC OA syntax error at pos: 20", errout.str());
-//         ASSERT_EQUALS("[test.cpp:6]: (error) Boolean value assigned to pointer.\n", errout.str());
+//         ASSERT_EQUALS("[scripts/test.ctl:6]: (error) Boolean value assigned to pointer.\n", errout.str());
 
         // ticket #5627 - false positive: template
         check("void f() {\n"
               "    X *p = new ::std::pair<int,int>[rSize];\n"
               "}");
-        ASSERT_EQUALS("WinCC OA syntax error at pos: 20", errout.str());
+        ASSERT_EQUALS("WinCC OA syntax error at pos: 33", errout.str());
 //         ASSERT_EQUALS("", errout.str());
 
         // ticket #6588 (c mode)
@@ -177,7 +177,7 @@ struct TestBool : public TestFixture {
               "                       ctx->q_chroma_intra_matrix;\n"
               "}");
         ASSERT_EQUALS("WinCC OA syntax error at pos: 28", errout.str());
-//         ASSERT_EQUALS("[test.cpp:3]: (error) Boolean value assigned to pointer.\n", errout.str());
+//         ASSERT_EQUALS("[scripts/test.ctl:3]: (error) Boolean value assigned to pointer.\n", errout.str());
 
         // ticket #6665
         check("void pivot_big(char *first, int compare(const void *, const void *)) {\n"
@@ -195,31 +195,33 @@ struct TestBool : public TestFixture {
               "    p = &b;\n"
               "}");
         ASSERT_EQUALS("WinCC OA syntax error at pos: 14", errout.str());
-//         ASSERT_EQUALS("[test.cpp:2]: (error) Boolean value assigned to pointer.\n", errout.str());
+//         ASSERT_EQUALS("[scripts/test.ctl:2]: (error) Boolean value assigned to pointer.\n", errout.str());
     }
 
     void assignBoolToFloat() {
         check("void foo1() {\n"
               "    double d = false;\n"
               "}");
-        ASSERT_EQUALS("[test.cpp:2]: (style) Boolean value assigned to floating point variable.\n", errout.str());
+        //ASSERT_EQUALS("[scripts/test.ctl:2]: (style) Boolean value assigned to floating point variable.\n", errout.str()); no such error in code
+        // Shouldn't an error of an unused variable be thrown? (Like in the ASSERT_EQUALS below)
+        ASSERT_EQUALS("", errout.str());
 
         check("void foo2() {\n"
               "    float d = true;\n"
               "}");
-        ASSERT_EQUALS("[test.cpp:2]: (style) Boolean value assigned to floating point variable.\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Variable is assigned a value that is never used: 'd'\n", errout.str());
 
         check("void foo3() {\n"
-              "    long double d = (2>1);\n"
+              "    double d = (2>1);\n"
               "}");
-        ASSERT_EQUALS("WinCC OA syntax error at pos: 23", errout.str());
-//         ASSERT_EQUALS("[test.cpp:2]: (style) Boolean value assigned to floating point variable.\n", errout.str());
+        ASSERT_EQUALS("", errout.str());
+//         ASSERT_EQUALS("[scripts/test.ctl:2]: (style) Boolean value assigned to floating point variable.\n", errout.str());
 
         // stability - don't crash:
         check("void foo4() {\n"
               "    unknown = false;\n"
               "}");
-        ASSERT_EQUALS("", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Undefined variable: unknown\n", errout.str());
 
         check("struct S {\n"
               "    float p;\n"
@@ -229,7 +231,7 @@ struct TestBool : public TestFixture {
               "    s.p = true;\n"
               "}\n");
         ASSERT_EQUALS("WinCC OA syntax error at pos: 48", errout.str());
-//         ASSERT_EQUALS("[test.cpp:6]: (style) Boolean value assigned to floating point variable.\n", errout.str());
+//         ASSERT_EQUALS("[scripts/test.ctl:6]: (style) Boolean value assigned to floating point variable.\n", errout.str());
         check("struct S {\n"
               "    float p;\n"
               "};\n"
@@ -237,7 +239,7 @@ struct TestBool : public TestFixture {
               "    S s;\n"
               "    s.p = true;\n"
               "}\n");
-        ASSERT_EQUALS("[test.cpp:6]: (style) Boolean value assigned to floating point variable.\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:6]: (warning) Variable is assigned a value that is never used: 's.p'\n", errout.str());
     }
 
     void comparisonOfBoolExpressionWithInt1() {
@@ -246,28 +248,28 @@ struct TestBool : public TestFixture {
               "        a++;\n"
               "}\n"
              );
-        ASSERT_EQUALS("[test.cpp:2]: (warning) Comparison of a boolean expression with an integer other than 0 or 1.\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Comparison of a boolean expression with an integer other than 0 or 1.\n", errout.str());
 
         check("void f(int x) {\n"
               "    if ((x && 0x0f)==0)\n"
               "        a++;\n"
               "}\n"
              );
-        ASSERT_EQUALS("", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:3]: (warning) Undefined variable: a\n", errout.str());
 
         check("void f(int x) {\n"
               "    if ((x || 0x0f)==6)\n"
               "        a++;\n"
               "}\n"
              );
-        ASSERT_EQUALS("[test.cpp:2]: (warning) Comparison of a boolean expression with an integer other than 0 or 1.\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Comparison of a boolean expression with an integer other than 0 or 1.\n", errout.str());
 
         check("void f(int x) {\n"
               "    if ((x || 0x0f)==0)\n"
               "        a++;\n"
               "}\n"
              );
-        ASSERT_EQUALS("[test.cpp:2]: (style) Condition '(x||15)==0' is always false\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:3]: (warning) Undefined variable: a\n", errout.str());
 //         ASSERT_EQUALS("", errout.str());
 
         check("void f(int x) {\n"
@@ -275,14 +277,14 @@ struct TestBool : public TestFixture {
               "        a++;\n"
               "}\n"
              );
-        ASSERT_EQUALS("", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:3]: (warning) Undefined variable: a\n", errout.str());
 
         check("void f(int x) {\n"
               "    if ((x | 0x0f)==6)\n"
               "        a++;\n"
               "}\n"
              );
-        ASSERT_EQUALS("[test.cpp:2]: (style) Expression '(X | 0xf) == 0x6' is always false.", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (style) Expression '(X | 0xf) == 0x6' is always false.", errout.str());
 //         ASSERT_EQUALS("", errout.str());
 
 
@@ -291,21 +293,21 @@ struct TestBool : public TestFixture {
               "        a++;\n"
               "}\n"
              );
-        ASSERT_EQUALS("[test.cpp:2]: (warning) Comparison of a boolean expression with an integer other than 0 or 1.\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Comparison of a boolean expression with an integer other than 0 or 1.\n", errout.str());
 
         check("void f(int x) {\n"
               "    if ((5 && x)==3 || (8 && x)==9)\n"
               "        a++;\n"
               "}\n"
              );
-        ASSERT_EQUALS("[test.cpp:2]: (warning) Comparison of a boolean expression with an integer other than 0 or 1.\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Comparison of a boolean expression with an integer other than 0 or 1.\n", errout.str());
 
         check("void f(int x) {\n"
               "    if ((5 && x)!=3)\n"
               "        a++;\n"
               "}\n"
              );
-        ASSERT_EQUALS("[test.cpp:2]: (warning) Comparison of a boolean expression with an integer other than 0 or 1.\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Comparison of a boolean expression with an integer other than 0 or 1.\n", errout.str());
 
 
         check("void f(int x) {\n"
@@ -313,35 +315,39 @@ struct TestBool : public TestFixture {
               "        a++;\n"
               "}\n"
              );
-        ASSERT_EQUALS("[test.cpp:2]: (warning) Comparison of a boolean expression with an integer other than 0 or 1.\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Comparison of a boolean expression with an integer other than 0 or 1.\n", errout.str());
 
         check("void f(int x) {\n"
               "    if ((5 && x) > 0)\n"
               "        a++;\n"
               "}\n"
              );
-        ASSERT_EQUALS("", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Comparison of a variable having boolean value using relational (<, >, <= or >=) operator.\n"
+                      "[scripts/test.ctl:3]: (warning) Undefined variable: a\n",
+                      errout.str());
 
         check("void f(int x) {\n"
               "    if ((5 && x) < 0)\n"
               "        a++;\n"
               "}\n"
              );
-        ASSERT_EQUALS("[test.cpp:2]: (warning) Comparison of a boolean expression with an integer other than 0 or 1.\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Comparison of a boolean expression with an integer other than 0 or 1.\n", errout.str());
 
         check("void f(int x) {\n"
               "    if ((5 && x) < 1)\n"
               "        a++;\n"
               "}\n"
              );
-        ASSERT_EQUALS("", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Comparison of a variable having boolean value using relational (<, >, <= or >=) operator.\n"
+                      "[scripts/test.ctl:3]: (warning) Undefined variable: a\n",
+                      errout.str());
 
         check("void f(int x) {\n"
               "    if ((5 && x) > 1)\n"
               "        a++;\n"
               "}\n"
              );
-        ASSERT_EQUALS("[test.cpp:2]: (warning) Comparison of a boolean expression with an integer other than 0 or 1.\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Comparison of a boolean expression with an integer other than 0 or 1.\n", errout.str());
 
 
         check("void f(int x) {\n"
@@ -349,84 +355,104 @@ struct TestBool : public TestFixture {
               "        a++;\n"
               "}\n"
              );
-        ASSERT_EQUALS("", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Comparison of a variable having boolean value using relational (<, >, <= or >=) operator.\n"
+                      "[scripts/test.ctl:3]: (warning) Undefined variable: a\n",
+                      errout.str());
 
         check("void f(int x) {\n"
               "    if (0 > (5 && x))\n"
               "        a++;\n"
               "}\n"
              );
-        ASSERT_EQUALS("[test.cpp:2]: (warning) Comparison of a boolean expression with an integer other than 0 or 1.\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Comparison of a boolean expression with an integer other than 0 or 1.\n", errout.str());
 
         check("void f(int x) {\n"
               "    if (1 > (5 && x))\n"
               "        a++;\n"
               "}\n"
              );
-        ASSERT_EQUALS("", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Comparison of a variable having boolean value using relational (<, >, <= or >=) operator.\n"
+                      "[scripts/test.ctl:3]: (warning) Undefined variable: a\n",
+                      errout.str());
 
         check("void f(int x) {\n"
               "    if (1 < (5 && x))\n"
               "        a++;\n"
               "}\n"
              );
-        ASSERT_EQUALS("[test.cpp:2]: (warning) Comparison of a boolean expression with an integer other than 0 or 1.\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Comparison of a boolean expression with an integer other than 0 or 1.\n", errout.str());
 
         check("void f(bool x ) {\n"
               "  if ( x > false )\n"
               "      a++;\n"
               "}\n"
              );
-        ASSERT_EQUALS("[test.cpp:2]: (warning) Comparison of a boolean value using relational operator (<, >, <= or >=).\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Comparison of a variable having boolean value using relational (<, >, <= or >=) operator.\n"
+                      "[scripts/test.ctl:3]: (warning) Undefined variable: a\n",
+                      errout.str());
 
         check("void f(bool x ) {\n"
               "  if ( false < x )\n"
               "      a++;\n"
               "}\n"
              );
-        ASSERT_EQUALS("[test.cpp:2]: (warning) Comparison of a boolean value using relational operator (<, >, <= or >=).\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Comparison of a variable having boolean value using relational (<, >, <= or >=) operator.\n"
+                      "[scripts/test.ctl:3]: (warning) Undefined variable: a\n",
+                      errout.str());
 
         check("void f(bool x ) {\n"
               "  if ( x < false )\n"
               "      a++;\n"
               "}\n"
              );
-        ASSERT_EQUALS("[test.cpp:2]: (warning) Comparison of a boolean value using relational operator (<, >, <= or >=).\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Comparison of a variable having boolean value using relational (<, >, <= or >=) operator.\n"
+                      "[scripts/test.ctl:3]: (warning) Undefined variable: a\n",
+                      errout.str());
 
         check("void f(bool x ) {\n"
               "  if ( false > x )\n"
               "      a++;\n"
               "}\n"
              );
-        ASSERT_EQUALS("[test.cpp:2]: (warning) Comparison of a boolean value using relational operator (<, >, <= or >=).\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Comparison of a variable having boolean value using relational (<, >, <= or >=) operator.\n"
+                      "[scripts/test.ctl:3]: (warning) Undefined variable: a\n",
+                      errout.str());
 
         check("void f(bool x ) {\n"
               "  if ( x >= false )\n"
               "      a++;\n"
               "}\n"
              );
-        ASSERT_EQUALS("[test.cpp:2]: (warning) Comparison of a boolean value using relational operator (<, >, <= or >=).\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Comparison of a variable having boolean value using relational (<, >, <= or >=) operator.\n"
+                      "[scripts/test.ctl:3]: (warning) Undefined variable: a\n",
+                      errout.str());
 
         check("void f(bool x ) {\n"
               "  if ( false >= x )\n"
               "      a++;\n"
               "}\n"
              );
-        ASSERT_EQUALS("[test.cpp:2]: (warning) Comparison of a boolean value using relational operator (<, >, <= or >=).\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Comparison of a variable having boolean value using relational (<, >, <= or >=) operator.\n"
+                      "[scripts/test.ctl:3]: (warning) Undefined variable: a\n",
+                      errout.str());
 
         check("void f(bool x ) {\n"
               "  if ( x <= false )\n"
               "      a++;\n"
               "}\n"
              );
-        ASSERT_EQUALS("[test.cpp:2]: (warning) Comparison of a boolean value using relational operator (<, >, <= or >=).\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Comparison of a variable having boolean value using relational (<, >, <= or >=) operator.\n"
+                      "[scripts/test.ctl:3]: (warning) Undefined variable: a\n",
+                      errout.str());
 
         check("void f(bool x ) {\n"
               "  if ( false <= x )\n"
               "      a++;\n"
               "}\n"
              );
-        ASSERT_EQUALS("[test.cpp:2]: (warning) Comparison of a boolean value using relational operator (<, >, <= or >=).\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Comparison of a variable having boolean value using relational (<, >, <= or >=) operator.\n"
+                      "[scripts/test.ctl:3]: (warning) Undefined variable: a\n",
+                      errout.str());
 
         check("typedef int (*func)(bool invert);\n"
               "void x(int, func f);\n"
@@ -437,16 +463,22 @@ struct TestBool : public TestFixture {
 //         ASSERT_EQUALS("", errout.str());
 
         check("int f() { return !a+b<c; }"); // #5072
-        ASSERT_EQUALS("",errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:1]: (warning) Undefined variable: a\n"
+                      "[scripts/test.ctl:1]: (warning) Undefined variable: b\n"
+                      "[scripts/test.ctl:1]: (warning) Undefined variable: c\n",
+                      errout.str());
 
         check("int f() { return (!a+b<c); }");
-        ASSERT_EQUALS("",errout.str());
+         ASSERT_EQUALS("[scripts/test.ctl:1]: (warning) Undefined variable: a\n"
+                       "[scripts/test.ctl:1]: (warning) Undefined variable: b\n"
+                       "[scripts/test.ctl:1]: (warning) Undefined variable: c\n",
+                       errout.str());
 
         {
             const string code = "void f(int x, bool y) { if ( x != y ) {} }";
 
-            check(code, false, "test.cpp");
-            ASSERT_EQUALS("[test.cpp:1]: (warning) Comparison of a boolean expression with an integer.\n", errout.str());
+            check(code, false, "scripts/test.ctl");
+            ASSERT_EQUALS("[scripts/test.ctl:1]: (warning) Comparison of a boolean expression with an integer.\n", errout.str());
 
             // @test c-style, not oa relevant
 //             check(code, false, "test.c");
@@ -454,7 +486,11 @@ struct TestBool : public TestFixture {
         }
 
         check("int f() { return (a+(b<5)<=c); }");
-        ASSERT_EQUALS("",errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:1]: (warning) Comparison of a variable having boolean value using relational (<, >, <= or >=) operator.\n"
+                      "[scripts/test.ctl:1]: (warning) Undefined variable: a\n"
+                      "[scripts/test.ctl:1]: (warning) Undefined variable: b\n"
+                      "[scripts/test.ctl:1]: (warning) Undefined variable: c\n",
+                      errout.str());
     }
 
     void comparisonOfBoolExpressionWithInt2() {
@@ -463,14 +499,14 @@ struct TestBool : public TestFixture {
               "        printf(\"x not equal to 10\");\n"
               "    }\n"
               "}");
-        ASSERT_EQUALS("[test.cpp:2]: (warning) Comparison of a boolean expression with an integer other than 0 or 1.\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Comparison of a boolean expression with an integer other than 0 or 1.\n", errout.str());
 
         check("void f(int x) {\n"
               "    if (!x != 10) {\n"
               "        printf(\"x not equal to 10\");\n"
               "    }\n"
               "}");
-        ASSERT_EQUALS("[test.cpp:2]: (warning) Comparison of a boolean expression with an integer other than 0 or 1.\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Comparison of a boolean expression with an integer other than 0 or 1.\n", errout.str());
 
         check("void f(int x) {\n"
               "    if (x != 10) {\n"
@@ -484,14 +520,14 @@ struct TestBool : public TestFixture {
               "        printf(\"x not equal to 10\");\n"
               "    }\n"
               "}");
-        ASSERT_EQUALS("[test.cpp:2]: (warning) Comparison of a boolean expression with an integer other than 0 or 1.\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Comparison of a boolean expression with an integer other than 0 or 1.\n", errout.str());
 
         check("void f(int x) {\n"
               "    if (10 != !x) {\n"
               "        printf(\"x not equal to 10\");\n"
               "    }\n"
               "}");
-        ASSERT_EQUALS("[test.cpp:2]: (warning) Comparison of a boolean expression with an integer other than 0 or 1.\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Comparison of a boolean expression with an integer other than 0 or 1.\n", errout.str());
 
         check("void f(int x, int y) {\n"
               "    if (y != !x) {\n"
@@ -514,7 +550,7 @@ struct TestBool : public TestFixture {
               "}");
         ASSERT_EQUALS("", errout.str());
 
-        check("void f(int x, int y) {\n"
+        check("bool f(int x, int y) {\n"
               "    return (!y == !x);\n"
               "}");
         ASSERT_EQUALS("", errout.str());
@@ -524,17 +560,24 @@ struct TestBool : public TestFixture {
               "}");
         TODO_ASSERT_EQUALS("error", "", errout.str());
 
-        check("void f() { if (!!a+!!b+!!c>1){} }");
-        ASSERT_EQUALS("",errout.str());
+        check("void f() { if (!!a + !!b + !!c >1){} }");
+        ASSERT_EQUALS("[scripts/test.ctl:1]: (warning) Comparison of a boolean expression with an integer other than 0 or 1.\n"
+                      "[scripts/test.ctl:1]: (warning, inconclusive) The scope is empty: 'if'\n"
+                      "[scripts/test.ctl:1]: (warning) Undefined variable: a\n"
+                      "[scripts/test.ctl:1]: (warning) Undefined variable: b\n"
+                      "[scripts/test.ctl:1]: (warning) Undefined variable: c\n",
+                      errout.str());
 
         check("void f(int a, int b, int c) { if (a != !b || c) {} }");
-        ASSERT_EQUALS("",errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:1]: (warning, inconclusive) The scope is empty: 'if'\n", errout.str());
 
         check("void f(int a, int b, int c) { if (1 < !!a + !!b + !!c) {} }");
-        ASSERT_EQUALS("",errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:1]: (warning) Comparison of a boolean expression with an integer other than 0 or 1.\n"
+                      "[scripts/test.ctl:1]: (warning, inconclusive) The scope is empty: 'if'\n",
+                      errout.str());
 
         check("void f(int a, int b, int c) { if (1 < !(a+b)) {} }");
-        ASSERT_EQUALS("[test.cpp:1]: (warning) Comparison of a boolean expression with an integer other than 0 or 1.\n",errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:1]: (warning) Comparison of a boolean expression with an integer other than 0 or 1.\n",errout.str());
     }
 
     void comparisonOfBoolExpressionWithInt3() {
@@ -550,19 +593,19 @@ struct TestBool : public TestFixture {
         check("void f() {\n"
               "  for(int i = 4; i > -1 < 5 ; --i) {}\n"
               "}");
-        ASSERT_EQUALS("[test.cpp:2]: (warning) Comparison of a boolean expression with an integer other than 0 or 1.\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Comparison of a boolean expression with an integer other than 0 or 1.\n", errout.str());
 
-        check("void f(int a, int b, int c) {\n"
+        check("bool f(int a, int b, int c) {\n"
               "  return (a > b) < c;\n"
               "}");
-        ASSERT_EQUALS("[test.cpp:2]: (warning) Comparison of a boolean expression with an integer.\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Comparison of a boolean expression with an integer.\n", errout.str());
 
-        check("void f(int a, int b, int c) {\n"
+        check("bool f(int a, int b, int c) {\n"
               "  return x(a > b) < c;\n"
               "}");
-        ASSERT_EQUALS("", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Comparison of a variable having boolean value using relational (<, >, <= or >=) operator.\n", errout.str());
 
-        check("void f(int a, int b, int c) {\n"
+        check("bool f(int a, int b, int c) {\n"
               "  return a > b == c;\n"
               "}");
         ASSERT_EQUALS("", errout.str());
@@ -585,15 +628,21 @@ struct TestBool : public TestFixture {
         check("int f() {\n"
               "  return (a < b) != 0U;\n"
               "}");
-        ASSERT_EQUALS("", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Undefined variable: a\n"
+                      "[scripts/test.ctl:2]: (warning) Undefined variable: b\n",
+                      errout.str());
+
         check("int f() {\n"
               "  return (a < b) != 0x0;\n"
               "}");
-        ASSERT_EQUALS("", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Undefined variable: a\n"
+                      "[scripts/test.ctl:2]: (warning) Undefined variable: b\n",
+                      errout.str());
+
         check("int f() {\n"
               "  return (a < b) != 42U;\n"
               "}");
-        ASSERT_EQUALS("[test.cpp:2]: (warning) Comparison of a boolean expression with an integer other than 0 or 1.\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Comparison of a boolean expression with an integer other than 0 or 1.\n", errout.str());
     }
 
     void checkComparisonOfFuncReturningBool1() {
@@ -617,7 +666,7 @@ struct TestBool : public TestFixture {
               "     else\n"
               "         return true;\n"
               "}");
-        ASSERT_EQUALS("[test.cpp:3]: (style) Comparison of two functions returning boolean value using relational (<, >, <= or >=) operator.\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:3]: (warning) Comparison of a variable having boolean value using relational (<, >, <= or >=) operator.\n", errout.str());
     }
 
     void checkComparisonOfFuncReturningBool2() {
@@ -635,7 +684,7 @@ struct TestBool : public TestFixture {
               "    else\n"
               "     return false;\n"
               "}");
-        ASSERT_EQUALS("[test.cpp:4]: (style) Comparison of a function returning boolean value using relational (<, >, <= or >=) operator.\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:4]: (warning) Comparison of a variable having boolean value using relational (<, >, <= or >=) operator.\n", errout.str());
     }
 
     void checkComparisonOfFuncReturningBool3() {
@@ -652,8 +701,9 @@ struct TestBool : public TestFixture {
               " else\n"
               "     return false;\n"
               "}");
-        ASSERT_EQUALS("[test.cpp:3]: (warning) Comparison of a boolean expression with an integer.\n"
-                      "[test.cpp:3]: (style) Comparison of a function returning boolean value using relational (<, >, <= or >=) operator.\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:3]: (warning) Comparison of a boolean expression with an integer.\n"
+                      "[scripts/test.ctl:3]: (warning) Comparison of a variable having boolean value using relational (<, >, <= or >=) operator.\n",+
+                      errout.str());
     }
 
     void checkComparisonOfFuncReturningBool4() {
@@ -678,7 +728,7 @@ struct TestBool : public TestFixture {
               " else\n"
               "     return false;\n"
               "}");
-        ASSERT_EQUALS("[test.cpp:4]: (style) Comparison of a function returning boolean value using relational (<, >, <= or >=) operator.\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:4]: (warning) Comparison of a variable having boolean value using relational (<, >, <= or >=) operator.\n", errout.str());
     }
 
     void checkComparisonOfFuncReturningBool5() {
@@ -702,7 +752,7 @@ struct TestBool : public TestFixture {
               "     else\n"
               "         return true;\n"
               "}");
-        ASSERT_EQUALS("[test.cpp:3]: (style) Comparison of two functions returning boolean value using relational (<, >, <= or >=) operator.\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:3]: (warning) Comparison of a variable having boolean value using relational (<, >, <= or >=) operator.\n", errout.str());
     }
 
     void checkComparisonOfFuncReturningBool6() {
@@ -729,7 +779,7 @@ struct TestBool : public TestFixture {
               "        printf(\"foo\");\n"
               "    }\n"
               "}");
-        ASSERT_EQUALS("WinCC OA syntax error at pos: 10", errout.str());
+        ASSERT_EQUALS("WinCC OA syntax error at pos: 0", errout.str());
 //         ASSERT_EQUALS("", errout.str());
 
         check("int compare1(int temp);\n"
@@ -743,7 +793,7 @@ struct TestBool : public TestFixture {
               "    }\n"
               "}");
         ASSERT_EQUALS("WinCC OA syntax error at pos: 22", errout.str());
-//         ASSERT_EQUALS("[test.cpp:6]: (style) Comparison of a function returning boolean value using relational (<, >, <= or >=) operator.\n", errout.str());
+//         ASSERT_EQUALS("[scripts/test.ctl:6]: (style) Comparison of a function returning boolean value using relational (<, >, <= or >=) operator.\n", errout.str());
 
         check("int compare1(int temp);\n"
               "namespace Foo {\n"
@@ -770,7 +820,7 @@ struct TestBool : public TestFixture {
     }
 
     void checkComparisonOfBoolWithBool() {
-      
+
         // @test settings.experimental works for cppCheck intern only. It has no start option for this settings.
         //       Ignore that for WinCC OA tests
         /*
@@ -797,7 +847,7 @@ struct TestBool : public TestFixture {
                             "        return false;\n"
                             "}\n";
         check(code, true);
-        ASSERT_EQUALS("[test.cpp:5]: (style) Comparison of a variable having boolean value using relational (<, >, <= or >=) operator.\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:5]: (style) Comparison of a variable having boolean value using relational (<, >, <= or >=) operator.\n", errout.str());
         check(code, false);
         ASSERT_EQUALS("", errout.str());*/
     }
@@ -806,76 +856,101 @@ struct TestBool : public TestFixture {
         check("void f(bool a, bool b) {\n"
               "    if(a & !b) {}\n"
               "}");
-        ASSERT_EQUALS("[test.cpp:2]: (style, inconclusive) Boolean variable 'a' is used in bitwise operation. Did you mean '&&'?\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning, inconclusive) Boolean variable/expression 'a' is used in bitwise operation. Did you mean '&&'?\n"
+                      "[scripts/test.ctl:2]: (style) Boolean result is used in bitwise operation. Clarify expression with parentheses.\n"
+                      "[scripts/test.ctl:2]: (warning, inconclusive) The scope is empty: 'if'\n",
+                      errout.str());
 
         check("void f(bool a, bool b) {\n"
               "    if(a | !b) {}\n"
               "}");
-        ASSERT_EQUALS("[test.cpp:2]: (style, inconclusive) Boolean variable 'a' is used in bitwise operation. Did you mean '||'?\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning, inconclusive) Boolean variable/expression 'a' is used in bitwise operation. Did you mean '||'?\n"
+                      "[scripts/test.ctl:2]: (style) Boolean result is used in bitwise operation. Clarify expression with parentheses.\n"
+                      "[scripts/test.ctl:2]: (warning, inconclusive) The scope is empty: 'if'\n",
+                      errout.str());
 
         check("bool a, b;\n"
               "void f() {\n"
               "    if(a & b) {}\n"
               "}");
-        ASSERT_EQUALS("[test.cpp:3]: (style, inconclusive) Boolean variable 'a' is used in bitwise operation. Did you mean '&&'?\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:3]: (warning, inconclusive) Boolean variable/expression 'a' is used in bitwise operation. Did you mean '&&'?\n"
+                      "[scripts/test.ctl:3]: (warning, inconclusive) Boolean variable/expression 'b' is used in bitwise operation. Did you mean '&&'?\n"
+                      "[scripts/test.ctl:3]: (warning, inconclusive) The scope is empty: 'if'\n",
+                      errout.str());
 
         check("bool a, b;\n"
               "void f() {\n"
               "    if(a & !b) {}\n"
               "}");
-        ASSERT_EQUALS("[test.cpp:3]: (style, inconclusive) Boolean variable 'a' is used in bitwise operation. Did you mean '&&'?\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:3]: (warning, inconclusive) Boolean variable/expression 'a' is used in bitwise operation. Did you mean '&&'?\n"
+                      "[scripts/test.ctl:3]: (style) Boolean result is used in bitwise operation. Clarify expression with parentheses.\n"
+                      "[scripts/test.ctl:3]: (warning, inconclusive) The scope is empty: 'if'\n",
+                      errout.str());
 
         check("bool a, b;\n"
               "void f() {\n"
               "    if(a | b) {}\n"
               "}");
-        ASSERT_EQUALS("[test.cpp:3]: (style, inconclusive) Boolean variable 'a' is used in bitwise operation. Did you mean '||'?\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:3]: (warning, inconclusive) Boolean variable/expression 'a' is used in bitwise operation. Did you mean '||'?\n"
+                      "[scripts/test.ctl:3]: (warning, inconclusive) Boolean variable/expression 'b' is used in bitwise operation. Did you mean '&&'?\n"
+                      "[scripts/test.ctl:3]: (warning, inconclusive) The scope is empty: 'if'\n",
+                      errout.str());
 
         check("bool a, b;\n"
               "void f() {\n"
               "    if(a | !b) {}\n"
               "}");
-        ASSERT_EQUALS("[test.cpp:3]: (style, inconclusive) Boolean variable 'a' is used in bitwise operation. Did you mean '||'?\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:3]: (warning, inconclusive) Boolean variable/expression 'a' is used in bitwise operation. Did you mean '||'?\n"
+                      "[scripts/test.ctl:3]: (style) Boolean result is used in bitwise operation. Clarify expression with parentheses.\n"
+                      "[scripts/test.ctl:3]: (warning, inconclusive) The scope is empty: 'if'\n",
+                      errout.str());
 
         check("void f(bool a, int b) {\n"
               "    if(a & b) {}\n"
               "}");
-        ASSERT_EQUALS("[test.cpp:2]: (style, inconclusive) Boolean variable 'a' is used in bitwise operation. Did you mean '&&'?\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning, inconclusive) Boolean variable/expression 'a' is used in bitwise operation. Did you mean '&&'?\n"
+                      "[scripts/test.ctl:2]: (warning, inconclusive) The scope is empty: 'if'\n",
+                      errout.str());
 
         check("void f(int a, bool b) {\n"
               "    if(a & b) {}\n"
               "}");
-        ASSERT_EQUALS("[test.cpp:2]: (style, inconclusive) Boolean variable 'b' is used in bitwise operation. Did you mean '&&'?\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning, inconclusive) Boolean variable/expression 'b' is used in bitwise operation. Did you mean '&&'?\n"
+                      "[scripts/test.ctl:2]: (warning, inconclusive) The scope is empty: 'if'\n",
+                      errout.str());
 
         check("void f(int a, int b) {\n"
               "    if(a & b) {}\n"
               "}");
-        ASSERT_EQUALS("", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning, inconclusive) The scope is empty: 'if'\n", errout.str());
 
         check("void f(bool b) {\n"
               "    foo(bar, &b);\n"
               "}");
         ASSERT_EQUALS("WinCC OA syntax error at pos: 30", errout.str());
+
         check("void f(bool &b) {\n"
               "    foo(bar, b);\n"
               "}");
-        ASSERT_EQUALS("", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Undefined variable: bar\n", errout.str());
     }
 
     void incrementBoolean() {
         check("bool bValue = true;\n"
               "void f() { bValue++; }");
-        ASSERT_EQUALS("[test.cpp:2]: (style) Incrementing a variable of type 'bool' with postfix operator++ is deprecated by the C++ Standard. You should assign it the value 'true' instead.\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Incrementing/Decrementing a variable/expression 'bValue' of type 'bool' with operator++ is not allowed. You should assign it the value 'true' or 'false' instead.\n", errout.str());
 
         check("void f(bool test){\n"
               "    test++;\n"
               "}");
-        ASSERT_EQUALS("[test.cpp:2]: (style) Incrementing a variable of type 'bool' with postfix operator++ is deprecated by the C++ Standard. You should assign it the value 'true' instead.\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Incrementing/Decrementing a variable/expression 'test' of type 'bool' with operator++ is not allowed. You should assign it the value 'true' or 'false' instead.\n"
+                      "[scripts/test.ctl:2]: (warning) Assignment of function parameter 'test' has no effect outside the function.\n",
+                      errout.str());
 
         check("void f(int test){\n"
               "    test++;\n"
               "}");
-        ASSERT_EQUALS("[test.cpp:2]: (style) Assignment of function parameter has no effect outside the function.", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Assignment of function parameter 'test' has no effect outside the function.\n", errout.str());
     }
 
     void comparisonOfBoolWithInt1() {
@@ -884,14 +959,14 @@ struct TestBool : public TestFixture {
               "        printf(\"foo\");\n"
               "    }\n"
               "}");
-        ASSERT_EQUALS("[test.cpp:2]: (warning) Comparison of a boolean expression with an integer other than 0 or 1.\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Comparison of a boolean expression with an integer other than 0 or 1.\n", errout.str());
 
         check("void f(bool x) {\n"
               "    if (10 >= x) {\n"
               "        printf(\"foo\");\n"
               "    }\n"
               "}");
-        ASSERT_EQUALS("[test.cpp:2]: (warning) Comparison of a boolean expression with an integer other than 0 or 1.\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Comparison of a boolean expression with an integer other than 0 or 1.\n", errout.str());
 
         check("void f(bool x) {\n"
               "    if (x != 0) {\n"
@@ -904,21 +979,21 @@ struct TestBool : public TestFixture {
               "    if (x == 1) {\n"
               "    }\n"
               "}");
-        ASSERT_EQUALS("", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning, inconclusive) The scope is empty: 'if'\n", errout.str());
 
         check("void f(bool x) {\n"
               "    if (x != 10) {\n"
               "        printf(\"foo\");\n"
               "    }\n"
               "}");
-        ASSERT_EQUALS("[test.cpp:2]: (warning) Comparison of a boolean expression with an integer other than 0 or 1.\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Comparison of a boolean expression with an integer other than 0 or 1.\n", errout.str());
 
         check("void f(bool x) {\n"
               "    if (x == 10) {\n"
               "        printf(\"foo\");\n"
               "    }\n"
               "}");
-        ASSERT_EQUALS("[test.cpp:2]: (warning) Comparison of a boolean expression with an integer other than 0 or 1.\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Comparison of a boolean expression with an integer other than 0 or 1.\n", errout.str());
 
         check("void f(bool x) {\n"
               "    if (x == 0) {\n"
@@ -938,14 +1013,14 @@ struct TestBool : public TestFixture {
               "        printf(\"foo\");\n"
               "    }\n"
               "}");
-        ASSERT_EQUALS("[test.cpp:2]: (warning) Comparison of a boolean expression with an integer.\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Comparison of a boolean expression with an integer.\n", errout.str());
 
         check("void f(int x, bool y) {\n"
               "    if (x == y) {\n"
               "        printf(\"foo\");\n"
               "    }\n"
               "}");
-        ASSERT_EQUALS("[test.cpp:2]: (warning) Comparison of a boolean expression with an integer.\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Comparison of a boolean expression with an integer.\n", errout.str());
 
         check("void f(bool x, bool y) {\n"
               "    if (x == y) {\n"
@@ -962,12 +1037,13 @@ struct TestBool : public TestFixture {
         ASSERT_EQUALS("WinCC OA syntax error at pos: 15", errout.str());
 //         ASSERT_EQUALS("", errout.str());
 
-        check("class fooClass{}; void f(bool x, fooClass y) {\n"
+        check("class fooClass{};\n"
+              "void f(bool x, fooClass y) {\n"
               "    if (x == y) {\n"
               "        printf(\"foo\");\n"
               "    }\n"
               "}");
-        ASSERT_EQUALS("", errout.str()); // this shall not work !?
+        ASSERT_EQUALS("[scripts/test.ctl:1]: (warning, inconclusive) The scope is empty: 'class'\n", errout.str()); // this shall not work !?
     }
 
     void comparisonOfBoolWithInt3() {
@@ -976,15 +1052,16 @@ struct TestBool : public TestFixture {
               "        printf(\"foo\");\n"
               "    }\n"
               "}");
-        ASSERT_EQUALS("[test.cpp:2]: (warning) Comparison of a boolean expression with an integer.\n"
-                      "[test.cpp:2]: (warning) Comparison of a boolean value using relational operator (<, >, <= or >=).\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Comparison of a boolean expression with an integer.\n"
+                      "[scripts/test.ctl:2]: (warning) Comparison of a variable having boolean value using relational (<, >, <= or >=) operator.\n",
+                      errout.str());
 
         check("void f(int y) {\n"
               "    if (true == y) {\n"
               "        printf(\"foo\");\n"
               "    }\n"
               "}");
-        ASSERT_EQUALS("[test.cpp:2]: (warning) Comparison of a boolean expression with an integer.\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Comparison of a boolean expression with an integer.\n", errout.str());
 
         check("void f(bool y) {\n"
               "    if (y == true) {\n"
@@ -998,14 +1075,14 @@ struct TestBool : public TestFixture {
               "        printf(\"foo\");\n"
               "    }\n"
               "}");
-        ASSERT_EQUALS("[test.cpp:2]: (warning) Comparison of a boolean expression with an integer other than 0 or 1.\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Comparison of a boolean expression with an integer other than 0 or 1.\n", errout.str());
     }
 
     void comparisonOfBoolWithInt4() {
         check("void f(int x) {\n"
               "    if (!x == 1) { }\n"
               "}");
-        ASSERT_EQUALS("", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning, inconclusive) The scope is empty: 'if'\n", errout.str());
     }
 
     void comparisonOfBoolWithInt5() {
@@ -1013,7 +1090,7 @@ struct TestBool : public TestFixture {
               "    bool (SciTEBase::*ischarforsel)(char ch);\n"
               "    if (visible != GetVisible(index)) { }\n"
               "}");
-        ASSERT_EQUALS("WinCC OA syntax error at pos: 52", errout.str());
+        ASSERT_EQUALS("WinCC OA syntax error at pos: 64", errout.str());
 //         ASSERT_EQUALS("", errout.str());
     }
 
@@ -1021,14 +1098,14 @@ struct TestBool : public TestFixture {
         check("void SetVisible(bool b, int i) {\n"
               "    if (b == (bool)i) { }\n"
               "}");
-        ASSERT_EQUALS("", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning, inconclusive) The scope is empty: 'if'\n", errout.str());
     }
 
     void comparisonOfBoolWithInt7() { // #4846 - (!x==true)
         check("void f(int x) {\n"
               "    if (!x == true) { }\n"
               "}");
-        ASSERT_EQUALS("", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning, inconclusive) The scope is empty: 'if'\n", errout.str());
     }
 
     // @test WinCC OA does not support pointers
@@ -1037,37 +1114,37 @@ struct TestBool : public TestFixture {
               "    if (p+1){}\n"
               "}");
         ASSERT_EQUALS("WinCC OA syntax error at pos: 12", errout.str());
-//         ASSERT_EQUALS("[test.cpp:2]: (error) Converting pointer arithmetic result to bool. The bool is always true unless there is undefined behaviour.\n", errout.str());
+//         ASSERT_EQUALS("[scripts/test.ctl:2]: (error) Converting pointer arithmetic result to bool. The bool is always true unless there is undefined behaviour.\n", errout.str());
 
         check("void f(char *p) {\n"
               "    do {} while (p+1);\n"
               "}");
         ASSERT_EQUALS("WinCC OA syntax error at pos: 12", errout.str());
-//      ASSERT_EQUALS("[test.cpp:2]: (error) Converting pointer arithmetic result to bool. The bool is always true unless there is undefined behaviour.\n", errout.str());
+//      ASSERT_EQUALS("[scripts/test.ctl:2]: (error) Converting pointer arithmetic result to bool. The bool is always true unless there is undefined behaviour.\n", errout.str());
 
         check("void f(char *p) {\n"
               "    while (p-1) {}\n"
               "}");
         ASSERT_EQUALS("WinCC OA syntax error at pos: 12", errout.str());
-//         ASSERT_EQUALS("[test.cpp:2]: (error) Converting pointer arithmetic result to bool. The bool is always true unless there is undefined behaviour.\n", errout.str());
+//         ASSERT_EQUALS("[scripts/test.ctl:2]: (error) Converting pointer arithmetic result to bool. The bool is always true unless there is undefined behaviour.\n", errout.str());
 
         check("void f(char *p) {\n"
               "    for (int i = 0; p+1; i++) {}\n"
               "}");
         ASSERT_EQUALS("WinCC OA syntax error at pos: 12", errout.str());
-//         ASSERT_EQUALS("[test.cpp:2]: (error) Converting pointer arithmetic result to bool. The bool is always true unless there is undefined behaviour.\n", errout.str());
+//         ASSERT_EQUALS("[scripts/test.ctl:2]: (error) Converting pointer arithmetic result to bool. The bool is always true unless there is undefined behaviour.\n", errout.str());
 
         check("void f(char *p) {\n"
               "    if (p && p+1){}\n"
               "}");
         ASSERT_EQUALS("WinCC OA syntax error at pos: 12", errout.str());
-//         ASSERT_EQUALS("[test.cpp:2]: (error) Converting pointer arithmetic result to bool. The bool is always true unless there is undefined behaviour.\n", errout.str());
+//         ASSERT_EQUALS("[scripts/test.ctl:2]: (error) Converting pointer arithmetic result to bool. The bool is always true unless there is undefined behaviour.\n", errout.str());
 
         check("void f(char *p) {\n"
               "    if (p+2 || p) {}\n"
               "}");
         ASSERT_EQUALS("WinCC OA syntax error at pos: 12", errout.str());
-//         ASSERT_EQUALS("[test.cpp:2]: (error) Converting pointer arithmetic result to bool. The bool is always true unless there is undefined behaviour.\n", errout.str());
+//         ASSERT_EQUALS("[scripts/test.ctl:2]: (error) Converting pointer arithmetic result to bool. The bool is always true unless there is undefined behaviour.\n", errout.str());
     }
 
     // @test this syntax is not supported by WinCC OA
@@ -1088,19 +1165,19 @@ struct TestBool : public TestFixture {
               "    return 2;\n"
               "}");
         ASSERT_EQUALS("WinCC OA syntax error at pos: 11", errout.str());
-//         ASSERT_EQUALS("[test.cpp:2]: (style) Non-boolean value returned from function returning bool\n", errout.str());
+//         ASSERT_EQUALS("[scripts/test.ctl:2]: (style) Non-boolean value returned from function returning bool\n", errout.str());
 
         check("bool f(void) {\n"
               "    return -1;\n"
               "}");
         ASSERT_EQUALS("WinCC OA syntax error at pos: 11", errout.str());
-//         ASSERT_EQUALS("[test.cpp:2]: (style) Non-boolean value returned from function returning bool\n", errout.str());
+//         ASSERT_EQUALS("[scripts/test.ctl:2]: (style) Non-boolean value returned from function returning bool\n", errout.str());
 
         check("bool f(void) {\n"
               "    return 1 + 1;\n"
               "}");
         ASSERT_EQUALS("WinCC OA syntax error at pos: 11", errout.str());
-//         ASSERT_EQUALS("[test.cpp:2]: (style) Non-boolean value returned from function returning bool\n", errout.str());
+//         ASSERT_EQUALS("[scripts/test.ctl:2]: (style) Non-boolean value returned from function returning bool\n", errout.str());
 
         check("bool f(void) {\n"
               "    int x = 0;\n"
@@ -1114,7 +1191,7 @@ struct TestBool : public TestFixture {
               "    return x;\n"
               "}");
         ASSERT_EQUALS("WinCC OA syntax error at pos: 11", errout.str());
-//         ASSERT_EQUALS("[test.cpp:3]: (style) Non-boolean value returned from function returning bool\n", errout.str());
+//         ASSERT_EQUALS("[scripts/test.ctl:3]: (style) Non-boolean value returned from function returning bool\n", errout.str());
 
         check("bool f(void) {\n"
               "    return 2 < 1;\n"
@@ -1138,7 +1215,7 @@ struct TestBool : public TestFixture {
               "    return ret;\n"
               "}");
         ASSERT_EQUALS("WinCC OA syntax error at pos: 11", errout.str());
-//         ASSERT_EQUALS("[test.cpp:5]: (style) Non-boolean value returned from function returning bool\n", errout.str());
+//         ASSERT_EQUALS("[scripts/test.ctl:5]: (style) Non-boolean value returned from function returning bool\n", errout.str());
 
         check("bool f(void) {\n"
               "    if (a)\n"
@@ -1146,8 +1223,8 @@ struct TestBool : public TestFixture {
               "    return 4;\n"
               "}");
         ASSERT_EQUALS("WinCC OA syntax error at pos: 11", errout.str());
-//         ASSERT_EQUALS("[test.cpp:3]: (style) Non-boolean value returned from function returning bool\n"
-//                       "[test.cpp:4]: (style) Non-boolean value returned from function returning bool\n", errout.str());
+//         ASSERT_EQUALS("[scripts/test.ctl:3]: (style) Non-boolean value returned from function returning bool\n"
+//                       "[scripts/test.ctl:4]: (style) Non-boolean value returned from function returning bool\n", errout.str());
 
         check("bool f(void) {\n"
               "    return;\n"
@@ -1167,7 +1244,7 @@ struct TestBool : public TestFixture {
               "return 2;\n"
               "}\n");
         ASSERT_EQUALS("WinCC OA syntax error at pos: 11", errout.str());
-//         ASSERT_EQUALS("[test.cpp:3]: (style) Non-boolean value returned from function returning bool\n", errout.str());
+//         ASSERT_EQUALS("[scripts/test.ctl:3]: (style) Non-boolean value returned from function returning bool\n", errout.str());
 
         check("bool f(void) {\n"
               "auto x = [](void) -> int { return -1; };\n"
@@ -1181,47 +1258,54 @@ struct TestBool : public TestFixture {
               "return 2;\n"
               "}\n");
         ASSERT_EQUALS("WinCC OA syntax error at pos: 11", errout.str());
-//         ASSERT_EQUALS("[test.cpp:3]: (style) Non-boolean value returned from function returning bool\n", errout.str());
+//         ASSERT_EQUALS("[scripts/test.ctl:3]: (style) Non-boolean value returned from function returning bool\n", errout.str());
     }
-    
-    
+
+
     void returnNonBoolWinCC_OA() {
         check("bool f() {\n"
               "    return 0;\n"
               "}");
-        ASSERT_EQUALS("", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning, inconclusive) Return value 'int' does not match with declaration 'bool'.\n", errout.str());
 
         check("bool f() {\n"
               "    return 1;\n"
               "}");
-        ASSERT_EQUALS("", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning, inconclusive) Return value 'int' does not match with declaration 'bool'.", errout.str());
 
         check("bool f() {\n"
               "    return 2;\n"
               "}");
-        ASSERT_EQUALS("[test.cpp:2]: (style) Non-boolean value returned from function returning bool\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Non-boolean value returned from function returning bool\n"
+                      "[scripts/test.ctl:2]: (warning, inconclusive) Return value 'int' does not match with declaration 'bool'.\n",
+                      errout.str());
 
         check("bool f() {\n"
               "    return -1;\n"
               "}");
-        ASSERT_EQUALS("[test.cpp:2]: (style) Non-boolean value returned from function returning bool\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Non-boolean value returned from function returning bool\n"
+                      "[scripts/test.ctl:2]: (warning, inconclusive) Return value 'int' does not match with declaration 'bool'.\n",
+                      errout.str());
 
         check("bool f() {\n"
               "    return 1 + 1;\n"
               "}");
-        ASSERT_EQUALS("[test.cpp:2]: (style) Non-boolean value returned from function returning bool\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:2]: (warning) Non-boolean value returned from function returning bool\n"
+                      "[scripts/test.ctl:2]: (warning, inconclusive) Return value 'int' does not match with declaration 'bool'.\n",
+                      errout.str());
 
         check("bool f() {\n"
               "    int x = 0;\n"
               "    return x;\n"
               "}");
-        ASSERT_EQUALS("", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:3]: (warning, inconclusive) Return value 'int' does not match with declaration 'bool'.\n", errout.str());
 
         check("bool f() {\n"
               "    int x = 10;\n"
               "    return x;\n"
               "}");
-        ASSERT_EQUALS("[test.cpp:3]: (style) Non-boolean value returned from function returning bool\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:3]: (warning) Non-boolean value returned from function returning bool\n"
+                      "[scripts/test.ctl:3]: (warning, inconclusive) Return value 'int' does not match with declaration 'bool'.\n", errout.str());
 
         check("bool f() {\n"
               "    return 2 < 1;\n"
@@ -1234,7 +1318,9 @@ struct TestBool : public TestFixture {
               "        ret = 1;\n"
               "    return ret;\n"
               "}");
-        ASSERT_EQUALS("", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:5]: (warning, inconclusive) Return value 'int' does not match with declaration 'bool'.\n"
+                      "[scripts/test.ctl:3]: (warning) Undefined variable: a\n",
+                      errout.str());
 
         check("bool f() {\n"
               "    int ret = 0;\n"
@@ -1242,22 +1328,29 @@ struct TestBool : public TestFixture {
               "        ret = 3;\n"
               "    return ret;\n"
               "}");
-        ASSERT_EQUALS("[test.cpp:5]: (style) Non-boolean value returned from function returning bool\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:5]: (warning) Non-boolean value returned from function returning bool\n"
+                      "[scripts/test.ctl:5]: (warning, inconclusive) Return value 'int' does not match with declaration 'bool'.\n"
+                      "[scripts/test.ctl:3]: (warning) Undefined variable: a\n",
+                      errout.str());
 
         check("bool f() {\n"
               "    if (a)\n"
               "        return 3;\n"
               "    return 4;\n"
               "}");
-        ASSERT_EQUALS("[test.cpp:3]: (style) Non-boolean value returned from function returning bool\n"
-                      "[test.cpp:4]: (style) Non-boolean value returned from function returning bool\n", errout.str());
+        ASSERT_EQUALS("[scripts/test.ctl:3]: (warning) Non-boolean value returned from function returning bool\n"
+                      "[scripts/test.ctl:4]: (warning) Non-boolean value returned from function returning bool\n"
+                      "[scripts/test.ctl:3]: (warning, inconclusive) Return value 'int' does not match with declaration 'bool'.\n"
+                      "[scripts/test.ctl:4]: (warning, inconclusive) Return value 'int' does not match with declaration 'bool'.\n"
+                      "[scripts/test.ctl:2]: (warning) Undefined variable: a\n",
+                      errout.str());
 
         check("bool f() {\n"
               "    return;\n"
               "}");
-        ASSERT_EQUALS("", errout.str()); // this looks like a bug. Becouse it shall return some value, but in the line 2 is return only.
+        ASSERT_EQUALS("WinCC OA syntax error at pos: 21", errout.str()); // this looks like a bug. Because it shall return some value, but in the line 2 is return only.
     }
-    
+
     void winCC_OA_const()
     {
         check("bool f() {\n"
@@ -1268,7 +1361,7 @@ struct TestBool : public TestFixture {
               "return FALSE;\n"
               "}\n");
         ASSERT_EQUALS("", errout.str());
-        
+
         check("bool f() {\n"
               "return true;\n"
               "}\n");
@@ -1277,17 +1370,17 @@ struct TestBool : public TestFixture {
               "return TRUE;\n"
               "}\n");
         ASSERT_EQUALS("", errout.str());
-                
+
         check("bool f() {\n"
               "return TRUE == true;\n"
               "}\n");
         ASSERT_EQUALS("", errout.str());
-        
+
         check("bool f() {\n"
               "return TRUE == false;\n"
               "}\n");
         ASSERT_EQUALS("", errout.str());
-        
+
         check("bool f() {\n"
               "return TRUE != false;\n"
               "}\n");
@@ -1296,7 +1389,7 @@ struct TestBool : public TestFixture {
 };
 
 // REGISTER_TEST(TestBool)
-    
+
 void main()
 {
   TestBool test;
