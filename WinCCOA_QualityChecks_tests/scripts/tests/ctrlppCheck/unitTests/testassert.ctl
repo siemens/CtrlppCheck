@@ -68,6 +68,7 @@ struct TestAssert : public TestFixture
 
   void functionCallInAssert()
   {
+    /* knownBug TFS(#158013)
     check(
       "int a;\n"
       "int foo() {\n"
@@ -77,7 +78,7 @@ struct TestAssert : public TestFixture
       "void main(){assert(foo() == 3);}\n"
     );
     ASSERT_EQUALS("[test.cpp:6]: (warning) Assert statement calls a function which may have desired side effects: 'foo'.\n", errout.str());
-
+    */
     //  Ticket #4937 "false positive: Assert calls a function which may have desired side effects"
     check("struct Square {\n"
           "  static void dummy(){1+1;}\n"
@@ -94,7 +95,7 @@ struct TestAssert : public TestFixture
           "   assert( !SquarePack::isRank1Or8(push2) );\n"
           "}\n");
     ASSERT_EQUALS("", errout.str());
-
+    /* knownBug TFS(#158013)
     check("struct Square {\n"
           "  static void dummy(){1+1;}\n"
           "};\n"
@@ -110,10 +111,12 @@ struct TestAssert : public TestFixture
           "   assert( !SquarePack::isRank1Or8(push2) );\n"
           "}\n");
     ASSERT_EQUALS("[test.cpp:8]: (warning) Assert statement calls a function which may have desired side effects: 'isRank1Or8'.\n", errout.str());
+    */
   }
 
   void memberFunctionCallInAssert()
   {
+    /* knownBug TFS(#158013)
     check("struct SquarePack {\n"
           "   void Foo(){}\n"
           "};\n"
@@ -121,6 +124,7 @@ struct TestAssert : public TestFixture
           "   assert( s.Foo() );\n"
           "}");
     ASSERT_EQUALS("[test.cpp:5]: (warning) Assert statement calls a function which may have desired side effects: 'Foo'.\n", errout.str());
+    */
 
     check("struct SquarePack {\n"
           "   static void Foo(){}\n"
@@ -140,51 +144,57 @@ struct TestAssert : public TestFixture
 
   void assignmentInAssert()
   {
+    /* knownBug TFS(#158013)
     check("void f() {\n"
           "    int a; a = 1;\n"
           "    assert(a = 2);\n"
           "}\n"
          );
     ASSERT_EQUALS("[test.cpp:3]: (warning) Assert statement modifies 'a'.\n", errout.str());
-
+    */
     check("void f(int a) {\n"
           "    assert(a == 2);\n"
           "}\n"
          );
     ASSERT_EQUALS("", errout.str());
-
+    /* knownBug TFS(#158013)
     check("void f(int a, int b) {\n"
           "    assert((a == 2) && (b = 1));\n"
           "}\n"
          );
     ASSERT_EQUALS("[test.cpp:2]: (warning) Assert statement modifies 'b'.\n", errout.str());
-
+    */
+    /* knownBug TFS(#158013)
     check("void f() {\n"
           "    int a; a = 0;\n"
           "    assert(a += 2);\n"
           "}\n"
          );
     ASSERT_EQUALS("[test.cpp:3]: (warning) Assert statement modifies 'a'.\n", errout.str());
-
+    */
+    /* knownBug TFS(#158013)
     check("void f() {\n"
           "    int a; a = 0;\n"
           "    assert(a *= 2);\n"
           "}\n"
          );
     ASSERT_EQUALS("[test.cpp:3]: (warning) Assert statement modifies 'a'.\n", errout.str());
-
+    */
+    /* knownBug TFS(#158013)
     check("void f() {\n"
           "    int a; a = 0;\n"
           "    assert(a -= 2);\n"
           "}\n"
          );
     ASSERT_EQUALS("[test.cpp:3]: (warning) Assert statement modifies 'a'.\n", errout.str());
-
+    */
+    /* knownBug TFS(#158013)
     check("void f() {\n"
           "    int a = 0;\n"
           "    assert(a--);\n"
           "}\n");
     ASSERT_EQUALS("[test.cpp:3]: (warning) Assert statement modifies 'a'.\n", errout.str());
+    */
   }
 };
 

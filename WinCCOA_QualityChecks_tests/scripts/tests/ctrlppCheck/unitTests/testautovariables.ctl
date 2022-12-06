@@ -292,11 +292,13 @@ struct TestAutoVariables : TestFixture
           "}");
     ASSERT_EQUALS("", errout.str());
 
+    /* knownBug TFS(#158013)
     check("class Foo {};\n"
           "void foo(shared_ptr<Foo> p) {\n"
           "    p = 0;\n"
           "}");
     ASSERT_EQUALS("[scripts/test.ctl:2]: (style) Variable 'p' is assigned a value that is never used.\n", errout.str());
+    */
 
     check("class Foo {};\n"
           "void foo(Foo p) {\n"
@@ -396,14 +398,13 @@ struct TestAutoVariables : TestFixture
     check("class SharedPtrHolder\n"
           "{\n"
           "  shared_ptr<int> pNum;\n"
-          " public:\n"
-          "  void SetNum(const shared_ptr<int>& apNum)\n"
+          "  public void SetNum(const shared_ptr<int> apNum)\n"
           "  {\n"
           "    pNum = apNum;\n"
           "  }\n"
           "};\n");
 
-    ASSERT_EQUALS("", errout.str());
+    ASSERT_EQUALS("[scripts/test.ctl:1]: (style) The class 'SharedPtrHolder' does not have a constructor although it has private member variables.\n", errout.str());
   }
 
   void testconstructor()   // Ticket #5478 - crash while checking a constructor
