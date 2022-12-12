@@ -119,7 +119,7 @@ class QgCtrlppCheck : QgBase
     if ( dpExists("_CtrlppCheck") )
     {
       dpGet("_CtrlppCheck.settings.enableLibCheck", check.settings.enableLibCheck,
-            "_CtrlppCheck.settings.enableHeadersCheck", check.settings.enableHeadersCheck,
+            //"_CtrlppCheck.settings.enableHeadersCheck", check.settings.enableHeadersCheck,  // currently disabled
             "_CtrlppCheck.settings.inconclusive", check.settings.inconclusive,
             "_CtrlppCheck.settings.includeSubProjects", check.settings.includeSubProjects,
             "_CtrlppCheck.settings.verbose", check.settings.verbose,
