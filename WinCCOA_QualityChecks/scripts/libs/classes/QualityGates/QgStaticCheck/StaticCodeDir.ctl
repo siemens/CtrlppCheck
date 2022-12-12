@@ -88,6 +88,9 @@ class StaticCodeDir :StaticDir
     for(int i = 1; i <= dynlen(childs); i++)
     {
       anytype child = makeCheckSubDir(getDirPath() + childs[i] + "/");
+      if ( !child )
+        continue;
+
       child.calculate();
 
       _nloc += child.getNLOC();
