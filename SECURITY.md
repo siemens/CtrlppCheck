@@ -15,6 +15,3 @@ To report a vulnerability please send an email to `oss-security@etm.at`. We will
 First check for existing reports about your finding and provide additional
 information or issue a new report providing detailed data about regarding
 software version and environment of the incident.
-
-The reported issues are rated and planned for further evaluation on a weekly
-basis. Status updates are communicated transparently via the issues only.
