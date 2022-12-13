@@ -170,7 +170,7 @@ jobs:
 
   package:
     name: Package project and binaries
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     needs: build
 
     steps:
