@@ -11,7 +11,7 @@ supports the most recent version.
 
 ## Reporting a Vulnerability
 
-To report a vulnerability please send an email to `oss-security@etm.at`.  
+To report a vulnerability please send an email to `oss-security@etm.at`. We will get back to you within 48 hours.  
 First check for existing reports about your finding and provide additional
 information or issue a new report providing detailed data about regarding
 software version and environment of the incident.
