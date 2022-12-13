@@ -11,9 +11,9 @@ supports the most recent version.
 
 ## Reporting a Vulnerability
 
-To report a vulnerability go to the _Issues_ section of our repository.
+To report a vulnerability please send an email to `oss-security@etm.at`.  
 First check for existing reports about your finding and provide additional
-information or create a new issue providing detailed data about regarding
+information or issue a new report providing detailed data about regarding
 software version and environment of the incident.
 
 The reported issues are rated and planned for further evaluation on a weekly
