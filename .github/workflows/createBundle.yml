@@ -84,7 +84,7 @@ jobs:
         endif()
 
     - name: sccache cache files
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: .sccache
         key: ${{ matrix.config.name }}-sccache
@@ -170,7 +170,7 @@ jobs:
 
   package:
     name: Package project and binaries
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     needs: build
 
     steps:
@@ -182,7 +182,7 @@ jobs:
         cp -rp ${{github.workspace}}/WinCCOA_QualityChecks/* ${{github.workspace}}/install/WinCCOA_QualityChecks/
 
     - name: Download ctrlppcheck binaries
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v3
       with:
         name: ctrlppcheck
         path: ${{github.workspace}}/install/WinCCOA_QualityChecks/bin/ctrlppcheck/
@@ -196,16 +196,16 @@ jobs:
   release:
     if: github.event_name == 'release'
     name: Release
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     needs: package
     steps:
 
     - name: Get the version
       id: get_version
-      run: echo ::set-output name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3)
+      run: echo "VERSION=$(echo $GITHUB_REF | cut -d / -f 3)" >> $GITHUB_OUTPUT
 
     - name: Download artifact
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v3
       with:
         name: WinCCOA_QualityChecks
         path: ${{github.workspace}}/install/
