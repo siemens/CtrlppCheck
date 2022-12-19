@@ -31,11 +31,11 @@ Continuous integration:
 
 user documentation:
 
-- https://github.com/siemens/CtrlppCheck/docs/user.md
+- [Link](docs/user.md)
 
 technical documentation:
 
-- https://github.com/siemens/ctrlppcheck/docs/contributor.md
+- [Link](docs/contributor.md)
 
 License
 -------

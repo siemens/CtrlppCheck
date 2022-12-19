@@ -5,7 +5,7 @@ code analysis on your Control script code and UI files.
 
 ### Documentation
 
-* [User Documentation](https://github.com/siemens/CtrlppCheck/docs/user.md)
+* [User Documentation](docs/user.md)
 
 ### Issue tracking and Roadmap items
 

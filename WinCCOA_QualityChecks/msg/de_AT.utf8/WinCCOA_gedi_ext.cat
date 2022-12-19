@@ -8,7 +8,6 @@ tool_QualityGates_QgSyntaxCheck,Syntax check (simple)
 tool_QualityGates_QgOverloadedFilesCheck,Check overloaded files
 tool_QualityGates_UnitTests,Unit tests
 tool_QualityGates_InternallCheck,Internal version check
-tool_QualityGates_BuildDoku,Generate doxydocu
 open_Docu,Öffne Online Hilfe
 open_Result,Öffne Ergebnisse
 open_Dock,Öffne Dock-Modul
