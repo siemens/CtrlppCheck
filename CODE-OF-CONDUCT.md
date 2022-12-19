@@ -61,7 +61,7 @@ representative at an online or offline event.
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
 reported to the community leaders responsible for enforcement at
-[maintainers](https://github.com/siemens/CtrlppCheck/MAINTAINERS.md) or via
+[maintainers](MAINTAINERS.md) or via
 info@etm.at.
 All complaints will be reviewed and investigated promptly and fairly.
 
