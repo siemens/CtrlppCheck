@@ -9,7 +9,7 @@ The tool is implemented as a WinCC OA Subproject and is divided into two parts:
 
 Quality checks check panels and ctrl code based on the following software metrics and WinCC OA specific checks:
 
-- Mc Cabe Complexity
+- McCabe Complexity
 - Code lines per script / Libs
 - Code lines per function
 - Number of function per script / libs
@@ -58,18 +58,18 @@ Both types of checks may also be executed from the command line to facilitate in
 Hardware requirements
 ---------------------
 
-see WinCC OA online documentation (<https://www.winccoa.com/documentation/WinCCOA/3.18/en_US/GettingStarted/GettingStarted-13_2.html>)
+see WinCC OA online documentation [link](https://www.winccoa.com/documentation/WinCCOA/latest/en_US/GettingStarted/GettingStarted-13_2.html)
 
 Software requirements
 ---------------------
 
-for basic requirements see WinCC OA online documentation (<https://www.winccoa.com/documentation/WinCCOA/3.18/en_US/GettingStarted/GettingStarted-13_2.html>)
+for basic requirements see WinCC OA online documentation [link](https://www.winccoa.com/documentation/WinCCOA/latest/en_US/GettingStarted/GettingStarted-13_2.html)
 
 python must be installed; min. V3.6
 
 ## Installation
 
-**TO BE DEFINED ONCE WE KNOW HOW IT SHOULD BE DONE: #150074**
+_currently only manual integration, see steps below_
 
 # How To use
 
@@ -428,10 +428,11 @@ All error locations are reported as location elements on the error element. The 
 
 ### Plain text suppressions
 You can suppress certain types of errors. The format for such suppression is one of:
-
+```
 [error id]:[filename]:[line]
 [error id]:[filename2]
 [error id]
+```
 The error id is the id that you want to suppress. The easiest way to get it is to use the --xml command line flag. Copy and paste the id string from the XML output. This may be * to suppress all warnings (for a specified file or files).
 
 The filename may include the wildcard characters * or ?, which match any sequence of characters or any single character respectively. It is recommended that you use "/" as path separator on all operating systems.
@@ -545,8 +546,8 @@ Comments may be combined with in code suppressions.  Its recommended to use ";" 
 // ctrlppcheck-suppress uninitvar // some comment
 ```
 
-###Define special rules
-**Option1**
+### Define special rules
+**Option 1**
 Run the ctrlppcheck from /bin directory.
 
 **Option 2**
@@ -576,7 +577,7 @@ See namingCheck.md for detailed explanation of this check and documentation of t
 
 ### Include lib for your project
 
---library=/full/path/to/WinCCOA_QualityChecks/data/ctrlPpCheck/cfg/__proj__.xml
+--library=/full/path/to/WinCCOA_QualityChecks/data/ctrlPpCheck/cfg/\_\_proj\_\_.xml
 Include libs for your WinCC OA version
 
 --library=<winccoa_install_path>/data/DevTools/Base/ctrl.xml
