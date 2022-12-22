@@ -29,7 +29,7 @@ Continuous integration:
   - ![](https://github.com/siemens/CtrlppCheck/actions/workflows/main.yaml/badge.svg?branch=master) on master
   - ![](https://github.com/siemens/CtrlppCheck/actions/workflows/main.yaml/badge.svg?branch=next) on next
 
-- For the Ctrl language definition the tool depends on an installed WinCC OA version. Released major versions of WinCC OA are marked in our source code history using tags.
+- For the Ctrl language definition the tool depends on an installed WinCC OA version. Released major versions of WinCC OA are marked in our source code history using tags with syntax WinCC_OA_X_Y, e.g. WinCC_OA_3_19.
 
 user documentation:
 
