@@ -5,9 +5,8 @@ WinCC OA CtrlppCheck
 Introduction
 ------------
 
-WinCC OA CtrlppCheck is a tool for static code ananylsis for SIMATIC WinCC OA's scripting language Ctrl and Ctrl++.  
-They are easy to use and integrate perfectly with WinCC OA's script editor GEDI but may also be used in an CI toolchain for automated pull request builds etc.-CtrlppCheck
-***
+WinCC OA CtrlppCheck is a set of tools for static code analysis for SIMATIC WinCC OA's scripting language Ctrl and Ctrl++.  
+They are easy to use and integrate perfectly with WinCC OA's script editor GEDI but may also be used in an CI toolchain for automated pull request builds etc.
 
 Community Resources
 -------------------
