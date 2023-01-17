@@ -288,7 +288,13 @@ static void print_stacktrace(FILE* output, bool demangling, int maxdepth, bool l
 #endif
 }
 
-static const size_t MYSTACKSIZE = 16*1024+SIGSTKSZ; // wild guess about a reasonable buffer
+#if defined(__USE_DYNAMIC_STACK_SIZE) && __USE_DYNAMIC_STACK_SIZE
+    // on glibc >= 2.34 SIGSTKSZ is not longer constant
+    // fall back to 8192 as the value used in some Linux distributions
+    static constexpr size_t MYSTACKSIZE = 16*1024+8192; // wild guess about a reasonable buffer
+#else
+    static constexpr size_t MYSTACKSIZE = 16*1024+SIGSTKSZ; // wild guess about a reasonable buffer
+#endif
 static char mytstack[MYSTACKSIZE]= {0}; // alternative stack for signal handler
 static bool bStackBelowHeap=false; // lame attempt to locate heap vs. stack address space. See CppCheckExecutor::check_wrapper()
 
