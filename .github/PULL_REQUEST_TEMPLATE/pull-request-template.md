@@ -84,7 +84,7 @@ Before the changes are marked as `ready-for-merge`:
 - [ ] Proper changelog labels are set so that the changelog can be generated automatically. See also [release-drafter-labels](...).
 -->
 - [ ] If the change needs additional upgrade steps from users, the `upgrade-guide-needed` label is set and there is a **Proposed upgrade guidelines** section in the pull request title (see [example](...)).
-- [ ] cpp and ctrl code changes are tested by automated test.
+- [ ] C++ and Control(++) code changes are tested by automated test.
 - [ ] WinCC OA guidelines for C++ and Control(++) coding have been met.
 - [ ] Result of pipeline build proving error/warning free code.
 - [ ] Result of automatic tests proving regression free.
