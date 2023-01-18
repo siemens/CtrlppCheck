@@ -39,7 +39,10 @@ At minimum this should include proof that a computer has executed the changed li
 Ideally this should include an automated test or an explanation as to why this change has no tests.
 Note that automated test coverage is less than complete, so a successful PR build does not necessarily imply that a computer has executed the changed lines.
 If automated test coverage does not exist for the lines you are changing, **you must describe** the scenario(s) in which you manually tested the change.
+Currently is not possible to start automatic tests on every PR. Therefore provide the tests manually and paste the result (screenshot) here.
+
 For frontend changes, include screenshots of the relevant page(s) before and after the change.
+
 For refactoring and code cleanup changes, exercise the code before and after the change and verify the behavior remains the same.
 -->
 
@@ -75,16 +78,15 @@ N/A
 
 Before the changes are marked as `ready-for-merge`:
 
-<!-- TBD, maybe done in GitHub rules
-- [ ] There is at least one (1) approval for the pull request and no outstanding requests for change.
-- [ ] Conversations in the pull request are over, or it is explicit that a reviewer is not blocking the change.
--->
 - [ ] Changelog entries in the **pull request title** and/or **Proposed changelog entries** are accurate, human-readable, and in the imperative mood.
-<!-- TBD, maybe done in GitHub rules
-- [ ] Proper changelog labels are set so that the changelog can be generated automatically. See also [release-drafter-labels](...).
--->
-- [ ] If the change needs additional upgrade steps from users, the `upgrade-guide-needed` label is set and there is a **Proposed upgrade guidelines** section in the pull request title (see [example](...)).
 - [ ] C++ and Control(++) code changes are tested by automated test.
 - [ ] WinCC OA guidelines for C++ and Control(++) coding have been met.
 - [ ] Result of pipeline build proving error/warning free code.
 - [ ] Result of automatic tests proving regression free.
+
+<!-- TBD, maybe done in GitHub rules
+- [ ] There is at least one (1) approval for the pull request and no outstanding requests for change.
+- [ ] Conversations in the pull request are over, or it is explicit that a reviewer is not blocking the change.
+- [ ] Proper changelog labels are set so that the changelog can be generated automatically. See also [release-drafter-labels](...).
+- [ ] If the change needs additional upgrade steps from users, the `upgrade-guide-needed` label is set and there is a **Proposed upgrade guidelines** section in the pull request title (see [example](...)).
+-->
