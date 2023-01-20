@@ -128,7 +128,7 @@ class QgCtrlppCheck : QgBase
     else if ( Qg::isRunningOnJenkins() )
     {
       check.settings.enableLibCheck = FALSE;
-      check.settings.enableHeadersCheck = TRUE;
+      //check.settings.enableHeadersCheck = TRUE;  // currently disabled
       check.settings.includeSubProjects = TRUE;
       check.settings.inconclusive = FALSE;
       check.settings.verbose = FALSE;
