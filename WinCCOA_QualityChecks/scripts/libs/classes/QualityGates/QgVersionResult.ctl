@@ -507,7 +507,7 @@ struct QgVersionResult
     userData["ErrMsg"] = msgCat.getText(reasonKey, reasonDollars);
     dyn_string stack = getStackTrace();
     dynRemove(stack, 1);
-    userData["StackTrace"] = stack;
+    userData["StackTrace"] = makeDynString();// stack;
     
     getKnownBugId(userData);
 
@@ -572,6 +572,7 @@ struct QgVersionResult
   */
   protected static bool _enableOaTestOutput()
   {
+    return true;
     return Qg::isRunningOnJenkins();
   }
 
