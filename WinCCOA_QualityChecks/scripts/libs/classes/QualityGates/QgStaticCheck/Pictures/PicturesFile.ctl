@@ -1,14 +1,13 @@
 #uses "std"
-#uses "classes/QualityGates/QgBase"
+#uses "spaceCheck"
 #uses "classes/QualityGates/QgSettings"
-#uses "CtrlOaUnit"
 
 class PicturesFile
 {
   public PicturesFile(const string &path)
   {
     _path = path;
-	// !! extention must be written lowercase, that NonCaseSensitive works
+	// !! extension must be written lowercase, that NonCaseSensitive works
   }
     
   public int calculate()
@@ -17,7 +16,7 @@ class PicturesFile
       return -1;
     
     _size = getFileSize(_path);
-    _extention = getExt(_path);
+    _extension = getExt(_path);
     
     return 0;
   }
@@ -39,6 +38,7 @@ class PicturesFile
       if ( settings.isEnabled() )
       {
         shared_ptr <QgVersionResult> assertion = new QgVersionResult();
+        assertion.setMsgCatName("QgStaticCheck_Pictures");
         assertion.setAssertionText("assert.file.size");
         assertion.setReasonText("reason.file.size", makeMapping("file.name", getName(),
                                                                 "file.size", byteSizeToString(_size)));    
@@ -50,15 +50,17 @@ class PicturesFile
     }
     
     {  
-      shared_ptr<QgSettings> settings = new QgSettings("PicturesFile.file.extention");  
+      shared_ptr<QgSettings> settings = new QgSettings("PicturesFile.file.extension");  
           
       if ( settings.isEnabled() )
       {
         shared_ptr <QgVersionResult> assertion = new QgVersionResult();
-        assertion.setAssertionText("assert.file.extention");
-        assertion.setReasonText("reason.file.extention", makeMapping("file.name", getName(),
-                                                                     "file.extention", _extention));
-        assertion.assertDynContains(settings.getReferenceValues(), strtolower(_extention), settings.getScorePoints());
+        assertion.setMsgCatName("QgStaticCheck_Pictures");
+        assertion.setAssertionText("assert.file.extension");
+        assertion.setReasonText("reason.file.extension", makeMapping("file.name", getName(),
+                                                                     "file.extension", _extension,
+                                                                     "allowedValues", settings.getReferenceValues()));
+        assertion.assertDynContains(settings.getReferenceValues(), strtolower(_extension), settings.getScorePoints());
         result.addChild(assertion);
       }
     }
@@ -73,7 +75,7 @@ class PicturesFile
   
   public shared_ptr <QgVersionResult> result;
   
-  string _extention;
+  string _extension;
   uint _size;
   string _path;
 };

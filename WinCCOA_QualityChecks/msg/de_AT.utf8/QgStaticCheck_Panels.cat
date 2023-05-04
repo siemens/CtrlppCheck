@@ -12,8 +12,8 @@ assert.panel.isCalculated,Is calculated
 reason.panel.isCalculated,Sorry, the panel '($panel.name)' can't be calculated.
 assert.panel.isExampleFile,Is example
 reason.panel.isExampleFile,The panel '($panel.name)' is an example file. Examples are ignored.
-assert.panel.extention,Extention
-reason.panel.extention,The panel '$panel.name' has an invalid extention '$panel.extention'.
+assert.panel.extension,Extension
+reason.panel.extension,The panel '$panel.name' has an invalid extension '$panel.extension'.
 assert.panel.isBackUp,Backup panel (.bak)
 reason.panel.isBackUp,Sorry, the panel '($panel.name)' is a backup, can't be calculated.
 assert.panel.isCrypted,Is encrypted.

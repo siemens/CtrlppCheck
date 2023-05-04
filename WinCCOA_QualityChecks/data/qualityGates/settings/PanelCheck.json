@@ -20,10 +20,10 @@
             "enabled": true
         },
         {
-            "id": "PanelCheck.panel.extention",
+            "id": "PanelCheck.panel.extension",
             "description":{ 
                 "de_AT.utf8":"Überprüft Dateien auf die angegebene Erweiterung",
-                "en_US.utf8":"Checks files for the specified extentions"
+                "en_US.utf8":"Checks files for the specified extensions"
              },
             "referenceValues": ["pnl", "xml"],
             "scorePoints": 1,

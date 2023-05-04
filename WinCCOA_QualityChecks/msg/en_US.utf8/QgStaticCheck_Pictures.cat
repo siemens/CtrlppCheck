@@ -11,5 +11,5 @@ filesList,Files
 subDirsList,Sub directories
 assert.file.size,Size
 reason.file.size,The picture '$file.name' is too big ($file.size).
-assert.file.extention,Extention
-reason.file.extention,The picture '$file.name' has an invalid extention '$file.extention'.
+assert.file.extension,Extension
+reason.file.extension,The picture '$file.name' has an invalid extension '$file.extension'. Possible extensions: $allowedValues

@@ -27,6 +27,7 @@ class QgStaticCheck_Pictures : QgBase
 //--------------------------------------------------------------------------------
 //@public members
 //--------------------------------------------------------------------------------
+  public string checkedPath;
   
   //------------------------------------------------------------------------------
   /** @brief Function setups pictures tests.
@@ -37,8 +38,9 @@ class QgStaticCheck_Pictures : QgBase
   {
     if ( QgBase::setUp() )
       return -1;
-    
-    _pictures.setDir(PROJ_PATH + PICTURES_REL_PATH);
+
+    throwError(makeError("", PRIO_INFO, ERR_CONTROL, 0, Qg::getId() + " will check " + this.checkedPath + PICTURES_REL_PATH));
+    _pictures.setDir(this.checkedPath + PICTURES_REL_PATH);
     
     if ( !_pictures.exists() )
       setMinValidScore("QgStaticCheck_Pictures", "assert.missingPictures", "reason.missingPictures");
@@ -91,9 +93,10 @@ class QgStaticCheck_Pictures : QgBase
 /** 
   @breif main rutine to start QualityGate QgStaticCheck-Pictures
 */
-void main()
+void main(string path = PROJ_PATH)
 {
   Qg::setId("QgStaticCheck_Pictures");
   QgStaticCheck_Pictures qg = QgStaticCheck_Pictures();
+  qg.checkedPath = path;
   exit(qg.start());
 }

@@ -2,5 +2,5 @@ assert.file.isCalculated,Is calculated
 reason.file.isCalculated,Sorry, the script '($file.name)' can't be calculated.
 assert.file.isExampleFile,Is an example file
 reason.file.isExampleFile,The script '($file.name)' is an example file. Examples are ignored.
-assert.file.extention,Extention
-reason.file.extention,The script '$file.name' has an invalid extention '$file.extention'.
+assert.file.extension,Extension
+reason.file.extension,The script '$file.name' has an invalid extension '$file.extension'.
