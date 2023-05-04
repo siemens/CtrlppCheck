@@ -130,7 +130,7 @@ void ctrlPPCheck()
     CppCheck ctrlPpCheck;
 
     dpGet("_CtrlppCheck.settings.enableLibCheck", ctrlPpCheck.settings.enableLibCheck,
-          "_CtrlppCheck.settings.enableHeadersCheck", ctrlPpCheck.settings.enableHeadersCheck,
+          //"_CtrlppCheck.settings.enableHeadersCheck", ctrlPpCheck.settings.enableHeadersCheck,  // currently disabled
           "_CtrlppCheck.settings.inconclusive", ctrlPpCheck.settings.inconclusive,
           "_CtrlppCheck.settings.includeSubProjects", ctrlPpCheck.settings.includeSubProjects,
           "_CtrlppCheck.settings.verbose", ctrlPpCheck.settings.verbose,
