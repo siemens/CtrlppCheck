@@ -11,8 +11,7 @@
 // used libraries (#uses)
 #uses "classes/QualityGates/QgMsgCat"
 #uses "classes/Variables/Float"
-#uses "classes/StTest"
-#uses "CtrlOaUnit"
+#uses "classes/oaTest/OaTest"
 
 //--------------------------------------------------------------------------------
 // declare variables and constans
@@ -21,10 +20,10 @@
 /*!
   @brief QualityGate test class.
 
-  @details StTest customized to handle with QualityGates.
+  @details OaTest customized to handle with QualityGates.
   @author lschopp
 */
-class QgTest : StTest
+class QgTest : OaTest
 {
 //--------------------------------------------------------------------------------
 //@public members

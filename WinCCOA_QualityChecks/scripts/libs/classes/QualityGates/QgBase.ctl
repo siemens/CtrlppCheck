@@ -11,7 +11,7 @@
 // used libraries (#uses)
 #uses "classes/QualityGates/AddOn/FileSys/QgAddOnTmpSourceDir"
 #uses "classes/QualityGates/QgResultPublisher"
-#uses "classes/StTest"
+#uses "classes/oaTest/OaTest"
 #uses "classes/QualityGates/Qg"
 #uses "classes/QualityGates/QgMsgCat"
 #uses "classes/QualityGates/QgVersionResult"
@@ -20,7 +20,7 @@
 // declare variables and constans
 
 QgMsgCat myQgMsgCat = QgMsgCat();
-StTest  myTest = StTest();
+OaTest  myTest = OaTest();
 
 
 
@@ -50,7 +50,6 @@ class QgBase
    */
   public int setUp()
   {
-    myTest.testSuiteId = Qg::getId();
     myTest.setUp();
     myQgMsgCat.setName(Qg::getId());
     
