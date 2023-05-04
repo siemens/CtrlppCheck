@@ -26,7 +26,7 @@ class QgStaticPanelCheck : QgBase
 //--------------------------------------------------------------------------------
 //@public members
 //--------------------------------------------------------------------------------
-  public string checkedPath;
+  public string checkedPath = PROJ_PATH;
   
   //------------------------------------------------------------------------------
   /** @brief Function setups panels tests.

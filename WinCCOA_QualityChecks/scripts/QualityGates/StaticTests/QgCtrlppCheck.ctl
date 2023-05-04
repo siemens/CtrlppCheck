@@ -9,7 +9,7 @@
 
 #uses "classes/QualityGates/QgCtrlppCheck/QgCtrlppCheck"
 
-void main()
+void main(string path = PROJ_PATH)
 {
-  exit(start_QgCtrlppCheck());
+  exit(start_QgCtrlppCheck(path));
 }

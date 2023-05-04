@@ -27,7 +27,7 @@ class QgStaticCheck_Pictures : QgBase
 //--------------------------------------------------------------------------------
 //@public members
 //--------------------------------------------------------------------------------
-  public string checkedPath;
+  public string checkedPath = PROJ_PATH;
   
   //------------------------------------------------------------------------------
   /** @brief Function setups pictures tests.

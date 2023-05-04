@@ -24,7 +24,7 @@
 */
 class QgStaticCheck_Scripts : QgBase
 {
-  public string checkedPath;
+  public string checkedPath = PROJ_PATH;
   public int setUp()
   {
     if ( QgBase::setUp() )
