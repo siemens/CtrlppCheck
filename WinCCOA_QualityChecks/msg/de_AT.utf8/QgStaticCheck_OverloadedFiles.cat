@@ -1,7 +1,7 @@
-assert.isCheater,Is file overloaded
+assert.isCheater,Check if is the file $location overloaded.
 reason.isCheater,It is not allowed to overwrite WinCCOA-license check files: $file.name
 filesList,Files
-assert.isOverloaded,Is file overloaded
+assert.isOverloaded,Check if is the file $location overloaded.
 reason.isOverloaded,The file '$file.name' is overloaded from '$file.isOverloadedFrom'.
-assert.isOverloadedAllowed,Is file overloaded
+assert.isOverloadedAllowed,Check if is the file $location overloaded (allowed overloads).
 reason.isOverloadedAllowed,The file '$file.name' is overloaded from '$file.isOverloadedFrom'. -> It's allowed

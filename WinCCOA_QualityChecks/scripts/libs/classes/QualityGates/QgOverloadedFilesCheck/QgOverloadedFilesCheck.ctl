@@ -118,6 +118,7 @@ class QgOverloadedFilesCheck
     {
       result.setMsgCatName("QgStaticCheck_OverloadedFiles");
       result.setAssertionText("filesList");
+      result.setLocation(PROJ_PATH);
 
       for(int i = 1; i <= dynlen(_relPaths); i++)
       {
@@ -129,6 +130,7 @@ class QgOverloadedFilesCheck
         if ( settings.isEnabled() )
         {
           shared_ptr <QgVersionResult> assertion = new QgVersionResult();
+          assertion.setLocation(relPath);
           assertion.setMsgCatName("QgStaticCheck_OverloadedFiles");
         
           if ( isAllowed(relPath) )

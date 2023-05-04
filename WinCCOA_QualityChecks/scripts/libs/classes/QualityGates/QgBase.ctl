@@ -152,7 +152,6 @@ class QgBase
 //--------------------------------------------------------------------------------
   protected QgAddOnTmpSourceDir _sourceDir = QgAddOnTmpSourceDir();
   protected QgResultPublisher _publisher = QgResultPublisher();
-  //protected QgVersionResult _result = QgVersionResult();
   protected shared_ptr<QgVersionResult> _result;
 
   protected bool _setMinScore = FALSE;
