@@ -39,7 +39,7 @@
 
 | Parameter | referenceValues                                                                          |
 |-----------|------------------------------------------------------------------------------------------|
-| Function  | Custom values used in the check (use depends on the check)<br>(e.g.: allowed extentions) |
+| Function  | Custom values used in the check (use depends on the check)<br>(e.g.: allowed extensions) |
 | Datatypes | dyn_mixed                                                                                |
 | Example   | ["pnl", "xml", ""]                                                                       |
 <br>

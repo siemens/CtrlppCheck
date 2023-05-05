@@ -12,7 +12,7 @@
             "enabled": true
         },
         {
-            "id": "PicturesFile.file.extention",
+            "id": "PicturesFile.file.extension",
             "description":{ 
                 "de_AT.utf8":"Überprüft die Dateierweiterung des Bildes",
                 "en_US.utf8":"Checks the file extension of the picture"

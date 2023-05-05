@@ -9,7 +9,7 @@
 
 /**
   @file scripts/scriptEditor/ctrlPPCheck_ext.ctl
-  @brief Extention for static tests in ctrl editor
+  @brief Extension for static tests in ctrl editor
   @details Extended static code check in ctrl editor
   + ctrlPP check
   + CCN

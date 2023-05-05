@@ -9,9 +9,7 @@
 
 #uses "classes/QualityGates/Tools/Python/Python"
 #uses "classes/FileSys/QgFile"
-#uses "classes/QualityGates/QgBase"
 #uses "csv"
-#uses "CtrlOaUnit"
 #uses "classes/QualityGates/Tools/Lizard/ToolLizard"
 #uses "classes/QualityGates/QgStaticCheck/CtrlCode/FunctionData"
 #uses "classes/Variables/Float"
@@ -63,7 +61,7 @@ class ScriptData
   
   //------------------------------------------------------------------------------
   /**
-    Return the checked file name with extention.
+    Return the checked file name with extension.
     @note Not full path only the file name.
     */
   public string getName()

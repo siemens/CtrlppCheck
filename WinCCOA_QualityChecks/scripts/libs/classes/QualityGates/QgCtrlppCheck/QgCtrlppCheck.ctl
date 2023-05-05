@@ -25,6 +25,7 @@ class QgCtrlppCheck : QgBase
 //--------------------------------------------------------------------------------
 //@public members
 //--------------------------------------------------------------------------------
+  public string checkedPath = PROJ_PATH;
 
   //------------------------------------------------------------------------------
   /** @brief Calculates / start ctrlppcheck.
@@ -33,7 +34,7 @@ class QgCtrlppCheck : QgBase
   */
   public int calculate()
   {
-    return checkDir(PROJ_PATH + SCRIPTS_REL_PATH);
+    return checkDir(this.checkedPath + SCRIPTS_REL_PATH);
   }
 
   //------------------------------------------------------------------------------
@@ -60,14 +61,14 @@ class QgCtrlppCheck : QgBase
             "_CtrlppCheck.filter.severity", disabledSeverities);
       includeFilesPattern = "*";
     }
-    else if ( Qg::isRunningOnJenkins() )
-    {
-      disabledIds = makeDynString("debug", "unreadVariable",
-                                  "checkLibraryFunction", "checkLibraryNoReturn",
-                                  "unusedFunction");
-      disabledSeverities = makeDynString("debug", "information");
-      includeFilesPattern = makeUnixPath(dirPath + "*");
-    }
+    // else if ( Qg::isRunningOnJenkins() )
+    // {
+    //   disabledIds = makeDynString("debug", "unreadVariable",
+    //                               "checkLibraryFunction", "checkLibraryNoReturn",
+    //                               "unusedFunction");
+    //   disabledSeverities = makeDynString("debug", "information");
+    //   includeFilesPattern = makeUnixPath(dirPath + "*");
+    // }
     else
     {
       disabledIds = makeDynString("debug", "unreadVariable",
@@ -125,15 +126,15 @@ class QgCtrlppCheck : QgBase
             "_CtrlppCheck.settings.verbose", check.settings.verbose,
             "_CtrlppCheck.settings.inlineSuppressions", check.settings.inlineSuppressions);
     }
-    else if ( Qg::isRunningOnJenkins() )
-    {
-      check.settings.enableLibCheck = FALSE;
-      //check.settings.enableHeadersCheck = TRUE;  // currently disabled
-      check.settings.includeSubProjects = TRUE;
-      check.settings.inconclusive = FALSE;
-      check.settings.verbose = FALSE;
-      check.settings.inlineSuppressions = TRUE;
-    }
+    // else if ( Qg::isRunningOnJenkins() )
+    // {
+    //   check.settings.enableLibCheck = FALSE;
+    //   check.settings.enableHeadersCheck = TRUE;
+    //   check.settings.includeSubProjects = TRUE;
+    //   check.settings.inconclusive = FALSE;
+    //   check.settings.verbose = FALSE;
+    //   check.settings.inlineSuppressions = TRUE;
+    // }
     else
     {
       check.settings.enableCheckLibrary(FALSE);
@@ -186,9 +187,10 @@ class QgCtrlppCheck : QgBase
 
 /// Start Qg ctrlppcheck.
 /// Simple old ctrl style.
-public int start_QgCtrlppCheck()
+public int start_QgCtrlppCheck(string path = PROJ_PATH)
 {
   Qg::setId("QgCtrlppCheck");
   QgCtrlppCheck qg = QgCtrlppCheck();
+  qg.checkedPath = path;
   return qg.start();
 }

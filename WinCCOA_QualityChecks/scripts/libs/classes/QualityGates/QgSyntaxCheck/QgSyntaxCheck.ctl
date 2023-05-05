@@ -146,7 +146,7 @@ class QgSyntaxCheck : QgBase
         {
           /// @todo remove this check when are WinCCOALicenseCtrlExt implemented
           if ( strpos(msg, "WinCCOALicenseCtrlExt") > 0 )
-            continue; // ignore missing extention, this is added by IL
+            continue; // ignore missing extension, this is added by IL
         }
         else if ( errCode == "61" )
         {
@@ -156,7 +156,7 @@ class QgSyntaxCheck : QgBase
           if ( str.endsWith(makeUnixPath(SCRIPTS_REL_PATH)) || str.endsWith(makeUnixPath(PANELS_REL_PATH)) )
           {
             DebugFTN("QgSyntaxCheck", "oa bug, ignore this message", msg);
-            continue; // ignore missing extention, this is added by IL
+            continue; // ignore missing extension, this is added by IL
           }
         }
 

@@ -18,6 +18,7 @@ class QgApp
     _isValid = FALSE;
     if ( id == "" )
     {
+      /// @todo I think we can remove this class, because always ends here.
       DebugFTN("QgApp", "!!! Parameter #1 (id) is missing" );
       return;
     }

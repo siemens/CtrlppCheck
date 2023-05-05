@@ -24,20 +24,25 @@
 */
 class QgStaticCheck_Scripts : QgBase
 {
-  
+  public string checkedPath = PROJ_PATH;
   public int setUp()
   {
     if ( QgBase::setUp() )
+    {
+      throwError(makeError("", PRIO_SEVERE, ERR_CONTROL, 0, "QgBase::setUp fails"));
       return -1;
+    }
     
     if ( Qg::getId() == "QgStaticCheck_Scripts" )
     {
-      _scriptsData.setDir(PROJ_PATH + SCRIPTS_REL_PATH);
+      throwError(makeError("", PRIO_INFO, ERR_CONTROL, 0, Qg::getId() + " will check " + this.checkedPath + SCRIPTS_REL_PATH));
+      _scriptsData.setDir(this.checkedPath + SCRIPTS_REL_PATH);
       _scriptsData.setType(ScriptsDataType::scripts);
     }
     else if ( Qg::getId() == "QgStaticCheck_Libs" )
     {
-      _scriptsData.setDir(PROJ_PATH + LIBS_REL_PATH);
+      throwError(makeError("", PRIO_INFO, ERR_CONTROL, 0, Qg::getId() + " will check " + this.checkedPath + LIBS_REL_PATH));
+      _scriptsData.setDir(this.checkedPath + LIBS_REL_PATH);
       _scriptsData.setType(ScriptsDataType::libs);
     }
 
@@ -57,9 +62,8 @@ class QgStaticCheck_Scripts : QgBase
   
   public int validate()
   {
-    
     if ( (Qg::getId() == "QgStaticCheck_Scripts") && (_scriptsData.getCountOfFilesRecursive() <= 0) && 
-          isdir(PROJ_PATH + LIBS_REL_PATH) && (_scriptsData.getCountOfSubDirs() <= 0) )
+          isdir(this.checkedPath + LIBS_REL_PATH) && (_scriptsData.getCountOfSubDirs() <= 0) )
     {
       // there are no scripts. Libs only and libs are checked in QgStaticCheck_Libs
       setMinValidScore("QgStaticCheck_Scripts", "assert.missingScripts", "reason.missingScripts");
@@ -83,7 +87,7 @@ class QgStaticCheck_Scripts : QgBase
 /** 
   Main rutine to start QG-Static check of scripts
 */
-void main(string testType)
+void main(string testType, string path = PROJ_PATH)
 {
   if ( testType == "scripts" )
   {
@@ -100,5 +104,6 @@ void main(string testType)
   }
   
   QgStaticCheck_Scripts qg = QgStaticCheck_Scripts();
+  qg.checkedPath = path;
   exit(qg.start());
 }

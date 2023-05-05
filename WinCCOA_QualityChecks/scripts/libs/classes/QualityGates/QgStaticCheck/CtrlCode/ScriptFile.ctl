@@ -24,8 +24,8 @@ class ScriptFile : QgFile
   public ScriptFile(string filePath = "")
   {
     setFilePath(filePath);
-    // !! extention must be written lowercase, that NonCaseSensitive works
-    _enabledExtentions = makeDynString("ctl", "ctc");
+    // !! extension must be written lowercase, that NonCaseSensitive works
+    _enabledExtensions = makeDynString("ctl", "ctc");
   }
   
   //------------------------------------------------------------------------------
@@ -56,7 +56,7 @@ class ScriptFile : QgFile
   public int calculate()
   {
     _isCalculated = FALSE;
-    _extention = getExt(getFilePath());
+    _extension = getExt(getFilePath());
     
     if ( !isfile(getFilePath()) )
     {
@@ -117,17 +117,17 @@ class ScriptFile : QgFile
     }
     
     {
-      shared_ptr<QgSettings> settings = new QgSettings("ScriptFile.file.extention");      
+      shared_ptr<QgSettings> settings = new QgSettings("ScriptFile.file.extension");      
       
       if ( settings.isEnabled() )
       {
-        // check for valid extentions    
+        // check for valid extensions    
         shared_ptr <QgVersionResult> assertion = new QgVersionResult();
         assertion.setMsgCatName("QgStaticCheck_ScriptFile");
-        assertion.setAssertionText("assert.file.extention");
-        assertion.setReasonText("reason.file.extention", makeMapping("file.name", getName(),
-                                                                     "file.extention", _extention));
-        if ( !assertion.assertDynContains(settings.getReferenceValues(), strtolower(_extention), settings.getScorePoints()) )
+        assertion.setAssertionText("assert.file.extension");
+        assertion.setReasonText("reason.file.extension", makeMapping("file.name", getName(),
+                                                                     "file.extension", _extension));
+        if ( !assertion.assertDynContains(settings.getReferenceValues(), strtolower(_extension), settings.getScorePoints()) )
         {
           result.addChild(assertion);
           return 0;
@@ -191,8 +191,8 @@ class ScriptFile : QgFile
   
   protected ScriptData _scriptData = ScriptData();
     
-  static dyn_string _enabledExtentions = makeDynString();  
-  string _extention;
+  static dyn_string _enabledExtensions = makeDynString();  
+  string _extension;
   
   bool _isCalculated;
   

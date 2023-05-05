@@ -7,8 +7,6 @@
 // SPDX-License-Identifier: GPL-3.0-only
 //
 
-#uses "classes/QualityGates/QgBase"
-#uses "CtrlOaUnit"
 #uses "classes/QualityGates/Tools/Lizard/ToolLizard"
 #uses "classes/QualityGates/QgSettings"
 

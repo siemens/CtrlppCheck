@@ -11,7 +11,7 @@
             "enabled": true
         },
         {
-            "id": "ScriptFile.file.extention",
+            "id": "ScriptFile.file.extension",
             "description":{ 
                 "de_AT.utf8":"Überprüft Dateien auf die angegebenen Erweiterungen",
                 "en_US.utf8":"Checks files for the specified extensions"

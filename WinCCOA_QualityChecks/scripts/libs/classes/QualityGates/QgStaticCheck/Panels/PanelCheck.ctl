@@ -9,11 +9,9 @@
 
 #uses "classes/QualityGates/QgVersionResult"
 #uses "classes/FileSys/QgFile"
-#uses "classes/QualityGates/QgBase"
 #uses "classes/QualityGates/QgAddOnResultErr"
 #uses "classes/QualityGates/QgStaticCheck/Panels/PanelFile/PanelFile"
 #uses "classes/QualityGates/QgSettings"
-#uses "CtrlOaUnit"
 
 //--------------------------------------------------------------------------------
 /**
@@ -37,8 +35,8 @@ class PanelCheck : QgFile
   public PanelCheck(const string &filePath)
   {
     setFilePath(filePath);
-    // !! extention must be written lowercase, that NonCaseSensitive works
-    _enabledExtentions = makeDynString("pnl", "xml", "");
+    // !! extension must be written lowercase, that NonCaseSensitive works
+    _enabledExtensions = makeDynString("pnl", "xml", "");
   }
 
   //------------------------------------------------------------------------------
@@ -147,7 +145,7 @@ class PanelCheck : QgFile
       return 0;
     }
     
-    _extention = getExt(getFilePath());
+    _extension = getExt(getFilePath());
     
     _pnl.read();
 
@@ -236,7 +234,7 @@ class PanelCheck : QgFile
     
     if ( validateIsExample() ||
          validateIsBackUp() ||
-         validateExtention() ||
+         validateExtension() ||
          validateIsCrypted() ||
          validateIsCalculated() )
     {
@@ -304,19 +302,19 @@ class PanelCheck : QgFile
     return 0;
   }
     
-    // check for valid extentions    
-  protected int validateExtention()
+    // check for valid extensions    
+  protected int validateExtension()
   {
-    shared_ptr<QgSettings> settings = new QgSettings("PanelCheck.panel.extention");    
+    shared_ptr<QgSettings> settings = new QgSettings("PanelCheck.panel.extension");    
     
     if ( settings.isEnabled() )
     {
       shared_ptr <QgVersionResult> assertion = new QgVersionResult();
       assertion.setMsgCatName("QgStaticCheck_Panels");
-      assertion.setAssertionText("assert.panel.extention");
-      assertion.setReasonText("reason.panel.extention", makeMapping("panel.name", getName(),
-                                                                    "panel.extention", _extention));
-      if ( !assertion.assertDynContains(settings.getReferenceValues(), strtolower(_extention), settings.getScorePoints()) )
+      assertion.setAssertionText("assert.panel.extension");
+      assertion.setReasonText("reason.panel.extension", makeMapping("panel.name", getName(),
+                                                                    "panel.extension", _extension));
+      if ( !assertion.assertDynContains(settings.getReferenceValues(), strtolower(_extension), settings.getScorePoints()) )
       {
         result.addChild(assertion);
         return 1;
@@ -560,8 +558,8 @@ class PanelCheck : QgFile
 //--------------------------------------------------------------------------------
     
   static string _sourceDir = PROJ_PATH;  
-  static dyn_string _enabledExtentions = makeDynString();  
-  string _extention;
+  static dyn_string _enabledExtensions = makeDynString();  
+  string _extension;
   
   PanelFile _pnl = PanelFile();
 

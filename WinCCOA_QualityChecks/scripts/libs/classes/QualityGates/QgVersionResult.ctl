@@ -57,6 +57,7 @@ struct QgVersionResult
   string reason;
   string  reasonKey;
   mapping reasonDollars;
+  string location;
 
   static const float NOT_VALID_SCORE = 0.0;
   float  score    = NOT_VALID_SCORE;
@@ -66,6 +67,18 @@ struct QgVersionResult
   //------------------------------------------------------------------------------
   QgVersionResult()
   {
+  }
+
+  //------------------------------------------------------------------------------
+  void setLocation(const string &location)
+  {
+    this.location = location;
+  }
+
+  //------------------------------------------------------------------------------
+  string getLocation()
+  {
+    return this.location;
   }
 
   //------------------------------------------------------------------------------
@@ -503,11 +516,17 @@ struct QgVersionResult
   protected _addScorePoints(int points = 1)
   {
     mapping userData;
+    if (location != "")
+    {
+      assertDollars["location"] = location;
+      userData["Location"] = location;
+    }
+
     userData["Note"] = msgCat.getText(assertKey, assertDollars);
+    
+    userData["Method"] = assertKey;
     userData["ErrMsg"] = msgCat.getText(reasonKey, reasonDollars);
-    dyn_string stack = getStackTrace();
-    dynRemove(stack, 1);
-    userData["StackTrace"] = stack;
+    userData["StackTrace"] = makeDynString();
     
     getKnownBugId(userData);
 
@@ -517,15 +536,18 @@ struct QgVersionResult
       errorPoints += points;
       lastErr = reason;
 
+      const int prio = mappingHasKey(userData, "KnownBug") ? PRIO_INFO : PRIO_WARNING;
+      throwError(makeError("QgBase", prio, ERR_CONTROL, 10, msgCat.getText(reasonKey, reasonDollars)));
+
       if ( _enableOaTestOutput() )
         oaUnitFail(assertKey, userData);
-//       throwError(makeError("QgBase", PRIO_WARNING, ERR_CONTROL, 10, msgCat.getText(reasonKey, reasonDollars)));
     }
     else
     {
       if ( _enableOaTestOutput() )
         oaUnitPass(assertKey, userData);
-//       throwError(makeError("QgBase", PRIO_INFO, ERR_CONTROL, 11, msgCat.getText(assertKey, assertDollars)));
+      else
+        throwError(makeError("QgBase", PRIO_INFO, ERR_CONTROL, 11, msgCat.getText(assertKey, assertDollars)));
     }
 
     _allowNextErr = FALSE;
@@ -572,6 +594,7 @@ struct QgVersionResult
   */
   protected static bool _enableOaTestOutput()
   {
+    return true;
     return Qg::isRunningOnJenkins();
   }
 

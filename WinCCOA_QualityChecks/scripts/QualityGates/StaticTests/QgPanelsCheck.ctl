@@ -26,6 +26,7 @@ class QgStaticPanelCheck : QgBase
 //--------------------------------------------------------------------------------
 //@public members
 //--------------------------------------------------------------------------------
+  public string checkedPath = PROJ_PATH;
   
   //------------------------------------------------------------------------------
   /** @brief Function setups panels tests.
@@ -36,8 +37,9 @@ class QgStaticPanelCheck : QgBase
   {
     if ( QgBase::setUp() )
       return -1;
-    
-    _panels.setDir(PROJ_PATH + PANELS_REL_PATH);
+
+    throwError(makeError("", PRIO_INFO, ERR_CONTROL, 0, Qg::getId() + " will check " + this.checkedPath + PANELS_REL_PATH));
+    _panels.setDir(this.checkedPath + PANELS_REL_PATH);
     
     if ( !_panels.exists() )
       setMinValidScore("QgStaticCheck_Panels", "assert.missingPanels", "reason.missingPanels");
@@ -90,10 +92,11 @@ class QgStaticPanelCheck : QgBase
 /** 
   @breif main rutine to start QualityGate QgStaticCheck-panels
 */
-void main()
+void main(string path = PROJ_PATH)
 {
   Qg::setId("QgStaticCheck_Panels");
   QgStaticPanelCheck qg = QgStaticPanelCheck();
+  qg.checkedPath = path;
   exit(qg.start());
 }
 
