@@ -85,6 +85,8 @@ class QgCtrlppCheck : QgBase
       if ( f.isExample() || f.isTest() || !f.isPatternMatch(includeFilesPattern) )
         continue;
 
+
+
       if ( isErrorFiltered(error) )
         continue;
 
@@ -162,6 +164,15 @@ class QgCtrlppCheck : QgBase
   /// Checks if the error shall be filtered.
   protected bool isErrorFiltered(const CppCheckError &error)
   {
+    /// @todo it shallbe somehow configurable and
+    /// done in the ctrlppcheck (in cpp source) to eliminate CPU usage
+    if (!error.path.isEmpty() && !makeUnixPath(error.path).startsWith(makeUnixPath(this.checkedPath)))
+    {
+      // inform only about failures in checked sources.
+      // No body interested about sub-project failures
+      return FALSE;
+    }
+
     if ( error.msg == "" )
       return TRUE;
 
