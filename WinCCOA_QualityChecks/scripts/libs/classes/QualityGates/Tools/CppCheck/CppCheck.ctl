@@ -233,6 +233,10 @@ class CppCheck
       mapping map = xmlElementAttributes(docNum, node);
       err.line = (int)map["line"];
       err.path = map["file"];
+
+      if (mappingHasKey(map, "file0"))
+        err.path0 = map["file0"];
+
       return 0;
     }
     return -1;

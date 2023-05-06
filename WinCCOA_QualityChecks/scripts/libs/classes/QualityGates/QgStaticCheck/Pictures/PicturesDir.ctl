@@ -46,6 +46,7 @@ class PicturesDir : StaticDir
     return 0;
   }
   
+  //------------------------------------------------------------------------------
   public string getSettingsRoot()
   {
     return "PicturesDir";

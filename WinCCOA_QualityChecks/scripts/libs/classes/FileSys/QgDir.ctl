@@ -9,8 +9,6 @@
 
 //--------------------------------------------------------------------------------
 // used libraries (#uses)
-#uses "classes/ErrorHdl/OaLogger"
-#uses "classes/QualityGates/Qg"
 
 //--------------------------------------------------------------------------------
 // declare variables and constans
@@ -41,11 +39,6 @@ class QgDir
   */
   public void setDirPath(const string &dirPath)
   {
-    if (dirPath != "")
-    {
-      OaLogger logger;
-      logger.info(0, Qg::getId(), "Check directory", dirPath);
-    }
     _dirPath = dirPath;
   }
   

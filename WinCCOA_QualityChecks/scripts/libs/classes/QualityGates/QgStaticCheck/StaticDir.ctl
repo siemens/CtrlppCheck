@@ -39,6 +39,8 @@ class StaticDir : QgDir
   public int calculate()
   {
     OaLogger logger;
+    logger.info(0, Qg::getId(), "Check directory", getDirPath());
+
     dynClear(_files);
     dynClear(_childs);
     
@@ -56,6 +58,7 @@ class StaticDir : QgDir
     for(int i = 1; i <= dynlen(fileNames); i++)
     {
       const string fullPath = makeNativePath(getDirPath() + fileNames[i]);
+      logger.info(0, Qg::getId(), "Check file", fullPath);
       anytype checkFile = makeCheckFile(fullPath);
       
       _allFilesCount++;

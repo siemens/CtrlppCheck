@@ -81,20 +81,15 @@ class QgCtrlppCheck : QgBase
     {
       CppCheckError error = check.errList[i];
 
-      QgFile f = QgFile(error.path);
-      if ( f.isExample() || f.isTest() || !f.isPatternMatch(includeFilesPattern) )
-        continue;
-
-
-
       if ( isErrorFiltered(error) )
         continue;
 
+      QgFile f = QgFile(error.path);
       string relPath = f.getRelPath(SCRIPTS_REL_PATH);
 
       shared_ptr <QgVersionResult> assertion = new QgVersionResult();
       assertion.setMsgCatName("QgCtrlppCheck");
-      assertion.setAssertionText(relPath + " : " + error.line);
+      assertion.setAssertionText(makeUnixPath(relPath));
       assertion.setReasonText(error.msg + " (" + error.id + ")");
       assertion.assertEqual(error.severity, "");
       _result.addChild(assertion);
@@ -139,6 +134,8 @@ class QgCtrlppCheck : QgBase
     // }
     else
     {
+      check.settings.inlineSuppressions = TRUE;
+      check.settings.includeSubProjects = FALSE;
       check.settings.enableCheckLibrary(FALSE);
     }
 
@@ -166,12 +163,16 @@ class QgCtrlppCheck : QgBase
   {
     /// @todo it shallbe somehow configurable and
     /// done in the ctrlppcheck (in cpp source) to eliminate CPU usage
-    if (!error.path.isEmpty() && !makeUnixPath(error.path).startsWith(makeUnixPath(this.checkedPath)))
+    if (error.path != error.path0)
     {
       // inform only about failures in checked sources.
-      // No body interested about sub-project failures
-      return FALSE;
+      // No body interested about sub-project failures.
+      return TRUE;
     }
+
+    QgFile f = QgFile(error.path);
+    if ( f.isExample() || f.isTest() || !f.isPatternMatch(includeFilesPattern) )
+      return true;
 
     if ( error.msg == "" )
       return TRUE;
@@ -184,6 +185,7 @@ class QgCtrlppCheck : QgBase
     const string severity = error.severity;
     if ( dynContains(disabledSeverities, severity)  )
       return TRUE;
+
 
     return FALSE;
   }
