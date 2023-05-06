@@ -7,6 +7,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 //
 
+#uses "classes/ErrorHdl/OaLogger"
 #uses "classes/QualityGates/QgBase"
 #uses "classes/FileSys/QgDir"
 #uses "classes/QualityGates/QgSettings"
@@ -37,20 +38,24 @@ class StaticDir : QgDir
   */
   public int calculate()
   {
+    OaLogger logger;
     dynClear(_files);
     dynClear(_childs);
     
     if ( !exists() )
+    {
+      logger.warning(0, Qg::getId(), __FUNCTION__, "Directory does not exist", getDirPath());
       return -1;
+    }
     
     float count = 0;
 
     // check all files    
     dyn_string fileNames = getFileNames(getDirPath());
+
     for(int i = 1; i <= dynlen(fileNames); i++)
     {
-      string fullPath = makeNativePath(getDirPath() + fileNames[i]);
-      
+      const string fullPath = makeNativePath(getDirPath() + fileNames[i]);
       anytype checkFile = makeCheckFile(fullPath);
       
       _allFilesCount++;
@@ -65,9 +70,11 @@ class StaticDir : QgDir
     
     // check all directories
     dyn_string childs = getSubDirNames();
+
     for(int i = 1; i <= dynlen(childs); i++)
     {
-      anytype child = makeCheckSubDir(getDirPath() + childs[i] + "/");
+      const string subDirPath = makeNativePath(getDirPath() + childs[i] + "/");
+      anytype child = makeCheckSubDir(subDirPath);
       if ( child.calculate() )
         continue; // only for safety (should never occur)
             
@@ -87,7 +94,6 @@ class StaticDir : QgDir
     
 
     QgVersionResult::lastErr = "";
-//     result.clear();
 
     result = new QgVersionResult();
     result.text = getName();

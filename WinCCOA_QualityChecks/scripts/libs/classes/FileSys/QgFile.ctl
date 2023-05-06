@@ -9,6 +9,8 @@
 
 //--------------------------------------------------------------------------------
 // used libraries (#uses)
+#uses "classes/ErrorHdl/OaLogger"
+#uses "classes/QualityGates/Qg"
 
 //--------------------------------------------------------------------------------
 // declare variables and constans
@@ -39,6 +41,11 @@ class QgFile
   */
   public void setFilePath(const string &filePath)
   {
+    if (filePath != "")
+    {
+      OaLogger logger;
+      logger.info(0, Qg::getId(), "Check file", filePath);
+    }
     _filePath = filePath;
   }
   

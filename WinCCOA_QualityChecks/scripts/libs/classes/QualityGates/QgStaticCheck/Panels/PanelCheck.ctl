@@ -56,7 +56,7 @@ class PanelCheck : QgFile
    */
   public string getRelPath()
   {
-    return substr(getFilePath(), strlen(_sourceDir + PANELS_REL_PATH) );
+    return substr(makeNativePath(getFilePath()), strlen(makeNativePath(_sourceDir + PANELS_REL_PATH)));
   }
 
   //------------------------------------------------------------------------------
@@ -141,7 +141,7 @@ class PanelCheck : QgFile
     
     if ( isExample() )
     {
-      // do calculate example, improve performance
+      // do not calculate example, improve performance
       return 0;
     }
     
@@ -169,36 +169,37 @@ class PanelCheck : QgFile
       // convert non xml format to a xml format, otherwise can not be loaded
 //       _pnl.strContent = "";
       string oldRelPath = _pnl.getRelPath();
-      string oldPath = getPath(PANELS_REL_PATH, oldRelPath);
-      if( oldPath == "" )
-      {
-        DebugFTN("PanelCheck", __FUNCTION__, "can no find panel", oldRelPath);
-        return -2;
-      }
+      const string originFullPath = _pnl.getFullPath();
       
       string uuId = createUuid();
       strreplace(uuId, "{", "");
       strreplace(uuId, "}", "");
-      string newPath = getRelPath() + uuId + ".xml";
+      string newPath = uuId + ".xml";
       _pnl.setPath(newPath);
 
-      newPath = getPath(PANELS_REL_PATH) + newPath;
+      newPath =  PROJ_PATH + PANELS_REL_PATH + newPath;
 
-      copyFile(oldPath, newPath);
+      // copy file into current project and convert it into xml format
+      // conversion works only with panels located in project
+      copyFile(originFullPath, newPath);
 
+      const string origSourcePath = _sourceDir;
+      PanelFile::setSourceDirPath(PROJ_PATH);
       _pnl.toXml();
       _pnl.read();
+      int rc = _pnl.load();
+      PanelFile::setSourceDirPath(origSourcePath);
 
-      if( _pnl.load() )
+      if (rc)
       {
-        remove(newPath);
+        // remove(newPath);
         DebugFTN("PanelCheck", __FUNCTION__, "can not load PNL/XML panel", getRelPath());
         _pnl.strContent = "";
         return -1;
       }
 
       
-      remove(newPath);
+      // remove(newPath);
 
       if( isfile(newPath + ".bak") )
         remove(newPath + ".bak"); // on converting generate the ui back up panel, so delete the waste.

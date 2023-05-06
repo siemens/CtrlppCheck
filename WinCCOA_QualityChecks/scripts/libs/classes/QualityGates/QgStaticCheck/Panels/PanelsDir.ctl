@@ -30,7 +30,7 @@ class PanelsDir : StaticCodeDir
   }
 
   //------------------------------------------------------------------------------
-  public static PanelsDir makeCheckSubDir(const string &fullPath)
+  public PanelsDir makeCheckSubDir(const string &fullPath)
   {
     PanelsDir dir = PanelsDir(fullPath);
     return dir;
