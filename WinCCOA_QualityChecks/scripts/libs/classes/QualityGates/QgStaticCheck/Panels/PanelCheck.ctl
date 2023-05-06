@@ -192,14 +192,14 @@ class PanelCheck : QgFile
 
       if (rc)
       {
-        // remove(newPath);
+        remove(newPath);
         DebugFTN("PanelCheck", __FUNCTION__, "can not load PNL/XML panel", getRelPath());
         _pnl.strContent = "";
         return -1;
       }
 
       
-      // remove(newPath);
+      remove(newPath);
 
       if( isfile(newPath + ".bak") )
         remove(newPath + ".bak"); // on converting generate the ui back up panel, so delete the waste.
