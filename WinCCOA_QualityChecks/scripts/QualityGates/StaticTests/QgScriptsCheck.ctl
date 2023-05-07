@@ -27,7 +27,7 @@ class QgStaticCheck_Scripts : QgBase
 //-----------------------------------------------------------------------------
 //@public members
 //-----------------------------------------------------------------------------
-  public string checkedPath = PROJ_PATH;
+  public string checkedPath = "";
 
   //---------------------------------------------------------------------------
   public int setUp()
@@ -40,12 +40,20 @@ class QgStaticCheck_Scripts : QgBase
 
     if ( Qg::getId() == "QgStaticCheck_Scripts" )
     {
-      _scriptsData.setDir(this.checkedPath + SCRIPTS_REL_PATH);
+      if (this.checkedPath.isEmpty())
+      {
+        this.checkedPath = PROJ_PATH + SCRIPTS_REL_PATH;
+      }
+      _scriptsData.setDir(this.checkedPath);
       _scriptsData.setType(ScriptsDataType::scripts);
     }
     else if ( Qg::getId() == "QgStaticCheck_Libs" )
     {
-      _scriptsData.setDir(this.checkedPath + LIBS_REL_PATH);
+      if (this.checkedPath.isEmpty())
+      {
+        this.checkedPath = PROJ_PATH + LIBS_REL_PATH;
+      }
+      _scriptsData.setDir(this.checkedPath);
       _scriptsData.setType(ScriptsDataType::libs);
     }
 
@@ -101,7 +109,7 @@ class QgStaticCheck_Scripts : QgBase
   @param testType Checks WinCC OA scripts or libs directory
   @param path Path to WinCCOA project to be checked. Per default this project.
 */
-void main(string testType, string path = PROJ_PATH)
+void main(string testType, string path = "")
 {
   if ( testType == "scripts" )
   {

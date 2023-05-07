@@ -15,10 +15,13 @@
 class StaticDir : QgDir
 {
   
-  public setDir(const string &dirPath)
+  public setDir(string dirPath)
   {
     dynClear(_files);
     dynClear(_childs);
+    if (!dirPath.endsWith("/") && !dirPath.endsWith("\\"))
+      dirPath += makeNativePath("/"); // add path delimiter on enf of direcotry
+
     QgDir::setDirPath(dirPath);
   }
   
