@@ -25,7 +25,7 @@ class QgCtrlppCheck : QgBase
 //--------------------------------------------------------------------------------
 //@public members
 //--------------------------------------------------------------------------------
-  public string checkedPath = PROJ_PATH;
+  public string checkedPath = PROJ_PATH + SCRIPTS_REL_PATH;
 
   //------------------------------------------------------------------------------
   /** @brief Calculates / start ctrlppcheck.
@@ -34,7 +34,7 @@ class QgCtrlppCheck : QgBase
   */
   public int calculate()
   {
-    return checkDir(this.checkedPath + SCRIPTS_REL_PATH);
+    return checkDir(this.checkedPath);
   }
 
   //------------------------------------------------------------------------------
@@ -61,14 +61,6 @@ class QgCtrlppCheck : QgBase
             "_CtrlppCheck.filter.severity", disabledSeverities);
       includeFilesPattern = "*";
     }
-    // else if ( Qg::isRunningOnJenkins() )
-    // {
-    //   disabledIds = makeDynString("debug", "unreadVariable",
-    //                               "checkLibraryFunction", "checkLibraryNoReturn",
-    //                               "unusedFunction");
-    //   disabledSeverities = makeDynString("debug", "information");
-    //   includeFilesPattern = makeUnixPath(dirPath + "*");
-    // }
     else
     {
       disabledIds = makeDynString("debug", "unreadVariable",
@@ -123,20 +115,18 @@ class QgCtrlppCheck : QgBase
             "_CtrlppCheck.settings.verbose", check.settings.verbose,
             "_CtrlppCheck.settings.inlineSuppressions", check.settings.inlineSuppressions);
     }
-    // else if ( Qg::isRunningOnJenkins() )
-    // {
-    //   check.settings.enableLibCheck = FALSE;
-    //   check.settings.enableHeadersCheck = TRUE;
-    //   check.settings.includeSubProjects = TRUE;
-    //   check.settings.inconclusive = FALSE;
-    //   check.settings.verbose = FALSE;
-    //   check.settings.inlineSuppressions = TRUE;
-    // }
     else
     {
+      ///@todo this shall be somehove configurable
+      /// but current QG-settings concept does not
+      /// support it.
+      /// It is not a big problem, because you can import
+      /// dp-list with _CtrlppCheck and use the code above.
       check.settings.inlineSuppressions = TRUE;
-      check.settings.includeSubProjects = FALSE;
+      check.settings.includeSubProjects = TRUE;
+      check.settings.inconclusive = FALSE;
       check.settings.enableCheckLibrary(FALSE);
+      check.settings.verbose = FALSE;
     }
 
     // load configs
@@ -200,7 +190,7 @@ class QgCtrlppCheck : QgBase
 
 /// Start Qg ctrlppcheck.
 /// Simple old ctrl style.
-public int start_QgCtrlppCheck(string path = PROJ_PATH)
+public int start_QgCtrlppCheck(string path = PROJ_PATH + SCRIPTS_REL_PATH)
 {
   Qg::setId("QgCtrlppCheck");
   QgCtrlppCheck qg = QgCtrlppCheck();
