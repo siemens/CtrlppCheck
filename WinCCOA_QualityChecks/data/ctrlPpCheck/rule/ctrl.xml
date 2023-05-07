@@ -156,7 +156,6 @@
 	    <id>quoted_params_system</id>
 		<severity>error</severity>
 		<summary>Call function system() with unquoted parameters.
-		<!--verbose-->
 		Calling function system() with unquoted parameters leads to issues, when spaces in parameter are used.
 		For example, when the program is located in path containing spaces.
 		Verify, that the system call has quoted parameters and suppres this error by
@@ -170,7 +169,6 @@
 	    <id>unsafe_system_call</id>
 		<severity>warning</severity>
 		<summary>Calling system command outside WinCC OA.
-		<!--verbose-->
 		Calling system command outside WinCC OA may be dangerours.
 		This is potential security issue.
 		Verify that this operation is safe and suppres this warning by
@@ -184,7 +182,6 @@
 	    <id>fatal_program_exit</id>
 		<severity>warning</severity>
 		<summary>Throw error with FATAL priority stop the program.
-		<!--verbose-->
 		Throwing a error with FATAL priority leads to stop the program.
 		Verify that this scenario is accepted and suppres this warning by
 		//ctrlppcheck-suppress fatal_program_exit</summary>
@@ -198,7 +195,6 @@
 	    <id>fatal_program_exit</id>
 		<severity>warning</severity>
 		<summary>Throw error with FATAL priority stop the program.
-		<!--verbose-->
 		Throwing a error with FATAL priority leads to stop the program.
 		Verify that this scenario is accepted and suppres this warning by
 		//ctrlppcheck-suppress fatal_program_exit</summary>

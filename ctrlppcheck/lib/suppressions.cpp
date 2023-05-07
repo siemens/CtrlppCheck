@@ -210,7 +210,8 @@ bool Suppressions::Suppression::parseComment(std::string comment, std::string *e
     std::istringstream iss(comment.substr(2));
     std::string word;
     iss >> word;
-    if (word != "cppcheck-suppress" && word != "cppcheck-suppress")
+    if (word != "cppcheck-suppress" && word != "cppcheck-suppress" &&
+        word != "ctrlppcheck-suppress" && word != "ctrlppcheck-suppress")
         return false;
     iss >> errorId;
     if (!iss)

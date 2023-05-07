@@ -767,7 +767,7 @@ void CmdLineParser::printHelp()
               "                         must be carefully investigated before you know if it is\n"
               "                         good or bad.\n"
               "    --inline-suppr       Enable inline suppressions. Use them by placing one or\n"
-              "                         more comments, like: '// cppcheck-suppress warningId'\n"
+              "                         more comments, like: '// ctrlppcheck-suppress warningId'\n"
               "                         on the lines before the warning to suppress.\n"
               "    --language=<language>, -x <language>\n"
               "                         Forces cppcheck to check all files as the given\n"

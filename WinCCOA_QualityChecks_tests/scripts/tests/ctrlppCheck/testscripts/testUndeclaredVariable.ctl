@@ -12,7 +12,7 @@ void main()
   unknownVar = 1;
   
   // test to supress this message
-  // cppcheck-suppress undeclaredVariable
+  // ctrlppcheck-suppress undeclaredVariable
   unknownVar = 2;
   // ctrlppcheck-suppress undeclaredVariable
   unknownVar = 3;
