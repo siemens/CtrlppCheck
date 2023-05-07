@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--  online editor for reg exp https://regex101.com/ -->
+
+<!-- enablde token lists:
+ normal
+ raw
+ simple
+-->
+
+<!-- OBSOLTE LIBRARIES -->
+<rule version="1">
+	<tokenlist>raw</tokenlist>
+	<pattern>uses \"stdVar\"</pattern>
+	<message>
+	    <id>obsolete_uses_stdVar</id>
+		<severity>warning</severity>
+		<summary>Library 'stdVar.ctl' is deprecated. Please use library std.ctl.</summary>
+	</message>
+</rule>
+<!-- TODO add more libs here -->
+<!-- END OF: OBSOLTE LIBRARIES  -->

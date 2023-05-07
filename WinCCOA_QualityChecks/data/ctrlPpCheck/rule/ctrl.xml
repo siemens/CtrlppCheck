@@ -177,3 +177,48 @@
 		//ctrlppcheck-suppress unsafe_system_call</summary>
 	</message>
 </rule>
+<rule version="1">
+	<tokenlist>raw</tokenlist>
+	<pattern>makeError \( \S+ , \S+ , \S+ , 0 </pattern>
+	<message>
+	    <id>fatal_program_exit</id>
+		<severity>warning</severity>
+		<summary>Throw error with FATAL priority stop the program.
+		<!--verbose-->
+		Throwing a error with FATAL priority leads to stop the program.
+		Verify that this scenario is accepted and suppres this warning by
+		//ctrlppcheck-suppress fatal_program_exit</summary>
+	</message>
+</rule>
+
+<rule version="1">
+	<tokenlist>raw</tokenlist>
+	<pattern>logger . fatal \( </pattern>
+	<message>
+	    <id>fatal_program_exit</id>
+		<severity>warning</severity>
+		<summary>Throw error with FATAL priority stop the program.
+		<!--verbose-->
+		Throwing a error with FATAL priority leads to stop the program.
+		Verify that this scenario is accepted and suppres this warning by
+		//ctrlppcheck-suppress fatal_program_exit</summary>
+	</message>
+</rule>
+<rule version="1">
+	<tokenlist>normal</tokenlist>
+	<pattern>uses \".*\.ctl\"</pattern>
+	<message>
+	    <id>library_extension</id>
+		<severity>style</severity>
+		<summary>It is not neccessary to use .ctl extension in #uses.</summary>
+	</message>
+</rule>
+<rule version="1">
+	<tokenlist>normal</tokenlist>
+	<pattern>uses \".*\.ctc\"</pattern>
+	<message>
+	    <id>library_extension</id>
+		<severity>style</severity>
+		<summary>It is not neccessary to use .ctc extension in #uses.</summary>
+	</message>
+</rule>

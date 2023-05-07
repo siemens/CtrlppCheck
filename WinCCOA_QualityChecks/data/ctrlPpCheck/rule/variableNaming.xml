@@ -7,6 +7,9 @@
  simple
 -->
 
+<!--
+	this rule make no sense insede a function.
+	Therefore deactivated now
 <rule version="1">
 	<pattern>^[A-Z0-9\\-\\_]+$</pattern>
 	<message>
@@ -14,6 +17,7 @@
 		<summary>The variable name cannot consist of lowercase letters.</summary>
 	</message>
 </rule>
+-->
 
 <rule version="1">
 	<pattern>^.+$</pattern>
