@@ -11,6 +11,7 @@
 // used libraries (#uses)
 #uses "classes/ErrorHdl/OaLogger"
 #uses "classes/QualityGates/AddOn/FileSys/QgAddOnTmpSourceDir"
+#uses "classes/QualityGates/QgBaseError"
 #uses "classes/QualityGates/QgResultPublisher"
 #uses "classes/oaTest/OaTest"
 #uses "classes/QualityGates/Qg"
@@ -24,17 +25,7 @@ QgMsgCat myQgMsgCat = QgMsgCat();
 OaTest  myTest = OaTest();
 
 
-//--------------------------------------------------------------------------------
-/** Error codes used in QgBase.cat
-*/
-enum QgBaseError {
-  Exception = 1,
-  NotImplemented = 20,
-  Start,
-  Calculate,
-  Validate,
-  Done
-};
+
 
 //--------------------------------------------------------------------------------
 /** QualityGate base class.

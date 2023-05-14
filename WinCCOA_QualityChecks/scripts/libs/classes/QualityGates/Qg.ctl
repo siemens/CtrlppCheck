@@ -18,6 +18,8 @@
  *
  * @details Base utilitys to handle with QualityGate.
  * @author lschopp
+ * @todo check it, but I think (mPokorny), that it can be removed. It looks like
+ *       old store-code (because of wording like backend ...)
  */
 class Qg
 {
@@ -69,12 +71,6 @@ class Qg
   public static int idToNum()
   {
     return dynContains(getAllIds(), getId());
-  }
-  
-  //------------------------------------------------------------------------------
-  public static bool isRunningOnJenkins()
-  {
-    return (getenv("WORKSPACE") != "");
   }
   
 //--------------------------------------------------------------------------------

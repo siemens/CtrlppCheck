@@ -161,9 +161,10 @@ class StaticCodeDir :StaticDir
           assertion.setMsgCatName("QgStaticCheck_StaticCodeDir");
 
           // NLOC in dir
-          assertion.setAssertionText("assert.dir.NLOC");
-          assertion.setReasonText("reason.dir.NLOC", makeMapping("dir.name", getName(),
-                                                                 "dir.NLOC", getNLOC()));
+          const mapping dollars = makeMapping("dir.name", getName(),
+                                              "dir.NLOC", getNLOC());
+          assertion.setAssertionText("assert.dir.NLOC", dollars);
+          assertion.setReasonText("reason.dir.NLOC", dollars);
           assertion.info(getNLOC(), settings.getScorePoints());
           result.addChild(assertion);
         }
@@ -179,9 +180,10 @@ class StaticCodeDir :StaticDir
           shared_ptr <QgVersionResult> assertion = new QgVersionResult();
           assertion.setMsgCatName("QgStaticCheck_StaticCodeDir");
 
-          assertion.setAssertionText("assert.dir.avgNLOC");
-          assertion.setReasonText("reason.dir.avgNLOC", makeMapping("dir.name", getName(),
-                                                                    "dir.avgNLOC", getAvgNLOC()));
+          const mapping dollars = makeMapping("dir.name", getName(),
+                                              "dir.avgNLOC", getAvgNLOC());
+          assertion.setAssertionText("assert.dir.avgNLOC", dollars);
+          assertion.setReasonText("reason.dir.avgNLOC", dollars);
           assertion.info(getAvgNLOC(), settings.getScorePoints());
           result.addChild(assertion);
         }
@@ -196,9 +198,10 @@ class StaticCodeDir :StaticDir
           shared_ptr <QgVersionResult> assertion = new QgVersionResult();
           assertion.setMsgCatName("QgStaticCheck_StaticCodeDir");
 
-          assertion.setAssertionText("assert.dir.CCN");
-          assertion.setReasonText("reason.dir.CCN", makeMapping("dir.name", getName(),
-                                                                "dir.CCN", getCCN()));
+          const mapping dollars = makeMapping("dir.name", getName(),
+                                              "dir.CCN", getCCN());
+          assertion.setAssertionText("assert.dir.CCN", dollars);
+          assertion.setReasonText("reason.dir.CCN", dollars);
           assertion.info(getCCN(), settings.getScorePoints());
           result.addChild(assertion);
         }
@@ -213,9 +216,10 @@ class StaticCodeDir :StaticDir
           shared_ptr <QgVersionResult> assertion = new QgVersionResult();
           assertion.setMsgCatName("QgStaticCheck_StaticCodeDir");
 
-          assertion.setAssertionText("assert.dir.avgCCN");
-          assertion.setReasonText("reason.dir.avgCCN", makeMapping("dir.name", getName(),
-                                                                   "dir.CCN", getAvgCCN()));
+          const mapping dollars = makeMapping("dir.name", getName(),
+                                              "dir.CCN", getAvgCCN());
+          assertion.setAssertionText("assert.dir.avgCCN", dollars);
+          assertion.setReasonText("reason.dir.avgCCN", dollars);
           assertion.info(getAvgCCN(), settings.getScorePoints());
           result.addChild(assertion);
         }

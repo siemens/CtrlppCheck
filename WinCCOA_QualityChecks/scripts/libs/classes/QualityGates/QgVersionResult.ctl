@@ -10,6 +10,8 @@
 #uses "csv"
 #uses "classes/QualityGates/QgMsgCat"
 #uses "classes/QualityGates/Qg"
+#uses "classes/QualityGates/QgBaseError"
+#uses "classes/QualityGates/QgTest"
 #uses "classes/Variables/Float"
 
 enum QgVersionResultType
@@ -537,24 +539,34 @@ struct QgVersionResult
       errorPoints += points;
       lastErr = reason;
 
-      const int prio = mappingHasKey(userData, "KnownBug") ? PRIO_INFO : PRIO_WARNING;
-      throwError(makeError("QgBase", prio, ERR_CONTROL, 10, msgCat.getText(reasonKey, reasonDollars)));
-
       if ( _enableOaTestOutput() )
         oaUnitFail(assertKey, userData);
+      else
+      {
+        const int prio = mappingHasKey(userData, "KnownBug") ? PRIO_INFO : PRIO_WARNING;
+        OaLogger logger = OaLogger("QgBase");
+        if (mappingHasKey(userData, "KnownBug"))
+          logger.info(QgBaseError::AssertionErrorAccepted, msgCat.getText(reasonKey, reasonDollars), userData["Note"]);
+        else
+          logger.warning(QgBaseError::AssertionError, msgCat.getText(reasonKey, reasonDollars), userData["Note"]);
+      }
     }
     else
     {
-      if ( _enableOaTestOutput() )
+      if ( _enableOaTestOutput()|| true)
         oaUnitPass(assertKey, userData);
-      else
-        throwError(makeError("QgBase", PRIO_INFO, ERR_CONTROL, 11, msgCat.getText(assertKey, assertDollars)));
+      // else
+      {
+        OaLogger logger = OaLogger("QgBase");
+        logger.info(QgBaseError::AssertionOK, assertKey, userData);
+      }
     }
 
     _allowNextErr = FALSE;
   }
   
   //------------------------------------------------------------------------------
+  /// @todo replace this code by OaTest-knownBug-handler
   protected getKnownBugId(mapping &userData)
   {
     if ( dynlen(knownBugs) <= 0 )
@@ -590,13 +602,11 @@ struct QgVersionResult
   
   //------------------------------------------------------------------------------
   /** @brief enabled or disabled oaUnitResults
-    @todo mPunk 30.10.2018: make it configureable, otherwise does not work in jenkins
-    @return TRUE hen are oaUnit results enabled
+    @return TRUE when are oaUnit results enabled
   */
   protected static bool _enableOaTestOutput()
   {
-    return true;
-    return Qg::isRunningOnJenkins();
+    return QgTest::isStartedByTestFramework();
   }
 
   //------------------------------------------------------------------------------

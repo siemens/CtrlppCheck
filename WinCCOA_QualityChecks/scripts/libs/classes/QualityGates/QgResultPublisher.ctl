@@ -8,6 +8,7 @@
 //
 
 #uses "classes/QualityGates/Qg"
+#uses "classes/QualityGates/QgTest"
 #uses "classes/QualityGates/AddOn/FileSys/QgAddOnResultsDir"
 #uses "classes/QualityGates/QgVersionResult"
 
@@ -91,11 +92,7 @@ class QgResultPublisher
   //------------------------------------------------------------------------------
   protected int _publishState(const QgAddOnResultsDir &resDir)
   {
-    string resPath;
-    if ( Qg::isRunningOnJenkins() )
-      resPath = resDir.getDirPath() + "_state";
-    else
-      resPath = resDir.getDirPath() + "State";
+    const string resPath = resDir.getDirPath() + "State";
           
     file f = fopen(resPath, "wb+");  
     if ( ferror(f) )
@@ -109,11 +106,7 @@ class QgResultPublisher
   //------------------------------------------------------------------------------
   protected int _publishSummary(const QgAddOnResultsDir &resDir)
   {
-    string resPath;
-    if ( Qg::isRunningOnJenkins() )
-      resPath = resDir.getDirPath() + "_data";
-    else
-      resPath = resDir.getDirPath() + "sum.json";
+    const string resPath = resDir.getDirPath() + "sum.json";
 
     file f = fopen(resPath, "wb+");
     if ( ferror(f) )
@@ -127,7 +120,7 @@ class QgResultPublisher
   //------------------------------------------------------------------------------
   protected int _publishFull(const QgAddOnResultsDir &resDir)
   {
-    if ( Qg::isRunningOnJenkins() || true )
+    if (QgTest::isStartedByTestFramework())
       return _publishFullOnJenkins(resDir);
     else
       return _publishFullLocale(resDir);

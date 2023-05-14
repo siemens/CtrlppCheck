@@ -4,5 +4,5 @@ assert.function.NLOC,NLOC (No. Lines Of Code)
 reason.function.NLOC,The function '$function.name()' has invalid lines of code ($function.NLOC)
 assert.function.countOfLines,Count of lines
 reason.function.countOfLines,The function '$function.name()' has invalid count of lines ($function.countOfLines)
-assert.function.paramCount,Count of parameters
+assert.function.paramCount,The function '$function.name()' has $function.paramCount parameter(s)
 reason.function.paramCount,The function '$function.name()' has too much parameters ($function.paramCount)

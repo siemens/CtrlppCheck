@@ -9,9 +9,10 @@
 
 
 #uses "classes/FileSys/QgDir"
+#uses "classes/QualityGates/AddOn/FileSys/QgAddOnSourceDir"
 #uses "classes/QualityGates/Qg"
 #uses "classes/QualityGates/QgApp"
-#uses "classes/QualityGates/AddOn/FileSys/QgAddOnSourceDir"
+#uses "classes/QualityGates/QgTest"
 
 class QgAddOnResultsDir
 {
@@ -99,13 +100,15 @@ class QgAddOnResultsDir
   {
     if ( _resultDir == "" )
     {
-      if ( !Qg::isRunningOnJenkins() )
+      if (!QgTest::isStartedByTestFramework())
       {
-        // projPath should be used, when Jenkins is not used
+        // When you start some locale tests, proj path will be used
         _resultDir = makeNativePath(PROJ_PATH + DATA_REL_PATH + "QualityGates/" + _qgId + "/" + _buildNo + "/");
       }
       else
       {
+        /// FIXME (mpokorny) currently I does not see any reason for this code.
+        /// probably can be remove
         QgApp app  = QgApp::getAppFromProjName(PROJ);
         _resultDir = makeNativePath(app.getSourcePath() + "QgResult/" + Qg::getId() + "/");
       }
