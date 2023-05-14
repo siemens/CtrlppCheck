@@ -177,7 +177,7 @@ class PanelCheck : QgFile
       string newPath = uuId + ".xml";
       _pnl.setPath(newPath);
 
-      newPath =  PROJ_PATH + PANELS_REL_PATH + newPath;
+      newPath = PROJ_PATH + PANELS_REL_PATH + newPath;
 
       // copy file into current project and convert it into xml format
       // conversion works only with panels located in project
