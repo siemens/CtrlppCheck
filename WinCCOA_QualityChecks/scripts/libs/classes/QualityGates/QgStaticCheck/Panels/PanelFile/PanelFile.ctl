@@ -196,7 +196,7 @@ class PanelFile
     
     if ( !mappingHasKey(map, "version") )
     {
-      logger.warning("The panel does not contains version information, " + getFullPath());
+      logger.warning("The panel does not contain version information, " + getFullPath());
       return -3;
     }
     
