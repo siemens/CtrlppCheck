@@ -27,7 +27,8 @@ OaTest  myTest = OaTest();
 //--------------------------------------------------------------------------------
 /** Error codes used in QgBase.cat
 */
-enum QgBaseError {
+enum QgBaseError
+{
   Exception = 1,
   NotImplemented = 20,
   Start,
