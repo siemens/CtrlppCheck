@@ -161,7 +161,7 @@ class QgCtrlppCheck : QgBase
     }
 
     QgFile f = QgFile(error.path);
-    if ( f.isExample() || f.isTest() || !f.isPatternMatch(includeFilesPattern) )
+    if (f.isExample() || f.isTest() || !f.isPatternMatch(includeFilesPattern))
       return true;
 
     if ( error.msg == "" )
