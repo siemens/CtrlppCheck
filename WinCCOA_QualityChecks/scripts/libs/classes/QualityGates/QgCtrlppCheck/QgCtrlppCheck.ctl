@@ -25,7 +25,7 @@ class QgCtrlppCheck : QgBase
 //--------------------------------------------------------------------------------
 //@public members
 //--------------------------------------------------------------------------------
-  public string checkedPath = PROJ_PATH;
+  public string checkedPath = PROJ_PATH + SCRIPTS_REL_PATH;
 
   //------------------------------------------------------------------------------
   /** @brief Calculates / start ctrlppcheck.
@@ -34,7 +34,7 @@ class QgCtrlppCheck : QgBase
   */
   public int calculate()
   {
-    return checkDir(this.checkedPath + SCRIPTS_REL_PATH);
+    return checkDir(this.checkedPath);
   }
 
   //------------------------------------------------------------------------------
@@ -61,14 +61,6 @@ class QgCtrlppCheck : QgBase
             "_CtrlppCheck.filter.severity", disabledSeverities);
       includeFilesPattern = "*";
     }
-    // else if ( Qg::isRunningOnJenkins() )
-    // {
-    //   disabledIds = makeDynString("debug", "unreadVariable",
-    //                               "checkLibraryFunction", "checkLibraryNoReturn",
-    //                               "unusedFunction");
-    //   disabledSeverities = makeDynString("debug", "information");
-    //   includeFilesPattern = makeUnixPath(dirPath + "*");
-    // }
     else
     {
       disabledIds = makeDynString("debug", "unreadVariable",
@@ -81,18 +73,15 @@ class QgCtrlppCheck : QgBase
     {
       CppCheckError error = check.errList[i];
 
-      QgFile f = QgFile(error.path);
-      if ( f.isExample() || f.isTest() || !f.isPatternMatch(includeFilesPattern) )
-        continue;
-
       if ( isErrorFiltered(error) )
         continue;
 
+      QgFile f = QgFile(error.path);
       string relPath = f.getRelPath(SCRIPTS_REL_PATH);
 
       shared_ptr <QgVersionResult> assertion = new QgVersionResult();
       assertion.setMsgCatName("QgCtrlppCheck");
-      assertion.setAssertionText(relPath + " : " + error.line);
+      assertion.setAssertionText(makeUnixPath(relPath));
       assertion.setReasonText(error.msg + " (" + error.id + ")");
       assertion.assertEqual(error.severity, "");
       _result.addChild(assertion);
@@ -126,18 +115,18 @@ class QgCtrlppCheck : QgBase
             "_CtrlppCheck.settings.verbose", check.settings.verbose,
             "_CtrlppCheck.settings.inlineSuppressions", check.settings.inlineSuppressions);
     }
-    // else if ( Qg::isRunningOnJenkins() )
-    // {
-    //   check.settings.enableLibCheck = FALSE;
-    //   check.settings.enableHeadersCheck = TRUE;
-    //   check.settings.includeSubProjects = TRUE;
-    //   check.settings.inconclusive = FALSE;
-    //   check.settings.verbose = FALSE;
-    //   check.settings.inlineSuppressions = TRUE;
-    // }
     else
     {
+      ///@todo this shall be somehove configurable
+      /// but current QG-settings concept does not
+      /// support it.
+      /// It is not a big problem, because you can import
+      /// dp-list with _CtrlppCheck and use the code above.
+      check.settings.inlineSuppressions = TRUE;
+      check.settings.includeSubProjects = TRUE;
+      check.settings.inconclusive = FALSE;
       check.settings.enableCheckLibrary(FALSE);
+      check.settings.verbose = FALSE;
     }
 
     // load configs
@@ -147,7 +136,7 @@ class QgCtrlppCheck : QgBase
 
     // load rules
     check.settings.addRuleFile(getPath(DATA_REL_PATH, "ctrlPpCheck/rule/ctrl.xml")); // general
-    check.settings.addRuleFile(getPath(DATA_REL_PATH, "ctrlPpCheck/rule/ctrl_" + VERSION + ".xml")); // version specific
+    check.settings.addRuleFile(getPath(DATA_REL_PATH, "DevTools/Base/rule/ctrl_" + VERSION + ".xml")); // version specific
     check.settings.addRuleFile(getPath(DATA_REL_PATH, "ctrlPpCheck/rule/__proj__.xml")); // proj specific
 
     check.settings.addEnabled("all");
@@ -162,6 +151,19 @@ class QgCtrlppCheck : QgBase
   /// Checks if the error shall be filtered.
   protected bool isErrorFiltered(const CppCheckError &error)
   {
+    /// @todo it shallbe somehow configurable and
+    /// done in the ctrlppcheck (in cpp source) to eliminate CPU usage
+    if (error.path != error.path0)
+    {
+      // inform only about failures in checked sources.
+      // No body interested about sub-project failures.
+      return TRUE;
+    }
+
+    QgFile f = QgFile(error.path);
+    if (f.isExample() || f.isTest() || !f.isPatternMatch(includeFilesPattern))
+      return true;
+
     if ( error.msg == "" )
       return TRUE;
 
@@ -173,6 +175,7 @@ class QgCtrlppCheck : QgBase
     const string severity = error.severity;
     if ( dynContains(disabledSeverities, severity)  )
       return TRUE;
+
 
     return FALSE;
   }
@@ -187,7 +190,7 @@ class QgCtrlppCheck : QgBase
 
 /// Start Qg ctrlppcheck.
 /// Simple old ctrl style.
-public int start_QgCtrlppCheck(string path = PROJ_PATH)
+public int start_QgCtrlppCheck(string path = PROJ_PATH + SCRIPTS_REL_PATH)
 {
   Qg::setId("QgCtrlppCheck");
   QgCtrlppCheck qg = QgCtrlppCheck();

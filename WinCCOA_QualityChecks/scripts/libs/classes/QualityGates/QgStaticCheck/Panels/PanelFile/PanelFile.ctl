@@ -7,33 +7,47 @@
 // SPDX-License-Identifier: GPL-3.0-only
 //
 
+#uses "classes/ErrorHdl/OaLogger"
+#uses "classes/file/File"
 #uses "classes/QualityGates/QgStaticCheck/Panels/PanelFile/PanelFileScript"
 #uses "CtrlXml"
 #uses "classes/QualityGates/QgStaticCheck/Panels/PanelFile/PanelFileShape"
 
 class PanelFile
 {
+//--------------------------------------------------------------------------------
+//@public members
+//--------------------------------------------------------------------------------
+  public dyn_anytype shapes;
+  public mapping properties;
+  public mapping events;
+  public string strContent;
+
+  //------------------------------------------------------------------------------
   public PanelFile(const string relPath = "")
   {
     setPath(relPath); 
   }
   
+  //------------------------------------------------------------------------------
   public void setPath(const string &relPath)
   {
     _relPath = relPath; 
   }
   
+  //------------------------------------------------------------------------------
   static public void setSourceDirPath(const string &path)
   {
     _sourceDir = path;
   }
   
+  //------------------------------------------------------------------------------
   public bool exists()
   {
     return (_relPath != "" && isfile(getFullPath()) );
   }
   
-  
+  //------------------------------------------------------------------------------
   public int toXml()
   {
     string cmd;
@@ -50,98 +64,111 @@ class PanelFile
     
     int rc = system(cmd);
     if ( rc )
+    {
+      logger.warning("Can not convert panel into xml format: " + cmd);
       return -2;
+    }
     
     return 0;
   }
   
+  //------------------------------------------------------------------------------
   public bool isBackUp()
   {
     return (strpos(getExt(_relPath), "bak") == 0);
   }
   
+  //------------------------------------------------------------------------------
   public string getFullPath()
   {
     return _sourceDir + PANELS_REL_PATH + _relPath;
   }
   
+  //------------------------------------------------------------------------------
   public string getRelPath()
   {
     return _relPath;
   }
   
+  //------------------------------------------------------------------------------
   public int read()
   {
-    if ( !exists() )
-    {
-      DebugFTN("PanelFile", __FUNCTION__, "panel does not exists", getFullPath());
-      return -1;
-    }
+    File panelFile = File(getFullPath());
     
-    fileToString(getFullPath(), strContent);
+    panelFile.read(this.strContent);
     
-    if ( strContent != "" )
+    if ( this.strContent != "" )
     {      
-      _isXml = (strpos(strContent, "<?xml version=") == 0);
-      _isCrypted = (strpos(strContent, "PVSS_CRYPTED_PANEL") == 0);
+      _isXml = this.strContent.startsWith("<?xml version=");
+      ///@todo clrify, how it looks when the xml file is crypted?
+      _isCrypted = this.strContent.startsWith("PVSS_CRYPTED_PANEL");
       return 0;
     }
     
-    
-    DebugFTN("PanelFile", __FUNCTION__, "panel contetn is empty", getFullPath());
+    logger.warning("Panel contetn is empty, " + getFullPath());
     return 2;
   }
   
+  //------------------------------------------------------------------------------
   public bool isXmlFormat()
   {
     return _isXml;
   }
   
+  //------------------------------------------------------------------------------
   public bool isCrypted()
   {
     return _isCrypted;
   }
   
+  //------------------------------------------------------------------------------
   public string getVersion()
   {
     return _version;
   }
   
+  //------------------------------------------------------------------------------
   public int getCountOfProperties()
   {
     return mappinglen(properties);
   }
   
+  //------------------------------------------------------------------------------
   public int getCountOfEvents()
   {
     return mappinglen(events);
   }
   
+  //------------------------------------------------------------------------------
   public int getCountOfShapes()
   {
     return dynlen(shapes);
   }
   
+  //------------------------------------------------------------------------------
   public mapping getProperties()
   {
     return properties;
   }
   
+  //------------------------------------------------------------------------------
   public mapping getEvents()
   {
     return events;
   }
   
+  //------------------------------------------------------------------------------
   public dyn_anytype getShapes()
   {
     return shapes;
   }
   
+  //------------------------------------------------------------------------------
   public int load()
   {
     if ( !isXmlFormat() )
     {
-      DebugFTN("PanelFile", __FUNCTION__, "is not XML format");
+      logger.warning("Panel contetn is not XML format, " + getFullPath());
       return -1; // no other formats are possible to read
     }
     
@@ -150,7 +177,11 @@ class PanelFile
     _xmlDoc = xmlDocumentFromString(strContent, errMsg, errLine, errColumn);
     if ( _xmlDoc < 0 )
     {
-      DebugFTN("PanelFile", __FUNCTION__, errMsg, errLine, errColumn);
+      logger.warning("Can not read XML document. " +
+        errMsg + " at line " +
+        errLine + " at column " +
+        errColumn + ", "
+        + getFullPath());
       return -2;
     }
     
@@ -165,7 +196,7 @@ class PanelFile
     
     if ( !mappingHasKey(map, "version") )
     {
-      DebugFTN("PanelFile", "this panel has no version ???", nodeName, map);
+      logger.warning("The panel does not contain version information, " + getFullPath());
       return -3;
     }
     
@@ -189,7 +220,7 @@ class PanelFile
           break; 
         
         default:
-          DebugFTN("PanelFile", __FUNCTION__, "!!warning undefined nodeName", nodeName);
+          logger.warning("InternFailure: undefined nodeName, " + nodeName + ", " + getFullPath());
       }
 
       node = xmlNextSibling(_xmlDoc, node);
@@ -198,6 +229,7 @@ class PanelFile
     return 0;
   }
   
+  //------------------------------------------------------------------------------
   public int calculate()
   {
     int count = 0;
@@ -224,7 +256,6 @@ class PanelFile
       count++;
     }
     
-    
     // avarege per dir ??? not sure if is correct so
     if ( count > 0 )
     {
@@ -233,27 +264,40 @@ class PanelFile
     }
   }
   
+  //------------------------------------------------------------------------------
   public int getCCN()
   {
     return _ccn;
   }
   
+  //------------------------------------------------------------------------------
   public float getAvgCCN()
   {
     return _avgCcn;
   }
   
+  //------------------------------------------------------------------------------
   public int getNLOC()
   {
     return _nloc;
   }
   
+  //------------------------------------------------------------------------------
   public float getAvgNLOC()
   {
     return _avgNloc;
   }
   
+//--------------------------------------------------------------------------------
+//@protected members
+//--------------------------------------------------------------------------------
+
+
+//--------------------------------------------------------------------------------
+//@private members
+//--------------------------------------------------------------------------------
   
+  //------------------------------------------------------------------------------
   int _readShapes(int node, dyn_anytype &shapes)
   {
     if ( node < 0 )
@@ -270,6 +314,7 @@ class PanelFile
     return 0;
   }
   
+  //------------------------------------------------------------------------------
   int _readShape(int node, PanelFileShape &sh)
   {
     if ( node < 0 )
@@ -283,7 +328,6 @@ class PanelFile
       map["shapeType"] = "PANEL_REFERENCE"; // refernec does not contains the type. So push it here.
     }
     
-      
     if ( (nodeName == "shape") || (nodeName == "reference") )
     {
       mapping props;
@@ -303,7 +347,7 @@ class PanelFile
             break;
             
           default:
-            DebugFTN("PanelFile", __FUNCTION__, "!!warning undefined nodeName", nodeName);
+            logger.warning("InternFailure: undefined nodeName, " + nodeName + ", " + getFullPath());
       
         }
         scNode = xmlNextSibling(_xmlDoc, scNode);
@@ -314,11 +358,12 @@ class PanelFile
       sh.setEvents(events);
       return 0;
     }
-      
-    DebugFTN("PanelFile", __FUNCTION__, "unknown shape type", nodeName, map);
+
+    logger.warning("Unknown shape type, " + nodeName + ", " + getFullPath());
     return -2;
   }
   
+  //------------------------------------------------------------------------------
   int _readEvents(int node, mapping &events)
   {
     if ( node < 0 )
@@ -335,6 +380,7 @@ class PanelFile
     return 0;
   }
   
+  //------------------------------------------------------------------------------
   int _readEvent(int node, mapping &events)
   {
     if ( node < 0 )
@@ -353,12 +399,11 @@ class PanelFile
       
       events[name] = script;  
     }
-    else
-      DebugFTN("PanelFile", __FUNCTION__, name, map);
     
     return 0;
   }
   
+  //------------------------------------------------------------------------------
   int _readProps(int node, anytype &result)
   {
     if ( node < 0 )
@@ -392,26 +437,14 @@ class PanelFile
   }
   
   
-  public dyn_anytype shapes;
-  public mapping properties;
-  public mapping events;
-  public string strContent;
-  
-  
+  //------------------------------------------------------------------------------
   bool _isXml;
   bool _isCrypted;
-  
   static string _sourceDir = PROJ_PATH;
-  
   string _version;
-  
-  
   int _xmlDoc;
   string _relPath;
-  
-  
-  
   int _nloc, _ccn;
   float _avgCcn, _avgNloc;
-  
+  OaLogger logger;
 };

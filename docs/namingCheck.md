@@ -102,7 +102,7 @@ Either all three categories must be defined or only one.
 
 ## Check process
 
-1. All rules will be searched if theere is a perfect match between an variable and a certain id:  
+1. All rules will be searched if there is a perfect match between an variable and a certain id:  
 
 **Example**:
 Variable:

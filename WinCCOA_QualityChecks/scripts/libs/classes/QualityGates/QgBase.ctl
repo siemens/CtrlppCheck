@@ -9,6 +9,7 @@
 
 //--------------------------------------------------------------------------------
 // used libraries (#uses)
+#uses "classes/ErrorHdl/OaLogger"
 #uses "classes/QualityGates/AddOn/FileSys/QgAddOnTmpSourceDir"
 #uses "classes/QualityGates/QgResultPublisher"
 #uses "classes/oaTest/OaTest"
@@ -23,13 +24,23 @@ QgMsgCat myQgMsgCat = QgMsgCat();
 OaTest  myTest = OaTest();
 
 
-
+//--------------------------------------------------------------------------------
+/** Error codes used in QgBase.cat
+*/
+enum QgBaseError
+{
+  Exception = 1,
+  NotImplemented = 20,
+  Start,
+  Calculate,
+  Validate,
+  Done
+};
 
 //--------------------------------------------------------------------------------
-/*!
-  @brief QualityGate base class.
+/** QualityGate base class.
 
-  @details Base class to handle (execute) quality gates
+  Base class to handle (execute) quality gates
   @author lschopp
 */
 class QgBase
@@ -37,6 +48,7 @@ class QgBase
 //--------------------------------------------------------------------------------
 //@public members
 //--------------------------------------------------------------------------------
+
   //------------------------------------------------------------------------------
   /** @brief QualityGate setup.
    * @details Function setups the QualityGate.
@@ -52,7 +64,7 @@ class QgBase
   {
     myTest.setUp();
     myQgMsgCat.setName(Qg::getId());
-    
+
     if (isEvConnOpen() && (  Qg::getId() != "" ) )
       dpSet("_WinCCOA_qgCmd.Command", Qg::getId() + ":START");
     return 0;
@@ -71,25 +83,26 @@ class QgBase
   {
     if (isEvConnOpen() && (  Qg::getId() != "" ) )
       dpSet("_WinCCOA_qgCmd.Command", Qg::getId() + ":START");
-    
+
     int rc = _start();
-        
+
     if (isEvConnOpen() && (  Qg::getId() != "" ) )
       dpSet("_WinCCOA_qgCmd.Command", Qg::getId() + ":DONE:" + rc);
-    
+
     return rc;
   }
 
   //------------------------------------------------------------------------------
   public int calculate()
   {
+    logger.severe(QgBaseError::NotImplemented, __FUNCTION__, Qg::getId());
     return 0;
   }
 
   //------------------------------------------------------------------------------
   public int validate()
   {
-    DebugFTN("QgBase", __FUNCTION__, "You must implement some validation");
+    logger.severe(QgBaseError::NotImplemented, __FUNCTION__, Qg::getId());
     return -1;
   }
 
@@ -156,24 +169,25 @@ class QgBase
 
   protected bool _setMinScore = FALSE;
   protected shared_ptr <QgVersionResult> _minScoreResult;
-  
+
   //------------------------------------------------------------------------------
   protected int _start()
   {
+    const time startTime = getCurrentTime();
+    logger.info(QgBaseError::Start, Qg::getId());
     try // exceptions happen here more often, so it should be sure to stop the QG properly
     {
       _setMinScore = FALSE;
-      int rc;
-      
-      rc = setUp();
+      int rc = setUp();
       if ( rc )
       {
-        DebugFTN("QgBase", __FUNCTION__, "setUp returns some error", rc);
+        logger.severe(QgBaseError::NotImplemented, __FUNCTION__, Qg::getId());
         return -1;
       }
-    
+
       if ( !_setMinScore )
       {
+        logger.info(QgBaseError::Calculate, Qg::getId());
         rc = calculate();
 // ctrlppcheck-suppress knownConditionTrueFalse // the variable rc can be changed in the function calculate() in the derived class.
         if ( rc )
@@ -186,6 +200,7 @@ class QgBase
 // ctrlppcheck-suppress duplicateCondition // The variable _setMinScore can be changed in the function calculate() in the derived class.
       if ( !_setMinScore )
       {
+        logger.info(QgBaseError::Validate, Qg::getId());
         rc = validate();
         if ( rc  )
         {
@@ -204,18 +219,18 @@ class QgBase
     catch
     {
       // very dangerous - directly stop
-      dyn_errClass err = getLastException();
-      throwError(err);
-      
-      err = makeError("QgBase", PRIO_FATAL, ERR_CONTROL, 1, Qg::getId());
-      throwError(err);
+      logger.warning(getLastException());
+      logger.fatal(QgBaseError::Exception, Qg::getId());
       return -1; // defensive code, should never happen
     }
 
+    float duration = getCurrentTime() - startTime;
+    logger.info(QgBaseError::Done, Qg::getId(), duration);
     return 0;
   }
-  
+
 //--------------------------------------------------------------------------------
 //@private members
 //--------------------------------------------------------------------------------
+  protected OaLogger logger = OaLogger("QgBase");
 };

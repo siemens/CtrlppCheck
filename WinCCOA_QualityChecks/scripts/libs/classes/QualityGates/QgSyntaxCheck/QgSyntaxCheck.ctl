@@ -160,7 +160,7 @@ class QgSyntaxCheck : QgBase
           }
         }
 
-        DebugFN("QgSyntaxCheck", __FUNCTION__, "add message to bad-list");
+        DebugFTN("QgSyntaxCheck", __FUNCTION__, "add message to bad-list");
 
         assertion.assertTrue(FALSE, settings.getScorePoints());
         _result.addChild(assertion);

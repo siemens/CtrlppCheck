@@ -55,7 +55,7 @@ class QgApp
       return app;
     }
     
-    QgApp app = QgApp(items[3], items[2]);
+    QgApp app = QgApp(items[3]);
     return app;
   }
  

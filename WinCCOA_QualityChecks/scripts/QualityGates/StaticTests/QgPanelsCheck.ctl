@@ -38,7 +38,9 @@ class QgStaticPanelCheck : QgBase
     if ( QgBase::setUp() )
       return -1;
 
-    throwError(makeError("", PRIO_INFO, ERR_CONTROL, 0, Qg::getId() + " will check " + this.checkedPath + PANELS_REL_PATH));
+
+    PanelCheck::setSourceDirPath(this.checkedPath);
+    PanelFile::setSourceDirPath(this.checkedPath);
     _panels.setDir(this.checkedPath + PANELS_REL_PATH);
     
     if ( !_panels.exists() )

@@ -7,6 +7,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 //
 
+#uses "classes/ErrorHdl/OaLogger"
 #uses "classes/QualityGates/QgBase"
 #uses "classes/QualityGates/QgStaticCheck/StaticDir"
 #uses "classes/QualityGates/QgSettings"
@@ -44,20 +45,26 @@ class StaticCodeDir :StaticDir
   */
   public int calculate()
   {
-
+    OaLogger logger;
+    logger.info(0, Qg::getId(), "Check directory", getDirPath());
     dynClear(_files);
     dynClear(_childs);
 
     if ( !exists() )
+    {
+      logger.warning(0, Qg::getId(), __FUNCTION__, "Directory does not exist", getDirPath());
       return -1;
+    }
 
     float count = 0;
 
     // check all files
     dyn_string fileNames = getFileNames(getDirPath());
+
     for(int i = 1; i <= dynlen(fileNames); i++)
     {
-      string fullPath = makeNativePath(getDirPath() + fileNames[i]);
+      const string fullPath = makeNativePath(getDirPath() + fileNames[i]);
+      logger.info(0, Qg::getId(), "Check file", fullPath);
 
       anytype checkFile = makeCheckFile(fullPath);
 
@@ -85,11 +92,11 @@ class StaticCodeDir :StaticDir
 
     // check all directories
     dyn_string childs = getSubDirNames();
+
     for(int i = 1; i <= dynlen(childs); i++)
     {
-      anytype child = makeCheckSubDir(getDirPath() + childs[i] + "/");
-      if ( !child )
-        continue;
+      const string subDirPath = makeNativePath(getDirPath() + childs[i] + "/");
+      anytype child = makeCheckSubDir(subDirPath);
 
       child.calculate();
 

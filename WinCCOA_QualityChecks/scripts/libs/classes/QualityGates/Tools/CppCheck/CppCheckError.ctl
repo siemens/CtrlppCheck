@@ -7,6 +7,7 @@ struct CppCheckError
   string msg;
   string verbose;
   string path;
+  string path0;
   int line;
   int cwe;
   string knownBug; // for internal use (tests)

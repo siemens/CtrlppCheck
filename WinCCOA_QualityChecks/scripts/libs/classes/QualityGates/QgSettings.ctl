@@ -10,7 +10,7 @@
 //-----------------------------------------------------------------------------
 // used libraries (#uses)
 #uses "classes/Variables/Mapping"
-#uses "classes/WinCCOA_Json"
+#uses "classes/json/JsonFile"
 
 //-----------------------------------------------------------------------------
 // declare variables and constans
@@ -100,7 +100,6 @@ class QgSettings
     }
     else
     {
-      //DebugFTN("QgSettings", "jjjj");
       return def;
     }
   }
@@ -265,7 +264,7 @@ class QgSettings
         continue;
       }    
     
-      Sl_Jsonfile json_file = Sl_Jsonfile(file_path);
+      JsonFile json_file = JsonFile(file_path);
     
       anytype json_data;    
       int ret_val = json_file.read(json_data);     
@@ -329,7 +328,7 @@ class QgSettings
       return;
     }    
     
-    Sl_Jsonfile json_file = Sl_Jsonfile(file_path);
+    JsonFile json_file = JsonFile(file_path);
     
     anytype json_data;    
     int ret_val = json_file.read(json_data);

@@ -606,7 +606,7 @@ T
 2
 LANG:10001 4 Save
 LANG:10000 9 Speichern
-"#uses \"classes/WinCCOA_Json\"
+"#uses \"classes/json/JsonFile\"
 
 main(mapping event)
 {
@@ -631,7 +631,7 @@ void saveChanges()
       string file_name = setting[\"changed\"] + \".json\";
       mappingRemove(setting, \"changed\");
       
-      Sl_Jsonfile jsonFile = Sl_Jsonfile(path + file_name, true);
+      JsonFile jsonFile = JsonFile(path + file_name, true);
       jsonFile.write(setting);
     }
   }

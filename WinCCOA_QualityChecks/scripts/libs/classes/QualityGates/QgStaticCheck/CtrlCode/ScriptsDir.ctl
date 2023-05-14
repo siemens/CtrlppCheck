@@ -49,7 +49,7 @@ class ScriptsDir : StaticCodeDir
     return p;
   }
   
-  public static ScriptsDir makeCheckSubDir(const string &fullPath)
+  public ScriptsDir makeCheckSubDir(const string &fullPath)
   {
     ScriptsDir dir = ScriptsDir(fullPath);
     return dir;

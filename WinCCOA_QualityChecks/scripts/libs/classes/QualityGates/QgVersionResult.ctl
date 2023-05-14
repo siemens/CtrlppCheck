@@ -201,6 +201,7 @@ struct QgVersionResult
     return errorPoints;
   }
 
+  //------------------------------------------------------------------------------
   public void toStdOut()
   {
     DebugN(__FUNCTION__, text, assertKey, dynlen(children), lowerBound, upperBound, referenceValue);

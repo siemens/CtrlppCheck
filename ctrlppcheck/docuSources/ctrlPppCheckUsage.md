@@ -272,7 +272,7 @@ To suppress the error message, a comment can be added:
 void main()
 {
   int i;
-  // cppcheck-suppress uninitvar
+  // ctrlppcheck-suppress uninitvar
   if ( i > 0 )
   {
     i++;
@@ -289,13 +289,13 @@ cppcheck --inline-suppr file1.ctl
 you can specify that the inline suppression only applies to a specific symbol:
 
 ```
-// cppcheck-suppress uninitvar symbolName=arr
+// ctrlppcheck-suppress uninitvar symbolName=arr
 ```
 
 You can write comments for the suppress, however, is recommended to use ; or // to specify where they start:
 ```
-// cppcheck-suppress uninitvar ; some comment
-// cppcheck-suppress uninitvar // some comment
+// ctrlppcheck-suppress uninitvar ; some comment
+// ctrlppcheck-suppress uninitvar // some comment
 ```
 
 ## Library configuration

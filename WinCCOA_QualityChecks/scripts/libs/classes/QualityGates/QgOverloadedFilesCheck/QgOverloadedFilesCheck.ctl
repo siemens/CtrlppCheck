@@ -7,6 +7,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 //
 
+#uses "classes/ErrorHdl/OaLogger"
 #uses "classes/QualityGates/QgBase"
 #uses "classes/QualityGates/QgSettings"
 #uses "fileSys"
@@ -69,6 +70,7 @@ class QgOverloadedFilesCheck
                                                  SCRIPTS_REL_PATH + "userPara.ctl",
                                                  LIBS_REL_PATH +  "aesuser.ctl",
                                                  LIBS_REL_PATH + "asModifyDisplay.ctl",
+                                                 LIBS_REL_PATH + "classes/oaTest/OaTest.ctl",
                                                 // (officially not part of product)
                                                  LIBS_REL_PATH + "driverSettings_HOOK.ctl",
                                                  PANELS_REL_PATH + "vision/aes/_AS_propFilterExtended.pnl",
@@ -81,12 +83,15 @@ class QgOverloadedFilesCheck
   */
   public int calculate()
   {
+    OaLogger logger;
     dyn_string files = getFileNamesRecursive(PROJ_PATH);
     dynSort(files);
     //
     for(int i = 1; i <= dynlen(files); i++)
     {
       string path = files[i];
+      logger.info(0, Qg::getId(), "Check file", path);
+
       const string relPath = substr(path, strlen(PROJ_PATH));
 
       if ( strpos(relPath, makeNativePath(CONFIG_REL_PATH)) == 0 ||
