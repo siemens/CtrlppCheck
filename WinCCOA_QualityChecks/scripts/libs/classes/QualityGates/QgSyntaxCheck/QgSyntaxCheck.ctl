@@ -44,7 +44,7 @@ class QgSyntaxCheck : QgBase
   */
   public int setUp()
   {
-    if ( QgBase::setUp() )
+    if (QgBase::setUp())
       return -1;
 
     QgVersionResult::showErrorsOnly = TRUE;
@@ -52,7 +52,7 @@ class QgSyntaxCheck : QgBase
     QgDir panelsDir = QgDir(PROJ_PATH + PANELS_REL_PATH);
     QgDir scriptsDir = QgDir(PROJ_PATH + SCRIPTS_REL_PATH);
 
-    if ( !panelsDir.exists() && !scriptsDir.exists() )
+    if (!panelsDir.exists() && !scriptsDir.exists())
       setMinValidScore("QgSyntaxCheck", "assert.missingFiles", "reason.missingFiles");
 
     return 0;
@@ -93,29 +93,30 @@ class QgSyntaxCheck : QgBase
     _oaSyntaxCheck.stdErr = ""; // free memory
     _oaSyntaxCheck.stdOut = ""; // free memory
 
-    for(int i = 1; i <= dynlen(msgs); i++)
+    for (int i = 1; i <= dynlen(msgs); i++)
     {
       string msg = msgs[i];
-      if ( strpos(msg, "is Qt installed correctly") > 0 )
+
+      if (strpos(msg, "is Qt installed correctly") > 0)
       {
         continue;  // this message is not relevant
       }
 
       shared_ptr<QgSettings> settings = new QgSettings("SyntaxCheck.isSyntaxValid");
 
-      if ( settings.isEnabled() )
+      if (settings.isEnabled())
       {
         DebugFTN("QgSyntaxCheck", __FUNCTION__, "check message", msg);
         dyn_string items = strsplit(msg, ",");
 
-        if ( dynlen(items) < 4 )
+        if (dynlen(items) < 4)
           continue; // ignore something like 'This plugin does not support createPlatformOpenGLContext!'
 
         const string type    = strltrim(items[3], " ");
         const string prio    = strltrim(items[4], " ");
         string errCode;
 
-        if ( dynlen(items) >= 5 )
+        if (dynlen(items) >= 5)
           errCode = strltrim(items[5], " ");
 
         dynRemove(items, 1);
@@ -130,30 +131,31 @@ class QgSyntaxCheck : QgBase
         assertion.setAssertionText("assert.isSyntaxValid");
         assertion.setReasonText("reason.isSyntaxValid", makeMapping("msg", msg));
 
-        if ( prio == "INFO" )
+        if (prio == "INFO")
         {
-          if ( errCode == "0" )
+          if (errCode == "0")
           {
-            DebugFN("QgSyntaxCheck", __FUNCTION__, "this will works, syntax check does not returns errors");   
-            assertion.assertTrue(TRUE, settings.getScorePoints());       
+            DebugFN("QgSyntaxCheck", __FUNCTION__, "this will works, syntax check does not returns errors");
+            assertion.assertTrue(TRUE, settings.getScorePoints());
             assertion.referenceValue = msg;
             _result.addChild(assertion);
           }
+
           DebugFN("QgSyntaxCheck", __FUNCTION__, "Skip checks for info message");
           continue;  // ignore info messages
         }
-        else if ( errCode == "117" )
+        else if (errCode == "117")
         {
           /// @todo remove this check when are WinCCOALicenseCtrlExt implemented
-          if ( strpos(msg, "WinCCOALicenseCtrlExt") > 0 )
+          if (strpos(msg, "WinCCOALicenseCtrlExt") > 0)
             continue; // ignore missing extension, this is added by IL
         }
-        else if ( errCode == "61" )
+        else if (errCode == "61")
         {
           /// 61, Cannot open file, /.../WinCCOA_FinalyApi_234/scripts/
           String str = String(makeUnixPath(msg));
 
-          if ( str.endsWith(makeUnixPath(SCRIPTS_REL_PATH)) || str.endsWith(makeUnixPath(PANELS_REL_PATH)) )
+          if (str.endsWith(makeUnixPath(SCRIPTS_REL_PATH)) || str.endsWith(makeUnixPath(PANELS_REL_PATH)))
           {
             DebugFTN("QgSyntaxCheck", "oa bug, ignore this message", msg);
             continue; // ignore missing extension, this is added by IL

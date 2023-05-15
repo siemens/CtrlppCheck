@@ -34,7 +34,7 @@ void makeScriptEditorToolbar()
   /// @todo translate label by msgCat
   actionId = moduleAddAction("CtrlppCheck", "", "", -1, tbID, "ctrlPPCheck");
 
-  while( !dpExists("_CtrlCommandInterface_StaticTests") )
+  while (!dpExists("_CtrlCommandInterface_StaticTests"))
   {
     // ctrlppcheck-suppress badPerformanceInLoops // wait till created by update script
     delay(1);
@@ -54,47 +54,52 @@ void ctrlPPCheck()
   mapping map; // mapping with checked data
 
   // get current script path;
-  if ( isFunctionDefined("seGetFileName") )
-   path = seGetFileName();
+  if (isFunctionDefined("seGetFileName"))
+    path = seGetFileName();
 
   // store path;
   map["path"] = path;
 
   bool tmpFileUsed = FALSE;
-  if ( path == "" ) // panel or version < 3.16
-  {
-  /*
-    When we want to check panel, we need to skip the script delimiter.
-    The delimiter is ASCII-char 226 (something like --). This is of cores wrong code (parse problem)
-    So it is fine when we commented the lines out. In that case can ctrlppcheck parse the code
-    again. I want to delete the lines, but there are some helpfully informations, there
-    can be used in ctrlppcheck in future.
 
-    That means we need to read the code here now, and comment out all bad lines.
-  */
+  if (path == "")   // panel or version < 3.16
+  {
+    /*
+      When we want to check panel, we need to skip the script delimiter.
+      The delimiter is ASCII-char 226 (something like --). This is of cores wrong code (parse problem)
+      So it is fine when we commented the lines out. In that case can ctrlppcheck parse the code
+      again. I want to delete the lines, but there are some helpfully informations, there
+      can be used in ctrlppcheck in future.
+
+      That means we need to read the code here now, and comment out all bad lines.
+    */
     path = tmpnam() + ".ctl";
     file f = fopen(path, "wb+");
 
     string script = getScript();
     dyn_string lines = strsplit(script, "\n");
-    for(int i = 1; i <= dynlen(lines) ; i++)
+
+    for (int i = 1; i <= dynlen(lines) ; i++)
     {
-      if ( lines[i] == "" )
+      if (lines[i] == "")
         continue;
 
       char firstChar = lines[i][0];
       bool isDelim = firstChar == (char)226;
-      if ( isDelim )
+
+      if (isDelim)
         lines[i] = "//" + lines[i];
 
     }
+
     script = strjoin(lines, "\n");
     fputs(script, f);
     fclose(f);
     tmpFileUsed = TRUE;
   }
 
-  { // in new scope to eliminate memory usage
+  {
+    // in new scope to eliminate memory usage
     ScriptData script;
     script.setPath(path);
     script.calculate();
@@ -126,7 +131,8 @@ void ctrlPPCheck()
   }
 
 
-  { // in new scope to eliminate memory usage
+  {
+    // in new scope to eliminate memory usage
     CppCheck ctrlPpCheck;
 
     dpGet("_CtrlppCheck.settings.enableLibCheck", ctrlPpCheck.settings.enableLibCheck,
@@ -153,7 +159,7 @@ void ctrlPPCheck()
     map["ctrlPpCheck"] = ctrlPpCheck.errList;
   }
 
-  if ( tmpFileUsed )
+  if (tmpFileUsed)
     remove(path); // remove temp file
 
 
@@ -173,10 +179,10 @@ void ctrlPPCheck()
 /// @warning The panel functions needs active connection to event. Dont try it to start with -n option.
 void showResult(const mapping &result)
 {
-  if ( isModuleOpen("CtrlppCheck") )
+  if (isModuleOpen("CtrlppCheck"))
     moduleOff("CtrlppCheck");
 
-  while ( isModuleOpen("CtrlppCheck") )
+  while (isModuleOpen("CtrlppCheck"))
   {
     // ctrlppcheck-suppress badPerformanceInLoops
     delay(0, 20);
@@ -186,7 +192,7 @@ void showResult(const mapping &result)
   ModuleOnWithPanel("CtrlppCheck", -2, -2, 100, 200, 1, 1, "", "vision/scriptEditor/staticTests.pnl", "staticTests",
                     makeDynString());
 
-  while ( !isPanelOpen("staticTests", "CtrlppCheck") )
+  while (!isPanelOpen("staticTests", "CtrlppCheck"))
   {
     // ctrlppcheck-suppress badPerformanceInLoops
     delay(0, 100);
@@ -201,11 +207,11 @@ void showResult(const mapping &result)
 /// @todo make some identifier, that can be this action simple used for every lib
 void update_cb(const string dpe, const string cmd)
 {
-  if ( strpos(cmd, "line:") != 0 )
+  if (strpos(cmd, "line:") != 0)
     return;
 
   string line = substr(cmd, strlen("line:"));
-  seSetCursorPos((int)line -1, 0);
+  seSetCursorPos((int)line - 1, 0);
 }
 
 

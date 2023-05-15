@@ -15,17 +15,17 @@ class QgAddOnScore
   public QgAddOnScore()
   {
   }
-  
-  /** 
-    
+
+  /**
+
     @deprecated since 06.05.2018 +lSchopp dismiss score per version
-    @param score 
+    @param score
     @return errcode
   */
   public int addScore(int score)
   {
     return 0;
   }
-  
+
   QgAddOnResultsDir _resDir = QgAddOnResultsDir();
 };

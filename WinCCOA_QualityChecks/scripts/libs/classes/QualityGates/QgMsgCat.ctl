@@ -24,81 +24,87 @@ class QgMsgCat
   {
     setName(msgCat);
   }
-  
+
   public setPrio(QgMsgCatErrPrio prio)
   {
     _prio = prio;
   }
-  
+
   public setName(const string &msgCatName)
   {
     _msgCat = msgCatName;
   }
-  
+
   public string getName()
   {
     return _msgCat;
   }
-  
+
   public string getText(const string &catKey, const mapping dollars = makeMapping())
   {
-    if ( catKey == "" )
+    if (catKey == "")
       DebugFTN("QgMsgCat", __FUNCTION__, "msg cat is empty", getStackTrace(), dollars, _msgCat);
-    
+
     // get string from msg catalog
     string text = _getMsgCatText(catKey);
-  
-    for (int i=1; i<= mappinglen(dollars); i++)
+
+    for (int i = 1; i <= mappinglen(dollars); i++)
     {
       string key = mappingGetKey(dollars, i);
       string value = _formatValue(dollars[key]);
       strreplace(text, "$" + key, value);
     }
-    
+
     strreplace(text, "$prio", getPriorityAsText(_prio));
     strreplace(text, "$QgId", Qg::getId());
-  
+
     return text;
   }
-  
+
   public string getPriorityAsText(const QgMsgCatErrPrio &prio)
   {
-    switch(prio)
+    switch (prio)
     {
       case QgMsgCatErrPrio::Info:
-      return "Info";
+        return "Info";
+
       case QgMsgCatErrPrio::Warning:
-      return "Warning";
+        return "Warning";
+
       case QgMsgCatErrPrio::Error:
-      return "Error";
+        return "Error";
+
       default:
-      return "Unkwon";
+        return "Unkwon";
     }
   }
-  
+
   protected string _getMsgCatText(const string &catKey)
   {
-    if ( !mappingHasKey(_cache, _msgCat) )
+    if (!mappingHasKey(_cache, _msgCat))
       _cache[_msgCat] = makeMapping();
-    
-    if ( !mappingHasKey(_cache[_msgCat], catKey) )
+
+    if (!mappingHasKey(_cache[_msgCat], catKey))
     {
       string text = getCatStr(_msgCat, catKey);
-      if ( dynlen(getLastError()) > 0 ) // string founded
+
+      if (dynlen(getLastError()) > 0)   // string founded
       {
 //         DebugN(__FUNCTION__, "not found", catKey, _msgCat);
         text = catKey;
       }
+
       _cache[_msgCat][catKey] = text;
     }
-    
+
     return _cache[_msgCat][catKey];;
   }
-  
+
   string _formatValue(const anytype &value)
   {
     string str;
-    if ( getType(value) == FLOAT_VAR )
+
+    if (getType(value) == FLOAT_VAR)
     {
       Float f = Float(value);
       str = (string)f.round(2); // round float
@@ -107,15 +113,12 @@ class QgMsgCat
     {
       str = (string)value;
     }
-    
+
     return str;
   }
-  
-  
-  
+
   QgMsgCatErrPrio _prio;
   string _msgCat;
-  
+
   static protected mapping _cache;
-  
 };

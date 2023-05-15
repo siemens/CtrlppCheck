@@ -17,9 +17,10 @@ class QgAddOnResultsDir
 {
   public QgAddOnResultsDir()
   {
-    if ( _buildNo <= 0 )
+    if (_buildNo <= 0)
       _buildNo = (long)getCurrentTime();
-    if ( Qg::getId() != "" )
+
+    if (Qg::getId() != "")
       setQgId(Qg::getId());
   }
 
@@ -31,7 +32,8 @@ class QgAddOnResultsDir
   public string getLastDirPath()
   {
     dyn_string histDirs = getHistoryDirs();
-    if ( dynlen(histDirs) > 0 )
+
+    if (dynlen(histDirs) > 0)
       return histDirs[1];
     else
       return "";
@@ -42,11 +44,11 @@ class QgAddOnResultsDir
     QgDir dir = QgDir(PROJ_PATH + DATA_REL_PATH + "QualityGates/");
     dyn_string subdirs = dir.getSubDirNames();
 
-    for(int i = dynlen(subdirs); i >= 1; i--)
+    for (int i = dynlen(subdirs); i >= 1; i--)
     {
       //settings folder must be ignored,
       //otherwise a tab will be created in the result panel
-      if ( subdirs[i] == "settings" )
+      if (subdirs[i] == "settings")
       {
         dynRemove(subdirs, i);
       }
@@ -61,10 +63,12 @@ class QgAddOnResultsDir
     QgDir dir = QgDir(qgResDir);
     dyn_string histDirs = dir.getSubDirNames();
     dynSort(histDirs, FALSE);
-    for(int i = 1; i <= dynlen(histDirs); i++)
+
+    for (int i = 1; i <= dynlen(histDirs); i++)
     {
       histDirs[i] = makeNativePath(qgResDir + histDirs[i] + "/");
     }
+
     return histDirs;
   }
 
@@ -75,11 +79,12 @@ class QgAddOnResultsDir
 
   public int create()
   {
-    if ( exists() )
+    if (exists())
       cleanUp();
 
     QgDir dir = QgDir(getDirPath());
-    if ( dir.mk() )
+
+    if (dir.mk())
       return -2;
 
     return 0;
@@ -87,19 +92,17 @@ class QgAddOnResultsDir
 
   public int cleanUp()
   {
-    if ( exists() )
+    if (exists())
       return rmdir(getDirPath(), TRUE);
 
     return 0;
   }
 
-
-
   public string getDirPath()
   {
-    if ( _resultDir == "" )
+    if (_resultDir == "")
     {
-      if ( !Qg::isRunningOnJenkins() )
+      if (!Qg::isRunningOnJenkins())
       {
         // projPath should be used, when Jenkins is not used
         _resultDir = makeNativePath(PROJ_PATH + DATA_REL_PATH + "QualityGates/" + _qgId + "/" + _buildNo + "/");

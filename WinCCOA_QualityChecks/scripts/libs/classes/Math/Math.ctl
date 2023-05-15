@@ -44,7 +44,7 @@ class Math
    */
   public static float getPercent(const float &f1, const float &f2)
   {
-    if( (f1 == 0.0) || (f2 == 0) )
+    if ((f1 == 0.0) || (f2 == 0))
       return 0.0;
 
     float f = f1 / f2;

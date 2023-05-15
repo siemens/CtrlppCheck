@@ -28,11 +28,10 @@ class QgTest : OaTest
 //--------------------------------------------------------------------------------
 //@public members
 //--------------------------------------------------------------------------------
-  
-    
+
   //------------------------------------------------------------------------------
   /** @brief Function calculates QG score.
-    @details Calculates the QG-score depended of test-results. Calculate how many 
+    @details Calculates the QG-score depended of test-results. Calculate how many
              percente of test-cases are OK.
     @return Percentil of passed testcases.
     @todo lschopp 23.05.2018: return result in float format. But we need to check what
@@ -43,15 +42,15 @@ class QgTest : OaTest
     float error = getErrorCount();
     float all   = getAllCount();
     float perc;
-    
-    if ( all != 0 )
+
+    if (all != 0)
       perc = (error / all) * 100.0;
-    
+
     perc = 100.0 - perc;
-    
+
     Float f = Float(perc);
     perc = f.round();
-    
+
     mapping map = makeMapping("Total points", all,
                               "Error points", error,
                               "%", perc);
@@ -59,13 +58,13 @@ class QgTest : OaTest
 
     return perc;
   }
-  
+
   public void addScoreDetail(const mapping &info)
   {
     try
     {
       // try-catch necessary / no guarantee that variable "_data" exists
-      if ( mappingHasKey(_data, "qgTestVersionResults") )
+      if (mappingHasKey(_data, "qgTestVersionResults"))
       {
         _data["qgTestVersionResults"]["Score"] = info;
       }
@@ -73,10 +72,10 @@ class QgTest : OaTest
     catch
     {
     }
-    
+
     DebugTN("QgTest", __FUNCTION__, info);
   }
-    
+
   //------------------------------------------------------------------------------
   /** @brief Function returns count of all errors.
     @details Returns count of all NOT passed test cases executed in this QG.
@@ -86,7 +85,7 @@ class QgTest : OaTest
   {
     return _errCount;
   }
-  
+
   //------------------------------------------------------------------------------
   /** @brief Function returns count of all testcases.
     @details Returns count of all test cases executed in this QG.
@@ -96,7 +95,7 @@ class QgTest : OaTest
   {
     return _all;
   }
-  
+
   //------------------------------------------------------------------------------
   /** @brief Function returns error priority of current error.
     @return Error priority.
@@ -105,7 +104,7 @@ class QgTest : OaTest
   {
     return _errPrio;
   }
-  
+
   //------------------------------------------------------------------------------
   /** @brief Function returns error code of current error.
     @return Error code.
@@ -114,7 +113,7 @@ class QgTest : OaTest
   {
     return _errCode;
   }
-  
+
   //------------------------------------------------------------------------------
   /** @brief Function returns error note of current error.
     @return Error note.
@@ -129,13 +128,13 @@ class QgTest : OaTest
 
 //--------------------------------------------------------------------------------
 //@protected members
-//--------------------------------------------------------------------------------  
+//--------------------------------------------------------------------------------
   protected string _errNote  = "";       //!< Error note.
   protected int _errPrio = PRIO_SEVERE;  //!< Error priority.
   protected int _errCode = 1;            //!< Error code.
 
 //--------------------------------------------------------------------------------
 //@private members
-//--------------------------------------------------------------------------------  
+//--------------------------------------------------------------------------------
   const int RESULT_FILE_FORMAT = 3;  //!< Default result output.
 };

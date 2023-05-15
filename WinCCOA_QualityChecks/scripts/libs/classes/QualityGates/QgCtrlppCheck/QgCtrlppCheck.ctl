@@ -54,8 +54,7 @@ class QgCtrlppCheck : QgBase
     _result.setMsgCatName("QgCtrlppCheck");
     _result.setAssertionText("checks");
 
-
-    if ( dpExists("_CtrlppCheck") )
+    if (dpExists("_CtrlppCheck"))
     {
       dpGet("_CtrlppCheck.filter.id", disabledIds,
             "_CtrlppCheck.filter.severity", disabledSeverities);
@@ -69,11 +68,11 @@ class QgCtrlppCheck : QgBase
       includeFilesPattern = "*";
     }
 
-    for(int i = 1; i <= dynlen(check.errList); i++)
+    for (int i = 1; i <= dynlen(check.errList); i++)
     {
       CppCheckError error = check.errList[i];
 
-      if ( isErrorFiltered(error) )
+      if (isErrorFiltered(error))
         continue;
 
       QgFile f = QgFile(error.path);
@@ -87,6 +86,7 @@ class QgCtrlppCheck : QgBase
       _result.addChild(assertion);
 
     }
+
     return 0;
   }
 
@@ -106,7 +106,7 @@ class QgCtrlppCheck : QgBase
   {
     dirPath = path;
 
-    if ( dpExists("_CtrlppCheck") )
+    if (dpExists("_CtrlppCheck"))
     {
       dpGet("_CtrlppCheck.settings.enableLibCheck", check.settings.enableLibCheck,
             //"_CtrlppCheck.settings.enableHeadersCheck", check.settings.enableHeadersCheck,  // currently disabled
@@ -161,19 +161,21 @@ class QgCtrlppCheck : QgBase
     }
 
     QgFile f = QgFile(error.path);
+
     if (f.isExample() || f.isTest() || !f.isPatternMatch(includeFilesPattern))
       return true;
 
-    if ( error.msg == "" )
+    if (error.msg == "")
       return TRUE;
 
     const string id = error.id;
 
-    if ( dynContains(disabledIds, id)  )
+    if (dynContains(disabledIds, id))
       return TRUE;
 
     const string severity = error.severity;
-    if ( dynContains(disabledSeverities, severity)  )
+
+    if (dynContains(disabledSeverities, severity))
       return TRUE;
 
 
@@ -186,7 +188,6 @@ class QgCtrlppCheck : QgBase
 
   CppCheck check;
 };
-
 
 /// Start Qg ctrlppcheck.
 /// Simple old ctrl style.

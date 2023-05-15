@@ -24,20 +24,21 @@ class CppCheck
   //------------------------------------------------------------------------------
   public static synchronized string getExecutable()
   {
-    if ( !initialized )
+    if (!initialized)
     {
       paCfgReadValue(getPath(CONFIG_REL_PATH, "config"), "qualityChecks", "ctrlppcheckPath", path);
 
-      if ( path == "" )
+      if (path == "")
       {
-        if ( _UNIX )
+        if (_UNIX)
           path = getPath(BIN_REL_PATH, "ctrlppcheck/ctrlppcheck");
-        else if ( _WIN32 )
+        else if (_WIN32)
           path = getPath(BIN_REL_PATH, "ctrlppcheck/ctrlppcheck.exe");
       }
+
       initialized = TRUE;
 
-      if ( path != "" )
+      if (path != "")
         path = "\"" + path + "\"";
     }
 
@@ -48,7 +49,8 @@ class CppCheck
   public int start(const string addOptions = "")
   {
     string cmd = getExecutable();
-    if ( cmd == "" )
+
+    if (cmd == "")
     {
       stdErr = __FUNCTION__ + " can not find executable";
       rc = -1;
@@ -56,11 +58,12 @@ class CppCheck
     }
 
     cmd += " " + addOptions + " " + settings.toCmdLine();
-    
+
     DebugFTN("ctrlppcheck",  __FUNCTION__, cmd);
     rc = system(cmd, stdOut, stdErr);
     DebugFN("ctrlppcheck_dtl",  __FUNCTION__, stdOut, stdErr);
-    if ( settings.verbose )
+
+    if (settings.verbose)
       DebugN(stdOut);
 
     return rc;
@@ -91,7 +94,8 @@ class CppCheck
   public dyn_anytype getAllPossibleErrors()
   {
     string cmd = getExecutable();
-    if ( cmd == "" )
+
+    if (cmd == "")
     {
       stdErr = __FUNCTION__ + " can not find executable";
       return makeDynAnytype();
@@ -126,15 +130,17 @@ class CppCheck
     docNum = xmlDocumentFromString(str, errMsg, errLine, errColumn);
 
     DebugFTN("ctrlppcheck", __FUNCTION__,
-            "docNum", docNum,
-            "errMsg", errMsg,
-            "errLine", errLine,
-            "errColumn", errColumn);
-    if ( docNum < 0 )
+             "docNum", docNum,
+             "errMsg", errMsg,
+             "errLine", errLine,
+             "errColumn", errColumn);
+
+    if (docNum < 0)
     {
       DebugFTN("ctrlppcheck", __FUNCTION__, str);
       return;
     }
+
     xmlRec(xmlFirstChild(docNum));
     str = "";
   }
@@ -142,7 +148,7 @@ class CppCheck
   //------------------------------------------------------------------------------
   protected stdErrToErrList()
   {
-    if ( !settings.isXmlOutEnabled() )
+    if (!settings.isXmlOutEnabled())
       return;
 
     // make a copy of result in log
@@ -169,17 +175,19 @@ class CppCheck
   //------------------------------------------------------------------------------
   void xmlRec(int node)
   {
-    if ( node < 0 )
+    if (node < 0)
       return;
 
-    if ( xmlNodeType(docNum, node) == XML_ELEMENT_NODE )
+    if (xmlNodeType(docNum, node) == XML_ELEMENT_NODE)
     {
       string nodeName = xmlNodeName(docNum, node);
-      if ( nodeName == "errors" )
+
+      if (nodeName == "errors")
       {
         dyn_uint nodes;
         xmlChildNodes(docNum, node, nodes);
-        for(int i = 1; i <= dynlen(nodes); i++)
+
+        for (int i = 1; i <= dynlen(nodes); i++)
         {
           CppCheckError err;
           xnmlNextErr(nodes[i], err);
@@ -197,29 +205,32 @@ class CppCheck
   //------------------------------------------------------------------------------
   void xnmlNextErr(uint node, CppCheckError &err)
   {
-    if ( (xmlNodeType(docNum, node) == XML_ELEMENT_NODE) && (xmlNodeName(docNum, node) == "error") )
+    if ((xmlNodeType(docNum, node) == XML_ELEMENT_NODE) && (xmlNodeName(docNum, node) == "error"))
     {
       mapping map = xmlElementAttributes(docNum, node);
       err.id = map["id"];
       err.severity = map["severity"];
       err.msg = map["msg"];
-      if ( mappingHasKey(map, "verbose") )
+
+      if (mappingHasKey(map, "verbose"))
       {
         string msg = map["verbose"];
         strreplace(msg, FF, "\n");
         err.verbose = msg;
       }
-      if ( mappingHasKey(map, "cwe") )
+
+      if (mappingHasKey(map, "cwe"))
         err.cwe = map["cwe"];
 
-      if ( mappingHasKey(map, "knownBug") )
+      if (mappingHasKey(map, "knownBug"))
         err.knownBug = map["knownBug"];
 
       dyn_uint nodes;
       xmlChildNodes(docNum, node, nodes);
-      for(int i = 1; i <= dynlen(nodes); i++)
+
+      for (int i = 1; i <= dynlen(nodes); i++)
       {
-        if ( !xmlErrLocation(nodes[i], err) )
+        if (!xmlErrLocation(nodes[i], err))
           break;
       }
     }
@@ -228,7 +239,7 @@ class CppCheck
   //------------------------------------------------------------------------------
   int xmlErrLocation(uint node, CppCheckError &err)
   {
-    if ( (xmlNodeType(docNum, node) == XML_ELEMENT_NODE) && (xmlNodeName(docNum, node) == "location") )
+    if ((xmlNodeType(docNum, node) == XML_ELEMENT_NODE) && (xmlNodeName(docNum, node) == "location"))
     {
       mapping map = xmlElementAttributes(docNum, node);
       err.line = (int)map["line"];
@@ -239,6 +250,7 @@ class CppCheck
 
       return 0;
     }
+
     return -1;
   }
 };

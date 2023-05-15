@@ -12,7 +12,7 @@
 #uses "classes/QualityGates/QgStaticCheck/StaticDir"
 #uses "classes/QualityGates/QgSettings"
 
-class StaticCodeDir :StaticDir
+class StaticCodeDir : StaticDir
 {
   public StaticCodeDir(const string dirPath = "")
   {
@@ -50,7 +50,7 @@ class StaticCodeDir :StaticDir
     dynClear(_files);
     dynClear(_childs);
 
-    if ( !exists() )
+    if (!exists())
     {
       logger.warning(0, Qg::getId(), __FUNCTION__, "Directory does not exist", getDirPath());
       return -1;
@@ -61,7 +61,7 @@ class StaticCodeDir :StaticDir
     // check all files
     dyn_string fileNames = getFileNames(getDirPath());
 
-    for(int i = 1; i <= dynlen(fileNames); i++)
+    for (int i = 1; i <= dynlen(fileNames); i++)
     {
       const string fullPath = makeNativePath(getDirPath() + fileNames[i]);
       logger.info(0, Qg::getId(), "Check file", fullPath);
@@ -72,7 +72,7 @@ class StaticCodeDir :StaticDir
 
       checkFile.calculate();
 
-      if ( checkFile.isCalculated() )
+      if (checkFile.isCalculated())
       {
         // it is not possible to calculate file (non panel/script file, crypted ...), so dont updatet the statistic data.
         _ccn  += checkFile.getCCN();
@@ -80,7 +80,8 @@ class StaticCodeDir :StaticDir
 
         _avgCcn  += checkFile.getAvgCCN();
         _avgNloc += checkFile.getAvgNLOC();
-        if ( checkFile.getAvgCCN() > 0.99 )
+
+        if (checkFile.getAvgCCN() > 0.99)
         {
           // average CCN can no be < 1. It looks like empty file
           count ++;
@@ -93,7 +94,7 @@ class StaticCodeDir :StaticDir
     // check all directories
     dyn_string childs = getSubDirNames();
 
-    for(int i = 1; i <= dynlen(childs); i++)
+    for (int i = 1; i <= dynlen(childs); i++)
     {
       const string subDirPath = makeNativePath(getDirPath() + childs[i] + "/");
       anytype child = makeCheckSubDir(subDirPath);
@@ -106,7 +107,8 @@ class StaticCodeDir :StaticDir
 
       _avgCcn  += child.getAvgCCN();
       _avgNloc += child.getAvgNLOC();
-      if ( child.getAvgCCN() > 0.99 )
+
+      if (child.getAvgCCN() > 0.99)
       {
         // average CCN can no be < 1. It looks like empty dir
         count ++;
@@ -116,7 +118,7 @@ class StaticCodeDir :StaticDir
     }
 
     // average per dir ??? not sure if is correct so
-    if ( count > 0 )
+    if (count > 0)
     {
       _avgCcn = _avgCcn / count;
       _avgNloc = _avgNloc / count;
@@ -150,12 +152,13 @@ class StaticCodeDir :StaticDir
   public int validate()
   {
     int rc = StaticDir::validate();
-    if ( rc == 0 )
+
+    if (rc == 0)
     {
       {
         shared_ptr<QgSettings> settings = new QgSettings("StaticCodeDir.dir.NLOC");
 
-        if ( settings.isEnabled() )
+        if (settings.isEnabled())
         {
           shared_ptr <QgVersionResult> assertion = new QgVersionResult();
           assertion.setMsgCatName("QgStaticCheck_StaticCodeDir");
@@ -163,25 +166,26 @@ class StaticCodeDir :StaticDir
           // NLOC in dir
           assertion.setAssertionText("assert.dir.NLOC");
           assertion.setReasonText("reason.dir.NLOC", makeMapping("dir.name", getName(),
-                                                                 "dir.NLOC", getNLOC()));
+                                  "dir.NLOC", getNLOC()));
           assertion.info(getNLOC(), settings.getScorePoints());
           result.addChild(assertion);
         }
       }
+
       // average NLOC in dir
-      if ( getAvgNLOC() > 0 )
+      if (getAvgNLOC() > 0)
       {
 
         shared_ptr<QgSettings> settings = new QgSettings("StaticCodeDir.dir.avgNLOC");
 
-        if ( settings.isEnabled() )
+        if (settings.isEnabled())
         {
           shared_ptr <QgVersionResult> assertion = new QgVersionResult();
           assertion.setMsgCatName("QgStaticCheck_StaticCodeDir");
 
           assertion.setAssertionText("assert.dir.avgNLOC");
           assertion.setReasonText("reason.dir.avgNLOC", makeMapping("dir.name", getName(),
-                                                                    "dir.avgNLOC", getAvgNLOC()));
+                                  "dir.avgNLOC", getAvgNLOC()));
           assertion.info(getAvgNLOC(), settings.getScorePoints());
           result.addChild(assertion);
         }
@@ -191,31 +195,32 @@ class StaticCodeDir :StaticDir
       {
         shared_ptr<QgSettings> settings = new QgSettings("StaticCodeDir.dir.CC");
 
-        if ( settings.isEnabled() )
+        if (settings.isEnabled())
         {
           shared_ptr <QgVersionResult> assertion = new QgVersionResult();
           assertion.setMsgCatName("QgStaticCheck_StaticCodeDir");
 
           assertion.setAssertionText("assert.dir.CCN");
           assertion.setReasonText("reason.dir.CCN", makeMapping("dir.name", getName(),
-                                                                "dir.CCN", getCCN()));
+                                  "dir.CCN", getCCN()));
           assertion.info(getCCN(), settings.getScorePoints());
           result.addChild(assertion);
         }
       }
+
       // average CCN in dir
-      if ( getAvgCCN() > 0 )
+      if (getAvgCCN() > 0)
       {
         shared_ptr<QgSettings> settings = new QgSettings("StaticCodeDir.dir.avgCCN");
 
-        if ( settings.isEnabled() )
+        if (settings.isEnabled())
         {
           shared_ptr <QgVersionResult> assertion = new QgVersionResult();
           assertion.setMsgCatName("QgStaticCheck_StaticCodeDir");
 
           assertion.setAssertionText("assert.dir.avgCCN");
           assertion.setReasonText("reason.dir.avgCCN", makeMapping("dir.name", getName(),
-                                                                   "dir.CCN", getAvgCCN()));
+                                  "dir.CCN", getAvgCCN()));
           assertion.info(getAvgCCN(), settings.getScorePoints());
           result.addChild(assertion);
         }
