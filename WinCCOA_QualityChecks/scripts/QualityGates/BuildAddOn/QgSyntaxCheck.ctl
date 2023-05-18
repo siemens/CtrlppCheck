@@ -16,7 +16,7 @@
 
 
 //--------------------------------------------------------------------------------
-/** 
+/**
   @breif main rutine to start QualityGate QgStaticCheck-OASyntaxCheck
 */
 void main()

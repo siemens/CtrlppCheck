@@ -61,11 +61,9 @@ void makeGediToolbar()
   action = moduleAddAction("", "", "", id, -1, "");
   moduleSetAction(action, "separator", TRUE);
 
- // moduleAddAction(getCatStr("WinCCOA_gedi_ext", "tool_QualityGates_BuildDocu"), "", "", id, -1, "tool_QualityGates_BuildDocu");
   moduleAddAction(getCatStr("WinCCOA_gedi_ext", "open_Docu"), "", "", id, -1, "open_Docu");
 
-//   moduleAddDockModule("WinCCOA_test", "vision/gedi/tests/testStarter.pnl");
- openDockModule();
+  openDockModule();
 }
 
 private  int _startCtrlMan(string script, const string scriptOptions = "")
@@ -74,9 +72,9 @@ private  int _startCtrlMan(string script, const string scriptOptions = "")
   string stdErr = "";
   string cmd;
 
-  if ( _WIN32 )
+  if (_WIN32)
     cmd = getPath(BIN_REL_PATH, getComponentName(CTRL_COMPONENT) + ".exe");
-  else if ( _UNIX )
+  else if (_UNIX)
     cmd = getPath(BIN_REL_PATH, getComponentName(CTRL_COMPONENT));
   else
   {
@@ -85,9 +83,9 @@ private  int _startCtrlMan(string script, const string scriptOptions = "")
     return -1;
   }
 
-  if ( getPath(SCRIPTS_REL_PATH, script + ".ctl") != "" )
+  if (getPath(SCRIPTS_REL_PATH, script + ".ctl") != "")
     script += ".ctl";
-  else if ( getPath(SCRIPTS_REL_PATH, script + ".ctc") != "" )
+  else if (getPath(SCRIPTS_REL_PATH, script + ".ctc") != "")
     script += ".ctc";
   else
     DebugFTN("qualityCheck_ext", "Sorry, the script " + script + " was not found.");
@@ -95,7 +93,8 @@ private  int _startCtrlMan(string script, const string scriptOptions = "")
   cmd += " " + script + " " + scriptOptions + " -proj " + PROJ;// + " -log +stderr";
 
   int rc = system(cmd, stdOut, stdErr);
-  if ( rc )
+
+  if (rc)
   {
     DebugFTN("qualityCheck_ext", __FUNCTION__, "command exited with rc = " + rc, cmd, stdOut, stdErr);
     return rc;
@@ -112,7 +111,8 @@ private tool_QualityGates_showBusy(const string &qgId)
 void tool_QualityGates_QgStaticCheck_CtrlppCheck()
 {
   tool_QualityGates_showBusy("QgCtrlppCheck");
-  if ( useGediScope )
+
+  if (useGediScope)
     start_QgCtrlppCheck();
   else
     _startCtrlMan("QualityGates/StaticTests/QgCtrlppCheck");
@@ -162,7 +162,7 @@ void tool_QualityGates_UnitTests()
 
 void tool_QualityGates_OpenResult()
 {
-  ModuleOnWithPanel("QgResult-1",-1,-1,400,400,1,1,"Scale","vision/QualityChecks/QG_Main.pnl","QG Result Overview",makeDynString(""));
+  ModuleOnWithPanel("QgResult-1", -1, -1, 400, 400, 1, 1, "Scale", "vision/QualityChecks/QG_Main.pnl", "QG Result Overview", makeDynString(""));
 }
 
 void open_Docu()

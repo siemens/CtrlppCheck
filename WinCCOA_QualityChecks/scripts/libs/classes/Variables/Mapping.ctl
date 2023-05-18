@@ -31,7 +31,7 @@ class Mapping
    * @warning The c-tor make a copy of variable and that cost some memory-usage..
    *          In case of big mappings it is better to use function set(), instead of c-tor.
    */
-  public Mapping(mapping map = makeMapping() )
+  public Mapping(mapping map = makeMapping())
   {
     _var = map;
   }
@@ -60,7 +60,7 @@ class Mapping
    */
   public anytype getAt(const anytype &key, const anytype def = NULL)
   {
-    if( mappingHasKey(_var, key) )
+    if (mappingHasKey(_var, key))
       return _var[ key ];
 
     return def;
@@ -76,11 +76,11 @@ class Mapping
     //
     mapping map = var.get();
 
-    for( int i = 1; i <= mappinglen(map); i++ )
+    for (int i = 1; i <= mappinglen(map); i++)
     {
       const anytype key = mappingGetKey(map, i);
       anytype value = map[key];
-      
+
       _var[key] = value;
     }
   }

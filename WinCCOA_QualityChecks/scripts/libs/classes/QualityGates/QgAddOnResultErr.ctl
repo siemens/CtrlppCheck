@@ -60,40 +60,41 @@ class QgAddOnResultErr
   {
     return getErrorText(_err);
   }
-  
+
   public int getPriority()
   {
     return getErrorPriority(_err);
   }
-  
+
   public string getPriorityAsText()
   {
-    switch(getPriority())
+    switch (getPriority())
     {
       case PRIO_INFO:
-      return "Info";
+        return "Info";
+
       case PRIO_WARNING:
-      return "Warning";
+        return "Warning";
+
       case PRIO_SEVERE:
-      return "Error";
+        return "Error";
+
       default:
-      return "Unkwon";
+        return "Unkwon";
     }
   }
-  
+
   public void fillMap(mapping &map)
   {
     map[getPriorityAsText()] = getText();
   }
-  
+
   public mapping toMap()
   {
     mapping map;
     fillMap(map);
     return map;
   }
-  
-  
 
 //--------------------------------------------------------------------------------
 //@private members

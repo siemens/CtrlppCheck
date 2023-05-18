@@ -27,7 +27,7 @@ class QgStaticPanelCheck : QgBase
 //@public members
 //--------------------------------------------------------------------------------
   public string checkedPath = PROJ_PATH;
-  
+
   //------------------------------------------------------------------------------
   /** @brief Function setups panels tests.
     @details Creates temp-source dir.
@@ -35,17 +35,17 @@ class QgStaticPanelCheck : QgBase
   */
   public int setUp()
   {
-    if ( QgBase::setUp() )
+    if (QgBase::setUp())
       return -1;
 
 
     PanelCheck::setSourceDirPath(this.checkedPath);
     PanelFile::setSourceDirPath(this.checkedPath);
     _panels.setDir(this.checkedPath + PANELS_REL_PATH);
-    
-    if ( !_panels.exists() )
+
+    if (!_panels.exists())
       setMinValidScore("QgStaticCheck_Panels", "assert.missingPanels", "reason.missingPanels");
-    
+
     return 0;
   }
 
@@ -56,12 +56,12 @@ class QgStaticPanelCheck : QgBase
   */
   public int calculate()
   {
-    if ( _panels.exists() )
+    if (_panels.exists())
       return _panels.calculate();
     else
       return 0;
   }
-  
+
   //------------------------------------------------------------------------------
   /** @brief Function validates calculated panels dircetory.
     @warning Call function calculate() before. Otherwise validation does not work.
@@ -86,12 +86,12 @@ class QgStaticPanelCheck : QgBase
 //--------------------------------------------------------------------------------
 //@private members
 //--------------------------------------------------------------------------------
-  
+
   PanelsDir _panels = PanelsDir(); //!< panels directory
 };
 
 //--------------------------------------------------------------------------------
-/** 
+/**
   @breif main rutine to start QualityGate QgStaticCheck-panels
 */
 void main(string path = PROJ_PATH)

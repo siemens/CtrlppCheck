@@ -1,2 +1,4 @@
 WinCCOA_QualityChecks/bin/ctrlppcheck/
 ctrlppcheck/build/
+# astyle backup files
+*.ctl.orig
