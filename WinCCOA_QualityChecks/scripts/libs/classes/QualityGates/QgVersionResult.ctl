@@ -559,9 +559,10 @@ struct QgVersionResult
     else
     {
       if (_enableOaTestOutput())
+      {
         oaUnitPass(assertKey, userData);
-
-      // else
+      }
+      else
       {
         OaLogger logger = OaLogger("QgBase");
         logger.info(QgBaseError::AssertionOK, assertKey, userData);
