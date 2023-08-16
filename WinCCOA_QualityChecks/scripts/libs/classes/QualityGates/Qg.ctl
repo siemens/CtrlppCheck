@@ -18,7 +18,7 @@
  *
  * @details Base utilitys to handle with QualityGate.
  * @author lschopp
- * @todo check it, but I think (mPokorny), that it can be removed. It looks like
+ * @todo check it, but I think, that it can be removed. It looks like
  *       old store-code (because of wording like backend ...)
  */
 class Qg

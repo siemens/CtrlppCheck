@@ -154,12 +154,6 @@ void tool_QualityGates_QgOverloadedFilesCheck()
   _startCtrlMan("QualityGates/StaticTests/QgOverloadedFilesCheck");
 }
 
-void tool_QualityGates_UnitTests()
-{
-  tool_QualityGates_showBusy("UnitTests");
-  _startCtrlMan("QualityGates/QgTestRunner");
-}
-
 void tool_QualityGates_OpenResult()
 {
   ModuleOnWithPanel("QgResult-1", -1, -1, 400, 400, 1, 1, "Scale", "vision/QualityChecks/QG_Main.pnl", "QG Result Overview", makeDynString(""));
