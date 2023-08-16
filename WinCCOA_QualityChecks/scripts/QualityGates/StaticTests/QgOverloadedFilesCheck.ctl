@@ -25,17 +25,17 @@ class QgStaticCheck_OverloadedFiles : QgBase
 //--------------------------------------------------------------------------------
 //@public members
 //--------------------------------------------------------------------------------
-  
+
   //------------------------------------------------------------------------------
   public int setUp()
   {
-    if ( QgBase::setUp() )
+    if (QgBase::setUp())
       return -1;
-    
+
     QgVersionResult::showErrorsOnly = TRUE;
     return 0;
   }
-  
+
   //------------------------------------------------------------------------------
   /** @brief Calculates pictures directory.
     @details Calculates pictures directory recursive.
@@ -45,7 +45,7 @@ class QgStaticCheck_OverloadedFiles : QgBase
   {
     return _files.calculate();
   }
-  
+
   //------------------------------------------------------------------------------
   /** @brief Function validates calculated pictures dircetory.
     @warning Call function calculate() before. Otherwise validation does not work.
@@ -70,12 +70,12 @@ class QgStaticCheck_OverloadedFiles : QgBase
 //--------------------------------------------------------------------------------
 //@private members
 //--------------------------------------------------------------------------------
-  
+
   QgOverloadedFilesCheck _files = QgOverloadedFilesCheck(); //!< Pictures directory
 };
 
 //--------------------------------------------------------------------------------
-/** 
+/**
   @breif main rutine to start QualityGate QgStaticCheck-Pictures
 */
 void main()

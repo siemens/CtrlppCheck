@@ -32,7 +32,7 @@ class Float
   {
     _f = f;
   }
-  
+
   //------------------------------------------------------------------------------
   /** @brief Function returns value of float variable.
     @return value of variable.
@@ -41,7 +41,7 @@ class Float
   {
     return _f;
   }
-  
+
   //------------------------------------------------------------------------------
   /** @brief Function sets new content to variable.
     @param f New float value.
@@ -50,7 +50,7 @@ class Float
   {
     _f = f;
   }
-  
+
   //------------------------------------------------------------------------------
   /** @brief Function rounds the float variable with given precision.
     @param precision Round precision.
@@ -58,13 +58,13 @@ class Float
   */
   public float round(int precision = 2)
   {
-    if ( precision < 0 )
+    if (precision < 0)
       precision = 0;
-    
+
     float precisionFactor = pow(10.0, precision);
     return floor(_f * precisionFactor + 0.5) / precisionFactor;
   }
-  
+
 //--------------------------------------------------------------------------------
 //@private members
 //--------------------------------------------------------------------------------

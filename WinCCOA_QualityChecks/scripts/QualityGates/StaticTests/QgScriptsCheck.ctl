@@ -32,32 +32,34 @@ class QgStaticCheck_Scripts : QgBase
   //---------------------------------------------------------------------------
   public int setUp()
   {
-    if ( QgBase::setUp() )
+    if (QgBase::setUp())
     {
       throwError(makeError("", PRIO_SEVERE, ERR_CONTROL, 0, "QgBase::setUp fails"));
       return -1;
     }
 
-    if ( Qg::getId() == "QgStaticCheck_Scripts" )
+    if (Qg::getId() == "QgStaticCheck_Scripts")
     {
       if (this.checkedPath.isEmpty())
       {
         this.checkedPath = PROJ_PATH + SCRIPTS_REL_PATH;
       }
+
       _scriptsData.setDir(this.checkedPath);
       _scriptsData.setType(ScriptsDataType::scripts);
     }
-    else if ( Qg::getId() == "QgStaticCheck_Libs" )
+    else if (Qg::getId() == "QgStaticCheck_Libs")
     {
       if (this.checkedPath.isEmpty())
       {
         this.checkedPath = PROJ_PATH + LIBS_REL_PATH;
       }
+
       _scriptsData.setDir(this.checkedPath);
       _scriptsData.setType(ScriptsDataType::libs);
     }
 
-    if ( !_scriptsData.exists() )
+    if (!_scriptsData.exists())
       setMinValidScore(Qg::getId(), "assert.missingScripts", "reason.missingScripts");
 
     return 0;
@@ -66,7 +68,7 @@ class QgStaticCheck_Scripts : QgBase
   //---------------------------------------------------------------------------
   public int calculate()
   {
-    if ( _scriptsData.exists() )
+    if (_scriptsData.exists())
       return _scriptsData.calculate();
     else
       return 0;
@@ -75,8 +77,8 @@ class QgStaticCheck_Scripts : QgBase
   //---------------------------------------------------------------------------
   public int validate()
   {
-    if ( (Qg::getId() == "QgStaticCheck_Scripts") && (_scriptsData.getCountOfFilesRecursive() <= 0) &&
-          isdir(this.checkedPath + LIBS_REL_PATH) && (_scriptsData.getCountOfSubDirs() <= 0) )
+    if ((Qg::getId() == "QgStaticCheck_Scripts") && (_scriptsData.getCountOfFilesRecursive() <= 0) &&
+        isdir(this.checkedPath + LIBS_REL_PATH) && (_scriptsData.getCountOfSubDirs() <= 0))
     {
       // there are no scripts. Libs only and libs are checked in QgStaticCheck_Libs
       setMinValidScore("QgStaticCheck_Scripts", "assert.missingScripts", "reason.missingScripts");
@@ -111,11 +113,11 @@ class QgStaticCheck_Scripts : QgBase
 */
 void main(string testType, string path = "")
 {
-  if ( testType == "scripts" )
+  if (testType == "scripts")
   {
     Qg::setId("QgStaticCheck_Scripts");
   }
-  else if ( testType == "libs" )
+  else if (testType == "libs")
   {
     Qg::setId("QgStaticCheck_Libs");
   }

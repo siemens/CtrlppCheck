@@ -16,7 +16,7 @@ class QgTemplate : QgBase
 
   public int setUp()
   {
-    if ( QgBase::setUp() )
+    if (QgBase::setUp())
       return -1;
 
 //     _sourceDir.create();

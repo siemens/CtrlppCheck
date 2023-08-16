@@ -31,7 +31,7 @@ class ScriptFile : QgFile
   //------------------------------------------------------------------------------
   public static bool isCrypted(const string &s)
   {
-    return ( strpos(s, "PVSS_CRYPTED_PANEL") == 0);
+    return (strpos(s, "PVSS_CRYPTED_PANEL") == 0);
   }
 
   //------------------------------------------------------------------------------
@@ -40,7 +40,7 @@ class ScriptFile : QgFile
     string s;
     fileToString(getFilePath(), s);
 
-    if ( (s == "") && (strpos(getFilePath(), ".ctc") > 0) )
+    if ((s == "") && (strpos(getFilePath(), ".ctc") > 0))
       return TRUE;
 
     return isCrypted(s);
@@ -58,19 +58,19 @@ class ScriptFile : QgFile
     _isCalculated = FALSE;
     _extension = getExt(getFilePath());
 
-    if ( !isfile(getFilePath()) )
+    if (!isfile(getFilePath()))
     {
       DebugFTN("ScriptFile", __FUNCTION__, "file does not exists", getFilePath());
       return -1;
     }
 
-    if ( isFileCrypted() )
+    if (isFileCrypted())
     {
       DebugFTN("ScriptFile", __FUNCTION__, "!!! file is encrypted", getFilePath());
       return 0;
     }
 
-    if ( this.isExample() )
+    if (this.isExample())
     {
       // do calculate example, aprove performance
       DebugFTN("ScriptFile", __FUNCTION__, "!!! Dont calculate example file", getFilePath());
@@ -78,7 +78,8 @@ class ScriptFile : QgFile
     }
 
     _scriptData.setPath(getFilePath());
-    if ( _scriptData.calculate() )
+
+    if (_scriptData.calculate())
     {
       DebugFTN("ScriptFile", __FUNCTION__, "can not calculate script data");
       return -2;
@@ -98,21 +99,23 @@ class ScriptFile : QgFile
     {
       shared_ptr<QgSettings> settings = new QgSettings("ScriptFile.file.isExampleFile");
 
-      if ( settings.isEnabled() )
+      if (settings.isEnabled())
       {
-      // check if the file is example.
-      // ignore all example files, the example are terrible scripts
+        // check if the file is example.
+        // ignore all example files, the example are terrible scripts
         shared_ptr <QgVersionResult> assertion = new QgVersionResult();
         assertion.setMsgCatName("QgStaticCheck_ScriptFile");
         const mapping dollars = makeMapping("file.name", getName());
         assertion.setAssertionText("assert.file.isExampleFile", dollars);
         assertion.setReasonText("reason.file.isExampleFile", dollars);
         assertion.allowNextErr(TRUE);
-        if ( !assertion.assertFalse(this.isExample(), settings.getScorePoints()) )
+
+        if (!assertion.assertFalse(this.isExample(), settings.getScorePoints()))
         {
           result.addChild(assertion);
           return 0;
         }
+
         result.addChild(assertion);
       }
     }
@@ -120,7 +123,7 @@ class ScriptFile : QgFile
     {
       shared_ptr<QgSettings> settings = new QgSettings("ScriptFile.file.extension");
 
-      if ( settings.isEnabled() )
+      if (settings.isEnabled())
       {
         // check for valid extensions
         shared_ptr <QgVersionResult> assertion = new QgVersionResult();
@@ -129,11 +132,13 @@ class ScriptFile : QgFile
                                             "file.extension", _extension);
         assertion.setAssertionText("assert.file.extension", dollars);
         assertion.setReasonText("reason.file.extension", dollars);
-        if ( !assertion.assertDynContains(settings.getReferenceValues(), strtolower(_extension), settings.getScorePoints()) )
+
+        if (!assertion.assertDynContains(settings.getReferenceValues(), strtolower(_extension), settings.getScorePoints()))
         {
           result.addChild(assertion);
           return 0;
         }
+
         result.addChild(assertion);
       }
     }
@@ -141,25 +146,27 @@ class ScriptFile : QgFile
     {
       shared_ptr<QgSettings> settings = new QgSettings("ScriptFile.file.isCalculated");
 
-      if ( settings.isEnabled() )
+      if (settings.isEnabled())
       {
-      // check if file is calculated.
-      // ognore all not calculated files (crypted, empty files ...)
+        // check if file is calculated.
+        // ognore all not calculated files (crypted, empty files ...)
         shared_ptr <QgVersionResult> assertion = new QgVersionResult();
         assertion.setMsgCatName("QgStaticCheck_ScriptFile");
         const mapping dollars = makeMapping("file.name", getName());
         assertion.setAssertionText("assert.file.isCalculated", dollars);
         assertion.setReasonText("reason.file.isCalculated", dollars);
-        if ( !assertion.assertTrue(isCalculated(), settings.getScorePoints()) )
+
+        if (!assertion.assertTrue(isCalculated(), settings.getScorePoints()))
         {
           result.addChild(assertion);
           return 0;
         }
+
         result.addChild(assertion);
       }
     }
 
-    if ( _scriptData.validate() )
+    if (_scriptData.validate())
       return -1;
 
     result.addChild(_scriptData.result);

@@ -27,7 +27,7 @@ class FunctionData
   //------------------------------------------------------------------------------
   public int fillFromCsv(const dyn_string &line)
   {
-    if ( dynlen(line) < (int)LizardCsvIndx::PARAMS )
+    if (dynlen(line) < (int)LizardCsvIndx::PARAMS)
     {
       return -1; // there might be an fault - lizard format not valid possibly
     }
@@ -45,8 +45,9 @@ class FunctionData
     // and compare 1. with 3. item.
     _isCtor = FALSE;
     dyn_string items = strsplit(_name, "::");
+
     // strsplit returns 3 items "FunctionData", "", "FunctionData" --> (oa-Bug)
-    if ( dynlen(items) == 3 )
+    if (dynlen(items) == 3)
     {
       _isCtor = (items[1] == items[3]);
     }
@@ -128,7 +129,7 @@ class FunctionData
   {
     shared_ptr<QgSettings> settings = new QgSettings("FunctionData.function.CCN");
 
-    if ( settings.isEnabled() )
+    if (settings.isEnabled())
     {
       shared_ptr <QgVersionResult> assertion = new QgVersionResult();
       assertion.setMsgCatName("QgStaticCheck_FunctionData");
@@ -138,8 +139,8 @@ class FunctionData
       assertion.setAssertionText("assert.function.CCN", dollars);
       assertion.setReasonText("reason.function.CCN", dollars);
       assertion.assertLessEqual(getCCN(),
-          settings.getHighLimit(DEFAULT_CNN_HIGH),
-          settings.getScorePoints());
+                                settings.getHighLimit(DEFAULT_CNN_HIGH),
+                                settings.getScorePoints());
       result.addChild(assertion);
     }
   }
@@ -150,7 +151,7 @@ class FunctionData
     string path = isCtor() ? "FunctionData.function.NLOC.ctor" : "FunctionData.function.NLOC";
     shared_ptr<QgSettings> settings = new QgSettings(path);
 
-    if ( settings.isEnabled() )
+    if (settings.isEnabled())
     {
       shared_ptr <QgVersionResult> assertion = new QgVersionResult();
       assertion.setMsgCatName("QgStaticCheck_FunctionData");
@@ -161,9 +162,9 @@ class FunctionData
       assertion.setReasonText("reason.function.NLOC", dollars);
 
       assertion.assertBetween(getNLOC(),
-          settings.getLowLimit(DEFAULT_NLOC_LOW),
-          settings.getHighLimit(DEFAULT_NLOC_HIGH),
-          settings.getScorePoints());
+                              settings.getLowLimit(DEFAULT_NLOC_LOW),
+                              settings.getHighLimit(DEFAULT_NLOC_HIGH),
+                              settings.getScorePoints());
       result.addChild(assertion);
     }
   }
@@ -173,7 +174,7 @@ class FunctionData
   {
     shared_ptr<QgSettings> settings = new QgSettings("FunctionData.function.paramCount");
 
-    if ( settings.isEnabled() )
+    if (settings.isEnabled())
     {
       shared_ptr <QgVersionResult> assertion = new QgVersionResult();
       assertion.setMsgCatName("QgStaticCheck_FunctionData");
@@ -183,8 +184,8 @@ class FunctionData
       assertion.setAssertionText("assert.function.paramCount", dollars);
       assertion.setReasonText("reason.function.paramCount", dollars);
       assertion.assertLessEqual(getParamCount(),
-          settings.getHighLimit(10),
-          settings.getScorePoints());
+                                settings.getHighLimit(10),
+                                settings.getScorePoints());
       result.addChild(assertion);
     }
   }
@@ -194,7 +195,7 @@ class FunctionData
   {
     shared_ptr<QgSettings> settings = new QgSettings("FunctionData.function.countOfLines");
 
-    if ( settings.isEnabled() )
+    if (settings.isEnabled())
     {
       shared_ptr <QgVersionResult> assertion = new QgVersionResult();
       assertion.setMsgCatName("QgStaticCheck_FunctionData");

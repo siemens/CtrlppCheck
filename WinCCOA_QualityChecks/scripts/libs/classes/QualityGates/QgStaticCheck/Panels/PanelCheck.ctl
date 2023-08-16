@@ -134,12 +134,12 @@ class PanelCheck : QgFile
     _pnl.setPath(getRelPath());
     _isBackUp = _pnl.isBackUp();
 
-    if( _isBackUp )
+    if (_isBackUp)
     {
       return 0;
     }
 
-    if ( isExample() )
+    if (isExample())
     {
       // do not calculate example, improve performance
       return 0;
@@ -149,15 +149,15 @@ class PanelCheck : QgFile
 
     _pnl.read();
 
-    if( _pnl.isCrypted() )
+    if (_pnl.isCrypted())
     {
       return 0;
     }
 
-    if( _pnl.isXmlFormat() )
+    if (_pnl.isXmlFormat())
     {
       // xml panel can be directly loaded
-      if( _pnl.load() )
+      if (_pnl.load())
       {
         DebugFTN("PanelCheck", __FUNCTION__, "can not load XML panel", getRelPath());
         _pnl.strContent = "";
@@ -201,7 +201,7 @@ class PanelCheck : QgFile
 
       remove(newPath);
 
-      if( isfile(newPath + ".bak") )
+      if (isfile(newPath + ".bak"))
         remove(newPath + ".bak"); // on converting generate the ui back up panel, so delete the waste.
 
       _pnl.setPath(oldRelPath);
@@ -233,11 +233,11 @@ class PanelCheck : QgFile
     result = new QgVersionResult();
     result.text = getName();
 
-    if ( validateIsExample() ||
-         validateIsBackUp() ||
-         validateExtension() ||
-         validateIsCrypted() ||
-         validateIsCalculated() )
+    if (validateIsExample() ||
+        validateIsBackUp() ||
+        validateExtension() ||
+        validateIsCrypted() ||
+        validateIsCalculated())
     {
       return 0;
     }
@@ -265,7 +265,7 @@ class PanelCheck : QgFile
   {
     shared_ptr<QgSettings> settings = new QgSettings("PanelCheck.panel.isExampleFile");
 
-    if ( settings.isEnabled() )
+    if (settings.isEnabled())
     {
       shared_ptr <QgVersionResult> assertion = new QgVersionResult();
       assertion.setMsgCatName("QgStaticCheck_Panels");
@@ -273,44 +273,50 @@ class PanelCheck : QgFile
       assertion.setAssertionText("assert.panel.isExampleFile", dollars);
       assertion.setReasonText("reason.panel.isExampleFile", dollars);
       assertion.allowNextErr(TRUE);
-      if ( !assertion.assertFalse(isExample(), settings.getScorePoints()) )
+
+      if (!assertion.assertFalse(isExample(), settings.getScorePoints()))
       {
         result.addChild(assertion);
         return 1;
       }
+
       result.addChild(assertion);
     }
+
     return 0;
   }
 
-    // is backup
+  // is backup
   protected int validateIsBackUp()
   {
     shared_ptr<QgSettings> settings = new QgSettings("PanelCheck.panel.isBackUp");
 
-    if ( settings.isEnabled() )
+    if (settings.isEnabled())
     {
       shared_ptr <QgVersionResult> assertion = new QgVersionResult();
       assertion.setMsgCatName("QgStaticCheck_Panels");
       const mapping dollars = makeMapping("panel.name", getName());
       assertion.setAssertionText("assert.panel.isBackUp", dollars);
       assertion.setReasonText("reason.panel.isBackUp", dollars);
-      if ( !assertion.assertFalse(isBackUp(), settings.getScorePoints()) )
+
+      if (!assertion.assertFalse(isBackUp(), settings.getScorePoints()))
       {
         result.addChild(assertion);
         return 1;
       }
+
       result.addChild(assertion);
     }
+
     return 0;
   }
 
-    // check for valid extensions
+  // check for valid extensions
   protected int validateExtension()
   {
     shared_ptr<QgSettings> settings = new QgSettings("PanelCheck.panel.extension");
 
-    if ( settings.isEnabled() )
+    if (settings.isEnabled())
     {
       shared_ptr <QgVersionResult> assertion = new QgVersionResult();
       assertion.setMsgCatName("QgStaticCheck_Panels");
@@ -318,65 +324,73 @@ class PanelCheck : QgFile
                                           "panel.extension", _extension);
       assertion.setAssertionText("assert.panel.extension", dollars);
       assertion.setReasonText("reason.panel.extension", dollars);
-      if ( !assertion.assertDynContains(settings.getReferenceValues(), strtolower(_extension), settings.getScorePoints()) )
+
+      if (!assertion.assertDynContains(settings.getReferenceValues(), strtolower(_extension), settings.getScorePoints()))
       {
         result.addChild(assertion);
         return 1;
       }
+
       result.addChild(assertion);
     }
+
     return 0;
   }
 
-    // is crypted
+  // is crypted
   protected int validateIsCrypted()
   {
     shared_ptr<QgSettings> settings = new QgSettings("PanelCheck.panel.isCrypted");
 
-    if ( settings.isEnabled() )
+    if (settings.isEnabled())
     {
       shared_ptr <QgVersionResult> assertion = new QgVersionResult();
       assertion.setMsgCatName("QgStaticCheck_Panels");
       const mapping dollars = makeMapping("panel.name", getName());
       assertion.setAssertionText("assert.panel.isCrypted", dollars);
       assertion.setReasonText("reason.panel.isCrypted", dollars);
-      if ( !assertion.assertFalse(_pnl.isCrypted(), settings.getScorePoints()) )
+
+      if (!assertion.assertFalse(_pnl.isCrypted(), settings.getScorePoints()))
       {
         result.addChild(assertion);
         return 1;
       }
+
       result.addChild(assertion);
     }
+
     return 0;
   }
 
-    // is calculated
+  // is calculated
   protected int validateIsCalculated()
   {
     shared_ptr<QgSettings> settings = new QgSettings("PanelCheck.panel.isCalculated");
 
-    if ( settings.isEnabled() )
+    if (settings.isEnabled())
     {
       shared_ptr <QgVersionResult> assertion = new QgVersionResult();
       assertion.setMsgCatName("QgStaticCheck_Panels");
       const mapping dollars = makeMapping("panel.name", getName());
       assertion.setAssertionText("assert.panel.isCalculated", dollars);
       assertion.setReasonText("reason.panel.isCalculated", dollars);
-      if ( !assertion.assertTrue(isCalculated(), settings.getScorePoints()) )
+
+      if (!assertion.assertTrue(isCalculated(), settings.getScorePoints()))
       {
         result.addChild(assertion);
         return 1;
       }
     }
+
     return 0;
   }
 
-    // countOfProperties
+  // countOfProperties
   protected validateCountOfProperties()
   {
     shared_ptr<QgSettings> settings = new QgSettings("PanelCheck.panel.countOfProperties");
 
-    if ( settings.isEnabled() )
+    if (settings.isEnabled())
     {
       shared_ptr <QgVersionResult> assertion = new QgVersionResult();
       assertion.setMsgCatName("QgStaticCheck_Panels");
@@ -389,12 +403,12 @@ class PanelCheck : QgFile
     }
   }
 
-    // getCountOfEvents
+  // getCountOfEvents
   protected validateCountOfEvents()
   {
     shared_ptr<QgSettings> settings = new QgSettings("PanelCheck.panel.countOfEvents");
 
-    if ( settings.isEnabled() )
+    if (settings.isEnabled())
     {
       shared_ptr <QgVersionResult> assertion = new QgVersionResult();
       assertion.setMsgCatName("QgStaticCheck_Panels");
@@ -411,7 +425,7 @@ class PanelCheck : QgFile
   {
     shared_ptr<QgSettings> settings = new QgSettings("PanelCheck.panel.countOfShapes");
 
-    if ( settings.isEnabled() )
+    if (settings.isEnabled())
     {
       shared_ptr <QgVersionResult> assertion = new QgVersionResult();
       assertion.setMsgCatName("QgStaticCheck_Panels");
@@ -426,19 +440,19 @@ class PanelCheck : QgFile
   }
 
 
-    //----------------------------------------------------------------------------
+  //----------------------------------------------------------------------------
   protected validateCCN()
   {
     shared_ptr<QgSettings> settings = new QgSettings("PanelCheck.panel.panel.CCN");
 
-    if ( settings.isEnabled() )
+    if (settings.isEnabled())
     {
       shared_ptr <QgVersionResult> assertion = new QgVersionResult();
       assertion.setMsgCatName("QgStaticCheck_Panels");
       // info only, dont check the values
       assertion.setAssertionText("assert.panel.CCN");
       assertion.setReasonText("reason.panel.CCN", makeMapping("panel.name", getName(),
-                                                              "panel.CCN", getCCN()));
+                              "panel.CCN", getCCN()));
       assertion.info(getCCN(), settings.getScorePoints());
       result.addChild(assertion);
     }
@@ -448,13 +462,13 @@ class PanelCheck : QgFile
   {
     shared_ptr<QgSettings> settings = new QgSettings("PanelCheck.panel.avgCCN");
 
-    if ( settings.isEnabled() )
+    if (settings.isEnabled())
     {
       shared_ptr <QgVersionResult> assertion = new QgVersionResult();
       assertion.setMsgCatName("QgStaticCheck_Panels");
       assertion.setAssertionText("assert.panel.avgCCN");
       assertion.setReasonText("reason.panel.avgCCN", makeMapping("panel.name", getName(),
-                                                                 "panel.avgCCN", getAvgCCN()));
+                              "panel.avgCCN", getAvgCCN()));
       assertion.info(getAvgCCN(), settings.getScorePoints());
       result.addChild(assertion);
     }
@@ -464,13 +478,13 @@ class PanelCheck : QgFile
   {
     shared_ptr<QgSettings> settings = new QgSettings("PanelCheck.panel.NLOC");
 
-    if ( settings.isEnabled() )
+    if (settings.isEnabled())
     {
       shared_ptr <QgVersionResult> assertion = new QgVersionResult();
       assertion.setMsgCatName("QgStaticCheck_Panels");
       assertion.setAssertionText("assert.panel.NLOC");
       assertion.setReasonText("reason.panel.NLOC", makeMapping("panel.name", getName(),
-                                                               "panel.NLOC", getNLOC()));
+                              "panel.NLOC", getNLOC()));
       assertion.info(getNLOC(), settings.getScorePoints());
       result.addChild(assertion);
     }
@@ -480,13 +494,13 @@ class PanelCheck : QgFile
   {
     shared_ptr<QgSettings> settings = new QgSettings("PanelCheck.panel.avgNLOC");
 
-    if ( settings.isEnabled() )
+    if (settings.isEnabled())
     {
       shared_ptr <QgVersionResult> assertion = new QgVersionResult();
       assertion.setMsgCatName("QgStaticCheck_Panels");
       assertion.setAssertionText("assert.panel.avgNLOC");
       assertion.setReasonText("reason.panel.avgNLOC", makeMapping("panel.name", getName(),
-                                                                  "panel.avgNLOC", getAvgNLOC()));
+                              "panel.avgNLOC", getAvgNLOC()));
       assertion.info(getAvgNLOC(), settings.getScorePoints());
       result.addChild(assertion);
     }
@@ -496,14 +510,15 @@ class PanelCheck : QgFile
   {
     shared_ptr <QgVersionResult> assertion = new QgVersionResult();
     assertion.setMsgCatName("QgStaticCheck_Panels");
+
     //----------------------------------------------------------------------------
     // validate events
-    if ( _pnl.getCountOfEvents() > 0 )
+    if (_pnl.getCountOfEvents() > 0)
     {
       shared_ptr <QgVersionResult>  ev = new QgVersionResult();
       ev.setAssertionText("panel.events");
 
-      while( _pnl.getCountOfEvents() > 0 )
+      while (_pnl.getCountOfEvents() > 0)
       {
         const anytype key = mappingGetKey(_pnl.events, 1);
         _pnl.events[key].validate();
@@ -519,33 +534,35 @@ class PanelCheck : QgFile
   {
     //----------------------------------------------------------------------------
     // validate shapes
-    if ( _pnl.getCountOfShapes() > 0 )
+    if (_pnl.getCountOfShapes() > 0)
     {
       shared_ptr <QgVersionResult> sh = new QgVersionResult();
       sh.setAssertionText("panel.shapes");
 
-      while(_pnl.getCountOfShapes() > 0 )
+      while (_pnl.getCountOfShapes() > 0)
       {
         _pnl.shapes[1].validate();
         sh.addChild(_pnl.shapes[1].result);
         dynRemove(_pnl.shapes, 1);
       }
+
       result.addChild(sh);
     }
   }
 
-    //----------------------------------------------------------------------------
-    // validate properties
+  //----------------------------------------------------------------------------
+  // validate properties
   protected validateProperties()
   {
     shared_ptr <QgVersionResult> assertion = new QgVersionResult();
     assertion.setMsgCatName("QgStaticCheck_Panels");
-    if ( _pnl.getCountOfProperties() > 0 )
+
+    if (_pnl.getCountOfProperties() > 0)
     {
       shared_ptr <QgVersionResult>  prop = new QgVersionResult();
       prop.setAssertionText("panel.properties");
 
-      while ( _pnl.getCountOfProperties() > 0 )
+      while (_pnl.getCountOfProperties() > 0)
       {
         ///@todo probably place for checking properties
         string key = mappingGetKey(_pnl.properties, 1);

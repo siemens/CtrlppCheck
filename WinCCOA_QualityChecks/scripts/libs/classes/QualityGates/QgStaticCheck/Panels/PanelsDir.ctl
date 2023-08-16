@@ -21,7 +21,7 @@ class PanelsDir : StaticCodeDir
   {
     setDir(dirPath);
   }
-    
+
   //------------------------------------------------------------------------------
   public PanelCheck makeCheckFile(const string &fullPath)
   {
@@ -35,8 +35,8 @@ class PanelsDir : StaticCodeDir
     PanelsDir dir = PanelsDir(fullPath);
     return dir;
   }
-  
-  
+
+
 //--------------------------------------------------------------------------------
 //@private members
 //--------------------------------------------------------------------------------

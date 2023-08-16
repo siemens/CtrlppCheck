@@ -3,7 +3,7 @@
 //--------------------------------------------------------------------------------
 /**
   Interface for python.
-  
+
   We need python for ToolLizard.
   @warning It is external dependency.
 */
@@ -19,11 +19,13 @@ class Python
   public static bool isInstalled()
   {
     string execPath = getExecutable();
-    if ( (execPath != "") && isfile(execPath) )
+
+    if ((execPath != "") && isfile(execPath))
       return TRUE;
-    
+
     string stdOut;
-    if ( _WIN32 )
+
+    if (_WIN32)
     {
       system("assoc .py", stdOut);
       strreplace(stdOut, "\n", "");
@@ -36,12 +38,12 @@ class Python
       return (strpos(stdOut, "Python ") == 0);
     }
   }
-  
+
   //------------------------------------------------------------------------------
   public static synchronized string getExecutable()
-{
-  return findExecutable("python");
-}
+  {
+    return findExecutable("python");
+  }
   //------------------------------------------------------------------------------
   // public static synchronized string getExecutable()
   // {

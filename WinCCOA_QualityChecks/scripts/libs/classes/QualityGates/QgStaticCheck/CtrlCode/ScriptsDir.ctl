@@ -28,53 +28,54 @@ class ScriptsDir : StaticCodeDir
   {
     setDir(dirPath);
   }
-  
+
 
   public setType(const ScriptsDataType &type)
   {
     _type = type;
-    if ( _type == ScriptsDataType::scripts )
+
+    if (_type == ScriptsDataType::scripts)
       setExcludePattern("libs");
   }
-  
+
   public ScriptsDataType getType()
   {
     return _type;
   }
-    
+
   //------------------------------------------------------------------------------
   public ScriptFile makeCheckFile(const string &fullPath)
   {
     ScriptFile p = ScriptFile(fullPath);
     return p;
   }
-  
+
   public ScriptsDir makeCheckSubDir(const string &fullPath)
   {
     ScriptsDir dir = ScriptsDir(fullPath);
     return dir;
   }
-  
+
   public int calculate()
   {
-    if ( this.getType() == ScriptsDataType::scripts )
+    if (this.getType() == ScriptsDataType::scripts)
     {
-      if ( strpos(makeUnixPath(getDirPath()), LIBS_REL_PATH) >= 0 ) 
+      if (strpos(makeUnixPath(getDirPath()), LIBS_REL_PATH) >= 0)
       {
         return 1;
       }
     }
-    
-    if ( StaticCodeDir::calculate() )
+
+    if (StaticCodeDir::calculate())
     {
       DebugFTN("ScriptsDir", __FUNCTION__, "Function StaticCodeDir::calculate return error");
       return -2;
     }
-    
+
     return 0;
   }
-  
-  
+
+
 //--------------------------------------------------------------------------------
 //@private members
 //--------------------------------------------------------------------------------

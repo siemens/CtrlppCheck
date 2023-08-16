@@ -35,7 +35,7 @@ class Qg
   {
     return _id;
   }
-  
+
   //------------------------------------------------------------------------------
   /** @brief Function set id for current QualityGate.
     @details Each QualityGate must have unique ID to handle with result files.
@@ -47,7 +47,7 @@ class Qg
   {
     _id = id;
   }
-  
+
   //------------------------------------------------------------------------------
   /** @brief Function returns all defined QualityGate IDs.
     @warning This list muss be equal to store-DB. in other case can not be results
@@ -57,22 +57,22 @@ class Qg
   public static dyn_string getAllIds()
   {
     return makeDynString("QgStaticCheck_Pictures", "QgStaticCheck_Scripts", "QgStaticCheck_Panels",
-                         "QgSyntaxCheck", 
+                         "QgSyntaxCheck",
                          "QgStaticCheck_OverloadedFiles", "Documentation",
                          "UnitTests", "CtrlCoverage", "QgCtrlppCheck",
                          "QgStaticCheck_Libs");
   }
-  
+
   //------------------------------------------------------------------------------
   /** @brief Function converts current QG-ID to int variable.
     @details We need this convert for backend (store).
-    @return 
+    @return
   */
   public static int idToNum()
   {
     return dynContains(getAllIds(), getId());
   }
-  
+
 //--------------------------------------------------------------------------------
 //@private members
 //--------------------------------------------------------------------------------

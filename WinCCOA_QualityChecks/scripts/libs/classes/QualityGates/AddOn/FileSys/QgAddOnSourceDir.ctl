@@ -17,16 +17,16 @@ class QgAddOnSourceDir
     QgApp app  = QgApp::getAppFromProjName(PROJ);
     _dirPath = makeNativePath(app.getSourcePath() + "appData/" + app.getExtendedTechnicalName() + "/");
   }
-  
+
   public string getDirPath()
   {
     return makeNativePath(_dirPath);
   }
-  
+
   public bool exists()
   {
     return (_dirPath != "" && isdir(_dirPath));
   }
-    
+
   string _dirPath;
 };

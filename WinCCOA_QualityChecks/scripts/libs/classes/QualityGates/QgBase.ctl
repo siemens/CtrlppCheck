@@ -55,8 +55,9 @@ class QgBase
     myTest.setUp();
     myQgMsgCat.setName(Qg::getId());
 
-    if (isEvConnOpen() && (  Qg::getId() != "" ) )
+    if (isEvConnOpen() && (Qg::getId() != ""))
       dpSet("_WinCCOA_qgCmd.Command", Qg::getId() + ":START");
+
     return 0;
   }
 
@@ -71,12 +72,12 @@ class QgBase
    */
   public int start()
   {
-    if (isEvConnOpen() && (  Qg::getId() != "" ) )
+    if (isEvConnOpen() && (Qg::getId() != ""))
       dpSet("_WinCCOA_qgCmd.Command", Qg::getId() + ":START");
 
     int rc = _start();
 
-    if (isEvConnOpen() && (  Qg::getId() != "" ) )
+    if (isEvConnOpen() && (Qg::getId() != ""))
       dpSet("_WinCCOA_qgCmd.Command", Qg::getId() + ":DONE:" + rc);
 
     return rc;
@@ -100,15 +101,17 @@ class QgBase
   public int tearDown()
   {
     myTest.tearDown();
-    if ( publish() )
+
+    if (publish())
       return -1;
+
     return 0;
   }
 
   //------------------------------------------------------------------------------
   public static QgResultState calculateState(const shared_ptr <QgVersionResult> result)
   {
-    if ( result.hasError )
+    if (result.hasError)
       return QgResultState::warning;
 
     return QgResultState::success;
@@ -119,14 +122,14 @@ class QgBase
   {
     _publisher.fields = getStoreFields();
 
-    if ( _setMinScore )
+    if (_setMinScore)
       _publisher.result = _minScoreResult;
     else
       _publisher.result = _result;
 
     _publisher.state = calculateState(_publisher.result);
 
-    if ( _publisher.publish() )
+    if (_publisher.publish())
       return -1;
 
     return 0;
@@ -165,22 +168,25 @@ class QgBase
   {
     const time startTime = getCurrentTime();
     logger.info(QgBaseError::Start, Qg::getId());
+
     try // exceptions happen here more often, so it should be sure to stop the QG properly
     {
       _setMinScore = FALSE;
       int rc = setUp();
-      if ( rc )
+
+      if (rc)
       {
         logger.severe(QgBaseError::NotImplemented, __FUNCTION__, Qg::getId());
         return -1;
       }
 
-      if ( !_setMinScore )
+      if (!_setMinScore)
       {
         logger.info(QgBaseError::Calculate, Qg::getId());
         rc = calculate();
+
 // ctrlppcheck-suppress knownConditionTrueFalse // the variable rc can be changed in the function calculate() in the derived class.
-        if ( rc )
+        if (rc)
         {
           DebugFTN("QgBase", __FUNCTION__, "calculate returns some error", rc);
           return -2;
@@ -188,11 +194,12 @@ class QgBase
       }
 
 // ctrlppcheck-suppress duplicateCondition // The variable _setMinScore can be changed in the function calculate() in the derived class.
-      if ( !_setMinScore )
+      if (!_setMinScore)
       {
         logger.info(QgBaseError::Validate, Qg::getId());
         rc = validate();
-        if ( rc  )
+
+        if (rc)
         {
           DebugFTN("QgBase", __FUNCTION__, "validate returns some error",  rc);
           return -3;
@@ -200,7 +207,8 @@ class QgBase
       }
 
       rc = tearDown();
-      if ( rc )
+
+      if (rc)
       {
         DebugFTN("QgBase", __FUNCTION__, "tearDown returns some error", rc);
         return -4;

@@ -125,7 +125,8 @@ class ScriptData
   public float getAvgCCN()
   {
     float count = getCountOfFunctions();
-    if ( count <= 0 )
+
+    if (count <= 0)
       return 0.0;
 
     Float f = Float((float)_ccn / count);
@@ -140,7 +141,8 @@ class ScriptData
   public float getAvgNLOC()
   {
     float count = getCountOfFunctions();
-    if ( count <= 0 )
+
+    if (count <= 0)
       return 0.0;
 
     Float f = Float((float)_nloc / count);
@@ -244,14 +246,15 @@ class ScriptData
     _ccn = 0;
     _isCalculated = FALSE;
 
-    if ( !isfile(_filePath) )
+    if (!isfile(_filePath))
       return -1;
 
     string cmd;
     cmd = Python::getExecutable() + " " + ToolLizard::getBinDir() + "lizard.py --csv " + makeUnixPath(_filePath);
     string stdOut, stdErr;
     int rc = system(cmd, stdOut, stdErr);
-    if ( rc != 0 )
+
+    if (rc != 0)
     {
       DebugFTN("ScriptData", __FUNCTION__, "!!! check if lizard is installed", rc, cmd, stdErr);
       return -2;
@@ -262,21 +265,23 @@ class ScriptData
     stdOut = "";
 
     uint allFuncParams, allFuncLines;
-    if ( dynlen(data) > 0 )
+
+    if (dynlen(data) > 0)
     {
       // the first line contains only summary for file in format: NLOC,CCN
-      if ( dynlen(data[1]) >= 2 )
+      if (dynlen(data[1]) >= 2)
       {
         _nloc = data[1][1];
         _ccn  = data[1][2];
       }
 
-      for(int i = 2; i <= dynlen(data); i++)
+      for (int i = 2; i <= dynlen(data); i++)
       {
         dyn_string line = data[i];
 
         FunctionData func = FunctionData();
-        if ( func.fillFromCsv(line) )
+
+        if (func.fillFromCsv(line))
         {
           continue; // shouldn't be possible / probably a fault in lizard format
         }
@@ -287,7 +292,7 @@ class ScriptData
       }
     }
 
-    if ( dynlen(data) > 0 )
+    if (dynlen(data) > 0)
     {
       _avgLines = (float)allFuncLines / (float)dynlen(data);
       _avgParamCount = (float)allFuncParams / (float)dynlen(data);
@@ -296,7 +301,8 @@ class ScriptData
     {
       string str;
       fileToString(_filePath, str);
-      if ( str != "" )
+
+      if (str != "")
         str += " "; // otherwise last line could be ignored
 
       _linesCount = dynlen(strsplit(str, "\n"));
@@ -316,7 +322,7 @@ class ScriptData
     result = new QgVersionResult();
     result.text = getName();
 
-    if ( !validateIsCalucalted() )
+    if (!validateIsCalucalted())
       return 0;
 
     validateCountOfFunctions();
@@ -349,21 +355,23 @@ class ScriptData
   {
     shared_ptr<QgSettings> settings = new QgSettings("ScriptData.script.isCalculated");
 
-    if ( settings.isEnabled() )
+    if (settings.isEnabled())
     {
-    // check if file is calculated.
-    // ognore all not calculated files (crypted, empty files ...)
+      // check if file is calculated.
+      // ognore all not calculated files (crypted, empty files ...)
       shared_ptr <QgVersionResult> assertion = new QgVersionResult();
       assertion.setMsgCatName("QgStaticCheck_ScriptData");
       const mapping dollars = makeMapping("script.name", getName());
       assertion.setAssertionText("assert.script.isCalculated", dollars);
       assertion.setReasonText("reason.script.isCalculated", dollars);
-      if ( !assertion.assertTrue(isCalculated(), settings.getScorePoints()) )
+
+      if (!assertion.assertTrue(isCalculated(), settings.getScorePoints()))
       {
         result.addChild(assertion);
         return 0;
       }
     }
+
 //     result.addChild(assertion); // sonnst doppelt drinnen ist
     return 1;
   }
@@ -384,7 +392,7 @@ class ScriptData
   {
     shared_ptr<QgSettings> settings = new QgSettings("ScriptData.script.countOfFunctions");
 
-    if ( settings.isEnabled() )
+    if (settings.isEnabled())
     {
       // check count of functions.
       shared_ptr <QgVersionResult> assertion = new QgVersionResult();
@@ -405,11 +413,11 @@ class ScriptData
     */
   protected validateAvgCCN()
   {
-    if ( getCountOfFunctions() > 1 ) // only when has more then 1 function
+    if (getCountOfFunctions() > 1)   // only when has more then 1 function
     {
       shared_ptr<QgSettings> settings = new QgSettings("ScriptData.script.avgCCN");
 
-      if ( settings.isEnabled() )
+      if (settings.isEnabled())
       {
         shared_ptr <QgVersionResult> assertion = new QgVersionResult();
         assertion.setMsgCatName("QgStaticCheck_ScriptData");
@@ -432,7 +440,7 @@ class ScriptData
   {
     shared_ptr<QgSettings> settings = new QgSettings("ScriptData.script.NLOC");
 
-    if ( settings.isEnabled() )
+    if (settings.isEnabled())
     {
       shared_ptr <QgVersionResult> assertion = new QgVersionResult();
       assertion.setMsgCatName("QgStaticCheck_ScriptData");
@@ -452,11 +460,11 @@ class ScriptData
   */
   protected validateAvgNLOC()
   {
-    if ( getCountOfFunctions() > 1 ) // only when has more then 1 function
+    if (getCountOfFunctions() > 1)   // only when has more then 1 function
     {
       shared_ptr<QgSettings> settings = new QgSettings("ScriptData.script.avgNLOC");
 
-      if ( settings.isEnabled() )
+      if (settings.isEnabled())
       {
         shared_ptr <QgVersionResult> assertion = new QgVersionResult();
         assertion.setMsgCatName("QgStaticCheck_ScriptData");
@@ -465,7 +473,7 @@ class ScriptData
         assertion.setAssertionText("assert.script.avgNLOC", dollars);
         assertion.setReasonText("reason.script.avgNLOC", dollars);
         assertion.info(getAvgNLOC(), settings.getScorePoints()); // does not check it, only information character
-    //     assertion.assertLessEqual(getAvgNLOC(), getMaxAvgCCN());
+        //     assertion.assertLessEqual(getAvgNLOC(), getMaxAvgCCN());
         result.addChild(assertion);
       }
     }
@@ -479,16 +487,18 @@ class ScriptData
   protected validateFunctions()
   {
     // check all functions too.
-    if ( getCountOfFunctions() > 0 )
+    if (getCountOfFunctions() > 0)
     {
       shared_ptr <QgVersionResult> functions = new QgVersionResult();
       functions.setMsgCatName("QgStaticCheck_ScriptData");
       functions.setAssertionText("functionsList");
-      for(int i = 1; i <= dynlen(_functions); i++)
+
+      for (int i = 1; i <= dynlen(_functions); i++)
       {
         _functions[i].validate();
         functions.addChild(_functions[i].result);
       }
+
       result.addChild(functions);
     }
   }

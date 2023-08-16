@@ -39,7 +39,7 @@ class CppCheckSettings
   //------------------------------------------------------------------------------
   public addEnabled(const string &str)
   {
-    if ( enabled != "" )
+    if (enabled != "")
       enabled += "," + str;
     else
       enabled = str;
@@ -54,7 +54,7 @@ class CppCheckSettings
   //------------------------------------------------------------------------------
   public enableXmlFormat(bool enable)
   {
-    if ( enable )
+    if (enable)
       xml = "--xml";
     else
       xml = "";
@@ -69,7 +69,7 @@ class CppCheckSettings
   //------------------------------------------------------------------------------
   public addRuleFile(const string &path)
   {
-    if ( path == "" )
+    if (path == "")
       return;
 
     dynAppend(ruleFiles, path);
@@ -83,7 +83,8 @@ class CppCheckSettings
   public unloadRule(const string &path)
   {
     int idx = dynContains(ruleFiles, path);
-    if ( idx <= 0 )
+
+    if (idx <= 0)
       return;
 
     dynRemove(ruleFiles, idx);
@@ -95,7 +96,7 @@ class CppCheckSettings
 // ctrlppcheck-suppress unusedFunction
   public addIncludeDir(const string &path)
   {
-    if ( path == "" )
+    if (path == "")
       return;
 
     dynAppend(includedSubProjDirs, path);
@@ -109,7 +110,8 @@ class CppCheckSettings
   public unloadIncludeDir(const string &path)
   {
     int idx = dynContains(includedSubProjDirs, path);
-    if ( idx <= 0 )
+
+    if (idx <= 0)
       return;
 
     dynRemove(includedSubProjDirs, idx);
@@ -118,7 +120,7 @@ class CppCheckSettings
   //------------------------------------------------------------------------------
   public addLibraryFile(const string &path)
   {
-    if ( path == "" )
+    if (path == "")
       return;
 
     dynAppend(libraryFiles, path);
@@ -132,7 +134,8 @@ class CppCheckSettings
   public unloadLibrary(const string &path)
   {
     int idx = dynContains(libraryFiles, path);
-    if ( idx <= 0 )
+
+    if (idx <= 0)
       return;
 
     dynRemove(libraryFiles, idx);
@@ -143,49 +146,51 @@ class CppCheckSettings
   {
     string opts;
 
-    if ( enabled != "" )
+    if (enabled != "")
       opts += " --enable=" + enabled;
-    if ( xml != "" )
+
+    if (xml != "")
       opts += " " + xml;
 
-    if ( inconclusive )
+    if (inconclusive)
       opts += " --inconclusive";
 
 
-    for(int i = 1; i <= dynlen(ruleFiles); i++)
+    for (int i = 1; i <= dynlen(ruleFiles); i++)
       opts += " --rule-file=" + makeNativePath(ruleFiles[i]);
 
-    if ( enableLibCheck )
+    if (enableLibCheck)
       opts += " --check-library";
 
     // disable header check for perfomance reason
     //if ( !enableHeadersCheck )
     //  opts += " --check-headers=no";
 
-    if ( includeSubProjects )
+    if (includeSubProjects)
     {
       // add all subproject to check includes via option -I
-      if ( dynlen(includedSubProjDirs) <= 0 )
+      if (dynlen(includedSubProjDirs) <= 0)
       {
         includedSubProjDirs = getSubProjPathes();
         dynAppend(includedSubProjDirs, WINCCOA_PATH);
       }
+
       for (int i = 1; i <= dynlen(includedSubProjDirs); i++)
         opts += " -I " + includedSubProjDirs[i];
     }
 
-    for(int i = 1; i <= dynlen(libraryFiles); i++)
+    for (int i = 1; i <= dynlen(libraryFiles); i++)
       opts += " --library=" + makeNativePath(libraryFiles[i]);
 
     opts += " --winccoa-projectName=" + winccoaProjectName;
 
-    if ( verbose )
+    if (verbose)
       opts += " -v";
 
-    if ( inlineSuppressions )
+    if (inlineSuppressions)
       opts += " --inline-suppr";
 
-    if ( errorList )
+    if (errorList)
       opts += " --errorlist";
 
     return opts;

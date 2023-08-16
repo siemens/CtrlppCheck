@@ -19,6 +19,7 @@ class StaticDir : QgDir
   {
     dynClear(_files);
     dynClear(_childs);
+
     if (!dirPath.endsWith("/") && !dirPath.endsWith("\\"))
       dirPath += makeNativePath("/"); // add path delimiter on enf of direcotry
 
@@ -47,7 +48,7 @@ class StaticDir : QgDir
     dynClear(_files);
     dynClear(_childs);
 
-    if ( !exists() )
+    if (!exists())
     {
       logger.warning(0, Qg::getId(), __FUNCTION__, "Directory does not exist", getDirPath());
       return -1;
@@ -58,7 +59,7 @@ class StaticDir : QgDir
     // check all files
     dyn_string fileNames = getFileNames(getDirPath());
 
-    for(int i = 1; i <= dynlen(fileNames); i++)
+    for (int i = 1; i <= dynlen(fileNames); i++)
     {
       const string fullPath = makeNativePath(getDirPath() + fileNames[i]);
       logger.info(0, Qg::getId(), "Check file", fullPath);
@@ -66,7 +67,7 @@ class StaticDir : QgDir
 
       _allFilesCount++;
 
-      if ( checkFile.calculate() )
+      if (checkFile.calculate())
       {
         continue;
       }
@@ -77,11 +78,12 @@ class StaticDir : QgDir
     // check all directories
     dyn_string childs = getSubDirNames();
 
-    for(int i = 1; i <= dynlen(childs); i++)
+    for (int i = 1; i <= dynlen(childs); i++)
     {
       const string subDirPath = makeNativePath(getDirPath() + childs[i] + "/");
       anytype child = makeCheckSubDir(subDirPath);
-      if ( child.calculate() )
+
+      if (child.calculate())
         continue; // only for safety (should never occur)
 
       _allFilesCount += child.getCountOfFilesRecursive();
@@ -107,20 +109,22 @@ class StaticDir : QgDir
     {
       shared_ptr<QgSettings> settings = new QgSettings(getSettingsRoot() + ".dir.hasFilesRecursive");
 
-      if ( settings.isEnabled() )
+      if (settings.isEnabled())
       {
         shared_ptr <QgVersionResult> assertion = new QgVersionResult();
         assertion.setMsgCatName("QgStaticCheck_StaticDir");
         const mapping dollars = makeMapping("dir.name", getName());
         assertion.setAssertionText("assert.dir.hasFilesRecursive", dollars);
         assertion.setReasonText("reason.dir.hasFilesRecursive", dollars);
-        if ( !assertion.assertGreatherEqual(getCountOfFilesRecursive(),
-            settings.getLowLimit(DEFAULT_FILESREC_LOW),
-            settings.getScorePoints()) )
+
+        if (!assertion.assertGreatherEqual(getCountOfFilesRecursive(),
+                                           settings.getLowLimit(DEFAULT_FILESREC_LOW),
+                                           settings.getScorePoints()))
         {
           result.addChild(assertion);
           return 1;
         }
+
         result.addChild(assertion);
       }
     }
@@ -129,18 +133,20 @@ class StaticDir : QgDir
     {
       shared_ptr<QgSettings> settings = new QgSettings(getSettingsRoot() + ".dir.isEmpty");
 
-      if ( settings.isEnabled() )
+      if (settings.isEnabled())
       {
         shared_ptr <QgVersionResult> assertion = new QgVersionResult();
         assertion.setMsgCatName("QgStaticCheck_StaticDir");
         const mapping dollars = makeMapping("dir.name", getName());
         assertion.setAssertionText("assert.dir.isEmpty", dollars);
         assertion.setReasonText("reason.dir.isEmpty", dollars);
-        if ( !assertion.assertFalse(isEmpty, settings.getScorePoints()) )
+
+        if (!assertion.assertFalse(isEmpty, settings.getScorePoints()))
         {
           result.addChild(assertion);
           return 1;
         }
+
         result.addChild(assertion);
       }
     }
@@ -148,7 +154,7 @@ class StaticDir : QgDir
     {
       shared_ptr<QgSettings> settings = new QgSettings(getSettingsRoot() + ".dir.subDirCount");
 
-      if ( settings.isEnabled() )
+      if (settings.isEnabled())
       {
         shared_ptr <QgVersionResult> assertion = new QgVersionResult();
         assertion.setMsgCatName("QgStaticCheck_StaticDir");
@@ -157,8 +163,8 @@ class StaticDir : QgDir
         assertion.setAssertionText("assert.dir.subDirCount", dollars);
         assertion.setReasonText("reason.dir.subDirCount", dollars);
         assertion.assertLessEqual(subDirCount,
-            settings.getHighLimit(DEFAULT_SUBDIRCOUNT_HIGH),
-            settings.getScorePoints());
+                                  settings.getHighLimit(DEFAULT_SUBDIRCOUNT_HIGH),
+                                  settings.getScorePoints());
         result.addChild(assertion);
       }
     }
@@ -167,7 +173,7 @@ class StaticDir : QgDir
     {
       shared_ptr<QgSettings> settings = new QgSettings(getSettingsRoot() + ".dir.filesCount");
 
-      if ( settings.isEnabled() )
+      if (settings.isEnabled())
       {
         shared_ptr <QgVersionResult> assertion = new QgVersionResult();
         assertion.setMsgCatName("QgStaticCheck_StaticDir");
@@ -176,8 +182,8 @@ class StaticDir : QgDir
         assertion.setAssertionText("assert.dir.filesCount", dollars);
         assertion.setReasonText("reason.dir.filesCount", dollars);
         assertion.assertLessEqual(filesCount,
-            settings.getHighLimit(DEFAULT_FILESCOUNT_HIGH),
-            settings.getScorePoints());
+                                  settings.getHighLimit(DEFAULT_FILESCOUNT_HIGH),
+                                  settings.getScorePoints());
         result.addChild(assertion);
       }
     }
@@ -187,17 +193,19 @@ class StaticDir : QgDir
 
   public int validateSubDirs()
   {
-    if ( dynlen(_childs) > 0 )
+    if (dynlen(_childs) > 0)
     {
       shared_ptr <QgVersionResult> subDirs = new QgVersionResult();
       subDirs.setMsgCatName("QgStaticCheck_StaticDir");
       subDirs.setAssertionText("subDirsList");
-      while(dynlen(_childs) > 0)
+
+      while (dynlen(_childs) > 0)
       {
         _childs[1].validate();
         subDirs.addChild(_childs[1].result);
         dynRemove(_childs, 1);
       }
+
       result.addChild(subDirs);
     }
 
@@ -206,12 +214,13 @@ class StaticDir : QgDir
 
   public int validateFiles()
   {
-    if ( dynlen(_files) > 0 )
+    if (dynlen(_files) > 0)
     {
       shared_ptr <QgVersionResult> files = new QgVersionResult();
       files.setMsgCatName("QgStaticCheck_StaticDir");
       files.setAssertionText("filesList");
-      while(dynlen(_files) > 0)
+
+      while (dynlen(_files) > 0)
       {
         _files[1].validate();
         files.addChild(_files[1].result);

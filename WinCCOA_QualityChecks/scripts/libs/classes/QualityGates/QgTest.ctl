@@ -56,7 +56,7 @@ class QgTest : OaTest
     float all   = getAllCount();
     float perc;
 
-    if ( all != 0 )
+    if (all != 0)
       perc = (error / all) * 100.0;
 
     perc = 100.0 - perc;
@@ -78,7 +78,7 @@ class QgTest : OaTest
     try
     {
       // try-catch necessary / no guarantee that variable "_data" exists
-      if ( mappingHasKey(_data, "qgTestVersionResults") )
+      if (mappingHasKey(_data, "qgTestVersionResults"))
       {
         _data["qgTestVersionResults"]["Score"] = info;
       }

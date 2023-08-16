@@ -123,7 +123,7 @@ struct QgVersionResult
     Float f = Float(score);
     mapping map;
 
-    switch(qgVersionResultType)
+    switch (qgVersionResultType)
     {
       case QgVersionResultType::TableView:
       {
@@ -174,9 +174,9 @@ struct QgVersionResult
     float all   = getTotalPoints();
     float perc;
 
-    if ( all < 0 )
+    if (all < 0)
       return NOT_VALID_SCORE;
-    else if ( all != 0 )
+    else if (all != 0)
     {
       perc = (error / all) * 100.0;
       perc = 100.0 - perc;
@@ -208,63 +208,66 @@ struct QgVersionResult
   {
     DebugN(__FUNCTION__, text, assertKey, dynlen(children), lowerBound, upperBound, referenceValue);
   }
-  
+
   //------------------------------------------------------------------------------
   anytype toMap(const bool clearObjectOnReturn = TRUE)
   {
     mapping map;
     string goodRange;
-    if ( (lowerBound != "") || (upperBound != "") )
+
+    if ((lowerBound != "") || (upperBound != ""))
       goodRange = lowerBound + " " + _operand + " " + upperBound;
-    else if ( referenceValue != "" )
+    else if (referenceValue != "")
       goodRange = referenceValue;
 
-    switch(qgVersionResultType)
+    switch (qgVersionResultType)
     {
       case QgVersionResultType::TableView:
       {
-        if ( text != "" )
+        if (text != "")
           map["text"] = text;
-        else if ( assertKey != "" )
+        else if (assertKey != "")
           map["text"] = msgCat.getText(assertKey, assertDollars);
 
 
-        if ( value != "" )
+        if (value != "")
           map["value"] = value;
 
         map["leaf"] = (dynlen(children) <= 0);
 
-        if ( goodRange != "" )
+        if (goodRange != "")
           map["goodRange"] = goodRange;
 
-        if ( dynlen(children) > 0 )
+        if (dynlen(children) > 0)
         {
           map["children"] = makeDynMapping();
-          for(int i = 1; i <= dynlen(children); i++)
+
+          for (int i = 1; i <= dynlen(children); i++)
           {
-            if ( showErrorsOnly && !children[i].hasError )
+            if (showErrorsOnly && !children[i].hasError)
               continue;
+
             dynAppend(map["children"], children[i].toMap());
           }
         }
 
-        if ( hasError )
+        if (hasError)
           map["expanded"] = hasError;
 
 
-        if ( errorPoints > 0 )
+        if (errorPoints > 0)
         {
           map["totalPoints"] = totalPoints;
           map["errorPoints"] = errorPoints;
         }
-        else if ( totalPoints > 0 )
+        else if (totalPoints > 0)
           map["totalPoints"] = totalPoints;
 
-        if ( hasError )
+        if (hasError)
         {
-          if ( reason != "" )
+          if (reason != "")
             map["reason"] = reason;
-          else if ( reasonKey != "" )
+          else if (reasonKey != "")
             map["reason"] = msgCat.getText(reasonKey, reasonDollars);
         }
 
@@ -273,27 +276,27 @@ struct QgVersionResult
 
       case QgVersionResultType::TreeView:
       {
-        if ( goodRange != "" )
+        if (goodRange != "")
           map["goodRange"] = goodRange;
 
-        if ( value != "" )
+        if (value != "")
           map["value"] = value;
 
-        if ( errorPoints > 0 )
+        if (errorPoints > 0)
         {
           map["totalPoints"] = totalPoints;
           map["errorPoints"] = errorPoints;
         }
-        else if ( totalPoints > 0 )
+        else if (totalPoints > 0)
           map["totalPoints"] = totalPoints;
 
-        if ( hasError && reason != "" )
+        if (hasError && reason != "")
           map["reason"] = reason;
 
 
-        if ( dynlen(children) )
+        if (dynlen(children))
         {
-          for(int i = 1; i <= dynlen(children); i++)
+          for (int i = 1; i <= dynlen(children); i++)
           {
             map[children[i].text] = children[i].toMap();
           }
@@ -305,41 +308,43 @@ struct QgVersionResult
       case QgVersionResultType::SimpleTreeView:
       {
         dyn_string ret;
-        if ( goodRange != "" )
+
+        if (goodRange != "")
           dynAppend(ret, "goodRange: " + goodRange);
 
-        if ( value != "" )
+        if (value != "")
           dynAppend(ret, "value: " + value);
 
-        if ( errorPoints > 0 )
+        if (errorPoints > 0)
         {
           dynAppend(ret, "errorPoints: " + errorPoints);
         }
 
-        if ( hasError && reason != "" )
+        if (hasError && reason != "")
           dynAppend(ret, "reason: " + reason);
 
 
-        if ( dynlen(children) )
+        if (dynlen(children))
         {
-          for(int i = 1; i <= dynlen(children); i++)
+          for (int i = 1; i <= dynlen(children); i++)
           {
             map[children[i].text] = children[i].toMap();
           }
 
-          if ( clearObjectOnReturn )
+          if (clearObjectOnReturn)
             clear();
+
           return map;
         }
 
-        if ( clearObjectOnReturn )
+        if (clearObjectOnReturn)
           clear();
 
         return strjoin(ret, ", ");
       }
     }
 
-    if ( clearObjectOnReturn )
+    if (clearObjectOnReturn)
       clear();
 
     return map;
@@ -474,12 +479,12 @@ struct QgVersionResult
   //------------------------------------------------------------------------------
   void addChild(shared_ptr<QgVersionResult> child, const int pos = -1)
   {
-    if ( pos <= 0 )
+    if (pos <= 0)
       dynAppend(children, child);
     else
       dynInsertAt(children, child, pos);
 
-    if ( child.hasError )
+    if (child.hasError)
       hasError = TRUE;
 
     errorPoints += child.errorPoints;
@@ -519,6 +524,7 @@ struct QgVersionResult
   protected _addScorePoints(int points = 1)
   {
     mapping userData;
+
     if (location != "")
     {
       assertDollars["location"] = location;
@@ -526,25 +532,27 @@ struct QgVersionResult
     }
 
     userData["Note"] = msgCat.getText(assertKey, assertDollars);
-    
+
     userData["Method"] = assertKey;
     userData["ErrMsg"] = msgCat.getText(reasonKey, reasonDollars);
     userData["StackTrace"] = makeDynString();
-    
+
     getKnownBugId(userData);
 
     totalPoints += points;
-    if ( hasError && !_allowNextErr )
+
+    if (hasError && !_allowNextErr)
     {
       errorPoints += points;
       lastErr = reason;
 
-      if ( _enableOaTestOutput() )
+      if (_enableOaTestOutput())
         oaUnitFail(assertKey, userData);
       else
       {
         const int prio = mappingHasKey(userData, "KnownBug") ? PRIO_INFO : PRIO_WARNING;
         OaLogger logger = OaLogger("QgBase");
+
         if (mappingHasKey(userData, "KnownBug"))
           logger.info(QgBaseError::AssertionErrorAccepted, msgCat.getText(reasonKey, reasonDollars), userData["Note"]);
         else
@@ -553,8 +561,9 @@ struct QgVersionResult
     }
     else
     {
-      if ( _enableOaTestOutput()|| true)
+      if (_enableOaTestOutput() || true)
         oaUnitPass(assertKey, userData);
+
       // else
       {
         OaLogger logger = OaLogger("QgBase");
@@ -564,42 +573,44 @@ struct QgVersionResult
 
     _allowNextErr = FALSE;
   }
-  
+
   //------------------------------------------------------------------------------
   /// @todo replace this code by OaTest-knownBug-handler
   protected getKnownBugId(mapping &userData)
   {
-    if ( dynlen(knownBugs) <= 0 )
+    if (dynlen(knownBugs) <= 0)
       readKnownBugList();
-    
+
     string msg = userData["ErrMsg"];
+
     for (int i = 2; i <= dynlen(knownBugs); i++)
     {
-      if ( dynlen(knownBugs[i]) < 2 )
+      if (dynlen(knownBugs[i]) < 2)
         continue;
+
       string bugId = knownBugs[i][1];
       string tcId = knownBugs[i][2];
       string pattern = knownBugs[i][3];
-      
-      if ( (tcId == assertKey) && patternMatch(pattern, msg) )
+
+      if ((tcId == assertKey) && patternMatch(pattern, msg))
       {
         userData["KnownBug"] = bugId;
         break;
       }
     }
   }
-  
+
   //------------------------------------------------------------------------------
   private readKnownBugList()
   {
     string path = getPath(DATA_REL_PATH, "knownBugList.csv");
-    
-    if ( path != "" )
+
+    if (path != "")
       csvFileRead(path, knownBugs, ";");
     else
       knownBugs[1] = makeDynString("BUG_ID", "TC_ID", "PATTERN", "COMMENT");
   }
-  
+
   //------------------------------------------------------------------------------
   /** @brief enabled or disabled oaUnitResults
     @return TRUE when are oaUnit results enabled
@@ -613,7 +624,8 @@ struct QgVersionResult
   protected static string _castToString(const anytype &expr)
   {
     string str;
-    if ( getType(expr) == FLOAT_VAR )
+
+    if (getType(expr) == FLOAT_VAR)
     {
       Float f = Float(expr);
       str = (string)f.round(2); // round float
@@ -635,7 +647,7 @@ struct QgVersionResult
   /// @todo mPunk 30.10.2018: remove this contans and replace it by msg-cat, there shall be obsolete
   static const string KEY_SCORE_REASON = "Reason";
   static const string KEY_SCORE_PERCENT = "%";
-  static const string KEY_SCORE_TOTAL_POINTS= "Total points";
+  static const string KEY_SCORE_TOTAL_POINTS = "Total points";
   static const string KEY_SCORE_ERROR_POINTS = "Error points";
   static dyn_dyn_string knownBugs;
 };

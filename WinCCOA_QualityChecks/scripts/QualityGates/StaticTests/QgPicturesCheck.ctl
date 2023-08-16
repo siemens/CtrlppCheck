@@ -28,7 +28,7 @@ class QgStaticCheck_Pictures : QgBase
 //@public members
 //--------------------------------------------------------------------------------
   public string checkedPath = PROJ_PATH + PICTURES_REL_PATH;
-  
+
   //------------------------------------------------------------------------------
   /** @brief Function setups pictures tests.
     @details Creates temp-source dir.
@@ -36,15 +36,15 @@ class QgStaticCheck_Pictures : QgBase
   */
   public int setUp()
   {
-    if ( QgBase::setUp() )
+    if (QgBase::setUp())
       return -1;
 
     throwError(makeError("", PRIO_INFO, ERR_CONTROL, 0, Qg::getId() + " will check " + this.checkedPath + PICTURES_REL_PATH));
     _pictures.setDir(this.checkedPath);
-    
-    if ( !_pictures.exists() )
+
+    if (!_pictures.exists())
       setMinValidScore("QgStaticCheck_Pictures", "assert.missingPictures", "reason.missingPictures");
-    
+
     return 0;
   }
 
@@ -55,12 +55,12 @@ class QgStaticCheck_Pictures : QgBase
   */
   public int calculate()
   {
-    if ( _pictures.exists() )
+    if (_pictures.exists())
       return _pictures.calculate();
-    
+
     return 0;
   }
-  
+
   //------------------------------------------------------------------------------
   /** @brief Function validates calculated pictures dircetory.
     @warning Call function calculate() before. Otherwise validation does not work.
@@ -85,12 +85,12 @@ class QgStaticCheck_Pictures : QgBase
 //--------------------------------------------------------------------------------
 //@private members
 //--------------------------------------------------------------------------------
-  
+
   PicturesDir _pictures = PicturesDir(); //!< Pictures directory
 };
 
 //--------------------------------------------------------------------------------
-/** 
+/**
   @breif main rutine to start QualityGate QgStaticCheck-Pictures
 */
 void main(string path = PROJ_PATH + PICTURES_REL_PATH)

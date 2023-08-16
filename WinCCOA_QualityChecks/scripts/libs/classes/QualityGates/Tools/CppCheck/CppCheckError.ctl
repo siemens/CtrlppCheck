@@ -11,25 +11,25 @@ struct CppCheckError
   int line;
   int cwe;
   string knownBug; // for internal use (tests)
-  
+
   string toStdErrString()
   {
     string s =  "ID: " + id + "\n" +
                 "Severity: " + severity + "\n";
-    
-    if ( msg != "" )
+
+    if (msg != "")
       s += "Msg: " + msg + "\n";
-    
-    if ( verbose != "" )
+
+    if (verbose != "")
       s += "Verbose: " + verbose + "\n";
-    
-    if ( path != "" )
+
+    if (path != "")
       s += "Path: " + path + "\n";
-    
-    
+
+
     s += "Line: " + line + "\n" +
          "CWE: " + cwe;
-    
+
     return s;
   }
 };

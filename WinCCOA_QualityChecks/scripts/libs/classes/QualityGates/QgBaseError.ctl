@@ -1,7 +1,8 @@
 //--------------------------------------------------------------------------------
 /** Error codes used in QgBase.cat
 */
-enum QgBaseError {
+enum QgBaseError
+{
   Exception = 1,
   /// Assertion return error: $1
   AssertionError = 10,

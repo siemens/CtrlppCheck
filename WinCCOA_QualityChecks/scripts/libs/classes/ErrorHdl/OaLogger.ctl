@@ -84,6 +84,7 @@ class OaLogger
     {
       err = makeError(msgCatalog, prio, ERR_CONTROL, 0, codeOrError);
     }
+
     if (isA(codeOrError, ERRCLASS_VAR) || isA(codeOrError, DYN_ERRCLASS_VAR))
     {
       err = codeOrError;

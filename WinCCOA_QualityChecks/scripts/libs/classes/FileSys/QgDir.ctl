@@ -32,7 +32,7 @@ class QgDir
   {
     setDirPath(dirPath);
   }
-  
+
   //------------------------------------------------------------------------------
   /** @brief Function set the directory path
     @param dirPath Full path to directory.
@@ -41,7 +41,7 @@ class QgDir
   {
     _dirPath = dirPath;
   }
-  
+
   //------------------------------------------------------------------------------
   /** @brief Function returns full native path to directory.
     @return Full native path to directory.
@@ -51,42 +51,43 @@ class QgDir
   {
     return makeNativePath(_dirPath);
   }
-  
+
   public string getName()
   {
     return baseName(_dirPath);
   }
-  
-  
+
+
   //------------------------------------------------------------------------------
   /** @brief Function creates new directory.
     @return Error code. Returns 0 when successfull created, otherwise -1.
   */
   public int mk()
   {
-    if ( exists() )
+    if (exists())
       return 0;
-    
+
     const string delim = makeNativePath("/");
     dyn_string items = strsplit(makeNativePath(_dirPath), delim);
-    
+
     string dirPath = "";
-    for(int i = 1; i <= dynlen(items); i++)
+
+    for (int i = 1; i <= dynlen(items); i++)
     {
       dirPath += items[i];
-      
-      if ( !isdir(dirPath) )
+
+      if (!isdir(dirPath))
         mkdir(dirPath);
-      
+
       dirPath += delim;
     }
-    
-    if ( !exists() )
+
+    if (!exists())
       return -1;
-    
+
     return 0;
   }
-  
+
   //------------------------------------------------------------------------------
   /** @brief Function checks if directory exists.
     @return Returns TRUE when directory exists, otherwise FALSE.
@@ -96,7 +97,7 @@ class QgDir
   {
     return (_dirPath != "" && isdir(_dirPath));
   }
-  
+
   //------------------------------------------------------------------------------
   /** @brief Function removes directory.
     @details Function remove direcotry recursive.
@@ -105,36 +106,38 @@ class QgDir
   */
   public int rm()
   {
-    if ( _dirPath == "" )
+    if (_dirPath == "")
       return -1;
-    
-    if ( rmdir(_dirPath, TRUE) )
+
+    if (rmdir(_dirPath, TRUE))
       return 0;
-    
+
     return -1;
   }
-  
+
   //------------------------------------------------------------------------------
   public dyn_string getSubDirNames()
   {
-    if ( !exists() )
+    if (!exists())
       return makeDynString();
-    
+
     dyn_string dirs = getFileNames(getDirPath(), "*", FILTER_DIRS);
-    for(int i = dynlen(dirs); i > 0; i--)
+
+    for (int i = dynlen(dirs); i > 0; i--)
     {
       const string dir = dirs[i];
       const string exPattern = _excludePattern;
-      
-      if ( (dir == "") || (dir == ".") ||
-           (dir == "..") || patternMatch(exPattern, dir) )
+
+      if ((dir == "") || (dir == ".") ||
+          (dir == "..") || patternMatch(exPattern, dir))
       {
         dynRemove(dirs, i);
       }
     }
+
     return dirs;
   }
-  
+
   public void setExcludePattern(const string &pattern)
   {
     _excludePattern = pattern;
@@ -142,7 +145,7 @@ class QgDir
 
 //--------------------------------------------------------------------------------
 //@private members
-//--------------------------------------------------------------------------------  
+//--------------------------------------------------------------------------------
   string _dirPath;
   string _excludePattern;
 };

@@ -32,7 +32,7 @@ class String
   {
     _s = s;
   }
-  
+
   //------------------------------------------------------------------------------
   /** @brief Function returns value of string variable.
     @return value of variable.
@@ -41,7 +41,7 @@ class String
   {
     return _s;
   }
-  
+
   //------------------------------------------------------------------------------
   /** @brief Function sets new content to variable.
     @param f New string value.
@@ -50,7 +50,7 @@ class String
   {
     _s = s;
   }
-  
+
   public bool endsWith(const string &str)
   {
     return substr(_s, strlen(_s) - strlen(str)) == str;
