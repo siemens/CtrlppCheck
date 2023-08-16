@@ -117,11 +117,8 @@ class QgMsgCat
     return str;
   }
 
-
-
   QgMsgCatErrPrio _prio;
   string _msgCat;
 
   static protected mapping _cache;
-
 };

@@ -61,10 +61,8 @@ void makeGediToolbar()
   action = moduleAddAction("", "", "", id, -1, "");
   moduleSetAction(action, "separator", TRUE);
 
-// moduleAddAction(getCatStr("WinCCOA_gedi_ext", "tool_QualityGates_BuildDocu"), "", "", id, -1, "tool_QualityGates_BuildDocu");
   moduleAddAction(getCatStr("WinCCOA_gedi_ext", "open_Docu"), "", "", id, -1, "open_Docu");
 
-//   moduleAddDockModule("WinCCOA_test", "vision/gedi/tests/testStarter.pnl");
   openDockModule();
 }
 

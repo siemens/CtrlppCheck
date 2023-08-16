@@ -21,7 +21,7 @@ class StaticDir : QgDir
     dynClear(_childs);
 
     if (!dirPath.endsWith("/") && !dirPath.endsWith("\\"))
-      dirPath += makeNativePath("/"); // add path delimiter on enf of direcotry
+      dirPath += makeNativePath("/"); // ensure trailing path delimiter
 
     QgDir::setDirPath(dirPath);
   }
@@ -128,7 +128,6 @@ class StaticDir : QgDir
         result.addChild(assertion);
       }
     }
-
 
     {
       shared_ptr<QgSettings> settings = new QgSettings(getSettingsRoot() + ".dir.isEmpty");
@@ -271,9 +270,7 @@ class StaticDir : QgDir
     return "StaticDir";
   }
 
-
   //------------------------------------------------------------------------------
-//   public QgVersionResult result = QgVersionResult(); //!< Quality gate result
   public shared_ptr<QgVersionResult> result;
 
 //--------------------------------------------------------------------------------

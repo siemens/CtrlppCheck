@@ -238,7 +238,6 @@ class QgAddOnResult
     return _resDir.getDirPath();
   }
 
-
   QgAddOnResultsDir _resDir = QgAddOnResultsDir();
   protected mapping _data;
   QgAddOnResultState _state;

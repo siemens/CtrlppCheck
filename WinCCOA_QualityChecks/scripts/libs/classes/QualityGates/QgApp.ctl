@@ -70,7 +70,6 @@ class QgApp
   /**
     Function creates new not runnable project.
 
-
     @return error code. Succes == 0
   */
   public int makeProj()
@@ -233,8 +232,6 @@ class QgApp
     return filename;
   }
 
-
-
   //-------------------------------------------------------------------------------------------------------------------------------------
   public string getVersionProperty(const string &property)
   {
@@ -262,7 +259,6 @@ class QgApp
 
     if (!isdir(destPath + DATA_REL_PATH))
       mkdir(destPath + DATA_REL_PATH); // make dir for AddonInformation.json file
-
 
     if (isfile(addOnInfoPath))
       moveFile(addOnInfoPath, addOnInfoPath + ".copy"); // make copy of original file (+lShopp)
@@ -334,7 +330,6 @@ class QgApp
 
     if (!isfile(addOnInfoPath))
       DebugFTN("QgApp", __FUNCTION__, "Check te file", addOnInfoPath);
-
 
     return 0;
   }

@@ -57,7 +57,6 @@ class QgDir
     return baseName(_dirPath);
   }
 
-
   //------------------------------------------------------------------------------
   /** @brief Function creates new directory.
     @return Error code. Returns 0 when successfull created, otherwise -1.

@@ -95,7 +95,6 @@ class QgResultPublisher
   protected int _publishState(const QgAddOnResultsDir &resDir)
   {
     const string resPath = resDir.getDirPath() + "State";
-
     file f = fopen(resPath, "wb+");
 
     if (ferror(f))
@@ -110,7 +109,6 @@ class QgResultPublisher
   protected int _publishSummary(const QgAddOnResultsDir &resDir)
   {
     const string resPath = resDir.getDirPath() + "sum.json";
-
     file f = fopen(resPath, "wb+");
 
     if (ferror(f))
@@ -129,7 +127,6 @@ class QgResultPublisher
     else
       return _publishFullLocale(resDir);
   }
-
 
 //--------------------------------------------------------------------------------
 //@private members

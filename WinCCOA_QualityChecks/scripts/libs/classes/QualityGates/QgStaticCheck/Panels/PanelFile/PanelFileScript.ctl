@@ -33,7 +33,6 @@ class PanelFileScript : ScriptData
     return _script;
   }
 
-
   public int getMaxCountOfFunctions()
   {
     if ("ScopeLib" == _name)

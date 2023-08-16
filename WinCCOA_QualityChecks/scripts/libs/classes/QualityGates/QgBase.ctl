@@ -24,8 +24,18 @@
 QgMsgCat myQgMsgCat = QgMsgCat();
 OaTest  myTest = OaTest();
 
-
-
+//--------------------------------------------------------------------------------
+/** Error codes used in QgBase.cat
+*/
+enum QgBaseError
+{
+  Exception = 1,
+  NotImplemented = 20,
+  Start,
+  Calculate,
+  Validate,
+  Done
+};
 
 //--------------------------------------------------------------------------------
 /** QualityGate base class.

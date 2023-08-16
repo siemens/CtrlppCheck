@@ -44,25 +44,6 @@ class Python
   {
     return findExecutable("python");
   }
-  //------------------------------------------------------------------------------
-  // public static synchronized string getExecutable()
-  // {
-  //   if ( !initialized )
-  //   {
-  //     paCfgReadValue(getPath(CONFIG_REL_PATH, "config"), "qualityChecks", "pythonPath", path);
-
-  //     if ( path == "" )
-  //     {
-  //       if ( _UNIX )
-  //         path = "python";
-  //       else if ( _WIN32 )
-  //         path = getPath(DATA_REL_PATH, "python/python.exe");
-  //     }
-  //     initialized = TRUE;
-  //   }
-
-  //   return path;
-  // }
 
 //@private
   //------------------------------------------------------------------------------

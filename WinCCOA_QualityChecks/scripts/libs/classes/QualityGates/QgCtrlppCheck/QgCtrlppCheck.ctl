@@ -54,7 +54,6 @@ class QgCtrlppCheck : QgBase
     _result.setMsgCatName("QgCtrlppCheck");
     _result.setAssertionText("checks");
 
-
     if (dpExists("_CtrlppCheck"))
     {
       dpGet("_CtrlppCheck.filter.id", disabledIds,
@@ -137,7 +136,7 @@ class QgCtrlppCheck : QgBase
 
     // load rules
     check.settings.addRuleFile(getPath(DATA_REL_PATH, "ctrlPpCheck/rule/ctrl.xml")); // general
-    check.settings.addRuleFile(getPath(DATA_REL_PATH, "ctrlPpCheck/rule/ctrl_" + VERSION + ".xml")); // version specific
+    check.settings.addRuleFile(getPath(DATA_REL_PATH, "DevTools/Base/rule/ctrl_" + VERSION + ".xml")); // version specific
     check.settings.addRuleFile(getPath(DATA_REL_PATH, "ctrlPpCheck/rule/__proj__.xml")); // proj specific
 
     check.settings.addEnabled("all");
@@ -189,7 +188,6 @@ class QgCtrlppCheck : QgBase
 
   CppCheck check;
 };
-
 
 /// Start Qg ctrlppcheck.
 /// Simple old ctrl style.

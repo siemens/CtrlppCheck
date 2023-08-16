@@ -46,7 +46,6 @@ class ScriptFile : QgFile
     return isCrypted(s);
   }
 
-
   public bool isCalculated()
   {
     return _isCalculated;
@@ -89,7 +88,6 @@ class ScriptFile : QgFile
 
     return 0;
   }
-
 
   public int validate()
   {
@@ -203,7 +201,5 @@ class ScriptFile : QgFile
 
   static dyn_string _enabledExtensions = makeDynString();
   string _extension;
-
   bool _isCalculated;
-
 };

@@ -254,7 +254,6 @@ struct QgVersionResult
         if (hasError)
           map["expanded"] = hasError;
 
-
         if (errorPoints > 0)
         {
           map["totalPoints"] = totalPoints;
@@ -349,7 +348,6 @@ struct QgVersionResult
 
     return map;
   }
-
 
   //------------------------------------------------------------------------------
   bool assertGreatherEqual(const anytype &currentValue, const anytype &refValue, int points = 1)
@@ -513,7 +511,6 @@ struct QgVersionResult
     _allowNextErr = flag;
   }
 
-
 //--------------------------------------------------------------------------------
 //@protected members
 //--------------------------------------------------------------------------------
@@ -561,7 +558,7 @@ struct QgVersionResult
     }
     else
     {
-      if (_enableOaTestOutput() || true)
+      if (_enableOaTestOutput())
         oaUnitPass(assertKey, userData);
 
       // else

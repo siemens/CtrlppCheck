@@ -99,8 +99,6 @@ class QgAddOnResultsDir
     return 0;
   }
 
-
-
   public string getDirPath()
   {
     if (_resultDir == "")
