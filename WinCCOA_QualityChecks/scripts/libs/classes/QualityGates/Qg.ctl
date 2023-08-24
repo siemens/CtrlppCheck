@@ -8,18 +8,10 @@
 //
 
 //--------------------------------------------------------------------------------
-// used libraries (#uses)
-
-//--------------------------------------------------------------------------------
-// declare variables and constans
-
-//--------------------------------------------------------------------------------
-/*! @brief Quality-Gate base utils.
+/*! Quality-Gate base utils.
  *
- * @details Base utilitys to handle with QualityGate.
+ * @details Base utilities to handle with QualityGate.
  * @author lschopp
- * @todo check it, but I think, that it can be removed. It looks like
- *       old store-code (because of wording like backend ...)
  */
 class Qg
 {
@@ -27,7 +19,7 @@ class Qg
 //@public members
 //--------------------------------------------------------------------------------
   //------------------------------------------------------------------------------
-  /** @brief Function returns id for current QualityGate.
+  /** Function returns id for current QualityGate.
     @return ID of QualityGate.
     @exception 0 when ID are not setted.
   */
@@ -37,40 +29,15 @@ class Qg
   }
 
   //------------------------------------------------------------------------------
-  /** @brief Function set id for current QualityGate.
+  /** Function set id for current QualityGate.
     @details Each QualityGate must have unique ID to handle with result files.
     @warning This ID is loaded "global" in the manager. It can not be quered by other
              manager at the same time.
     @param id QualityGate ID.
   */
-  public static void setId(const string id)
+  public static void setId(const string &id)
   {
     _id = id;
-  }
-
-  //------------------------------------------------------------------------------
-  /** @brief Function returns all defined QualityGate IDs.
-    @warning This list muss be equal to store-DB. in other case can not be results
-             imported in store-DB.
-    @return List with all QG-IDs.
-  */
-  public static dyn_string getAllIds()
-  {
-    return makeDynString("QgStaticCheck_Pictures", "QgStaticCheck_Scripts", "QgStaticCheck_Panels",
-                         "QgSyntaxCheck",
-                         "QgStaticCheck_OverloadedFiles", "Documentation",
-                         "UnitTests", "CtrlCoverage", "QgCtrlppCheck",
-                         "QgStaticCheck_Libs");
-  }
-
-  //------------------------------------------------------------------------------
-  /** @brief Function converts current QG-ID to int variable.
-    @details We need this convert for backend (store).
-    @return
-  */
-  public static int idToNum()
-  {
-    return dynContains(getAllIds(), getId());
   }
 
 //--------------------------------------------------------------------------------

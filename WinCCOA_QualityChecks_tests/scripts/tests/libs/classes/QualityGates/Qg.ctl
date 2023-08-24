@@ -18,7 +18,7 @@ class TstQg : StTest
   public dyn_string _getAllTcIds()
   {
     // list with our testcases
-    return makeDynString("Qg::get/setId()", "Qg::getAllIds()", "Qg::idToNum()");
+    return makeDynString("Qg::get/setId()");
   }
 
   public int _startTest()
@@ -32,27 +32,6 @@ class TstQg : StTest
         oaUnitAssertEqual(tcId, Qg::getId(), "");
         Qg::setId("some one ID");
         oaUnitAssertEqual(tcId, Qg::getId(), "some one ID");        
-        return 0;
-      }
-      case "Qg::getAllIds()":
-      {
-        oaUnitAssertEqual(tcId, Qg::getAllIds(), makeDynString("QgStaticCheck_Pictures", "QgStaticCheck_Scripts", "QgStaticCheck_Panels",
-                                                               "QgSyntaxCheck", 
-                                                               "QgStaticCheck_OverloadedFiles", "Documentation",
-                                                               "UnitTests", "CtrlCoverage", "QgCtrlppCheck",
-                                                               "QgStaticCheck_Libs"));
-        return 0;
-      }
-      case "Qg::idToNum()":
-      {
-        Qg::setId("some one ID");
-        oaUnitAssertEqual(tcId, Qg::idToNum(), 0);
-        
-        Qg::setId(Qg::getAllIds()[1]);
-        oaUnitAssertEqual(tcId, Qg::idToNum(), 1);
-        
-        Qg::setId(Qg::getAllIds()[dynlen(Qg::getAllIds())]);
-        oaUnitAssertEqual(tcId, Qg::idToNum(), dynlen(Qg::getAllIds()));
         return 0;
       }
     }
