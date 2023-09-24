@@ -20,10 +20,12 @@ class StaticDir : QgDir
     dynClear(_files);
     dynClear(_childs);
 
-    if (!dirPath.endsWith("/") && !dirPath.endsWith("\\"))
-      dirPath += makeNativePath("/"); // ensure trailing path delimiter
+    dirPath = makeUnixPath(dirPath);
 
-    QgDir::setDirPath(dirPath);
+    if (!dirPath.isEmpty() && !dirPath.endsWith("/"))
+      dirPath += "/"; // ensure trailing path delimiter
+
+    QgDir::setDirPath(makeNativePath(dirPath));
   }
 
   //------------------------------------------------------------------------------

@@ -1,0 +1,231 @@
+2023.09.25 00:27:45.438["HookTfTestRunner::setupEnvironment"]
+2023.09.25 00:29:12.593["HookTfTestRunner::setupEnvironment"]
+[instance 000001B9EB6511E0 of class ProjEnvProject
+"_version" : ""
+"_id" : "WinCCOA_QualityChecks"
+"_name" : 3
+LANG:10000 "WinCCOA_QualityChecks"
+LANG:10001 "WinCCOA_QualityChecks"
+LANG:10027 "WinCCOA_QualityChecks"
+
+"_path" : "C:\ws\Siemens\CtrlppCheck\"
+"_userName" : ""
+"_pw" : ""
+"_pmonPort" : 0
+"_pmonHost" : ""
+"DEFAULT_PMON_PORT" (static): 4999
+"TIMEOUT_PMON_RUNNING" (static): 10
+"_pmon" : instance 000001B9EB651280 of class ProjEnvPmonComponent
+	"_name" : "WCCILpmon"
+	"_async" : FALSE
+	"_detached" : FALSE
+	"_cmdOptions" : mapping 0 items
+
+	"_enableStdErr" : FALSE
+	"_enableAutoReg" : FALSE
+	"_enableAutoFReg" : FALSE
+	"_num" : -1
+	"_proj" : ""
+	"_config" : "C:\ws\Siemens\CtrlppCheck\WinCCOA_QualityChecks\config/config"
+	"_dbg" : ""
+	"_cmdOpts" : dyn_string 0 items
+
+	"_maxWaitTime" : -1
+	"_stdOut" : ""
+	"_stdErr" : ""
+	"_rc" : 0
+	"_sysCmdThId" : -1
+	"_envVars" : mapping 0 items
+
+	"_startTime" : 1970.01.01 01:00:00.000
+	"_endTime" : 1970.01.01 01:00:00.000
+	"_duration" : 0
+"_sysName" : ""
+"_sysId" : 0
+"_languages" : dyn_string 0 items
+
+"_asciiImportList" : dyn_string 0 items
+
+"_packageSelection" : enum ProjEnvProjectPackageSelection : Default
+"_databaseType" (static): enum ProjEnvDatabaseType : Unknown
+"_runnable" : FALSE
+"_err" : enum ProjEnvProjectError : None
+"MANAGER_START_MODE_MANUAL" : "manual"
+"MANAGER_START_MODE_ALWAYS" : "always"
+"MANAGER_START_MODE_ONCE" : "once"
+"MSG_CAT_NAME" : "ProjEnvProject"]
+2023.09.25 00:31:15.681["HookTfTestRunner::setupEnvironment"]
+[instance 000001CF44CBF7D0 of class ProjEnvProject
+"_version" : ""
+"_id" : "WinCCOA_QualityChecks"
+"_name" : 3
+LANG:10000 "WinCCOA_QualityChecks"
+LANG:10001 "WinCCOA_QualityChecks"
+LANG:10027 "WinCCOA_QualityChecks"
+
+"_path" : "C:\ws\Siemens\CtrlppCheck\"
+"_userName" : ""
+"_pw" : ""
+"_pmonPort" : 0
+"_pmonHost" : ""
+"DEFAULT_PMON_PORT" (static): 4999
+"TIMEOUT_PMON_RUNNING" (static): 10
+"_pmon" : instance 000001CF44CBECE0 of class ProjEnvPmonComponent
+	"_name" : "WCCILpmon"
+	"_async" : FALSE
+	"_detached" : FALSE
+	"_cmdOptions" : mapping 0 items
+
+	"_enableStdErr" : FALSE
+	"_enableAutoReg" : FALSE
+	"_enableAutoFReg" : FALSE
+	"_num" : -1
+	"_proj" : ""
+	"_config" : "C:\ws\Siemens\CtrlppCheck\WinCCOA_QualityChecks\config/config"
+	"_dbg" : ""
+	"_cmdOpts" : dyn_string 0 items
+
+	"_maxWaitTime" : -1
+	"_stdOut" : ""
+	"_stdErr" : ""
+	"_rc" : 0
+	"_sysCmdThId" : -1
+	"_envVars" : mapping 0 items
+
+	"_startTime" : 1970.01.01 01:00:00.000
+	"_endTime" : 1970.01.01 01:00:00.000
+	"_duration" : 0
+"_sysName" : ""
+"_sysId" : 0
+"_languages" : dyn_string 0 items
+
+"_asciiImportList" : dyn_string 0 items
+
+"_packageSelection" : enum ProjEnvProjectPackageSelection : Default
+"_databaseType" (static): enum ProjEnvDatabaseType : Unknown
+"_runnable" : FALSE
+"_err" : enum ProjEnvProjectError : None
+"MANAGER_START_MODE_MANUAL" : "manual"
+"MANAGER_START_MODE_ALWAYS" : "always"
+"MANAGER_START_MODE_ONCE" : "once"
+"MSG_CAT_NAME" : "ProjEnvProject"]
+2023.09.25 00:34:09.290["HookTfTestRunner::setupEnvironment"]
+[instance 00000232581722B0 of class ProjEnvProject
+"_version" : ""
+"_id" : "WinCCOA_QualityChecks"
+"_name" : 3
+LANG:10000 "WinCCOA_QualityChecks"
+LANG:10001 "WinCCOA_QualityChecks"
+LANG:10027 "WinCCOA_QualityChecks"
+
+"_path" : "C:\ws\Siemens\CtrlppCheck\"
+"_userName" : ""
+"_pw" : ""
+"_pmonPort" : 0
+"_pmonHost" : ""
+"DEFAULT_PMON_PORT" (static): 4999
+"TIMEOUT_PMON_RUNNING" (static): 10
+"_pmon" : instance 00000232581723A0 of class ProjEnvPmonComponent
+	"_name" : "WCCILpmon"
+	"_async" : FALSE
+	"_detached" : FALSE
+	"_cmdOptions" : mapping 0 items
+
+	"_enableStdErr" : FALSE
+	"_enableAutoReg" : FALSE
+	"_enableAutoFReg" : FALSE
+	"_num" : -1
+	"_proj" : ""
+	"_config" : "C:\ws\Siemens\CtrlppCheck\WinCCOA_QualityChecks\config/config"
+	"_dbg" : ""
+	"_cmdOpts" : dyn_string 0 items
+
+	"_maxWaitTime" : -1
+	"_stdOut" : ""
+	"_stdErr" : ""
+	"_rc" : 0
+	"_sysCmdThId" : -1
+	"_envVars" : mapping 0 items
+
+	"_startTime" : 1970.01.01 01:00:00.000
+	"_endTime" : 1970.01.01 01:00:00.000
+	"_duration" : 0
+"_sysName" : ""
+"_sysId" : 0
+"_languages" : dyn_string 0 items
+
+"_asciiImportList" : dyn_string 0 items
+
+"_packageSelection" : enum ProjEnvProjectPackageSelection : Default
+"_databaseType" (static): enum ProjEnvDatabaseType : Unknown
+"_runnable" : FALSE
+"_err" : enum ProjEnvProjectError : None
+"MANAGER_START_MODE_MANUAL" : "manual"
+"MANAGER_START_MODE_ALWAYS" : "always"
+"MANAGER_START_MODE_ONCE" : "once"
+"MSG_CAT_NAME" : "ProjEnvProject"]
+2023.09.25 00:35:17.708["HookTfTestRunner::setupEnvironment"]
+[instance 0000029F59AD6180 of class ProjEnvProject
+"_version" : ""
+"_id" : "WinCCOA_QualityChecks"
+"_name" : 3
+LANG:10000 "WinCCOA_QualityChecks"
+LANG:10001 "WinCCOA_QualityChecks"
+LANG:10027 "WinCCOA_QualityChecks"
+
+"_path" : "C:\ws\Siemens\CtrlppCheck\"
+"_userName" : ""
+"_pw" : ""
+"_pmonPort" : 0
+"_pmonHost" : ""
+"DEFAULT_PMON_PORT" (static): 4999
+"TIMEOUT_PMON_RUNNING" (static): 10
+"_pmon" : instance 0000029F59AD64F0 of class ProjEnvPmonComponent
+	"_name" : "WCCILpmon"
+	"_async" : FALSE
+	"_detached" : FALSE
+	"_cmdOptions" : mapping 0 items
+
+	"_enableStdErr" : FALSE
+	"_enableAutoReg" : FALSE
+	"_enableAutoFReg" : FALSE
+	"_num" : -1
+	"_proj" : ""
+	"_config" : "C:\ws\Siemens\CtrlppCheck\WinCCOA_QualityChecks\config/config"
+	"_dbg" : ""
+	"_cmdOpts" : dyn_string 0 items
+
+	"_maxWaitTime" : -1
+	"_stdOut" : ""
+	"_stdErr" : ""
+	"_rc" : 0
+	"_sysCmdThId" : -1
+	"_envVars" : mapping 0 items
+
+	"_startTime" : 1970.01.01 01:00:00.000
+	"_endTime" : 1970.01.01 01:00:00.000
+	"_duration" : 0
+"_sysName" : ""
+"_sysId" : 0
+"_languages" : dyn_string 0 items
+
+"_asciiImportList" : dyn_string 0 items
+
+"_packageSelection" : enum ProjEnvProjectPackageSelection : Default
+"_databaseType" (static): enum ProjEnvDatabaseType : Unknown
+"_runnable" : FALSE
+"_err" : enum ProjEnvProjectError : None
+"MANAGER_START_MODE_MANUAL" : "manual"
+"MANAGER_START_MODE_ALWAYS" : "always"
+"MANAGER_START_MODE_ONCE" : "once"
+"MSG_CAT_NAME" : "ProjEnvProject"]
+2023.09.25 00:35:22.356["HookTfTestProject::_getDefaultSubProjects"][dyn_string 3 items
+     1: "Global"
+     2: "TestFramework_3.20"
+     3: "WinCCOA_QualityChecks"
+]
+2023.09.25 00:35:30.021["HookTfTestProject::_getDefaultSubProjects"][dyn_string 3 items
+     1: "Global"
+     2: "TestFramework_3.20"
+     3: "WinCCOA_QualityChecks"
+]

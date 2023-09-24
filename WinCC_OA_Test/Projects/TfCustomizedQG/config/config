@@ -1,0 +1,19 @@
+[general]
+#WinCC OA path
+pvss_path = "C:/Siemens/Automation/WinCC_OA/3.20"
+#TestFramework self
+#proj_path = "C:/Siemens/Automation/WinCC_OA/3.20/TestFramework_3.20"
+proj_path = "C:/ws/WinCCOA/develop_3.x/Subprojects/TestFramework"
+#global test project
+proj_path = "C:/ws/Siemens/CtrlppCheck/WinCC_OA_Test/Projects/Global"
+#customized testFramework project
+proj_path = "C:/ws/Siemens/CtrlppCheck/WinCC_OA_Test/Projects/TfCustomizedQG"
+proj_version = "3.20"
+#default languages
+langs = "de_AT.utf8"
+langs = "en_US.utf8"
+langs = "ru_RU.utf8"
+pmonPort = 5999
+[testFramework]
+#path with tests
+installPath = "C:\ws\Siemens\CtrlppCheck\WinCC_OA_Test"

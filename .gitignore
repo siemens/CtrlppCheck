@@ -2,3 +2,7 @@ WinCCOA_QualityChecks/bin/ctrlppcheck/
 ctrlppcheck/build/
 # astyle backup files
 *.ctl.orig
+
+# WinCC OA Tests
+WinCC_OA_Test/Projects/Stored/
+WinCC_OA_Test/Results/
