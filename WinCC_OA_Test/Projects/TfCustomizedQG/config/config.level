@@ -1,0 +1,3 @@
+[ctrl]
+LoadCtrlLibs = "classes/testFramework/HookTfTestRunner.ctl"
+LoadCtrlLibs = "classes/testFramework/testProject/HookTfTestProject.ctl"
