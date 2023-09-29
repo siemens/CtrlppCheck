@@ -10,7 +10,7 @@
 //--------------------------------------------------------------------------------
 // used libraries (#uses)
 #uses "classes/ErrorHdl/OaLogger"
-#uses "classes/QualityGates/AddOn/FileSys/QgAddOnTmpSourceDir"
+#uses "classes/QualityGates/QgBaseError"
 #uses "classes/QualityGates/QgResultPublisher"
 #uses "classes/oaTest/OaTest"
 #uses "classes/QualityGates/Qg"
@@ -22,7 +22,6 @@
 
 QgMsgCat myQgMsgCat = QgMsgCat();
 OaTest  myTest = OaTest();
-
 
 //--------------------------------------------------------------------------------
 /** Error codes used in QgBase.cat
@@ -166,7 +165,6 @@ class QgBase
 //--------------------------------------------------------------------------------
 //@protected members
 //--------------------------------------------------------------------------------
-  protected QgAddOnTmpSourceDir _sourceDir = QgAddOnTmpSourceDir();
   protected QgResultPublisher _publisher = QgResultPublisher();
   protected shared_ptr<QgVersionResult> _result;
 

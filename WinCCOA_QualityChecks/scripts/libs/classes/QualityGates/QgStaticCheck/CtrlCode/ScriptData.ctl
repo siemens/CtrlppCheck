@@ -361,8 +361,9 @@ class ScriptData
       // ognore all not calculated files (crypted, empty files ...)
       shared_ptr <QgVersionResult> assertion = new QgVersionResult();
       assertion.setMsgCatName("QgStaticCheck_ScriptData");
-      assertion.setAssertionText("assert.script.isCalculated");
-      assertion.setReasonText("reason.script.isCalculated", makeMapping("script.name", getName()));
+      const mapping dollars = makeMapping("script.name", getName());
+      assertion.setAssertionText("assert.script.isCalculated", dollars);
+      assertion.setReasonText("reason.script.isCalculated", dollars);
 
       if (!assertion.assertTrue(isCalculated(), settings.getScorePoints()))
       {
@@ -396,9 +397,10 @@ class ScriptData
       // check count of functions.
       shared_ptr <QgVersionResult> assertion = new QgVersionResult();
       assertion.setMsgCatName("QgStaticCheck_ScriptData");
-      assertion.setAssertionText("assert.script.countOfFunctions");
-      assertion.setReasonText("reason.script.countOfFunctions", makeMapping("script.name", getName(),
-                              "countOfFunctions", getCountOfFunctions()));
+      const mapping dollars = makeMapping("script.name", getName(),
+                                          "countOfFunctions", getCountOfFunctions());
+      assertion.setAssertionText("assert.script.countOfFunctions", dollars);
+      assertion.setReasonText("reason.script.countOfFunctions", dollars);
       assertion.assertBetween(getCountOfFunctions(), getMinCountOfFunctions(), getMaxCountOfFunctions(), settings.getScorePoints());
       result.addChild(assertion);
     }
@@ -419,9 +421,10 @@ class ScriptData
       {
         shared_ptr <QgVersionResult> assertion = new QgVersionResult();
         assertion.setMsgCatName("QgStaticCheck_ScriptData");
-        assertion.setAssertionText("assert.script.avgCCN");
-        assertion.setReasonText("reason.script.avgCCN", makeMapping("script.name", getName(),
-                                "avgCCN", getAvgCCN()));
+        const mapping dollars = makeMapping("script.name", getName(),
+                                            "avgCCN", getAvgCCN());
+        assertion.setAssertionText("assert.script.avgCCN", dollars);
+        assertion.setReasonText("reason.script.avgCCN", dollars);
         assertion.assertLessEqual(getAvgCCN(), getMaxAvgCCN(), settings.getScorePoints());
         result.addChild(assertion);
       }
@@ -441,9 +444,10 @@ class ScriptData
     {
       shared_ptr <QgVersionResult> assertion = new QgVersionResult();
       assertion.setMsgCatName("QgStaticCheck_ScriptData");
-      assertion.setAssertionText("assert.script.NLOC");
-      assertion.setReasonText("reason.script.NLOC", makeMapping("script.name", getName(),
-                              "NLOC", getNLOC()));
+      const mapping dollars = makeMapping("script.name", getName(),
+                                          "NLOC", getNLOC());
+      assertion.setAssertionText("assert.script.NLOC", dollars);
+      assertion.setReasonText("reason.script.NLOC", dollars);
       assertion.assertBetween(getNLOC(), getMinNLOC(), getMaxNLOC(), settings.getScorePoints());
       result.addChild(assertion);
     }
@@ -464,9 +468,10 @@ class ScriptData
       {
         shared_ptr <QgVersionResult> assertion = new QgVersionResult();
         assertion.setMsgCatName("QgStaticCheck_ScriptData");
-        assertion.setAssertionText("assert.script.avgNLOC");
-        assertion.setReasonText("reason.script.avgNLOC", makeMapping("script.name", getName(),
-                                "avgNLOC", getAvgNLOC()));
+        const mapping dollars = makeMapping("script.name", getName(),
+                                            "avgNLOC", getAvgNLOC());
+        assertion.setAssertionText("assert.script.avgNLOC", dollars);
+        assertion.setReasonText("reason.script.avgNLOC", dollars);
         assertion.info(getAvgNLOC(), settings.getScorePoints()); // does not check it, only information character
         //     assertion.assertLessEqual(getAvgNLOC(), getMaxAvgCCN());
         result.addChild(assertion);

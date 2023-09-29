@@ -44,6 +44,10 @@ class QgStaticCheck_Scripts : QgBase
       {
         this.checkedPath = PROJ_PATH + SCRIPTS_REL_PATH;
       }
+      else if (isdir(this.checkedPath + SCRIPTS_REL_PATH))
+      {
+        this.checkedPath = this.checkedPath + SCRIPTS_REL_PATH;
+      }
 
       _scriptsData.setDir(this.checkedPath);
       _scriptsData.setType(ScriptsDataType::scripts);
@@ -54,10 +58,16 @@ class QgStaticCheck_Scripts : QgBase
       {
         this.checkedPath = PROJ_PATH + LIBS_REL_PATH;
       }
+      else if (isdir(this.checkedPath + LIBS_REL_PATH))
+      {
+        this.checkedPath = this.checkedPath + LIBS_REL_PATH;
+      }
 
       _scriptsData.setDir(this.checkedPath);
       _scriptsData.setType(ScriptsDataType::libs);
     }
+
+    throwError(makeError("", PRIO_INFO, ERR_CONTROL, 0, "Path to check", this.checkedPath));
 
     if (!_scriptsData.exists())
       setMinValidScore(Qg::getId(), "assert.missingScripts", "reason.missingScripts");

@@ -143,18 +143,20 @@ class QgOverloadedFilesCheck
 
           if (isAllowed(relPath))
           {
-            assertion.setAssertionText("assert.isOverloadedAllowed", makeMapping("file.name", relPath));
-            assertion.setReasonText("reason.isOverloadedAllowed", makeMapping("file.name", relPath,
-                                    "file.isOverloadedFrom", overloadedFrom));
+            const mapping dollars = makeMapping("file.name", relPath,
+                                                "file.isOverloadedFrom", overloadedFrom);
+            assertion.setAssertionText("assert.isOverloadedAllowed", dollars);
+            assertion.setReasonText("reason.isOverloadedAllowed", dollars);
             assertion.allowNextErr(TRUE);
             assertion.assertFalse(overloadedFrom != "", settings.getScorePoints()); // negative logic, for better look in store
             assertion.referenceValue = (overloadedFrom != ""); // reference value faken, for better look in store
           }
           else
           {
-            assertion.setAssertionText("assert.isOverloaded", makeMapping("file.name", relPath));
-            assertion.setReasonText("reason.isOverloaded", makeMapping("file.name", relPath,
-                                    "file.isOverloadedFrom", overloadedFrom));
+            const mapping dollars = makeMapping("file.name", relPath,
+                                                "file.isOverloadedFrom", overloadedFrom);
+            assertion.setAssertionText("assert.isOverloaded", dollars);
+            assertion.setReasonText("reason.isOverloaded", dollars);
             assertion.assertFalse(overloadedFrom != "", settings.getScorePoints()); // negative logic, for better look in store
 
           }

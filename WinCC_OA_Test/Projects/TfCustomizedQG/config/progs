@@ -1,0 +1,18 @@
+version 1
+
+auth "" ""
+#Manager         | Start  | SecKill | Restart# | ResetMin | Options
+WCCILpmon        | manual |      30 |        3 |        1 |
+WCCOActrl        | manual |      30 |        2 |        2 |testRunner.ctl Regressions-tests -n
+WCCOActrl        | manual |      30 |        2 |        2 |oaTestParsers/jsonToQc.ctl -n
+WCCOActrl        | manual |      30 |        2 |        2 |oaTestParsers/jsonToJUnit.ctl -n
+WCCOActrl        | manual |      30 |        2 |        2 |astyle.ctl -n <pathToScriptsDir>
+WCCOAui          | manual |      30 |        2 |        2 |-n -m gedi
+WCCOAui          | always |      30 |        2 |        2 |-p vision/tf/main.pnl -n
+WCCOActrl        | manual |      30 |        2 |        2 |getBestMatch.ctl -n Subprojects/TestFramework/ UiFiles/scripts/libs/classes/userManagement
+WCCOActrl        | manual |      30 |        2 |        2 |QualityGates/StaticTests/QgScriptsCheck.ctl scripts C:/ws/WinCCOA/develop_3.x/UiFiles/scripts -n
+WCCOActrl        | manual |      30 |        2 |        2 |QualityGates/StaticTests/QgScriptsCheck.ctl libs C:/ws/WinCCOA/develop_3.x/UiFiles/scripts/libs -n
+WCCOActrl        | manual |      30 |        2 |        2 |QualityGates/StaticTests/QgOverloadedFilesCheck.ctl -n
+WCCOActrl        | manual |      30 |        2 |        2 |QualityGates/StaticTests/QgPanelsCheck.ctl C:/ws/WinCCOA/develop_3.x/UiFiles/panels -n
+WCCOActrl        | manual |      30 |        2 |        2 |QualityGates/StaticTests/QgPicturesCheck.ctl C:/ws/WinCCOA/develop_3.x/UiFiles/pictures -n
+WCCOActrl        | manual |      30 |        2 |        2 |QualityGates/StaticTests/QgCtrlppCheck.ctl C:/ws/WinCCOA/develop_3.x/UiFiles/scripts -n

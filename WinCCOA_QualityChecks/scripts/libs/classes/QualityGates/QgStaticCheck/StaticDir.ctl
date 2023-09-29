@@ -20,10 +20,12 @@ class StaticDir : QgDir
     dynClear(_files);
     dynClear(_childs);
 
-    if (!dirPath.endsWith("/") && !dirPath.endsWith("\\"))
-      dirPath += makeNativePath("/"); // ensure trailing path delimiter
+    dirPath = makeUnixPath(dirPath);
 
-    QgDir::setDirPath(dirPath);
+    if (!dirPath.isEmpty() && !dirPath.endsWith("/"))
+      dirPath += "/"; // ensure trailing path delimiter
+
+    QgDir::setDirPath(makeNativePath(dirPath));
   }
 
   //------------------------------------------------------------------------------
@@ -47,10 +49,11 @@ class StaticDir : QgDir
 
     dynClear(_files);
     dynClear(_childs);
+    _allFilesCount = 0;
 
     if (!exists())
     {
-      logger.warning(0, Qg::getId(), __FUNCTION__, "Directory does not exist", getDirPath());
+      logger.warning(0, Qg::getId(), __FUNCTION__, "Directory does not exist: " + getDirPath());
       return -1;
     }
 
@@ -113,8 +116,9 @@ class StaticDir : QgDir
       {
         shared_ptr <QgVersionResult> assertion = new QgVersionResult();
         assertion.setMsgCatName("QgStaticCheck_StaticDir");
-        assertion.setAssertionText("assert.dir.hasFilesRecursive");
-        assertion.setReasonText("reason.dir.hasFilesRecursive", makeMapping("dir.name", getName()));
+        const mapping dollars = makeMapping("dir.name", getName());
+        assertion.setAssertionText("assert.dir.hasFilesRecursive", dollars);
+        assertion.setReasonText("reason.dir.hasFilesRecursive", dollars);
 
         if (!assertion.assertGreatherEqual(getCountOfFilesRecursive(),
                                            settings.getLowLimit(DEFAULT_FILESREC_LOW),
@@ -135,8 +139,9 @@ class StaticDir : QgDir
       {
         shared_ptr <QgVersionResult> assertion = new QgVersionResult();
         assertion.setMsgCatName("QgStaticCheck_StaticDir");
-        assertion.setAssertionText("assert.dir.isEmpty");
-        assertion.setReasonText("reason.dir.isEmpty", makeMapping("dir.name", getName()));
+        const mapping dollars = makeMapping("dir.name", getName());
+        assertion.setAssertionText("assert.dir.isEmpty", dollars);
+        assertion.setReasonText("reason.dir.isEmpty", dollars);
 
         if (!assertion.assertFalse(isEmpty, settings.getScorePoints()))
         {
@@ -155,9 +160,10 @@ class StaticDir : QgDir
       {
         shared_ptr <QgVersionResult> assertion = new QgVersionResult();
         assertion.setMsgCatName("QgStaticCheck_StaticDir");
-        assertion.setAssertionText("assert.dir.subDirCount");
-        assertion.setReasonText("reason.dir.subDirCount", makeMapping("dir.name", getName(),
-                                "dir.subDirCount", subDirCount));
+        const mapping dollars = makeMapping("dir.name", getName(),
+                                            "dir.subDirCount", subDirCount);
+        assertion.setAssertionText("assert.dir.subDirCount", dollars);
+        assertion.setReasonText("reason.dir.subDirCount", dollars);
         assertion.assertLessEqual(subDirCount,
                                   settings.getHighLimit(DEFAULT_SUBDIRCOUNT_HIGH),
                                   settings.getScorePoints());
@@ -173,9 +179,10 @@ class StaticDir : QgDir
       {
         shared_ptr <QgVersionResult> assertion = new QgVersionResult();
         assertion.setMsgCatName("QgStaticCheck_StaticDir");
-        assertion.setAssertionText("assert.dir.filesCount");
-        assertion.setReasonText("reason.dir.filesCount", makeMapping("dir.name", getName(),
-                                "dir.filesCount", filesCount));
+        const mapping dollars = makeMapping("dir.name", getName(),
+                                            "dir.filesCount", filesCount);
+        assertion.setAssertionText("assert.dir.filesCount", dollars);
+        assertion.setReasonText("reason.dir.filesCount", dollars);
         assertion.assertLessEqual(filesCount,
                                   settings.getHighLimit(DEFAULT_FILESCOUNT_HIGH),
                                   settings.getScorePoints());
@@ -267,7 +274,6 @@ class StaticDir : QgDir
   }
 
   //------------------------------------------------------------------------------
-//   public QgVersionResult result = QgVersionResult(); //!< Quality gate result
   public shared_ptr<QgVersionResult> result;
 
 //--------------------------------------------------------------------------------

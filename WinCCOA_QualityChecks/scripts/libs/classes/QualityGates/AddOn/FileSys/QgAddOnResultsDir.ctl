@@ -10,8 +10,7 @@
 
 #uses "classes/FileSys/QgDir"
 #uses "classes/QualityGates/Qg"
-#uses "classes/QualityGates/QgApp"
-#uses "classes/QualityGates/AddOn/FileSys/QgAddOnSourceDir"
+#uses "classes/QualityGates/QgTest"
 
 class QgAddOnResultsDir
 {
@@ -100,20 +99,17 @@ class QgAddOnResultsDir
 
   public string getDirPath()
   {
-    if (_resultDir == "")
+    if (_resultDir != "")
+      return _resultDir;
+    
+    if (!QgTest::isStartedByTestFramework())
     {
-      if (!Qg::isRunningOnJenkins())
-      {
-        // projPath should be used, when Jenkins is not used
-        _resultDir = makeNativePath(PROJ_PATH + DATA_REL_PATH + "QualityGates/" + _qgId + "/" + _buildNo + "/");
-      }
-      else
-      {
-        QgApp app  = QgApp::getAppFromProjName(PROJ);
-        _resultDir = makeNativePath(app.getSourcePath() + "QgResult/" + Qg::getId() + "/");
-      }
+      // When you start some locale tests, proj path will be used
+      // the test-framework does not need it, because results are stored in
+      // test-framework comform format automatically.
+      _resultDir = makeNativePath(PROJ_PATH + DATA_REL_PATH + "QualityGates/" + _qgId + "/" + _buildNo + "/");
     }
-
+    
     return _resultDir;
   }
 

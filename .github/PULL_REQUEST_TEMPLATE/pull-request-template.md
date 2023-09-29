@@ -37,6 +37,8 @@ If the issue is not fully described in Github, add more information here (justif
 Provide a clear description of how this change was tested.
 At minimum this should include proof that a computer has executed the changed lines.
 Ideally this should include an automated test or an explanation as to why this change has no tests.
+To execute all automated regressions tests start the script /WinCC_OA_Test/executeTests.cmd
+
 Note that automated test coverage is less than complete, so a successful PR build does not necessarily imply that a computer has executed the changed lines.
 If automated test coverage does not exist for the lines you are changing, **you must describe** the scenario(s) in which you manually tested the change.
 Currently is not possible to start automatic tests on every PR. Therefore provide the tests manually and paste the result (screenshot) here.
@@ -44,6 +46,7 @@ Currently is not possible to start automatic tests on every PR. Therefore provid
 For frontend changes, include screenshots of the relevant page(s) before and after the change.
 
 For refactoring and code cleanup changes, exercise the code before and after the change and verify the behavior remains the same.
+
 -->
 
 ### Proposed upgrade guidelines
@@ -70,6 +73,7 @@ N/A
 - [ ] There is automated testing or an explanation that explains why this change has no tests.
 - [ ] For dependency updates, there are links to external changelogs and, if possible, full differentials.
 - [ ] Any localizations are transferred to /msg/ files.
+- [ ] Automated tests has been executed and valid
 <!-- TBD
 - [ ] Changes in the interface are documented also as [examples](docs/examples/readme.md).
 -->

@@ -103,8 +103,9 @@ class ScriptFile : QgFile
         // ignore all example files, the example are terrible scripts
         shared_ptr <QgVersionResult> assertion = new QgVersionResult();
         assertion.setMsgCatName("QgStaticCheck_ScriptFile");
-        assertion.setAssertionText("assert.file.isExampleFile");
-        assertion.setReasonText("reason.file.isExampleFile", makeMapping("file.name", getName()));
+        const mapping dollars = makeMapping("file.name", getName());
+        assertion.setAssertionText("assert.file.isExampleFile", dollars);
+        assertion.setReasonText("reason.file.isExampleFile", dollars);
         assertion.allowNextErr(TRUE);
 
         if (!assertion.assertFalse(this.isExample(), settings.getScorePoints()))
@@ -125,9 +126,10 @@ class ScriptFile : QgFile
         // check for valid extensions
         shared_ptr <QgVersionResult> assertion = new QgVersionResult();
         assertion.setMsgCatName("QgStaticCheck_ScriptFile");
-        assertion.setAssertionText("assert.file.extension");
-        assertion.setReasonText("reason.file.extension", makeMapping("file.name", getName(),
-                                "file.extension", _extension));
+        const mapping dollars = makeMapping("file.name", getName(),
+                                            "file.extension", _extension);
+        assertion.setAssertionText("assert.file.extension", dollars);
+        assertion.setReasonText("reason.file.extension", dollars);
 
         if (!assertion.assertDynContains(settings.getReferenceValues(), strtolower(_extension), settings.getScorePoints()))
         {
@@ -148,8 +150,9 @@ class ScriptFile : QgFile
         // ognore all not calculated files (crypted, empty files ...)
         shared_ptr <QgVersionResult> assertion = new QgVersionResult();
         assertion.setMsgCatName("QgStaticCheck_ScriptFile");
-        assertion.setAssertionText("assert.file.isCalculated");
-        assertion.setReasonText("reason.file.isCalculated", makeMapping("file.name", getName()));
+        const mapping dollars = makeMapping("file.name", getName());
+        assertion.setAssertionText("assert.file.isCalculated", dollars);
+        assertion.setReasonText("reason.file.isCalculated", dollars);
 
         if (!assertion.assertTrue(isCalculated(), settings.getScorePoints()))
         {

@@ -133,9 +133,10 @@ class FunctionData
       shared_ptr <QgVersionResult> assertion = new QgVersionResult();
       assertion.setMsgCatName("QgStaticCheck_FunctionData");
 
-      assertion.setAssertionText("assert.function.CCN");
-      assertion.setReasonText("reason.function.CCN", makeMapping("function.name", getName(),
-                              "function.CCN", getCCN()));
+      const mapping dollars = makeMapping("function.name", getName(),
+                                          "function.CCN", getCCN());
+      assertion.setAssertionText("assert.function.CCN", dollars);
+      assertion.setReasonText("reason.function.CCN", dollars);
       assertion.assertLessEqual(getCCN(),
                                 settings.getHighLimit(DEFAULT_CNN_HIGH),
                                 settings.getScorePoints());
@@ -154,9 +155,10 @@ class FunctionData
       shared_ptr <QgVersionResult> assertion = new QgVersionResult();
       assertion.setMsgCatName("QgStaticCheck_FunctionData");
 
-      assertion.setAssertionText("assert.function.NLOC");
-      assertion.setReasonText("reason.function.NLOC", makeMapping("function.name", getName(),
-                              "function.NLOC", getNLOC()));
+      const mapping dollars = makeMapping("function.name", getName(),
+                                          "function.NLOC", getNLOC());
+      assertion.setAssertionText("assert.function.NLOC", dollars);
+      assertion.setReasonText("reason.function.NLOC", dollars);
 
       assertion.assertBetween(getNLOC(),
                               settings.getLowLimit(DEFAULT_NLOC_LOW),
@@ -176,9 +178,10 @@ class FunctionData
       shared_ptr <QgVersionResult> assertion = new QgVersionResult();
       assertion.setMsgCatName("QgStaticCheck_FunctionData");
 
-      assertion.setAssertionText("assert.function.paramCount");
-      assertion.setReasonText("reason.function.paramCount", makeMapping("function.name", getName(),
-                              "function.paramCount", getNLOC()));
+      const mapping dollars = makeMapping("function.name", getName(),
+                                          "function.paramCount", getNLOC());
+      assertion.setAssertionText("assert.function.paramCount", dollars);
+      assertion.setReasonText("reason.function.paramCount", dollars);
       assertion.assertLessEqual(getParamCount(),
                                 settings.getHighLimit(10),
                                 settings.getScorePoints());
@@ -196,9 +199,10 @@ class FunctionData
       shared_ptr <QgVersionResult> assertion = new QgVersionResult();
       assertion.setMsgCatName("QgStaticCheck_FunctionData");
 
-      assertion.setAssertionText("assert.function.countOfLines");
-      assertion.setReasonText("reason.function.countOfLines", makeMapping("function.name", getName(),
-                              "function.countOfLines", getLinesCount()));
+      const mapping dollars = makeMapping("function.name", getName(),
+                                          "function.countOfLines", getLinesCount());
+      assertion.setAssertionText("assert.function.countOfLines", dollars);
+      assertion.setReasonText("reason.function.countOfLines", dollars);
       assertion.info(getLinesCount(), settings.getScorePoints());
       result.addChild(assertion);
     }

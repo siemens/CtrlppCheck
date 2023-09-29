@@ -10,13 +10,13 @@
 #uses "csv"
 #uses "classes/QualityGates/QgMsgCat"
 #uses "classes/QualityGates/Qg"
+#uses "classes/QualityGates/QgBaseError"
+#uses "classes/QualityGates/QgTest"
 #uses "classes/Variables/Float"
 
 enum QgVersionResultType
 {
-  TableView,
-  TreeView,
-  SimpleTreeView
+  TableView
 };
 
 enum QgVersionResultJsonFormat
@@ -54,7 +54,6 @@ struct QgVersionResult
   string  assertKey;
   mapping assertDollars;
 
-  string reason;
   string  reasonKey;
   mapping reasonDollars;
   string location;
@@ -145,16 +144,6 @@ struct QgVersionResult
         map["text"] = "Score";
         break;
       }
-
-      case QgVersionResultType::SimpleTreeView:
-      case QgVersionResultType::TreeView:
-      {
-        map[KEY_SCORE_TOTAL_POINTS] = totalPoints;
-        map[KEY_SCORE_ERROR_POINTS] = errorPoints;
-        map[KEY_SCORE_PERCENT] = f.round(2);
-        break;
-      }
-
     }
 
     return map;
@@ -208,7 +197,7 @@ struct QgVersionResult
   }
 
   //------------------------------------------------------------------------------
-  anytype toMap(const bool clearObjectOnReturn = TRUE)
+  mapping toMap()
   {
     mapping map;
     string goodRange;
@@ -262,87 +251,12 @@ struct QgVersionResult
 
         if (hasError)
         {
-          if (reason != "")
-            map["reason"] = reason;
-          else if (reasonKey != "")
-            map["reason"] = msgCat.getText(reasonKey, reasonDollars);
+          map["reason"] = msgCat.getText(reasonKey, reasonDollars);
         }
 
         break;
-      }
-
-      case QgVersionResultType::TreeView:
-      {
-        if (goodRange != "")
-          map["goodRange"] = goodRange;
-
-        if (value != "")
-          map["value"] = value;
-
-        if (errorPoints > 0)
-        {
-          map["totalPoints"] = totalPoints;
-          map["errorPoints"] = errorPoints;
-        }
-        else if (totalPoints > 0)
-          map["totalPoints"] = totalPoints;
-
-        if (hasError && reason != "")
-          map["reason"] = reason;
-
-
-        if (dynlen(children))
-        {
-          for (int i = 1; i <= dynlen(children); i++)
-          {
-            map[children[i].text] = children[i].toMap();
-          }
-        }
-
-        break;
-      }
-
-      case QgVersionResultType::SimpleTreeView:
-      {
-        dyn_string ret;
-
-        if (goodRange != "")
-          dynAppend(ret, "goodRange: " + goodRange);
-
-        if (value != "")
-          dynAppend(ret, "value: " + value);
-
-        if (errorPoints > 0)
-        {
-          dynAppend(ret, "errorPoints: " + errorPoints);
-        }
-
-        if (hasError && reason != "")
-          dynAppend(ret, "reason: " + reason);
-
-
-        if (dynlen(children))
-        {
-          for (int i = 1; i <= dynlen(children); i++)
-          {
-            map[children[i].text] = children[i].toMap();
-          }
-
-          if (clearObjectOnReturn)
-            clear();
-
-          return map;
-        }
-
-        if (clearObjectOnReturn)
-          clear();
-
-        return strjoin(ret, ", ");
       }
     }
-
-    if (clearObjectOnReturn)
-      clear();
 
     return map;
   }
@@ -490,17 +404,16 @@ struct QgVersionResult
   //------------------------------------------------------------------------------
   void clear()
   {
-    lowerBound = "";
-    upperBound = "";
-    value = "";
-    referenceValue = "";
-    text = "";
-    reason = "";
-    hasError = FALSE;
-    dynClear(children);
-    _operand = "-";
-    totalPoints = 0;
-    errorPoints = 0;
+    this.lowerBound = "";
+    this.upperBound = "";
+    this.value = "";
+    this.referenceValue = "";
+    this.text = "";
+    this.hasError = FALSE;
+    dynClear(this.children);
+    this._operand = "-";
+    this.totalPoints = 0;
+    this.errorPoints = 0;
   }
 
   //------------------------------------------------------------------------------
@@ -539,26 +452,40 @@ struct QgVersionResult
     if (hasError && !_allowNextErr)
     {
       errorPoints += points;
-      lastErr = reason;
-
-      const int prio = mappingHasKey(userData, "KnownBug") ? PRIO_INFO : PRIO_WARNING;
-      throwError(makeError("QgBase", prio, ERR_CONTROL, 10, msgCat.getText(reasonKey, reasonDollars)));
+      // only for testing
+      lastErr = this.assertKey;
 
       if (_enableOaTestOutput())
         oaUnitFail(assertKey, userData);
+      else
+      {
+        const int prio = mappingHasKey(userData, "KnownBug") ? PRIO_INFO : PRIO_WARNING;
+        OaLogger logger = OaLogger("QgBase");
+
+        if (mappingHasKey(userData, "KnownBug"))
+          logger.info(QgBaseError::AssertionErrorAccepted, msgCat.getText(reasonKey, reasonDollars), userData["Note"]);
+        else
+          logger.warning(QgBaseError::AssertionError, msgCat.getText(reasonKey, reasonDollars), userData["Note"]);
+      }
     }
     else
     {
       if (_enableOaTestOutput())
+      {
         oaUnitPass(assertKey, userData);
+      }
       else
-        throwError(makeError("QgBase", PRIO_INFO, ERR_CONTROL, 11, msgCat.getText(assertKey, assertDollars)));
+      {
+        OaLogger logger = OaLogger("QgBase");
+        logger.info(QgBaseError::AssertionOK, assertKey, userData);
+      }
     }
 
     _allowNextErr = FALSE;
   }
 
   //------------------------------------------------------------------------------
+  /// @todo replace this code by OaTest-knownBug-handler
   protected getKnownBugId(mapping &userData)
   {
     if (dynlen(knownBugs) <= 0)
@@ -596,13 +523,12 @@ struct QgVersionResult
 
   //------------------------------------------------------------------------------
   /** @brief enabled or disabled oaUnitResults
-    @todo mPunk 30.10.2018: make it configureable, otherwise does not work in jenkins
-    @return TRUE hen are oaUnit results enabled
+    @return TRUE when are oaUnit results enabled
   */
+  public static bool enableOaTestCheck = true;
   protected static bool _enableOaTestOutput()
   {
-    return true;
-    return Qg::isRunningOnJenkins();
+    return QgTest::isStartedByTestFramework() && enableOaTestCheck;
   }
 
   //------------------------------------------------------------------------------
