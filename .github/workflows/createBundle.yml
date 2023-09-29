@@ -215,15 +215,10 @@ jobs:
         chmod +x ${{ github.workspace }}/install/WinCCOA_QualityChecks/bin/ctrlppcheck/ctrlppcheck
 
     - name: Zip Folder
-      run: cd ${{ github.workspace }}/install/ && zip -r ${{ github.workspace }}/release.zip *
+      run: cd ${{ github.workspace }}/install/ && zip -r ${{ github.workspace }}/WinCCOA_QualityChecks_${{ github.event.release.tag_name }}.zip *
 
     - name: Upload to Release
       id: upload_to_release
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: softprops/action-gh-release@v1
       with:
-        upload_url: ${{ github.event.release.upload_url }}
-        asset_path: release.zip
-        asset_name: WinCCOA_QualityChecks_${{ github.event.release.tag_name }}.zip
-        asset_content_type: application/zip
+        files: WinCCOA_QualityChecks_${{ github.event.release.tag_name }}.zip
