@@ -73,19 +73,23 @@ echo #path with tests  >> %_cfgPath%
 echo installPath = "%WINCC_OA_TEST_PATH%"  >> %_cfgPath%
 
 REM re-register project
-call %oaBinPath%WCCILpmon.exe -config %WINCC_OA_TEST_PATH%Projects\TfCustomizedQG\config\config -n -autofreg -status
-IF %ERRORLEVEL% NEQ 0 (
+call %oaBinPath%WCCILpmon.exe -config %WINCC_OA_TEST_PATH%Projects\TfCustomizedQG\config\config -n -autofreg -status -log +stderr
+IF %ERRORLEVEL% NEQ 0 IF %ERRORLEVEL% NEQ 3 (
+  REM ERRORLEVEL == 0 - fisrt registration
+  REM ERRORLEVEL == 3 - re-registration
   echo ERRORLEVEL: %ERRORLEVEL%
   exit 0
 )
 
 REM ---------------------------------------------------------------------------
 REM execute tests
-call %oaBinPath%WCCOActrl.exe -config %WINCC_OA_TEST_PATH%Projects\TfCustomizedQG\config\config -n testRunner.ctl {'registerGlobalProject':true,'registerAllTools':true,'registerAllTemplates':true,'cleanOldResults':true,'cleanStoredProjects':true,'showLogViewer':true,'TfTestManager.checkForPossibleFreezeTests':true,'testRunId':'%WINCC_OA_TEST_RUN_ID%'} -log +stderr
+echo ****** Execute WinCC OA Tests : %WINCC_OA_TEST_RUN_ID%
+call %oaBinPath%WCCOActrl.exe -config %WINCC_OA_TEST_PATH%Projects\TfCustomizedQG\config\config -n testRunner.ctl {'registerGlobalProject':true,'registerAllTools':true,'registerAllTemplates':true,'cleanOldResults':true,'cleanStoredProjects':true,'showLogViewer':true,'TfTestManager.checkForPossibleFreezeTests':true,'testRunId':'%WINCC_OA_TEST_RUN_ID%'} -log +stderr -lang en_US.utf8
 
 
 REM ---------------------------------------------------------------------------
 REM convert to jUnit
-call %oaBinPath%WCCOActrl.exe -config %WINCC_OA_TEST_PATH%Projects\TfCustomizedQG\config\config -n oaTestParsers/jsonToJUnit.ctl -log +stderr
+echo ****** Convert results into jUnit format
+call %oaBinPath%WCCOActrl.exe -config %WINCC_OA_TEST_PATH%Projects\TfCustomizedQG\config\config -n oaTestParsers/jsonToJUnit.ctl -log +stderr -lang en_US.utf8
 
 

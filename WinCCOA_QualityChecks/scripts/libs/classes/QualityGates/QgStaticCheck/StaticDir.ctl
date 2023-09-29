@@ -49,10 +49,11 @@ class StaticDir : QgDir
 
     dynClear(_files);
     dynClear(_childs);
+    _allFilesCount = 0;
 
     if (!exists())
     {
-      logger.warning(0, Qg::getId(), __FUNCTION__, "Directory does not exist", getDirPath());
+      logger.warning(0, Qg::getId(), __FUNCTION__, "Directory does not exist: " + getDirPath());
       return -1;
     }
 

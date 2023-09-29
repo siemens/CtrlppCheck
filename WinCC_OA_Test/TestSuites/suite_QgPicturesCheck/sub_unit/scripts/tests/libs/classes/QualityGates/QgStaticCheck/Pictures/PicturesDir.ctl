@@ -8,13 +8,13 @@
 // used libraries (#uses)
 #uses "classes/QualityGates/QgStaticCheck/Pictures/PicturesDir"/*!< tested object */
 #uses "classes/oaTest/OaTest"
-
-//--------------------------------------------------------------------------------
-// declare variables and constans
+#uses "classes/QualityGates/QgVersionResult"
 
 //--------------------------------------------------------------------------------
 class TstQg : OaTest
 {
+
+  //------------------------------------------------------------------------------
   public dyn_string getAllTestCaseIds()
   {
     // list with our testcases
@@ -24,6 +24,18 @@ class TstQg : OaTest
                          "PicturesDir::validate");
   }
 
+  //------------------------------------------------------------------------------
+  public int setUp()
+  {
+    if ( OaTest::setUp() )
+     return -1;
+
+    // eliminate fail positives
+    QgVersionResult::enableOaTestCheck = false;
+    return 0;
+  }
+
+  //------------------------------------------------------------------------------
   protected int startTestCase(const string tcId)
   {
     switch( tcId )
@@ -93,7 +105,7 @@ class TstQg : OaTest
         assertEqual(dir.getCountOfFilesRecursive(), 3);
         assertEqual(dir.getCountOfSubDirs(), 2);
         
-        dyn_anytype childs = dir.getChilds();
+        dyn_anytype childs = dir.getSubDirs();
         assertEqual(dynlen(childs), 2); 
         assertEqual(childs[1].getName(), "subDir1");
         
@@ -198,6 +210,7 @@ class TstQg : OaTest
     return -1;
   }
   
+  //------------------------------------------------------------------------------
   string _makeTmpDir()
   {    
     string tmpDir = dirName(tmpnam()) + "QgPictureDir/";
@@ -213,11 +226,8 @@ class TstQg : OaTest
 };
 
 //--------------------------------------------------------------------------------
-main()
+void main()
 {
-  TstQg test = TstQg();
-
+  TstQg test;
   test.startAll();
-
-  exit(0);
 }

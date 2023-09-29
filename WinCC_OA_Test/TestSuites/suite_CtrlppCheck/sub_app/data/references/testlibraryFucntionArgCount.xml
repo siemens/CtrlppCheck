@@ -8,10 +8,10 @@
         <error id="checkLibraryFunctionArgCount" severity="warning" msg="The function has invalid count of arguments: dpExists()" verbose="The function has invalid count of arguments: dpExists()" cwe="628">
             <location file0="" file="" line="12"/>
         </error>
-        <error id="checkLibraryFunctionArgCount" knownBug="#45" severity="warning" msg="The function has invalid count of arguments: dpExists()" verbose="The function has invalid count of arguments: dpExists()" cwe="628">
+        <error id="checkLibraryFunctionArgCount" severity="warning" msg="The function has invalid count of arguments: dpExists()" verbose="The function has invalid count of arguments: dpExists()" cwe="628">
             <location file0="" file="" line="13"/>
         </error>
-        <error id="checkLibraryFunctionArgCount" knownBug="#45" severity="warning" msg="The function has invalid count of arguments: dpSubStr()" verbose="The function has invalid count of arguments: dpSubStr()" cwe="628">
+        <error id="checkLibraryFunctionArgCount" severity="warning" msg="The function has invalid count of arguments: dpSubStr()" verbose="The function has invalid count of arguments: dpSubStr()" cwe="628">
             <location file0="" file="" line="14"/>
         </error>
         <error id="checkLibraryFunctionArgCount" severity="warning" msg="The function has invalid count of arguments: dpExists()" verbose="The function has invalid count of arguments: dpExists()" cwe="628">

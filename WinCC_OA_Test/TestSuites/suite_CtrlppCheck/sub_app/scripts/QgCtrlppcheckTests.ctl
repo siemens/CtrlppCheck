@@ -41,12 +41,14 @@ class MockCppCheck : CppCheck
     DebugTN(__FUNCTION__, refFile);
     const string tcId = "Ctrlppcheck." +  baseName(refFile);
     string str;
-    fileToString(refFile, str);
+    bool hasFailedRead = fileToString(refFile, str, "UTF8");
+    str = str.trim();
+    oaUnitAssertTrue(tcId, hasFailedRead, "Read reference file: " + refFile);
     MockCppCheck reference;
 
-    if ( str == "" )
+    if (str.isEmpty())
     {
-      oaUnitAbort(tcId, "reference file is empty");
+      oaUnitAbort(tcId, "Reference file " + refFile + " is empty");
       return;
     }
     reference.strToErrList(str);

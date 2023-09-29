@@ -127,7 +127,7 @@ void ctrlPPCheck()
     res["countOfParams.avg"] = script.getAvgParamCount();
 
 
-    map["script"] = res;//script.result.toMap();
+    map["script"] = res;
   }
 
 
