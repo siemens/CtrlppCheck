@@ -24,11 +24,12 @@ class TstFileSys : OaTest
     {
       case "fileSys getFileNamesRecursive":
       {
+        fclose(fopen(PROJ_PATH + LIBS_REL_PATH + "dummy.ctl", "w"));
         assertEqual(getFileNamesRecursive(""), makeDynString());
         assertEqual(getFileNamesRecursive("non existin path"), makeDynString());
-        assertEqual(dynlen(getFileNamesRecursive(PROJ_PATH, "panel*")), 0);
-        assertEqual(dynlen(getFileNamesRecursive(PROJ_PATH, "*.ctl", FILTER_DIRS)), 0);
-        assertGreater(dynlen(getFileNamesRecursive(PROJ_PATH, "*.ctl")), 0);
+        assertEqual(dynlen(getFileNamesRecursive(PROJ_PATH + PANELS_REL_PATH, "panel*")), 0);
+        assertEqual(dynlen(getFileNamesRecursive(PROJ_PATH + LIBS_REL_PATH, "*.ctl", FILTER_DIRS)), 0);
+        assertEqual(getFileNamesRecursive(PROJ_PATH + LIBS_REL_PATH, "*.ctl"), makeDynString(makeNativePath(PROJ_PATH + LIBS_REL_PATH + "dummy.ctl")));
         return 0;
       }
     }
