@@ -52,8 +52,7 @@ echo #WinCC OA path  >> %_cfgPath%
 echo pvss_path = "%WINCC_OA_INSTALL_PATH%"  >> %_cfgPath%
 
 echo #TestFramework self  >> %_cfgPath%
-REM echo proj_path = "%WINCC_OA_INSTALL_PATH%\TestFramework_%WINCC_OA_VERSION%"  >> %_cfgPath%
-echo proj_path = "C:\ws\WinCCOA\develop_3.x\Subprojects\TestFramework"  >> %_cfgPath%
+echo proj_path = "%WINCC_OA_INSTALL_PATH%\TestFramework_%WINCC_OA_VERSION%"  >> %_cfgPath%
 
 echo #global test project  >> %_cfgPath%
 echo proj_path = "%WINCC_OA_TEST_PATH%Projects\Global"  >> %_cfgPath%
