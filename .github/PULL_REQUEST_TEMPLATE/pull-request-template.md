@@ -37,7 +37,7 @@ If the issue is not fully described in Github, add more information here (justif
 Provide a clear description of how this change was tested.
 At minimum this should include proof that a computer has executed the changed lines.
 Ideally this should include an automated test or an explanation as to why this change has no tests.
-To execute all automated regressions tests start the script /WinCC_OA_Test/executeTests.cmd
+To execute all automated regression tests start the script /WinCC_OA_Test/executeTests.cmd
 
 Note that automated test coverage is less than complete, so a successful PR build does not necessarily imply that a computer has executed the changed lines.
 If automated test coverage does not exist for the lines you are changing, **you must describe** the scenario(s) in which you manually tested the change.

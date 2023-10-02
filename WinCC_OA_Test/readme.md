@@ -6,7 +6,7 @@ Execute the test run "regression tests" to validate all regressions before you c
 
 ## Execute tests
 
-To execute WinCC OA tests starts the script *executeTests.cmd* form command line.
+To execute WinCC OA tests start the script *executeTests.cmd* form command line.
 This script will prepare everything necessary to execute the test, executes the tests and convert the result to jUnit (might be used in CI/CD pipelines to show results)
 
 ``` bat
