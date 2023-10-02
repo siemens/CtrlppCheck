@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<results version="2">
+    <cppcheck version=""/>
+    <errors>
+        <error id="checkLibraryFunctionArgCount" severity="warning" msg="The function has invalid count of arguments: dpExists()" verbose="The function has invalid count of arguments: dpExists()" cwe="628">
+            <location file0="" file="" line="10"/>
+        </error>
+        <error id="checkLibraryFunctionArgCount" severity="warning" msg="The function has invalid count of arguments: dpExists()" verbose="The function has invalid count of arguments: dpExists()" cwe="628">
+            <location file0="" file="" line="12"/>
+        </error>
+        <error id="checkLibraryFunctionArgCount" severity="warning" msg="The function has invalid count of arguments: dpExists()" verbose="The function has invalid count of arguments: dpExists()" cwe="628">
+            <location file0="" file="" line="13"/>
+        </error>
+        <error id="checkLibraryFunctionArgCount" severity="warning" msg="The function has invalid count of arguments: dpSubStr()" verbose="The function has invalid count of arguments: dpSubStr()" cwe="628">
+            <location file0="" file="" line="14"/>
+        </error>
+        <error id="checkLibraryFunctionArgCount" severity="warning" msg="The function has invalid count of arguments: dpExists()" verbose="The function has invalid count of arguments: dpExists()" cwe="628">
+            <location file0="" file="" line="16"/>
+        </error>
+        <error id="checkLibraryFunctionArgCount" severity="warning" msg="The function has invalid count of arguments: dpGet()" verbose="The function has invalid count of arguments: dpGet()" cwe="628">
+            <location file0="" file="" line="20"/>
+        </error>
+        <error id="checkLibraryFunctionArgCount" severity="warning" msg="The function has invalid count of arguments: dpGet()" verbose="The function has invalid count of arguments: dpGet()" cwe="628">
+            <location file0="" file="" line="21"/>
+        </error>
+        <error id="checkLibraryFunctionArgCount" knownBug="#45" severity="warning" msg="The function has invalid count of arguments: dpGet()" verbose="The function has invalid count of arguments: dpGet()" cwe="628">
+            <location file0="" file="" line="24"/>
+        </error>
+        <error id="checkLibraryFunctionArgCount" knownBug="#45" severity="warning" msg="The function has invalid count of arguments: dpGet()" verbose="The function has invalid count of arguments: dpGet()" cwe="628">
+            <location file0="" file="" line="26"/>
+        </error>
+    </errors>
+</results>
