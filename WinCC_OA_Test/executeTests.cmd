@@ -9,7 +9,7 @@ REM default values
 SET WINCC_OA_INSTALL_PATH=C:\Siemens\Automation\WinCC_OA\
 SET WINCC_OA_VERSION=3.20
 set WINCC_OA_TEST_PATH=%cd%\
-set WINCC_OA_TEST_RUN_ID=Regressions-tests
+set WINCC_OA_TEST_RUN_ID=Regression-tests
 
 REM get input params
 :loopStdIn

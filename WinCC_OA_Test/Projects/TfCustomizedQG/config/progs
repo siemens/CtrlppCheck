@@ -3,7 +3,7 @@ version 1
 auth "" ""
 #Manager         | Start  | SecKill | Restart# | ResetMin | Options
 WCCILpmon        | manual |      30 |        3 |        1 |
-WCCOActrl        | manual |      30 |        2 |        2 |testRunner.ctl Regressions-tests -n
+WCCOActrl        | manual |      30 |        2 |        2 |testRunner.ctl Regression-tests -n
 WCCOActrl        | manual |      30 |        2 |        2 |oaTestParsers/jsonToJUnit.ctl -n
 WCCOAui          | manual |      30 |        2 |        2 |-n -m gedi
 WCCOActrl        | manual |      30 |        2 |        2 |QualityGates/StaticTests/QgScriptsCheck.ctl scripts C:/ws/WinCCOA/develop_3.x/UiFiles/scripts -n

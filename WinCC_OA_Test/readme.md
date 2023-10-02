@@ -2,7 +2,7 @@
 
 Here are located all WinCC OA tests based on WinCC CtrlTestFramework to validate QualityChecks.
 
-Execute the test run "regression tests" to validate all regressions before you commit some changes.
+Execute the test run "Regression-tests" to validate all regressions before you commit some changes.
 
 ## Execute tests
 
@@ -18,8 +18,8 @@ Following options are possible:
 -OaVersion ,defines the WinCC OA Version (default 3.20)
 -OaInstallPath ,define the installation path of WinCC OA (default C:\Siemens\Automation\WinCC_OA\)
 -OaTestPath ,define the test path (default *thisWorkspace*\WinCC_OA_Test\)
--OaTestRunId , defines test-run ID to be executed (default Regressions-tests )
+-OaTestRunId , defines test-run ID to be executed (default Regression-tests )
 
 ``` bat
-executeTests.cmd -OaVersion 3.19 -OaInstallPath C:\Siemens\Automation\WinCC_OA\ -OaTestPath C:\ws\Siemens\CtrlppCheck\WinCC_OA_Test\ -OaTestRunId Regressions-tests 
+executeTests.cmd -OaVersion 3.19 -OaInstallPath C:\Siemens\Automation\WinCC_OA\ -OaTestPath C:\ws\Siemens\CtrlppCheck\WinCC_OA_Test\ -OaTestRunId Regression-tests
 ```
