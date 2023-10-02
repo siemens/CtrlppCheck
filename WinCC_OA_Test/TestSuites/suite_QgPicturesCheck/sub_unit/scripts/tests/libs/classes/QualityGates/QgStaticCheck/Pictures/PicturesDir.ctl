@@ -30,7 +30,7 @@ class TstQg : OaTest
     if ( OaTest::setUp() )
      return -1;
 
-    // eliminate fail positives
+    // eliminate false positives
     QgVersionResult::enableOaTestCheck = false;
     return 0;
   }
