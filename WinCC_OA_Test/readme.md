@@ -2,7 +2,7 @@
 
 Here are located all WinCC OA tests based on WinCC CtrlTestFramework to validate QualityChecks.
 
-Execute the test run "Regressions-tests" to validate all regressions before you commit some changes.
+Execute the test run "regression tests" to validate all regressions before you commit some changes.
 
 ## Execute tests
 
