@@ -2,7 +2,7 @@
 //--------------------------------------------------------------------------------
 /**
   @file $relPath
-  @copyright Copyright 2022 SIEMENS AG
+  @copyright Copyright 2023 SIEMENS AG
              SPDX-License-Identifier: GPL-3.0-only
   @author mPokorny
 */
