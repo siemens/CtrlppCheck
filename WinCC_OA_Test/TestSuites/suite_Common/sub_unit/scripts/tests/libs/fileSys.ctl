@@ -11,7 +11,7 @@
 
 //--------------------------------------------------------------------------------
 class TstFileSys : OaTest
-{  
+{
   public dyn_string getAllTestCaseIds()
   {
     // list with our testcases
@@ -20,7 +20,7 @@ class TstFileSys : OaTest
 
   protected int startTestCase(const string tcId)
   {
-    switch( tcId )
+    switch (tcId)
     {
       case "fileSys getFileNamesRecursive":
       {

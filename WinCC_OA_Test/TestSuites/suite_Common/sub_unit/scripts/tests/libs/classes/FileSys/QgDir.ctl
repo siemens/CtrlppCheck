@@ -20,30 +20,30 @@ class TstDir : OaTest
 
   protected int startTestCase(const string tcId)
   {
-    switch( tcId )
+    switch (tcId)
     {
       case "QgDir":
       {
         QgDir dir = QgDir();
         QgDir dir2 = QgDir("non existing/ path");
-        
+
         assertEqual(dir.getDirPath(), "");
         assertEqual(dir2.getDirPath(), makeNativePath("non existing/ path"));
-        
-        assertFalse(dir.exists());        
+
+        assertFalse(dir.exists());
         assertFalse(dir2.exists());
-        
+
         dir.setDirPath(PROJ_PATH);
         assertEqual(dir.getDirPath(), makeNativePath(PROJ_PATH));
         assertTrue(dir.exists());
-        
+
         dir.setDirPath(PROJ_PATH + createUuid());
         assertFalse(dir.exists());
         assertEqual(dir.mk(), 0);
         assertTrue(dir.exists());
         assertEqual(dir.mk(), 0);
         assertTrue(dir.exists());
-        assertEqual(dir.rm(), 0);     
+        assertEqual(dir.rm(), 0);
         assertFalse(dir.exists());
 
         string dirPath = dir.getDirPath();
@@ -53,8 +53,8 @@ class TstDir : OaTest
         assertTrue(dir.exists());
         assertEqual(dir.rm(), 0);
         assertFalse(dir.exists());
-        
-        
+
+
         dir.setDirPath(dirPath);
         assertTrue(dir.exists());
         assertEqual(dir.rm(), 0);
@@ -62,10 +62,10 @@ class TstDir : OaTest
 
         assertEqual(dir.rm(), -1);
         assertEqual(dir2.rm(), -1);
-                
+
         dir.setDirPath("");
         assertEqual(dir.rm(), -1);
-        
+
         return 0;
       }
     }

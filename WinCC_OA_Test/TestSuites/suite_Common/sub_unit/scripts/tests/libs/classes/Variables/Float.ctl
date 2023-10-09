@@ -1,5 +1,5 @@
 /*!
- * @brief Tests for class: Float 
+ * @brief Tests for class: Float
  *
  * @author lschopp
  */
@@ -15,7 +15,7 @@
 //--------------------------------------------------------------------------------
 class TstFloat : OaTest
 {
-  
+
   public dyn_string getAllTestCaseIds()
   {
     // list with our testcases
@@ -24,7 +24,7 @@ class TstFloat : OaTest
 
   protected int startTestCase(const string tcId)
   {
-    switch( tcId )
+    switch (tcId)
     {
       case "Float":
       {
@@ -32,28 +32,28 @@ class TstFloat : OaTest
         f1 = 100;
         f2 = 33;
         Float f = Float(f1 / f2);
-  
+
         assertEqual((string)f.round(), "3.03");
         assertEqual((string)f.round(4), "3.0303");
         assertEqual((string)f.round(0), "3");
-  
+
         f.set(f2 / f1);
         assertEqual((string)f.round(), "0.33");
-  
+
         f.set(0);
         assertEqual((string)f.round(), "0");
-  
+
         f.set(1.4356);
         assertEqual((string)f.round(), "1.44");
         assertEqual(f.get(), 1.4356);
-        
+
         f.set(1.4323);
         assertEqual((string)f.round(), "1.43");
         assertEqual(f.get(), 1.4323);
-                
+
         f.set(1.4323);
         assertEqual((string)f.round(-1), "1");
-        
+
         return 0;
       }
     }

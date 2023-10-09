@@ -23,7 +23,7 @@ class TstMath : OaTest
 
   protected int startTestCase(const string tcId)
   {
-    switch( tcId )
+    switch (tcId)
     {
       case "Math::getPercent()":
       {

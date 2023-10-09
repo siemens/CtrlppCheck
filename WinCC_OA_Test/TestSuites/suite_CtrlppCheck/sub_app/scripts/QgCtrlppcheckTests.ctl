@@ -26,7 +26,8 @@ class MockCppCheck : CppCheck
     s = substr(s, 0, strpos(s, "\n")); // get fist lines
     const string key = "// start options: ";
     int idx = strpos(s, key);
-    if ( idx >= 0 )
+
+    if (idx >= 0)
       s = " " + substr(s, idx + strlen(key));
     else
       s = "";
@@ -51,6 +52,7 @@ class MockCppCheck : CppCheck
       oaUnitAbort(tcId, "Reference file " + refFile + " is empty");
       return;
     }
+
     reference.strToErrList(str);
 
 //     if ( dynlen(errList) != dynlen(reference.errList) )
@@ -60,26 +62,30 @@ class MockCppCheck : CppCheck
 //     }
 
     dyn_string simpleErrStrings;
-    for(int i = 1; i <= dynlen(reference.errList); i++)
+
+    for (int i = 1; i <= dynlen(reference.errList); i++)
     {
       reference.errList[i].path = "";
     }
-    for(int i = 1; i <= dynlen(errList); i++)
+
+    for (int i = 1; i <= dynlen(errList); i++)
     {
       errList[i].path = "";
       dynAppend(simpleErrStrings, errList[i].toStdErrString());
     }
 
 
-    for(int i = 1; i <= dynlen(reference.errList); i++)
+    for (int i = 1; i <= dynlen(reference.errList); i++)
     {
       CppCheckError expErr = reference.errList[i];
       string expErrorStr = expErr.toStdErrString();
       mapping map = makeMapping("ErrMsg", "Ctrlppcheck can not found this error:" +
-                                          "\n  File:\n" + refFile +
-                                          "\n  ExpectedValue:\n" + expErrorStr);
-      if ( expErr.knownBug != "" )
+                                "\n  File:\n" + refFile +
+                                "\n  ExpectedValue:\n" + expErrorStr);
+
+      if (expErr.knownBug != "")
         map["KnownBug"] = expErr.knownBug;
+
       // DebugN(__FUNCTION__, map, expErr);
       oaUnitAssertGreater(tcId, dynContains(simpleErrStrings, expErrorStr), 0, map);
     }
@@ -100,15 +106,17 @@ class TstCtrlppcheck : OaTest
 
   protected int startTestCase(const string tcId)
   {
-    switch( tcId )
+    switch (tcId)
     {
       case "Ctrlppcheck":
       {
         const string path = getPath(SCRIPTS_REL_PATH, "testScripts/" + testScriptPath);
+
         if (path.isEmpty())
         {
           return abort("Test script does not exists: " + SCRIPTS_REL_PATH + "testScripts/" + testScriptPath);
         }
+
         this.info("check file: " + path);
 
         string refFile = testScriptPath;
@@ -126,7 +134,7 @@ class TstCtrlppcheck : OaTest
 
         check.settings.enableLibCheck = FALSE;
         // check.settings.enableHeadersCheck = TRUE;
-        check.settings.includeSubProjects = TRUE; 	
+        check.settings.includeSubProjects = TRUE;
         check.settings.inconclusive = FALSE;
         check.settings.verbose = FALSE;
         check.settings.inlineSuppressions = FALSE;
@@ -150,7 +158,8 @@ class TstCtrlppcheck : OaTest
 
         // make a copy for futher analysis
         string resDir = PROJ_PATH + LOG_REL_PATH + "ctrlPpCheck/";
-        if ( !isdir(resDir) )
+
+        if (!isdir(resDir))
           mkdir(resDir);
 
         moveFile(PROJ_PATH + LOG_REL_PATH + "cppcheck-result.xml",  resDir + baseName(refFile));

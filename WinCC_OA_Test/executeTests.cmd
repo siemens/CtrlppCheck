@@ -10,6 +10,7 @@ SET WINCC_OA_INSTALL_PATH=C:\Siemens\Automation\WinCC_OA\
 SET WINCC_OA_VERSION=3.20
 set WINCC_OA_TEST_PATH=%cd%\
 set WINCC_OA_TEST_RUN_ID=Regression-tests
+set FORMAT_CTRL_CODE=false
 
 REM get input params
 :loopStdIn
@@ -30,6 +31,11 @@ IF NOT "%1"=="" (
   )
   IF "%1"=="-OaTestRunId" (
     SET WINCC_OA_TEST_RUN_ID=%2
+    SHIFT
+  )
+
+  IF "%1"=="-formatCtrlCode" (
+    SET FORMAT_CTRL_CODE=true
     SHIFT
   )
 
@@ -78,6 +84,13 @@ IF %ERRORLEVEL% NEQ 0 IF %ERRORLEVEL% NEQ 3 (
   REM ERRORLEVEL == 3 - re-registration
   echo ERRORLEVEL: %ERRORLEVEL%
   exit 0
+)
+
+REM --------------------------------------------------------------------------
+REM Format ctrl code
+if %FORMAT_CTRL_CODE% == true (
+  call %oaBinPath%WCCOActrl.exe -config %WINCC_OA_TEST_PATH%Projects\TfCustomizedQG\config\config -n astyle.ctl %WINCC_OA_TEST_PATH% -log +stderr -lang en_US.utf8
+  call %oaBinPath%WCCOActrl.exe -config %WINCC_OA_TEST_PATH%Projects\TfCustomizedQG\config\config -n astyle.ctl %WINCC_OA_TEST_PATH%..\WinCCOA_QualityChecks -log +stderr -lang en_US.utf8
 )
 
 REM ---------------------------------------------------------------------------
