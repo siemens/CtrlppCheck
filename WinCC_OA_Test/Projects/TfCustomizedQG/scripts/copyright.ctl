@@ -36,28 +36,30 @@ main(string sourcePath)
   const string correctCopyright = "Copyright " + now + " SIEMENS AG";
   const string oldCopyright = "Copyright " + (now - 1) + " SIEMENS AG";
 
-  for(int i = 1; i <= dynlen(filesToCheck); i++)
+  for (int i = 1; i <= dynlen(filesToCheck); i++)
   {
     const File ctrlFile = File(filesToCheck[i]);
     throwError(makeError("", PRIO_INFO, ERR_CONTROL, 0, "Check file", ctrlFile.getPath()));
 
     string result;
+
     if (ctrlFile.read(result))
       continue; // do not thrown error here, it is done in the function read() self
 
     bool changed = false;
+
     if (strreplace(result, oldCopyright, correctCopyright) > 0)
     {
       throwError(makeError("", PRIO_INFO, ERR_CONTROL, 0, "Old copyright changed", ctrlFile.getPath()));
       changed = true;
     }
-    
+
     if (!result.contains(correctCopyright))
     {
       result = "//--------------------------------------------------------------------------------\n" +
-                "/**\n  @file $relPath\n  @copyright " + correctCopyright +
-                "\n             SPDX-License-Identifier: GPL-3.0-only\n*/\n\n" +
-                result;
+               "/**\n  @file $relPath\n  @copyright " + correctCopyright +
+               "\n             SPDX-License-Identifier: GPL-3.0-only\n*/\n\n" +
+               result;
       throwError(makeError("", PRIO_INFO, ERR_CONTROL, 0, "New copyright added", ctrlFile.getPath()));
       changed = true;
     }
