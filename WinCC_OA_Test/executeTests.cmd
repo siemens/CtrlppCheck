@@ -100,7 +100,7 @@ if %FORMAT_CTRL_CODE% == true (
 )
 
 REM --------------------------------------------------------------------------
-REM Chnage Copyright information
+REM Change copyright information
 if %CHANGE_COPYRIGHT% == true (
   call %oaBinPath%WCCOActrl.exe -config %WINCC_OA_TEST_PATH%Projects\TfCustomizedQG\config\config -n copyright.ctl %WINCC_OA_TEST_PATH% -log +stderr -lang en_US.utf8
   call %oaBinPath%WCCOActrl.exe -config %WINCC_OA_TEST_PATH%Projects\TfCustomizedQG\config\config -n copyright.ctl %WINCC_OA_TEST_PATH%..\WinCCOA_QualityChecks -log +stderr -lang en_US.utf8
