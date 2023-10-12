@@ -65,6 +65,6 @@ main(string sourcePath)
     }
 
     if (changed && (ctrlFile.write(result) != 0))
-      throwError(makeError("", PRIO_INFO, ERR_CONTROL, 0, "Can not change file", ctrlFile.getPath()));
+      throwError(makeError("", PRIO_INFO, ERR_CONTROL, 0, "Cannot change file", ctrlFile.getPath()));
   }
 }
