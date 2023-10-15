@@ -21,8 +21,7 @@ This stript format the ctrl code in unified way by preferred WinCC OA configurat
 
 Following options are possible:
 
-+ -OaVersion ,defines the WinCC OA Version (default 3.19)
-+ -OaInstallPath ,define the installation path of WinCC OA (default C:\Siemens\Automation\WinCC_OA\\)
++ -oaVersion ,defines the WinCC OA Version (default 3.19)
 
 ## changeCopyright.cmd
 
@@ -31,7 +30,6 @@ Helper to change copyright entries to correct year for all ctrl code - including
 As the license section contains year need to be changed ones per year.
 To change it manually is a lot of work. Therefore you can start this script to change all the license section correctly.
 
-Following options are possible:
+Following options are supported:
 
-+ -OaVersion ,defines the WinCC OA Version (default 3.19)
-+ -OaInstallPath ,define the installation path of WinCC OA (default C:\Siemens\Automation\WinCC_OA\\)
++ -oaVersion ,defines the WinCC OA Version (default 3.19)

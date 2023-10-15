@@ -6,7 +6,6 @@ cls
 
 REM ---------------------------------------------------------------------------
 REM default values
-SET WINCC_OA_INSTALL_PATH=C:\Siemens\Automation\WinCC_OA\
 SET WINCC_OA_VERSION=3.19
 set WINCC_OA_TEST_PATH=%cd%\..\WinCC_OA_Test\
 
@@ -17,10 +16,6 @@ IF NOT "%1"=="" (
   REM print help
   IF "%1"=="-OaVersion" (
     SET WINCC_OA_VERSION=%2
-    SHIFT
-  )
-  IF "%1"=="-OaInstallPath" (
-    SET WINCC_OA_INSTALL_PATH=%2
     SHIFT
   )
   IF "%1"=="-OaTestPath" (

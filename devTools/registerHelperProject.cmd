@@ -4,10 +4,20 @@ REM Register WinCC OA helper project
 REM ---------------------------------------------------------------------------
 
 
-set WINCC_OA_INSTALL_PATH=%WINCC_OA_INSTALL_PATH%%WINCC_OA_VERSION%
+rem set WINCC_OA_INSTALL_PATH=%WINCC_OA_INSTALL_PATH%%WINCC_OA_VERSION%
 
 REM ---------------------------------------------------------------------------
 REM register CtrlTestFramework
+set REG_KEY=HKLM\Software\ETM\WinCC_OA\%WINCC_OA_VERSION%\
+
+set WINCC_OA_INSTALL_PATH=
+
+for /f "tokens=2,*" %%a in ('reg query %REG_KEY% /v INSTALLDIR ^| findstr INSTALLDIR') do (
+    set WINCC_OA_INSTALL_PATH=%%b
+)
+
+
+if not defined WINCC_OA_INSTALL_PATH (echo ERROR: No WinCC OA for version %WINCC_OA_VERSION% present! & exit /b 1)
 
 set oaBinPath=%WINCC_OA_INSTALL_PATH%\bin\
     

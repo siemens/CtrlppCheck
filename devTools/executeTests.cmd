@@ -6,31 +6,24 @@ cls
 
 REM ---------------------------------------------------------------------------
 REM default values
-SET WINCC_OA_INSTALL_PATH=C:\Siemens\Automation\WinCC_OA\
 SET WINCC_OA_VERSION=3.19
 set WINCC_OA_TEST_PATH=%cd%\..\WinCC_OA_Test\
 set WINCC_OA_TEST_RUN_ID=Regression-tests
-set FORMAT_CTRL_CODE=false
-set CHANGE_COPYRIGHT=false
 
 REM get input params
 :loopStdIn
 IF NOT "%1"=="" (
 
   REM print help
-  IF "%1"=="-OaVersion" (
+  IF "%1"=="-oaVersion" (
     SET WINCC_OA_VERSION=%2
     SHIFT
   )
-  IF "%1"=="-OaInstallPath" (
-    SET WINCC_OA_INSTALL_PATH=%2
-    SHIFT
-  )
-  IF "%1"=="-OaTestPath" (
+  IF "%1"=="-oaTestPath" (
     SET WINCC_OA_TEST_PATH=%2
     SHIFT
   )
-  IF "%1"=="-OaTestRunId" (
+  IF "%1"=="-oaTestRunId" (
     SET WINCC_OA_TEST_RUN_ID=%2
     SHIFT
   )
