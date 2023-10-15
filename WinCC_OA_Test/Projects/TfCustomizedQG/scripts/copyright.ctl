@@ -39,7 +39,7 @@ main(string sourcePath)
   for (int i = 1; i <= dynlen(filesToCheck); i++)
   {
     const File ctrlFile = File(filesToCheck[i]);
-    throwError(makeError("", PRIO_INFO, ERR_CONTROL, 0, "Check file", ctrlFile.getPath()));
+    throwError(makeError("", PRIO_INFO, ERR_CONTROL, 0, "Check Copyright in the file", ctrlFile.getPath()));
 
     string result;
 
