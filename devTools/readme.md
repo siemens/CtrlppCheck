@@ -6,30 +6,28 @@ Happy coding.
 
 ## executeTests.cmd
 
-Helper to execute WinCC OA tests start the script *executeTests.cmd* from command line.
-This script will prepare everything necessary to execute the test, executes the tests and convert the result to jUnit (might be used in CI/CD pipelines to show results)
+To execute WinCC OA tests start *executeTests.cmd* from command line.
+This script prepares everything necessary to execute the tests, executes them and converts the results to jUnit (can be used in CI/CD pipelines).
 
 See also [Execute tests](../WinCC_OA_Test/readme.md)
 
 ## formatCtrlCode.cmd
 
-Helper to allow automatic formatting of ctrl code - inclusive ctrl tests.
+Applies automatic formatting of all ctrl code - including ctrl tests.
 
 Consistently using the same style throughout your code makes it easier to read. Code that is easy to read is easier to understand by you as well as by potential collaborators. Therefore, adhering to a coding style reduces the risk of mistakes and makes it easier to work together on software.
 
-This stript format the ctrl code in unified way by preferred WinCC OA configuration.
+This strict formats the ctrl code in a uniform way by preferred WinCC OA configuration.
 
-Following options are possible:
+Following options are supported:
 
 + -oaVersion ,defines the WinCC OA Version (default 3.19)
 
 ## changeCopyright.cmd
 
-Helper to change copyright entries to correct year for all ctrl code - including ctrl tests.
-
-As the license section contains year need to be changed ones per year.
-To change it manually is a lot of work. Therefore you can start this script to change all the license section correctly.
-
+Changes copyright entries to current year for all ctrl code - including ctrl tests.
+The license section contains a year and therefore must be adapted accordingly.
+This script adapts all the license section for the current year.
 Following options are supported:
 
 + -oaVersion ,defines the WinCC OA Version (default 3.19)
