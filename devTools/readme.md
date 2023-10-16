@@ -21,7 +21,7 @@ This strict formats the ctrl code in a uniform way by preferred WinCC OA configu
 
 Following options are supported:
 
-+ -oaVersion ,defines the WinCC OA Version (default 3.19)
++ -oaVersion, defines the WinCC OA Version (default 3.19)
 
 ## changeCopyright.cmd
 
