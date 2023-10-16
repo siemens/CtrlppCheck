@@ -30,4 +30,4 @@ The license section contains a year and therefore must be adapted accordingly.
 This script adapts all the license section for the current year.
 Following options are supported:
 
-+ -oaVersion ,defines the WinCC OA Version (default 3.19)
++ -oaVersion, defines the WinCC OA Version (default 3.19)
