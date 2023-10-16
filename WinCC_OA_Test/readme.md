@@ -18,7 +18,7 @@ Following options are possible:
 
 + -oaVersion, defines the WinCC OA Version (default 3.19)
 + -oaTestPath, define the test path (default *thisWorkspace*/WinCC_OA_Test/)
-+ -oaTestRunId , defines test-run ID to be executed (default Regression-tests)
++ -oaTestRunId, defines test-run ID to be executed (default Regression-tests)
 
 ``` bat
 executeTests.cmd -oaVersion 3.19 -oaTestPath C:\ws\Siemens\CtrlppCheck\WinCC_OA_Test\ -oaTestRunId Regression-tests
