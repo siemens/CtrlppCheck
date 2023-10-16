@@ -1,6 +1,6 @@
 # Developer tools
 
-Here are located few helper developer tools to make locale development a little bit easier.
+This folder collects support tools to make local development work somewhat easier.
 
 Happy coding.
 
