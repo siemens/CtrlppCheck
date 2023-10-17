@@ -1,4 +1,11 @@
 //--------------------------------------------------------------------------------
+/**
+  @file $relPath
+  @copyright Copyright 2023 SIEMENS AG
+             SPDX-License-Identifier: GPL-3.0-only
+*/
+
+//--------------------------------------------------------------------------------
 // used libraries (#uses)
 #uses "classes/testFramework/testProject/TfTestProject"
 

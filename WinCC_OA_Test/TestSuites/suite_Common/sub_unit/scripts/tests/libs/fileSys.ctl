@@ -1,3 +1,10 @@
+//--------------------------------------------------------------------------------
+/**
+  @file $relPath
+  @copyright Copyright 2023 SIEMENS AG
+             SPDX-License-Identifier: GPL-3.0-only
+*/
+
 /*!
  * @brief Tests for lib: fileSys
  *
@@ -11,7 +18,7 @@
 
 //--------------------------------------------------------------------------------
 class TstFileSys : OaTest
-{  
+{
   public dyn_string getAllTestCaseIds()
   {
     // list with our testcases
@@ -20,7 +27,7 @@ class TstFileSys : OaTest
 
   protected int startTestCase(const string tcId)
   {
-    switch( tcId )
+    switch (tcId)
     {
       case "fileSys getFileNamesRecursive":
       {

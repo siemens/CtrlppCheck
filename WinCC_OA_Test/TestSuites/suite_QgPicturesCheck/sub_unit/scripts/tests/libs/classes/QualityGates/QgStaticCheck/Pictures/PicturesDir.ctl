@@ -1,3 +1,10 @@
+//--------------------------------------------------------------------------------
+/**
+  @file $relPath
+  @copyright Copyright 2023 SIEMENS AG
+             SPDX-License-Identifier: GPL-3.0-only
+*/
+
 /*!
  * @brief Tests for class: Qg
  *
@@ -27,8 +34,8 @@ class TstQg : OaTest
   //------------------------------------------------------------------------------
   public int setUp()
   {
-    if ( OaTest::setUp() )
-     return -1;
+    if (OaTest::setUp())
+      return -1;
 
     // eliminate false positives
     QgVersionResult::enableOaTestCheck = false;
@@ -38,7 +45,7 @@ class TstQg : OaTest
   //------------------------------------------------------------------------------
   protected int startTestCase(const string tcId)
   {
-    switch( tcId )
+    switch (tcId)
     {
       case "PicturesDir::ctor":
       {
@@ -46,15 +53,15 @@ class TstQg : OaTest
         assertEqual(dir.getName(), "");
         assertEqual(dir.getCountOfFiles(), 0);
         assertEqual(dir.getCountOfSubDirs(), 0);
-        
+
         dir.setDir(PROJ_PATH);
         assertEqual(dir.getName(), PROJ);
         assertEqual(dir.getCountOfFiles(), 0);
         assertEqual(dir.getCountOfSubDirs(), 0);
-        
+
         return 0;
       }
-      
+
       case "PicturesDir::exists":
       {
         PicturesDir dir = PicturesDir();
@@ -65,65 +72,65 @@ class TstQg : OaTest
         assertFalse(dir.exists());
         return 0;
       }
-      
+
       case "PicturesDir::calculate":
       {
         PicturesDir dir = PicturesDir();
         string tmpDir = _makeTmpDir();
-        
+
         // not existing
         assertEqual(dir.calculate(), -1);
         assertEqual(dir.getCountOfFiles(), 0);
         assertEqual(dir.getCountOfFilesRecursive(), 0);
         assertEqual(dir.getCountOfSubDirs(), 0);
-        
+
         // existing, but empty
         dir.setDir(tmpDir);
-        
+
         assertEqual(dir.calculate(), 0);
         assertEqual(dir.getCountOfFiles(), 0);
         assertEqual(dir.getCountOfFilesRecursive(), 0);
         assertEqual(dir.getCountOfSubDirs(), 0);
-        
+
         // existing with 2 sub dirs and 1 file
         mkdir(tmpDir + "subDir1");
         mkdir(tmpDir + "subDir2");
         fclose(fopen(tmpDir + "file.png", "wb+"));
-        
+
         assertEqual(dir.calculate(), 0);
         assertEqual(dir.getCountOfFiles(), 1);
         assertEqual(dir.getCountOfFilesRecursive(), 1);
         assertEqual(dir.getCountOfSubDirs(), 2);
-        
-        
+
+
         // existing witth 3 files in defirent sub dirs
         fclose(fopen(tmpDir + "subDir1/file.PNG", "wb+"));
         fclose(fopen(tmpDir + "subDir1/file.txt", "wb+"));
-        
+
         assertEqual(dir.calculate(), 0);
         assertEqual(dir.getCountOfFiles(), 1);
         assertEqual(dir.getCountOfFilesRecursive(), 3);
         assertEqual(dir.getCountOfSubDirs(), 2);
-        
+
         dyn_anytype childs = dir.getSubDirs();
-        assertEqual(dynlen(childs), 2); 
+        assertEqual(dynlen(childs), 2);
         assertEqual(childs[1].getName(), "subDir1");
-        
-        
+
+
         dir.setDir(PROJ_PATH);
         assertTrue(dir.exists());
         dir.setDir(PROJ_PATH + "abc");
         assertFalse(dir.exists());
-        
+
         rmdir(tmpDir, TRUE);
         return 0;
       }
-      
+
       case "PicturesDir::validate":
       {
         PicturesDir dir = PicturesDir();
         string tmpDir = _makeTmpDir();
-        
+
         dir.setDir(tmpDir);
 
         // check empty
@@ -133,7 +140,7 @@ class TstQg : OaTest
         assertEqual(dir.result.totalPoints, 1);
         assertEqual(QgVersionResult::lastErr, "reason.dir.isEmpty");
 //         return ;
-        
+
         // check with 10 files, try it with different extentions
         fclose(fopen(tmpDir + "file1.png", "wb+"));
         fclose(fopen(tmpDir + "file2.PNG", "wb+"));
@@ -146,16 +153,16 @@ class TstQg : OaTest
         fclose(fopen(tmpDir + "file9.png", "wb+"));
         fclose(fopen(tmpDir + "file10.png", "wb+"));
         dir.calculate();
-        
+
         assertEqual(dir.validate(), 0);
         assertEqual(dir.result.errorPoints, 0);
         assertEqual(dir.result.totalPoints, 23);
         assertEqual(dir.getCountOfFiles(), 10);
-        
+
         // to mutch files
         fclose(fopen(tmpDir + "file11.png", "wb+"));
         dir.calculate();
-        
+
         assertEqual(dir.validate(), 0);
         assertEqual(dir.result.errorPoints, 1);
         assertEqual(dir.result.totalPoints, 25);
@@ -163,7 +170,7 @@ class TstQg : OaTest
         assertEqual(dir.getCountOfFiles(), 11);
 //         DebugN(dir.result.children);
         remove(tmpDir + "file11.png");
-        
+
         // try with 5 sub dirs
         mkdir(tmpDir + "subDir1");
         fclose(fopen(tmpDir + "subDir1/file1.png", "wb+"));
@@ -176,22 +183,22 @@ class TstQg : OaTest
         mkdir(tmpDir + "subDir5");
         fclose(fopen(tmpDir + "subDir5/file1.png", "wb+"));
         dir.calculate();
-        
+
         assertEqual(dir.validate(), 0);
         assertEqual(dir.result.errorPoints, 0);
         assertEqual(dir.result.totalPoints, 48);
-        
+
         // to mutch sub dirs
         mkdir(tmpDir + "subDir6");
         fclose(fopen(tmpDir + "subDir6/file1.png", "wb+"));
         dir.calculate();
-        
+
         assertEqual(dir.validate(), 0);
         assertEqual(dir.result.errorPoints, 1);
         assertEqual(QgVersionResult::lastErr, "reason.dir.subDirCount");
 //         DebugN(dir);
         rmdir(tmpDir + "subDir6", TRUE);
-        
+
         // invalid extention, is a indirect test fi pictureFile. So it is tested that file errors are added
         fclose(fopen(tmpDir + "subDir5/file1.txt", "wb+"));
         dir.calculate();
@@ -200,7 +207,7 @@ class TstQg : OaTest
         assertEqual(dir.result.errorPoints, 1);
         assertEqual(QgVersionResult::lastErr, "reason.file.extention");
 //         DebugN(dir);
-        
+
         // claen up after test
 //         rmdir(tmpDir, TRUE);
         return 0;
@@ -209,18 +216,18 @@ class TstQg : OaTest
 
     return -1;
   }
-  
+
   //------------------------------------------------------------------------------
   string _makeTmpDir()
-  {    
+  {
     string tmpDir = dirName(tmpnam()) + "QgPictureDir/";
 
     // create tmp-dir for this test
-    if ( isdir(tmpDir) )
+    if (isdir(tmpDir))
       rmdir(tmpDir, TRUE);
-        
+
     mkdir(tmpDir);
-    
+
     return tmpDir;
   }
 };

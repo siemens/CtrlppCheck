@@ -1,3 +1,10 @@
+//--------------------------------------------------------------------------------
+/**
+  @file $relPath
+  @copyright Copyright 2023 SIEMENS AG
+             SPDX-License-Identifier: GPL-3.0-only
+*/
+
 #uses "std"
 #uses "spaceCheck"
 #uses "classes/QualityGates/QgSettings"

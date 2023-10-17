@@ -6,20 +6,20 @@ Execute the test run "Regression-tests" to validate all regressions before you c
 
 ## Execute tests
 
-To execute WinCC OA tests start the script *executeTests.cmd* form command line.
+To execute WinCC OA tests start the script *executeTests.cmd* from command line.
 This script will prepare everything necessary to execute the test, executes the tests and convert the result to jUnit (might be used in CI/CD pipelines to show results)
 
 ``` bat
-cd WinCC_OA_Test
+cd devTools
 executeTests.cmd
 ```
 
 Following options are possible:
--OaVersion ,defines the WinCC OA Version (default 3.20)
--OaInstallPath ,define the installation path of WinCC OA (default C:\Siemens\Automation\WinCC_OA\)
--OaTestPath ,define the test path (default *thisWorkspace*\WinCC_OA_Test\)
--OaTestRunId , defines test-run ID to be executed (default Regression-tests )
+
++ -oaVersion, defines the WinCC OA Version (default 3.19)
++ -oaTestPath, define the test path (default *thisWorkspace*/WinCC_OA_Test/)
++ -oaTestRunId, defines test-run ID to be executed (default Regression-tests)
 
 ``` bat
-executeTests.cmd -OaVersion 3.19 -OaInstallPath C:\Siemens\Automation\WinCC_OA\ -OaTestPath C:\ws\Siemens\CtrlppCheck\WinCC_OA_Test\ -OaTestRunId Regression-tests
+executeTests.cmd -oaVersion 3.19 -oaTestPath C:\ws\Siemens\CtrlppCheck\WinCC_OA_Test\ -oaTestRunId Regression-tests
 ```

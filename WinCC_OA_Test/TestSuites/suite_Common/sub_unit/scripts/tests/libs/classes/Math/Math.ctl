@@ -1,3 +1,10 @@
+//--------------------------------------------------------------------------------
+/**
+  @file $relPath
+  @copyright Copyright 2023 SIEMENS AG
+             SPDX-License-Identifier: GPL-3.0-only
+*/
+
 /*!
  * @brief Tests for class: Math
  *
@@ -23,7 +30,7 @@ class TstMath : OaTest
 
   protected int startTestCase(const string tcId)
   {
-    switch( tcId )
+    switch (tcId)
     {
       case "Math::getPercent()":
       {

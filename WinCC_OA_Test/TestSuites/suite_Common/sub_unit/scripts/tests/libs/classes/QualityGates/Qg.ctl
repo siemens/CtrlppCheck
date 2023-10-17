@@ -1,3 +1,10 @@
+//--------------------------------------------------------------------------------
+/**
+  @file $relPath
+  @copyright Copyright 2023 SIEMENS AG
+             SPDX-License-Identifier: GPL-3.0-only
+*/
+
 /*!
  * @brief Tests for class: Qg
  *
@@ -23,13 +30,13 @@ class TstQg : OaTest
 
   protected int startTestCase(const string tcId)
   {
-    switch( tcId )
+    switch (tcId)
     {
       case "Qg::get/setId()":
       {
         assertEqual(Qg::getId(), "");
         Qg::setId("some one ID");
-        assertEqual(Qg::getId(), "some one ID");        
+        assertEqual(Qg::getId(), "some one ID");
         return 0;
       }
     }

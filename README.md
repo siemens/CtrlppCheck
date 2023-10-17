@@ -115,3 +115,33 @@ When applying a dual GPL/BSD license, append the following to the above:
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 ```
+
+Test concept in few words
+-------------------------
+
+There is only one right way to test the product. Provide new automatic tests and check your quality.
+Automated tests perform the same steps precisely every time they are executed and never forget to record detailed results. Testers freed from repetitive manual tests have more time to create new automated software tests and deal with complex features.
+
+To execute WinCC OA tests start the script [*executeTests.cmd*](/devTools/readme.md) from command line.
+This script will prepare everything necessary to execute the test, executes the tests and convert the result to jUnit.
+
+Best practice is to start the tests before you provide the change. Everting shall be fine and you shall see something like this
+```
+WCCOActrl    (0), 2023.10.15 19:02:21.700, CTRL, INFO,        6/jUnit, Over all summary:
+  Failed : 0
+  Aborted : 0
+  Passed : 79
+  Skipped : 0
+  KnownBugs : 0
+  Instable : 0
+```
+
+Provide your new tests, which simulate the bug or test the feature.
+
+Start tests again. When the tests are OK, commit your changes and provide pull request.
+Test OK means, there are only Passed test cases. In worst case a *known-bug* might be accepted.
+Please be sure the bug has been linked correctly to an existing [Issue](https://github.com/siemens/CtrlppCheck/issues)
+
+More information can you fine in [Contributor documentation](docs/contributor.md)
+
+Happy testing.
