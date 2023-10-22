@@ -43,7 +43,7 @@ class QgStaticCheck_Pictures : QgBase
     _pictures.setDir(this.checkedPath);
 
     if (!_pictures.exists())
-      setMinValidScore("QgStaticCheck_Pictures", "assert.missingPictures", "reason.missingPictures");
+      this.setMinValidScore("QgStaticCheck_Pictures", "missingPictures");
 
     return 0;
   }

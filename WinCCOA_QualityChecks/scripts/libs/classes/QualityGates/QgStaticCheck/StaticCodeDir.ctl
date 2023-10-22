@@ -9,6 +9,7 @@
 
 #uses "classes/ErrorHdl/OaLogger"
 #uses "classes/QualityGates/QgBase"
+#uses "classes/QualityGates/QgResult"
 #uses "classes/QualityGates/QgStaticCheck/StaticDir"
 #uses "classes/QualityGates/QgSettings"
 
@@ -155,18 +156,21 @@ class StaticCodeDir : StaticDir
 
     if (rc == 0)
     {
+      const mapping dollars = makeMapping("dir.name", getName(),
+                                          "dir.avgNLOC", getAvgNLOC(),
+                                          "dir.avgNLOC", getAvgNLOC(),
+                                          "dir.CCN", getCCN(),
+                                          "dir.CCN", getAvgCCN()
+                                        );
+
       {
         shared_ptr<QgSettings> settings = new QgSettings("StaticCodeDir.dir.NLOC");
 
         if (settings.isEnabled())
         {
-          shared_ptr <QgVersionResult> assertion = new QgVersionResult();
-          assertion.setMsgCatName("QgStaticCheck_StaticCodeDir");
+          shared_ptr <QgResult> assertion = new QgResult("QgStaticCheck_StaticCodeDir", "dir.NLOC", dollars);
 
           // NLOC in dir
-          assertion.setAssertionText("assert.dir.NLOC");
-          assertion.setReasonText("reason.dir.NLOC", makeMapping("dir.name", getName(),
-                                  "dir.NLOC", getNLOC()));
           assertion.info(getNLOC(), settings.getScorePoints());
           result.addChild(assertion);
         }
@@ -175,17 +179,12 @@ class StaticCodeDir : StaticDir
       // average NLOC in dir
       if (getAvgNLOC() > 0)
       {
-
         shared_ptr<QgSettings> settings = new QgSettings("StaticCodeDir.dir.avgNLOC");
 
         if (settings.isEnabled())
         {
-          shared_ptr <QgVersionResult> assertion = new QgVersionResult();
-          assertion.setMsgCatName("QgStaticCheck_StaticCodeDir");
+          shared_ptr <QgResult> assertion = new QgResult("QgStaticCheck_StaticCodeDir", "dir.avgNLOC", dollars);
 
-          assertion.setAssertionText("assert.dir.avgNLOC");
-          assertion.setReasonText("reason.dir.avgNLOC", makeMapping("dir.name", getName(),
-                                  "dir.avgNLOC", getAvgNLOC()));
           assertion.info(getAvgNLOC(), settings.getScorePoints());
           result.addChild(assertion);
         }
@@ -197,12 +196,7 @@ class StaticCodeDir : StaticDir
 
         if (settings.isEnabled())
         {
-          shared_ptr <QgVersionResult> assertion = new QgVersionResult();
-          assertion.setMsgCatName("QgStaticCheck_StaticCodeDir");
-
-          assertion.setAssertionText("assert.dir.CCN");
-          assertion.setReasonText("reason.dir.CCN", makeMapping("dir.name", getName(),
-                                  "dir.CCN", getCCN()));
+          shared_ptr <QgResult> assertion = new QgResult("QgStaticCheck_StaticCodeDir", "dir.CCN", dollars);
           assertion.info(getCCN(), settings.getScorePoints());
           result.addChild(assertion);
         }
@@ -215,12 +209,7 @@ class StaticCodeDir : StaticDir
 
         if (settings.isEnabled())
         {
-          shared_ptr <QgVersionResult> assertion = new QgVersionResult();
-          assertion.setMsgCatName("QgStaticCheck_StaticCodeDir");
-
-          assertion.setAssertionText("assert.dir.avgCCN");
-          assertion.setReasonText("reason.dir.avgCCN", makeMapping("dir.name", getName(),
-                                  "dir.CCN", getAvgCCN()));
+          shared_ptr <QgResult> assertion = new QgResult("QgStaticCheck_StaticCodeDir", "dir.avgCCN", dollars);
           assertion.info(getAvgCCN(), settings.getScorePoints());
           result.addChild(assertion);
         }

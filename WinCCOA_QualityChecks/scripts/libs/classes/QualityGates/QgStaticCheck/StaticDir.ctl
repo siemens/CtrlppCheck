@@ -8,25 +8,29 @@
 //
 
 #uses "classes/ErrorHdl/OaLogger"
-#uses "classes/QualityGates/QgBase"
 #uses "classes/FileSys/QgDir"
+#uses "classes/QualityGates/QgBase"
+#uses "classes/QualityGates/QgResult"
 #uses "classes/QualityGates/QgSettings"
 
 class StaticDir : QgDir
 {
 
+  //---------------------------------------------------------------------------
   public setDir(string dirPath)
   {
     dynClear(_files);
     dynClear(_childs);
 
-    if (!dirPath.endsWith("/") && !dirPath.endsWith("\\"))
-      dirPath += makeNativePath("/"); // ensure trailing path delimiter
+    dirPath = makeUnixPath(dirPath);
 
-    QgDir::setDirPath(dirPath);
+    if (!dirPath.isEmpty() && !dirPath.endsWith("/"))
+      dirPath += "/"; // ensure trailing path delimiter
+
+    QgDir::setDirPath(makeNativePath(dirPath));
   }
 
-  //------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   /** @brief Function calculates statistic data from panels, scripts, libs dirs.
     @details It works for oa panels, scripts, libs directories.
 
@@ -47,10 +51,11 @@ class StaticDir : QgDir
 
     dynClear(_files);
     dynClear(_childs);
+    _allFilesCount = 0;
 
     if (!exists())
     {
-      logger.warning(0, Qg::getId(), __FUNCTION__, "Directory does not exist", getDirPath());
+      logger.warning(0, Qg::getId(), __FUNCTION__, "Directory does not exist: " + getDirPath());
       return -1;
     }
 
@@ -94,27 +99,45 @@ class StaticDir : QgDir
     return 0;
   }
 
+  //---------------------------------------------------------------------------
   public int validate()
   {
     const int filesCount  = getCountOfFiles();
     const int subDirCount = getCountOfSubDirs();
     const bool isEmpty = (filesCount + subDirCount) == 0;
 
+    const mapping dollars = makeMapping("dir.name", getName(),
+                                        "dir.filesCountRecursive", getCountOfFilesRecursive(),
+                                        "dir.isEmpty", isEmpty,
+                                        "dir.subDirCount", subDirCount,
+                                        "dir.filesCount", filesCount
+                                       );
 
-    QgVersionResult::lastErr = "";
+    result = new QgResult("QgStaticCheck_StaticDir", "directory", dollars);
 
-    result = new QgVersionResult();
-    result.text = getName();
+    {
+      shared_ptr<QgSettings> settings = new QgSettings(getSettingsRoot() + ".dir.isEmpty");
+
+      if (settings.isEnabled())
+      {
+        shared_ptr <QgResult> assertion = new QgResult("QgStaticCheck_StaticDir", "dir.isEmpty", dollars);
+
+        if (!assertion.assertFalse(isEmpty, settings.getScorePoints()))
+        {
+          result.addChild(assertion);
+          return 1;
+        }
+
+        result.addChild(assertion);
+      }
+    }
 
     {
       shared_ptr<QgSettings> settings = new QgSettings(getSettingsRoot() + ".dir.hasFilesRecursive");
 
       if (settings.isEnabled())
       {
-        shared_ptr <QgVersionResult> assertion = new QgVersionResult();
-        assertion.setMsgCatName("QgStaticCheck_StaticDir");
-        assertion.setAssertionText("assert.dir.hasFilesRecursive");
-        assertion.setReasonText("reason.dir.hasFilesRecursive", makeMapping("dir.name", getName()));
+        shared_ptr <QgResult> assertion = new QgResult("QgStaticCheck_StaticDir", "dir.hasFilesRecursive", dollars);
 
         if (!assertion.assertGreatherEqual(getCountOfFilesRecursive(),
                                            settings.getLowLimit(DEFAULT_FILESREC_LOW),
@@ -129,35 +152,11 @@ class StaticDir : QgDir
     }
 
     {
-      shared_ptr<QgSettings> settings = new QgSettings(getSettingsRoot() + ".dir.isEmpty");
-
-      if (settings.isEnabled())
-      {
-        shared_ptr <QgVersionResult> assertion = new QgVersionResult();
-        assertion.setMsgCatName("QgStaticCheck_StaticDir");
-        assertion.setAssertionText("assert.dir.isEmpty");
-        assertion.setReasonText("reason.dir.isEmpty", makeMapping("dir.name", getName()));
-
-        if (!assertion.assertFalse(isEmpty, settings.getScorePoints()))
-        {
-          result.addChild(assertion);
-          return 1;
-        }
-
-        result.addChild(assertion);
-      }
-    }
-
-    {
       shared_ptr<QgSettings> settings = new QgSettings(getSettingsRoot() + ".dir.subDirCount");
 
       if (settings.isEnabled())
       {
-        shared_ptr <QgVersionResult> assertion = new QgVersionResult();
-        assertion.setMsgCatName("QgStaticCheck_StaticDir");
-        assertion.setAssertionText("assert.dir.subDirCount");
-        assertion.setReasonText("reason.dir.subDirCount", makeMapping("dir.name", getName(),
-                                "dir.subDirCount", subDirCount));
+        shared_ptr <QgResult> assertion = new QgResult("QgStaticCheck_StaticDir", "dir.subDirCount", dollars);
         assertion.assertLessEqual(subDirCount,
                                   settings.getHighLimit(DEFAULT_SUBDIRCOUNT_HIGH),
                                   settings.getScorePoints());
@@ -171,11 +170,10 @@ class StaticDir : QgDir
 
       if (settings.isEnabled())
       {
-        shared_ptr <QgVersionResult> assertion = new QgVersionResult();
-        assertion.setMsgCatName("QgStaticCheck_StaticDir");
-        assertion.setAssertionText("assert.dir.filesCount");
-        assertion.setReasonText("reason.dir.filesCount", makeMapping("dir.name", getName(),
-                                "dir.filesCount", filesCount));
+        shared_ptr <QgResult> assertion = new QgResult("QgStaticCheck_StaticDir", "dir.filesCount", dollars);
+        DebugTN(__FUNCTION__, filesCount,
+                                  settings.getHighLimit(DEFAULT_FILESCOUNT_HIGH),
+                                  settings.getScorePoints(), dollars);
         assertion.assertLessEqual(filesCount,
                                   settings.getHighLimit(DEFAULT_FILESCOUNT_HIGH),
                                   settings.getScorePoints());
@@ -186,13 +184,13 @@ class StaticDir : QgDir
     return 0;
   }
 
+  //---------------------------------------------------------------------------
   public int validateSubDirs()
   {
     if (dynlen(_childs) > 0)
     {
-      shared_ptr <QgVersionResult> subDirs = new QgVersionResult();
-      subDirs.setMsgCatName("QgStaticCheck_StaticDir");
-      subDirs.setAssertionText("subDirsList");
+      const mapping dollars = makeMapping("dir.name", getName());
+      shared_ptr <QgResult> subDirs = new QgResult("QgStaticCheck_StaticDir", "subDirsList", dollars);
 
       while (dynlen(_childs) > 0)
       {
@@ -207,13 +205,13 @@ class StaticDir : QgDir
     return 0;
   }
 
+  //---------------------------------------------------------------------------
   public int validateFiles()
   {
     if (dynlen(_files) > 0)
     {
-      shared_ptr <QgVersionResult> files = new QgVersionResult();
-      files.setMsgCatName("QgStaticCheck_StaticDir");
-      files.setAssertionText("filesList");
+      const mapping dollars = makeMapping("dir.name", getName());
+      shared_ptr <QgResult> files = new QgResult("QgStaticCheck_StaticDir", "filesList", dollars);
 
       while (dynlen(_files) > 0)
       {
@@ -228,32 +226,37 @@ class StaticDir : QgDir
     return 0;
   }
 
+  //---------------------------------------------------------------------------
   public dyn_anytype getSubDirs()
   {
     return _childs;
   }
 
+  //---------------------------------------------------------------------------
   public dyn_anytype getFiles()
   {
     return _files;
   }
 
-
+  //---------------------------------------------------------------------------
   public int getCountOfFiles()
   {
     return dynlen(_files);
   }
 
+  //---------------------------------------------------------------------------
   public int getCountOfFilesRecursive()
   {
     return _allFilesCount;
   }
 
+  //---------------------------------------------------------------------------
   public int getCountOfSubDirs()
   {
     return dynlen(_childs);
   }
 
+  //---------------------------------------------------------------------------
   public void clear()
   {
     dynClear(_files);
@@ -261,18 +264,18 @@ class StaticDir : QgDir
 //     result = nullptr;
   }
 
+  //---------------------------------------------------------------------------
   public string getSettingsRoot()
   {
     return "StaticDir";
   }
 
-  //------------------------------------------------------------------------------
-//   public QgVersionResult result = QgVersionResult(); //!< Quality gate result
-  public shared_ptr<QgVersionResult> result;
+  //---------------------------------------------------------------------------
+  public shared_ptr<QgResult> result;
 
-//--------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 //@protected members
-//--------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
   protected dyn_anytype _files;
   protected dyn_anytype _childs;

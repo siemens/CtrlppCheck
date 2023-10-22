@@ -177,7 +177,7 @@
 </rule>
 <rule version="1">
 	<tokenlist>raw</tokenlist>
-	<pattern>makeError \( \S+ , \S+ , \S+ , 0 </pattern>
+	<pattern>makeError \( \S+ , 0 </pattern>
 	<message>
 	    <id>fatal_program_exit</id>
 		<severity>warning</severity>

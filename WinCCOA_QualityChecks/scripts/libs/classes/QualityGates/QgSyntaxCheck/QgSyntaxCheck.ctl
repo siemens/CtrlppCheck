@@ -12,6 +12,7 @@
 #uses "classes/QualityGates/Qg"
 #uses "classes/QualityGates/QgBase"
 #uses "classes/Variables/String"
+#uses "classes/QualityGates/QgResult"
 #uses "classes/QualityGates/QgSettings"
 
 //--------------------------------------------------------------------------------
@@ -47,13 +48,13 @@ class QgSyntaxCheck : QgBase
     if (QgBase::setUp())
       return -1;
 
-    QgVersionResult::showErrorsOnly = TRUE;
+    QgResult::showErrorsOnly = TRUE;
 
     QgDir panelsDir = QgDir(PROJ_PATH + PANELS_REL_PATH);
     QgDir scriptsDir = QgDir(PROJ_PATH + SCRIPTS_REL_PATH);
 
     if (!panelsDir.exists() && !scriptsDir.exists())
-      setMinValidScore("QgSyntaxCheck", "assert.missingFiles", "reason.missingFiles");
+      this.setMinValidScore("QgSyntaxCheck", "missingFiles");
 
     return 0;
   }
@@ -79,14 +80,17 @@ class QgSyntaxCheck : QgBase
 
     @return 0 when successfull, otherwise -1.
     @attention override from QgBase::validate()
+
+    @todo many code might be eliminated by using WinCC OA LogAnalyzer. But this feature
+          exists in versions >= 3.19. That means after refactoring it will no more works with
+          WinCC OA version <= 3.18
+          The value is to eliminate code here.
+           + is parsed in weir way and no body can grant, that it works "for ever"
+           + performance
   */
   public int validate()
   {
-    QgVersionResult::lastErr = "";
-    _result = new QgVersionResult();
-
-    _result.setMsgCatName("QgSyntaxCheck");
-    _result.setAssertionText("syntaxMsgs");
+    _result = new QgResult("QgSyntaxCheck", "syntaxMsgs");
 
     dyn_string msgs;
     _oaSyntaxCheck.stdErrToMessages(msgs);
@@ -126,10 +130,7 @@ class QgSyntaxCheck : QgBase
         msg = makeUnixPath(msg);
         strreplace(msg, makeUnixPath(PROJ_PATH), "");
 
-        shared_ptr <QgVersionResult> assertion = new QgVersionResult();
-        assertion.setMsgCatName("QgSyntaxCheck");
-        assertion.setAssertionText("assert.isSyntaxValid");
-        assertion.setReasonText("reason.isSyntaxValid", makeMapping("msg", msg));
+        shared_ptr <QgResult> assertion = new QgResult("QgSyntaxCheck", ("isSyntaxValid", makeMapping("msg", msg));
 
         if (prio == "INFO")
         {
@@ -143,23 +144,6 @@ class QgSyntaxCheck : QgBase
 
           DebugFN("QgSyntaxCheck", __FUNCTION__, "Skip checks for info message");
           continue;  // ignore info messages
-        }
-        else if (errCode == "117")
-        {
-          /// @todo remove this check when are WinCCOALicenseCtrlExt implemented
-          if (strpos(msg, "WinCCOALicenseCtrlExt") > 0)
-            continue; // ignore missing extension, this is added by IL
-        }
-        else if (errCode == "61")
-        {
-          /// 61, Cannot open file, /.../WinCCOA_FinalyApi_234/scripts/
-          String str = String(makeUnixPath(msg));
-
-          if (str.endsWith(makeUnixPath(SCRIPTS_REL_PATH)) || str.endsWith(makeUnixPath(PANELS_REL_PATH)))
-          {
-            DebugFTN("QgSyntaxCheck", "oa bug, ignore this message", msg);
-            continue; // ignore missing extension, this is added by IL
-          }
         }
 
         DebugFTN("QgSyntaxCheck", __FUNCTION__, "add message to bad-list");

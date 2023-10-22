@@ -1,2 +1,26 @@
-assert.hasErr,$file
-reason.hasErr,$errText
+# an Ctrlppcheck error may contains following keys
+# possible values
+# id
+# severity
+# msg
+# verbose
+# path
+# path0
+# line
+# cwe
+# special case for logging
+# relPath - relative path in unix format
+
+#assertions are per severity (error, warning, style, performance, portability or information)
+assert.has_error,ERROR in $relPath at line $line
+reason.has_error,$msg ($id)
+assert.has_warning,WARNING in $relPath at line $line
+reason.has_warning,$msg ($id)
+assert.has_style,STYLE in $relPath at line $line
+reason.has_style,$msg ($id)
+assert.has_performance,PERFORMANCE in $relPath at line $line
+reason.has_performance,$msg ($id)
+assert.has_portability,PORTABILITY in $relPath at line $line
+reason.has_portability,$msg ($id)
+assert.has_information,INFO in $relPath at line $line
+reason.has_information,$msg ($id)

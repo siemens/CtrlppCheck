@@ -1,6 +1,8 @@
-assert.isCheater,Check if file $location is overloaded.
-reason.isCheater,It is not allowed to overwrite WinCCOA-license check files: $file.name
-filesList,Files
+filesList,Check files in $projectPath
+# possible dollars
+# location - checked file relative path in Linux format
+# file.name - file name
+# file.isOverloadedFrom - the overloaded file (form sub project or WinCC OA)
 assert.isOverloaded,Check if file $location is overloaded.
 reason.isOverloaded,The file '$file.name' is overloaded from '$file.isOverloadedFrom'.
 assert.isOverloadedAllowed,Check if file $location is overloaded (allowed overloads).

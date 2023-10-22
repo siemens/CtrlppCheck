@@ -9,15 +9,16 @@
 
 #uses "classes/ErrorHdl/OaLogger"
 #uses "classes/QualityGates/QgBase"
+#uses "classes/QualityGates/QgResult"
 #uses "classes/QualityGates/QgSettings"
 #uses "fileSys"
-
 
 class QgOverloadedFilesCheck
 {
 //--------------------------------------------------------------------------------
 //@public members
 //--------------------------------------------------------------------------------
+  public string projPathToCheck = PROJ_PATH;
   /**
     List with allowed files.
   */
@@ -86,16 +87,26 @@ class QgOverloadedFilesCheck
   public int calculate()
   {
     OaLogger logger;
-    dyn_string files = getFileNamesRecursive(PROJ_PATH);
+    if (projPathToCheck.isEmpty() || !isdir(projPathToCheck))
+    {
+      logger.warning(0, Qg::getId(), "Directory does not exists", projPathToCheck);
+      return -1;
+    }
+
+    projPathToCheck = makeNativePath(projPathToCheck);
+    logger.info(0, Qg::getId(), "Check files in the project directory", projPathToCheck);
+    dyn_string files = getFileNamesRecursive(projPathToCheck);
     dynSort(files);
+    DebugTN(__FUNCTION__, projPathToCheck, files);
 
     //
+    const int projPathLen = strlen(projPathToCheck);
     for (int i = 1; i <= dynlen(files); i++)
     {
-      string path = files[i];
+      string path = makeNativePath(files[i]);
       logger.info(0, Qg::getId(), "Check file", path);
 
-      const string relPath = substr(path, strlen(PROJ_PATH));
+      const string relPath = substr(path, projPathLen);
 
       if (strpos(relPath, makeNativePath(CONFIG_REL_PATH)) == 0 ||
           strpos(relPath, makeNativePath(DB_REL_PATH)) == 0 ||
@@ -118,56 +129,39 @@ class QgOverloadedFilesCheck
   */
   public int validate()
   {
-    QgVersionResult::lastErr = "";
-    result = new QgVersionResult();
-
-
+    result = new QgResult("QgStaticCheck_OverloadedFiles", "filesList", makeMapping("projectPath", projPathToCheck));
+DebugTN(__FUNCTION__, _relPaths);
     if (dynlen(_relPaths) > 0)
     {
-      result.setMsgCatName("QgStaticCheck_OverloadedFiles");
-      result.setAssertionText("filesList");
-      result.setLocation(PROJ_PATH);
-
       for (int i = 1; i <= dynlen(_relPaths); i++)
       {
         const string relPath = _relPaths[i];
 
         const string overloadedFrom = findSourceProj(relPath);
+        DebugTN(__FUNCTION__, relPath, overloadedFrom);
         shared_ptr<QgSettings> settings = new QgSettings("OverloadedFilesCheck.isOverloadedAllowed");
 
         if (settings.isEnabled())
         {
-          shared_ptr <QgVersionResult> assertion = new QgVersionResult();
+          shared_ptr <QgResult> assertion = new QgResult("QgStaticCheck_OverloadedFiles", "", makeMapping("file.name", relPath, "file.isOverloadedFrom", overloadedFrom));
           assertion.setLocation(relPath);
-          assertion.setMsgCatName("QgStaticCheck_OverloadedFiles");
 
           if (isAllowed(relPath))
           {
-            assertion.setAssertionText("assert.isOverloadedAllowed", makeMapping("file.name", relPath));
-            assertion.setReasonText("reason.isOverloadedAllowed", makeMapping("file.name", relPath,
-                                    "file.isOverloadedFrom", overloadedFrom));
+            assertion.setKey("isOverloadedAllowed");
             assertion.allowNextErr(TRUE);
-            assertion.assertFalse(overloadedFrom != "", settings.getScorePoints()); // negative logic, for better look in store
-            assertion.referenceValue = (overloadedFrom != ""); // reference value faken, for better look in store
+            assertion.assertTrue(overloadedFrom.isEmpty(), settings.getScorePoints());
           }
           else
           {
-            assertion.setAssertionText("assert.isOverloaded", makeMapping("file.name", relPath));
-            assertion.setReasonText("reason.isOverloaded", makeMapping("file.name", relPath,
-                                    "file.isOverloadedFrom", overloadedFrom));
-            assertion.assertFalse(overloadedFrom != "", settings.getScorePoints()); // negative logic, for better look in store
-
+            assertion.setKey("isOverloaded");
+            assertion.assertTrue(overloadedFrom.isEmpty(), settings.getScorePoints());
           }
 
-          shared_ptr <QgVersionResult> fileChildData = new QgVersionResult();
-          fileChildData.text = relPath;
-          fileChildData.addChild(assertion);
-
           // add child to results
-          result.addChild(fileChildData);
+          result.addChild(assertion);
         }
       }
-
     }
 
     return 0;
@@ -212,7 +206,7 @@ class QgOverloadedFilesCheck
   }
 
   //------------------------------------------------------------------------------
-  public shared_ptr <QgVersionResult> result; //!< Overloaded file check result
+  public shared_ptr <QgResult> result; //!< Overloaded file check result
 
 //--------------------------------------------------------------------------------
 //@private members

@@ -10,19 +10,18 @@
 //--------------------------------------------------------------------------------
 // used libraries (#uses)
 #uses "classes/ErrorHdl/OaLogger"
-#uses "classes/QualityGates/AddOn/FileSys/QgAddOnTmpSourceDir"
+#uses "classes/QualityGates/QgBaseError"
 #uses "classes/QualityGates/QgResultPublisher"
 #uses "classes/oaTest/OaTest"
 #uses "classes/QualityGates/Qg"
 #uses "classes/QualityGates/QgMsgCat"
-#uses "classes/QualityGates/QgVersionResult"
+#uses "classes/QualityGates/QgResult"
 
 //--------------------------------------------------------------------------------
 // declare variables and constans
 
 QgMsgCat myQgMsgCat = QgMsgCat();
 OaTest  myTest = OaTest();
-
 
 //--------------------------------------------------------------------------------
 /** Error codes used in QgBase.cat
@@ -119,7 +118,7 @@ class QgBase
   }
 
   //------------------------------------------------------------------------------
-  public static QgResultState calculateState(const shared_ptr <QgVersionResult> result)
+  public static QgResultState calculateState(const shared_ptr <QgResult> result)
   {
     if (result.hasError)
       return QgResultState::warning;
@@ -153,25 +152,22 @@ class QgBase
 
   //------------------------------------------------------------------------------
   public void setMinValidScore(const string &msgCatName,
-                               const string &keyText, const string &keyReason,
+                               const string &key,
                                const mapping dollars = makeMapping())
   {
     _setMinScore = TRUE;
-    _minScoreResult = new QgVersionResult();
-    _minScoreResult.setMsgCatName(msgCatName);
-    _minScoreResult.setMinValidScore(keyText, keyReason, dollars);
+    _minScoreResult = new QgResult(msgCatName, key, dollars);
   }
 
 
 //--------------------------------------------------------------------------------
 //@protected members
 //--------------------------------------------------------------------------------
-  protected QgAddOnTmpSourceDir _sourceDir = QgAddOnTmpSourceDir();
   protected QgResultPublisher _publisher = QgResultPublisher();
-  protected shared_ptr<QgVersionResult> _result;
+  protected shared_ptr<QgResult> _result;
 
   protected bool _setMinScore = FALSE;
-  protected shared_ptr <QgVersionResult> _minScoreResult;
+  protected shared_ptr <QgResult> _minScoreResult;
 
   //------------------------------------------------------------------------------
   protected int _start()

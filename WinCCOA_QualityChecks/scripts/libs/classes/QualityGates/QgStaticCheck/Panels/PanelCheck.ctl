@@ -7,7 +7,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 //
 
-#uses "classes/QualityGates/QgVersionResult"
+#uses "classes/QualityGates/QgResult"
 #uses "classes/FileSys/QgFile"
 #uses "classes/QualityGates/QgAddOnResultErr"
 #uses "classes/QualityGates/QgStaticCheck/Panels/PanelFile/PanelFile"
@@ -26,7 +26,7 @@ class PanelCheck : QgFile
 //--------------------------------------------------------------------------------
 
   //------------------------------------------------------------------------------
-  public shared_ptr <QgVersionResult> result; //!< Quality gate result
+  public shared_ptr <QgResult> result; //!< Quality gate result
 
   //------------------------------------------------------------------------------
   /** Default c-tor
@@ -229,9 +229,8 @@ class PanelCheck : QgFile
   //------------------------------------------------------------------------------
   public int validate()
   {
-    QgVersionResult::lastErr = "";
-    result = new QgVersionResult();
-    result.text = getName();
+    const mapping dollars = makeMapping("file.name", getName());
+    result = new QgResult("QgStaticCheck_Panels", "file", dollars);
 
     if (validateIsExample() ||
         validateIsBackUp() ||
@@ -267,10 +266,8 @@ class PanelCheck : QgFile
 
     if (settings.isEnabled())
     {
-      shared_ptr <QgVersionResult> assertion = new QgVersionResult();
-      assertion.setMsgCatName("QgStaticCheck_Panels");
-      assertion.setAssertionText("assert.panel.isExampleFile");
-      assertion.setReasonText("reason.panel.isExampleFile", makeMapping("panel.name", getName()));
+      const mapping dollars = makeMapping("function.name", getName(), "panel.isExampleFile", this.isExample());
+      shared_ptr <QgResult> assertion = new QgResult("QgStaticCheck_Panels", "panel.isExampleFile", dollars);
       assertion.allowNextErr(TRUE);
 
       if (!assertion.assertFalse(isExample(), settings.getScorePoints()))
@@ -292,10 +289,8 @@ class PanelCheck : QgFile
 
     if (settings.isEnabled())
     {
-      shared_ptr <QgVersionResult> assertion = new QgVersionResult();
-      assertion.setMsgCatName("QgStaticCheck_Panels");
-      assertion.setAssertionText("assert.panel.isBackUp");
-      assertion.setReasonText("reason.panel.isBackUp", makeMapping("panel.name", getName()));
+      const mapping dollars = makeMapping("function.name", getName(), "panel.isBackUp", this.isBackUp());
+      shared_ptr <QgResult> assertion = new QgResult("QgStaticCheck_Panels", "panel.isBackUp", dollars);
 
       if (!assertion.assertFalse(isBackUp(), settings.getScorePoints()))
       {
@@ -316,11 +311,8 @@ class PanelCheck : QgFile
 
     if (settings.isEnabled())
     {
-      shared_ptr <QgVersionResult> assertion = new QgVersionResult();
-      assertion.setMsgCatName("QgStaticCheck_Panels");
-      assertion.setAssertionText("assert.panel.extension");
-      assertion.setReasonText("reason.panel.extension", makeMapping("panel.name", getName(),
-                              "panel.extension", _extension));
+      const mapping dollars = makeMapping("function.name", getName(), "panel.extension", _extension);
+      shared_ptr <QgResult> assertion = new QgResult("QgStaticCheck_Panels", "panel.extension", dollars);
 
       if (!assertion.assertDynContains(settings.getReferenceValues(), strtolower(_extension), settings.getScorePoints()))
       {
@@ -341,10 +333,8 @@ class PanelCheck : QgFile
 
     if (settings.isEnabled())
     {
-      shared_ptr <QgVersionResult> assertion = new QgVersionResult();
-      assertion.setMsgCatName("QgStaticCheck_Panels");
-      assertion.setAssertionText("assert.panel.isCrypted");
-      assertion.setReasonText("reason.panel.isCrypted", makeMapping("panel.name", getName()));
+      const mapping dollars = makeMapping("function.name", getName(), "panel.isCrypted", _pnl.isCrypted());
+      shared_ptr <QgResult> assertion = new QgResult("QgStaticCheck_Panels", "panel.isCrypted", dollars);
 
       if (!assertion.assertFalse(_pnl.isCrypted(), settings.getScorePoints()))
       {
@@ -365,10 +355,8 @@ class PanelCheck : QgFile
 
     if (settings.isEnabled())
     {
-      shared_ptr <QgVersionResult> assertion = new QgVersionResult();
-      assertion.setMsgCatName("QgStaticCheck_Panels");
-      assertion.setAssertionText("assert.panel.isCalculated");
-      assertion.setReasonText("reason.panel.isCalculated", makeMapping("panel.name", getName()));
+      const mapping dollars = makeMapping("function.name", getName(), "panel.isCalculated", this.isCalculated());
+      shared_ptr <QgResult> assertion = new QgResult("QgStaticCheck_Panels", "panel.isCalculated", dollars);
 
       if (!assertion.assertTrue(isCalculated(), settings.getScorePoints()))
       {
@@ -387,11 +375,8 @@ class PanelCheck : QgFile
 
     if (settings.isEnabled())
     {
-      shared_ptr <QgVersionResult> assertion = new QgVersionResult();
-      assertion.setMsgCatName("QgStaticCheck_Panels");
-      assertion.setAssertionText("assert.panel.countOfProperties");
-      assertion.setReasonText("reason.panel.countOfProperties", makeMapping("panel.name", getName(),
-                              "panel.countOfProperties", _pnl.getCountOfProperties()));
+      const mapping dollars = makeMapping("function.name", getName(), "panel.countOfProperties", _pnl.getCountOfProperties());
+      shared_ptr <QgResult> assertion = new QgResult("QgStaticCheck_Panels", "panel.countOfProperties", dollars);
       assertion.info(_pnl.getCountOfProperties(), settings.getScorePoints());
       result.addChild(assertion);
     }
@@ -404,11 +389,8 @@ class PanelCheck : QgFile
 
     if (settings.isEnabled())
     {
-      shared_ptr <QgVersionResult> assertion = new QgVersionResult();
-      assertion.setMsgCatName("QgStaticCheck_Panels");
-      assertion.setAssertionText("assert.panel.countOfEvents");
-      assertion.setReasonText("reason.panel.countOfEvents", makeMapping("panel.name", getName(),
-                              "panel.countOfEvents", _pnl.getCountOfEvents()));
+      const mapping dollars = makeMapping("function.name", getName(), "panel.countOfEvents", _pnl.getCountOfEvents());
+      shared_ptr <QgResult> assertion = new QgResult("QgStaticCheck_Panels", "panel.countOfEvents", dollars);
       assertion.assertLessEqual(_pnl.getCountOfEvents(), settings.getHighLimit(DEFAULT_EVENTCOUNT_HIGH), settings.getScorePoints());
       result.addChild(assertion);
     }
@@ -420,12 +402,8 @@ class PanelCheck : QgFile
 
     if (settings.isEnabled())
     {
-      shared_ptr <QgVersionResult> assertion = new QgVersionResult();
-      assertion.setMsgCatName("QgStaticCheck_Panels");
-      // countOfShapes
-      assertion.setAssertionText("assert.panel.countOfShapes");
-      assertion.setReasonText("reason.panel.countOfShapes", makeMapping("panel.name", getName(),
-                              "panel.countOfShapes", _pnl.getCountOfShapes()));
+      const mapping dollars = makeMapping("function.name", getName(), "panel.countOfShapes", _pnl.getCountOfShapes());
+      shared_ptr <QgResult> assertion = new QgResult("QgStaticCheck_Panels", "panel.countOfShapes", dollars);
       assertion.assertLessEqual(_pnl.getCountOfShapes(), settings.getHighLimit(DEFAULT_SHAPECOUNT_HIGH), settings.getScorePoints());
       result.addChild(assertion);
     }
@@ -439,12 +417,8 @@ class PanelCheck : QgFile
 
     if (settings.isEnabled())
     {
-      shared_ptr <QgVersionResult> assertion = new QgVersionResult();
-      assertion.setMsgCatName("QgStaticCheck_Panels");
-      // info only, dont check the values
-      assertion.setAssertionText("assert.panel.CCN");
-      assertion.setReasonText("reason.panel.CCN", makeMapping("panel.name", getName(),
-                              "panel.CCN", getCCN()));
+      const mapping dollars = makeMapping("function.name", getName(), "panel.CCN", this.getCCN());
+      shared_ptr <QgResult> assertion = new QgResult("QgStaticCheck_Panels", "panel.CCN", dollars);
       assertion.info(getCCN(), settings.getScorePoints());
       result.addChild(assertion);
     }
@@ -456,11 +430,8 @@ class PanelCheck : QgFile
 
     if (settings.isEnabled())
     {
-      shared_ptr <QgVersionResult> assertion = new QgVersionResult();
-      assertion.setMsgCatName("QgStaticCheck_Panels");
-      assertion.setAssertionText("assert.panel.avgCCN");
-      assertion.setReasonText("reason.panel.avgCCN", makeMapping("panel.name", getName(),
-                              "panel.avgCCN", getAvgCCN()));
+      const mapping dollars = makeMapping("function.name", getName(), "panel.avgCCN", this.getAvgCCN());
+      shared_ptr <QgResult> assertion = new QgResult("QgStaticCheck_Panels", "panel.avgCCN", dollars);
       assertion.info(getAvgCCN(), settings.getScorePoints());
       result.addChild(assertion);
     }
@@ -472,11 +443,8 @@ class PanelCheck : QgFile
 
     if (settings.isEnabled())
     {
-      shared_ptr <QgVersionResult> assertion = new QgVersionResult();
-      assertion.setMsgCatName("QgStaticCheck_Panels");
-      assertion.setAssertionText("assert.panel.NLOC");
-      assertion.setReasonText("reason.panel.NLOC", makeMapping("panel.name", getName(),
-                              "panel.NLOC", getNLOC()));
+      const mapping dollars = makeMapping("function.name", getName(), "panel.NLOC", this.getNLOC());
+      shared_ptr <QgResult> assertion = new QgResult("QgStaticCheck_Panels", "panel.NLOC", dollars);
       assertion.info(getNLOC(), settings.getScorePoints());
       result.addChild(assertion);
     }
@@ -488,11 +456,8 @@ class PanelCheck : QgFile
 
     if (settings.isEnabled())
     {
-      shared_ptr <QgVersionResult> assertion = new QgVersionResult();
-      assertion.setMsgCatName("QgStaticCheck_Panels");
-      assertion.setAssertionText("assert.panel.avgNLOC");
-      assertion.setReasonText("reason.panel.avgNLOC", makeMapping("panel.name", getName(),
-                              "panel.avgNLOC", getAvgNLOC()));
+      const mapping dollars = makeMapping("function.name", getName(), "panel.avgNLOC", this.getAvgNLOC());
+      shared_ptr <QgResult> assertion = new QgResult("QgStaticCheck_Panels", "panel.avgNLOC", dollars);
       assertion.info(getAvgNLOC(), settings.getScorePoints());
       result.addChild(assertion);
     }
@@ -500,15 +465,12 @@ class PanelCheck : QgFile
 
   protected validateEvents()
   {
-    shared_ptr <QgVersionResult> assertion = new QgVersionResult();
-    assertion.setMsgCatName("QgStaticCheck_Panels");
-
     //----------------------------------------------------------------------------
     // validate events
     if (_pnl.getCountOfEvents() > 0)
     {
-      shared_ptr <QgVersionResult>  ev = new QgVersionResult();
-      ev.setAssertionText("panel.events");
+      const mapping dollars = makeMapping("function.name", getName(), "panel.events.count", _pnl.getCountOfEvents());
+      shared_ptr <QgResult> assertion = new QgResult("QgStaticCheck_Panels", "panel.events", dollars);
 
       while (_pnl.getCountOfEvents() > 0)
       {
@@ -528,8 +490,8 @@ class PanelCheck : QgFile
     // validate shapes
     if (_pnl.getCountOfShapes() > 0)
     {
-      shared_ptr <QgVersionResult> sh = new QgVersionResult();
-      sh.setAssertionText("panel.shapes");
+      const mapping dollars = makeMapping("function.name", getName(), "panel.shapes.count", _pnl.getCountOfShapes());
+      shared_ptr <QgResult> sh = new QgResult("QgStaticCheck_Panels", "panel.shapes", dollars);
 
       while (_pnl.getCountOfShapes() > 0)
       {
@@ -546,20 +508,17 @@ class PanelCheck : QgFile
   // validate properties
   protected validateProperties()
   {
-    shared_ptr <QgVersionResult> assertion = new QgVersionResult();
-    assertion.setMsgCatName("QgStaticCheck_Panels");
-
     if (_pnl.getCountOfProperties() > 0)
     {
-      shared_ptr <QgVersionResult>  prop = new QgVersionResult();
-      prop.setAssertionText("panel.properties");
+      const mapping dollars = makeMapping("function.name", getName(), "panel.properties.count", _pnl.getCountOfProperties());
+      shared_ptr <QgResult> prop = new QgResult("QgStaticCheck_Panels", "panel.properties", dollars);
 
       while (_pnl.getCountOfProperties() > 0)
       {
         ///@todo probably place for checking properties
         string key = mappingGetKey(_pnl.properties, 1);
-        shared_ptr <QgVersionResult>  property = new QgVersionResult();
-        property.setAssertionText(key);
+        const mapping dollars = makeMapping("function.name", getName(), "panel.properties.key", key);
+        shared_ptr <QgResult> property = new QgResult("QgStaticCheck_Panels", "property", dollars);
         property.info(_pnl.properties[key]);
         mappingRemove(_pnl.properties, key);
         prop.addChild(property);

@@ -7,11 +7,12 @@
 // SPDX-License-Identifier: GPL-3.0-only
 //
 
-#uses "classes/QualityGates/Tools/CppCheck/CppCheckError"
 #uses "classes/FileSys/QgFile"
-#uses "classes/QualityGates/Tools/CppCheck/CppCheck"
 #uses "classes/QualityGates/Qg"
 #uses "classes/QualityGates/QgBase"
+#uses "classes/QualityGates/QgResult"
+#uses "classes/QualityGates/Tools/CppCheck/CppCheck"
+#uses "classes/QualityGates/Tools/CppCheck/CppCheckError"
 
 
 //--------------------------------------------------------------------------------
@@ -38,8 +39,8 @@ class QgCtrlppCheck : QgBase
   }
 
   //------------------------------------------------------------------------------
-  /** @brief Function validates this quality-check.
-    @details Validate all all errors from ctrlppcheck.
+  /** Validate all errors from ctrlppcheck.
+
     Errors are filtered by function isErrorFiltered().
 
     @todo calculate somehow the score.
@@ -48,11 +49,7 @@ class QgCtrlppCheck : QgBase
   */
   public int validate()
   {
-    QgVersionResult::lastErr = "";
-    _result = new QgVersionResult();
-
-    _result.setMsgCatName("QgCtrlppCheck");
-    _result.setAssertionText("checks");
+    _result = new QgResult("QgCtrlppCheck", "checks");
 
     if (dpExists("_CtrlppCheck"))
     {
@@ -75,16 +72,16 @@ class QgCtrlppCheck : QgBase
       if (isErrorFiltered(error))
         continue;
 
+      mapping dollars = error.toMapping();
+
       QgFile f = QgFile(error.path);
       string relPath = f.getRelPath(SCRIPTS_REL_PATH);
+      dollars["relPath"] = makeUnixPath(relPath);
 
-      shared_ptr <QgVersionResult> assertion = new QgVersionResult();
-      assertion.setMsgCatName("QgCtrlppCheck");
-      assertion.setAssertionText(makeUnixPath(relPath));
-      assertion.setReasonText(error.msg + " (" + error.id + ")");
+      shared_ptr <QgResult> assertion = new QgResult("QgCtrlppCheck", "has_" + severity, dollars);
+      // simulate fail
       assertion.assertEqual(error.severity, "");
       _result.addChild(assertion);
-
     }
 
     return 0;

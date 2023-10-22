@@ -44,7 +44,7 @@ class QgStaticPanelCheck : QgBase
     _panels.setDir(this.checkedPath + PANELS_REL_PATH);
 
     if (!_panels.exists())
-      setMinValidScore("QgStaticCheck_Panels", "assert.missingPanels", "reason.missingPanels");
+      this.setMinValidScore("QgStaticCheck_Panels", "missingPanels");
 
     return 0;
   }
