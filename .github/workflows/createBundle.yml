@@ -188,7 +188,10 @@ jobs:
 
     - name: Start WinCC OA tests
       run: |
-        cd ${{ github.workspace }}/devTools && executeTests.cmd
+        dir
+        cd ${{ github.workspace }}/devTools
+        dir
+        executeTests.cmd
 
     - name: Publish Test Report
       uses: mikepenz/action-junit-report@v4
