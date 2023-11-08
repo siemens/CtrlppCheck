@@ -176,7 +176,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Prepare file structure and project
+    - name: Prepare tests
       run: |
         mkdir -p ${{github.workspace}}/WinCCOA_QualityChecks/bin/ctrlppcheck
 
@@ -188,9 +188,7 @@ jobs:
 
     - name: Start WinCC OA tests
       run: |
-        dir
         cd ${{ github.workspace }}/devTools
-        dir
         executeTests.cmd
       shell: cmd
 
