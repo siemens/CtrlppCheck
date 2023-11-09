@@ -24,11 +24,6 @@ def csv_output(result, verbose):
 
     for source_file in result:
         if source_file:
-            print('{},{}'.format(
-              source_file.nloc,
-              source_file.CCN
-              ))
-                        
             for source_function in source_file.function_list:
                 if source_function:
                     print('{},{},{},{},{},"{}","{}","{}","{}",{},{}'.format(
