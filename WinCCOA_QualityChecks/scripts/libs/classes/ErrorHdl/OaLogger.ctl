@@ -7,7 +7,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 //
 
-#uses "var"
+#uses "stdVar"
 
 class OaLogger
 {

@@ -12,6 +12,7 @@
 #uses "classes/QualityGates/QgResult"
 #uses "classes/QualityGates/QgStaticCheck/StaticDir"
 #uses "classes/QualityGates/QgSettings"
+#uses "stdVar"
 
 class StaticCodeDir : StaticDir
 {

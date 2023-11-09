@@ -21,6 +21,10 @@ Source code:
 - https://github.com/siemens/CtrlppCheck.git
 - git@github.com:siemens/CtrlppCheck.git
 
+Download packages:
+
+- https://github.com/siemens/CtrlppCheck/releases
+
 Continuous integration:
 
 - https://github.com/siemens/CtrlppCheck/actions
