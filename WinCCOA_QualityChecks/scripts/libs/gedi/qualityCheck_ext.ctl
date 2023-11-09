@@ -167,10 +167,7 @@ void tool_QualityGates_OpenResult()
 
 void open_Docu()
 {
-  if (getLocale(getActiveLang()) == "de_AT.iso88591" || getLocale(getActiveLang()) == "de_AT.utf8")
-    openUrl("https://www.winccoa.com/documentation/WinCCOA/3.18/en_US/index.html");
-  else
-    openUrl("https://www.winccoa.com/documentation/WinCCOA/3.18/en_US/index.html");
+  openUrl("https://github.com/siemens/CtrlppCheck/blob/main/docs/user.md");
 }
 
 void tool_QualityGates_BuildDocu()
