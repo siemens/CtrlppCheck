@@ -85,7 +85,7 @@ LANG:10001 0
 1 -1.3563330008895e-14 0 E E E 1 E 1 E N "DavyGrey" E N "Isabelline" E E
  E "main(int row, string column)
 {
-  string fileName = this.cellValueRC(row, \"_resDir\") + \"QgTestVersion\\\\_Results\";
+  string fileName = this.cellValueRC(row, \"_resDir\") + \"QgTestVersion/_Results\";
   ChildPanelOnCentralModal(\"vision/QualityChecks/QG_Result.pnl\", getCatStr(\"QG_Names\",_qgId), makeDynString(\"$fileName:\" + fileName));
 }
 " 0
