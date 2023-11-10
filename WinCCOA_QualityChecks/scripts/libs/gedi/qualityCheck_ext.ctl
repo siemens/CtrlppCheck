@@ -167,7 +167,7 @@ void tool_QualityGates_OpenResult()
 
 void open_Docu()
 {
-  openUrl("https://github.com/siemens/CtrlppCheck/blob/main/docs/user.md");
+  openUrl("https://github.com/siemens/CtrlppCheck/blob/main/README.md");
 }
 
 void tool_QualityGates_BuildDocu()
