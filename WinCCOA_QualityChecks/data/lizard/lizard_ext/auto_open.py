@@ -2,7 +2,7 @@
 import io
 import os
 import codecs
-
+import sys
 
 def auto_open(*args, **kwargs):
     '''
@@ -28,7 +28,7 @@ def auto_open(*args, **kwargs):
 
 def auto_read(filename):
     try:
-        with auto_open(filename, 'rU') as current_file:
+        with auto_open(filename, 'rU' if sys.version_info[:2] < (3,11) else 'r') as current_file:
             return current_file.read()
 
     except UnicodeDecodeError:
