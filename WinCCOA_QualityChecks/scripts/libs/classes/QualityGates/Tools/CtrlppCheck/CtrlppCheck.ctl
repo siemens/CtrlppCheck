@@ -8,8 +8,8 @@
 #uses "panel"
 #uses "CtrlXml"
 #uses "CtrlPv2Admin"
-#uses "classes/QualityGates/Tools/CppCheck/CtrlppCheckError"
-#uses "classes/QualityGates/Tools/CppCheck/CtrlppCheckSettings"
+#uses "classes/QualityGates/Tools/CtrlppCheck/CtrlppCheckError"
+#uses "classes/QualityGates/Tools/CtrlppCheck/CtrlppCheckSettings"
 
 //--------------------------------------------------------------------------------
 class CtrlppCheck

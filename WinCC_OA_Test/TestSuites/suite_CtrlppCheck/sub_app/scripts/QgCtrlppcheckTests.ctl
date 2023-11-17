@@ -9,9 +9,9 @@
 
 //--------------------------------------------------------------------------------
 // used libraries (#uses)
-#uses "classes/QualityGates/Tools/CppCheck/CtrlppCheckError"
+#uses "classes/QualityGates/Tools/CtrlppCheck/CtrlppCheckError"
 #uses "fileSys"
-#uses "classes/QualityGates/Tools/CppCheck/CtrlppCheck"
+#uses "classes/QualityGates/Tools/CtrlppCheck/CtrlppCheck"
 #uses "classes/QualityGates/Qg" /*!< tested object */
 #uses "classes/oaTest/OaTest"
 

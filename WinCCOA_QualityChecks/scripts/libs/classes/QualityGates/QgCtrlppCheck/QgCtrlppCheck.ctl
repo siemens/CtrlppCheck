@@ -7,9 +7,9 @@
 // SPDX-License-Identifier: GPL-3.0-only
 //
 
-#uses "classes/QualityGates/Tools/CppCheck/CtrlppCheckError"
+#uses "classes/QualityGates/Tools/CtrlppCheck/CtrlppCheckError"
 #uses "classes/FileSys/QgFile"
-#uses "classes/QualityGates/Tools/CppCheck/CtrlppCheck"
+#uses "classes/QualityGates/Tools/CtrlppCheck/CtrlppCheck"
 #uses "classes/QualityGates/Qg"
 #uses "classes/QualityGates/QgBase"
 

@@ -4,7 +4,7 @@ LANG:10000 0
 LANG:10001 0 
 LANG:10027 0 
 PANEL,-1 -1 821 460 N "_3DFace" 0
-"#uses \"classes/QualityGates/Tools/CppCheck/CtrlppCheck\"
+"#uses \"classes/QualityGates/Tools/CtrlppCheck/CtrlppCheck\"
 
 main()
 {

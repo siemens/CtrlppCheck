@@ -21,7 +21,7 @@
 //---------------------------------------------------------------------------------------------------------------------------------------
 #uses "classes/QualityGates/Qg"
 #uses "classes/QualityGates/QgStaticCheck/CtrlCode/ScriptData"
-#uses "classes/QualityGates/Tools/CppCheck/CtrlppCheck"
+#uses "classes/QualityGates/Tools/CtrlppCheck/CtrlppCheck"
 #uses "panel"
 
 //---------------------------------------------------------------------------------------------------------------------------------------
