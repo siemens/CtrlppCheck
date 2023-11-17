@@ -12,7 +12,7 @@
 #uses "classes/QualityGates/Tools/CppCheck/CtrlppCheckSettings"
 
 //--------------------------------------------------------------------------------
-class CppCheck
+class CtrlppCheck
 {
 //--------------------------------------------------------------------------------
 //@public

@@ -21,7 +21,7 @@
 //---------------------------------------------------------------------------------------------------------------------------------------
 #uses "classes/QualityGates/Qg"
 #uses "classes/QualityGates/QgStaticCheck/CtrlCode/ScriptData"
-#uses "classes/QualityGates/Tools/CppCheck/CppCheck"
+#uses "classes/QualityGates/Tools/CppCheck/CtrlppCheck"
 #uses "panel"
 
 //---------------------------------------------------------------------------------------------------------------------------------------
@@ -133,7 +133,7 @@ void ctrlPPCheck()
 
   {
     // in new scope to eliminate memory usage
-    CppCheck ctrlPpCheck;
+    CtrlppCheck ctrlPpCheck;
 
     dpGet("_CtrlppCheck.settings.enableLibCheck", ctrlPpCheck.settings.enableLibCheck,
           //"_CtrlppCheck.settings.enableHeadersCheck", ctrlPpCheck.settings.enableHeadersCheck,  // currently disabled

@@ -142,7 +142,7 @@ void update_cb(const string dpe, const string json)
 void update_ctrlppData(const mapping &map)
 {
   //------------------------------------------------------------------------------
-  // cppCheck data
+  // ctrlppCheck data
   // filter by severity
   int errCount, perfCount, portCount, styleCount;
   

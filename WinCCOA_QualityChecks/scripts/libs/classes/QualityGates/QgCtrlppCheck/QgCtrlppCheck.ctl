@@ -9,7 +9,7 @@
 
 #uses "classes/QualityGates/Tools/CppCheck/CtrlppCheckError"
 #uses "classes/FileSys/QgFile"
-#uses "classes/QualityGates/Tools/CppCheck/CppCheck"
+#uses "classes/QualityGates/Tools/CppCheck/CtrlppCheck"
 #uses "classes/QualityGates/Qg"
 #uses "classes/QualityGates/QgBase"
 
@@ -186,7 +186,7 @@ class QgCtrlppCheck : QgBase
 //@private members
 //--------------------------------------------------------------------------------
 
-  CppCheck check;
+  CtrlppCheck check;
 };
 
 /// Start Qg ctrlppcheck.

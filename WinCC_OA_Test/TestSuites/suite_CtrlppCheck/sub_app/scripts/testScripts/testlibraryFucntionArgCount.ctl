@@ -2,7 +2,7 @@
 void main()
 {
 // this is error only when you use the option check-lib-config.
-// the cppcheck check arguments only for functions efined in config-file
+// the ctrlppcheck check arguments only for functions defined in config-file
   string s1 = retS();
   string s2 = retS("ABC");
   string s3 = retS("B", 2);

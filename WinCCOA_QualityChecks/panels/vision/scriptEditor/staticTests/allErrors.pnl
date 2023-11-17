@@ -4,11 +4,11 @@ LANG:10000 0
 LANG:10001 0 
 LANG:10027 0 
 PANEL,-1 -1 821 460 N "_3DFace" 0
-"#uses \"classes/QualityGates/Tools/CppCheck/CppCheck\"
+"#uses \"classes/QualityGates/Tools/CppCheck/CtrlppCheck\"
 
 main()
 {
-  CppCheck check;
+  CtrlppCheck check;
   dyn_anytype errors = check.getAllPossibleErrors();
   // update details table
   shape sh = getShape(\"table\");  

@@ -11,13 +11,13 @@
 // used libraries (#uses)
 #uses "classes/QualityGates/Tools/CppCheck/CtrlppCheckError"
 #uses "fileSys"
-#uses "classes/QualityGates/Tools/CppCheck/CppCheck"
+#uses "classes/QualityGates/Tools/CppCheck/CtrlppCheck"
 #uses "classes/QualityGates/Qg" /*!< tested object */
 #uses "classes/oaTest/OaTest"
 
 //--------------------------------------------------------------------------------
 
-class MockCppCheck : CppCheck
+class MockCtrlppCheck : CtrlppCheck
 {
   public void checkFile(const string &testFile)
   {
@@ -45,7 +45,7 @@ class MockCppCheck : CppCheck
     bool hasFailedRead = fileToString(refFile, str, "UTF8");
     str = str.trim();
     oaUnitAssertTrue(tcId, hasFailedRead, "Read reference file: " + refFile);
-    MockCppCheck reference;
+    MockCtrlppCheck reference;
 
     if (str.isEmpty())
     {
@@ -129,7 +129,7 @@ class TstCtrlppcheck : OaTest
         }
 
         const string testFile = makeUnixPath(path);
-        MockCppCheck check;
+        MockCtrlppCheck check;
         check.settings.enableXmlFormat(TRUE);
 
         check.settings.enableLibCheck = FALSE;

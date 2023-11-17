@@ -8,7 +8,7 @@
 //
 
 #uses "classes/QualityGates/QgCtrlppCheck/QgCtrlppCheck"
-#uses "classes/QualityGates/Tools/CppCheck/CppCheck"
+#uses "classes/QualityGates/Tools/CppCheck/CtrlppCheck"
 
 /// useGediScope enable to use gedi scope. It is faster, but not so safe.
 /// + faster execution
