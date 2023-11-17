@@ -48,7 +48,7 @@ InternalError::InternalError(const Token *tok, const std::string &errorMsg, Type
         id = "unknownMacro";
         break;
     case INTERNAL:
-        id = "cppcheckError";
+        id = "ctrlppcheckError";
         break;
     }
 }

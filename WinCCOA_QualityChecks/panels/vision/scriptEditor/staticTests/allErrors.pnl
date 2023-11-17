@@ -17,7 +17,7 @@ main()
   for(int i = 1; i <= dynlen(errors); i++)
   {
     const int newLineIdx = i - 1;
-    CppCheckError err = errors[i];
+    CtrlppCheckError err = errors[i];
     const string id = err.id;
     const string severity = err.severity;
     string cwe = err.cwe > 0 ? err.cwe : \"\";

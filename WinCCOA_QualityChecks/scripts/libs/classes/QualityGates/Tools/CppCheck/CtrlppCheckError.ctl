@@ -7,7 +7,7 @@
 
 
 //--------------------------------------------------------------------------------
-struct CppCheckError
+struct CtrlppCheckError
 {
   string id;
   string severity;

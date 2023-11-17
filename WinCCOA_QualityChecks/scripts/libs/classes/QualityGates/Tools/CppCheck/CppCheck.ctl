@@ -8,7 +8,7 @@
 #uses "panel"
 #uses "CtrlXml"
 #uses "CtrlPv2Admin"
-#uses "classes/QualityGates/Tools/CppCheck/CppCheckError"
+#uses "classes/QualityGates/Tools/CppCheck/CtrlppCheckError"
 #uses "classes/QualityGates/Tools/CppCheck/CppCheckSettings"
 
 //--------------------------------------------------------------------------------
@@ -196,7 +196,7 @@ class CppCheck
 
         for (int i = 1; i <= dynlen(nodes); i++)
         {
-          CppCheckError err;
+          CtrlppCheckError err;
           xnmlNextErr(nodes[i], err);
           dynAppend(errList, err);
         }
@@ -210,7 +210,7 @@ class CppCheck
   }
 
   //------------------------------------------------------------------------------
-  void xnmlNextErr(uint node, CppCheckError &err)
+  void xnmlNextErr(uint node, CtrlppCheckError &err)
   {
     if ((xmlNodeType(docNum, node) == XML_ELEMENT_NODE) && (xmlNodeName(docNum, node) == "error"))
     {
@@ -244,7 +244,7 @@ class CppCheck
   }
 
   //------------------------------------------------------------------------------
-  int xmlErrLocation(uint node, CppCheckError &err)
+  int xmlErrLocation(uint node, CtrlppCheckError &err)
   {
     if ((xmlNodeType(docNum, node) == XML_ELEMENT_NODE) && (xmlNodeName(docNum, node) == "location"))
     {

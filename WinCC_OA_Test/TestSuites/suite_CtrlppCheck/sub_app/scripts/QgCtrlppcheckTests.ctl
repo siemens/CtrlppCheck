@@ -9,7 +9,7 @@
 
 //--------------------------------------------------------------------------------
 // used libraries (#uses)
-#uses "classes/QualityGates/Tools/CppCheck/CppCheckError"
+#uses "classes/QualityGates/Tools/CppCheck/CtrlppCheckError"
 #uses "fileSys"
 #uses "classes/QualityGates/Tools/CppCheck/CppCheck"
 #uses "classes/QualityGates/Qg" /*!< tested object */
@@ -77,7 +77,7 @@ class MockCppCheck : CppCheck
 
     for (int i = 1; i <= dynlen(reference.errList); i++)
     {
-      CppCheckError expErr = reference.errList[i];
+      CtrlppCheckError expErr = reference.errList[i];
       string expErrorStr = expErr.toStdErrString();
       mapping map = makeMapping("ErrMsg", "Ctrlppcheck can not found this error:" +
                                 "\n  File:\n" + refFile +
