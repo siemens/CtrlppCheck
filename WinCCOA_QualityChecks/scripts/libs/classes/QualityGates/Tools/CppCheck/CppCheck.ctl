@@ -9,7 +9,7 @@
 #uses "CtrlXml"
 #uses "CtrlPv2Admin"
 #uses "classes/QualityGates/Tools/CppCheck/CtrlppCheckError"
-#uses "classes/QualityGates/Tools/CppCheck/CppCheckSettings"
+#uses "classes/QualityGates/Tools/CppCheck/CtrlppCheckSettings"
 
 //--------------------------------------------------------------------------------
 class CppCheck
@@ -18,7 +18,7 @@ class CppCheck
 //@public
 //--------------------------------------------------------------------------------
 
-  public CppCheckSettings settings;
+  public CtrlppCheckSettings settings;
 
   public dyn_anytype errList;
 
