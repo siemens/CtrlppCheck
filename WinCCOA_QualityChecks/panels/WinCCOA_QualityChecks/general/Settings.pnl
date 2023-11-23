@@ -566,7 +566,7 @@ void fillWithData()
       //read settings depeding on the version
       OaLanguage lang = getActiveLangId();
 
-      string sLang = getLocale(lang, LOCALE_FORMAT_ISO ).startsWith(\"de_\") ? \"de_AT.utf8\" : \"en_US.utf8\";
+      string sLang = getLocale(lang, LOCALE_FORMAT_ISO).startsWith(\"de_\") ? \"de_AT.utf8\" : \"en_US.utf8\";
 
       switch(json_data[\"settingsVersion\"])
       {
