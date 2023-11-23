@@ -564,10 +564,10 @@ void fillWithData()
       }
 
       //read settings depeding on the version
-      anytype lang = getActiveLangId();
-      string sLang = lang == OaLanguage::de_AT || lang == OaLanguage::de_AT_iso88591
-                || lang == OaLanguage::de_CH || lang == OaLanguage::de_CH_iso88591
-                || lang == OaLanguage::de_DE || lang == OaLanguage::de_DE_iso88591 ? \"de_AT.utf8\" : \"en_US.utf8\";
+      OaLanguage lang = getActiveLangId();
+
+      string sLang = getLocale(lang, LOCALE_FORMAT_ISO ).startsWith(\"de_\") ? \"de_AT.utf8\" : \"en_US.utf8\";
+      DebugTN(sLang);
       switch(json_data[\"settingsVersion\"])
       {
         case 0:
