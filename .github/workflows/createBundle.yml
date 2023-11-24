@@ -172,7 +172,7 @@ jobs:
     name: WinCC OA tests
     runs-on: ubuntu-20.04
     container:
-        image: ghcr.io/agruberetm/winccoa:v3.19.7-server
+        image: ghcr.io/agruberetm/winccoa:v3.19.7-uiserver
         credentials:
            username: mPokornyETM
            password: ${{  secrets.DOCKER_CONTAINER_REGISTRY_TOKEN }}
