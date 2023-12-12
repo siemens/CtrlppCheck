@@ -174,7 +174,7 @@ jobs:
     container:
         image: mpokornyetm/winccoa:v3.19.7-uiserver
         credentials:
-           username: mPokornyETM
+           username: mpokornyetm
            password: ${{  secrets.DOCKER_CONTAINER_REGISTRY_TOKEN }}
     needs: build
 
