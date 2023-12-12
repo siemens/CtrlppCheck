@@ -158,64 +158,20 @@ jobs:
     # no ctest tests for modified cppcheck, they were just thrown away
     #- name: Test
     #  working-directory: ${{github.workspace}}/build
-    #  # Execute tests defined by the CMake configuration.  
+    #  # Execute tests defined by the CMake configuration.
     #  # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
     #  run: ctest -C ${{env.BUILD_TYPE}}
-      
+
     - name: Upload ctrlppcheck
       uses: actions/upload-artifact@v3
       with:
         name: ctrlppcheck
         path: ${{github.workspace}}/build/${{ matrix.config.artifact }}
 
-  tests:
-    name: WinCC OA tests
-    runs-on: ubuntu-20.04
-    container:
-        image: mpokornyetm/winccoa:v3.19.7-uiserver
-        options: --user root
-        credentials:
-           username: mpokornyetm
-           password: ${{  secrets.DOCKER_CONTAINER_REGISTRY_TOKEN }}
-    needs: build
-
-    steps:
-    - name: who-am-i
-      shell: bash
-      run: |
-        echo "--This is running in my custom Docker image--"
-        uname
-        cd /opt/WinCC_OA/3.19/bin/ && ./WCCOActrl -version || true
-    - uses: actions/checkout@v3
-
-    - name: Prepare tests
-      run: |
-        ls -la ${{github.workspace}}
-        mkdir -p ${{github.workspace}}/WinCCOA_QualityChecks/bin/ctrlppcheck
-
-    - name: Download ctrlppcheck binaries
-      uses: actions/download-artifact@v3
-      with:
-        name: ctrlppcheck
-        path: ${{github.workspace}}/WinCCOA_QualityChecks/bin/ctrlppcheck/
-
-    - name: Start WinCC OA tests
-      run: |
-        ls -la ${{github.workspace}}/WinCCOA_QualityChecks/bin/ctrlppcheck/
-        ls -la ${{github.workspace}}
-        cd ${{ github.workspace }}/devTools
- #       executeTests.cmd
- #     shell: cmd
-
-    - name: Publish Test Report
-      uses: mikepenz/action-junit-report@v4
-      with:
-        report_paths : ${{github.workspace}}/WinCC_OA_Test/Results/*.xml
-
   package:
     name: Package project and binaries
     runs-on: ubuntu-20.04
-    needs: [build, tests]
+    needs: build
 
     steps:
     - uses: actions/checkout@v3
@@ -223,7 +179,8 @@ jobs:
     - name: Prepare file structure and project
       run: |
         mkdir -p ${{github.workspace}}/install/WinCCOA_QualityChecks/bin/ctrlppcheck
-        cp -rp ${{github.workspace}}/WinCCOA_QualityChecks/* ${{github.workspace}}/install/WinCCOA_QualityChecks/
+        cp -rp ${{github.workspace}}/WinCCOA_QualityChecks/* ${{github.workspace}}/install/WinCCOA_QualityChecks/bin/ctrlppcheck/ctrlppcheck
+        cp -rp ${{github.workspace}}/WinCC_OA_Test/* ${{github.workspace}}/tests/WinCC_OA_Test/
 
     - name: Download ctrlppcheck binaries
       uses: actions/download-artifact@v3
@@ -236,6 +193,86 @@ jobs:
       with:
         name: WinCCOA_QualityChecks
         path: ${{github.workspace}}/install/*
+
+    - name: Upload WinCC_OA_Test
+      uses: actions/upload-artifact@v3
+      with:
+        name: WinCC_OA_Test
+        path: ${{github.workspace}}/tests/*
+
+  tests:
+    name: WinCC OA tests
+    runs-on: ubuntu-20.04
+    container:
+        image: mpokornyetm/winccoa:v3.19.7-uiserver
+        options: --user root
+        credentials:
+           username: mpokornyetm
+           password: ${{  secrets.DOCKER_CONTAINER_REGISTRY_TOKEN }}
+    needs: [build, package]
+
+    steps:
+    - name: who-am-i
+      shell: bash
+      run: |
+        echo "--This is running in my custom Docker image--"
+        uname
+        cd /opt/WinCC_OA/3.19/bin/ && ./WCCOActrl -version || true
+
+    - name: Download WinCCOA_QualityChecks package
+      uses: actions/download-artifact@v3
+      with:
+        name: WinCCOA_QualityChecks
+        path: ${{github.workspace}}/WinCCOA_QualityChecks/
+
+    - name: Download WinCC_OA_Test
+      uses: actions/download-artifact@v3
+      with:
+        name: WinCC_OA_Test
+        path: ${{github.workspace}}/WinCC_OA_Test/
+
+    - name: Register Ctrl TestFramework
+      run: |
+        ls -la ${{github.workspace}}
+
+        echo "[general]
+        pvss_path = \"/opt/WinCC_OA/3.19\"
+        proj_path = \"/opt/WinCC_OA/3.19/TestFramework_3.19\"
+        proj_path = \"${{github.workspace}}/WinCC_OA_Test/Projects/Global\"
+        proj_path = \"${{github.workspace}}/WinCC_OA_Test/Projects/TfCustomizedQG\"
+        proj_version = \"3.19\"
+        langs = \"de_AT.utf8\"
+        langs = \"en_US.utf8\"
+        langs = \"ru_RU.utf8\"
+        pmonPort = 5999
+        [testFramework]
+        installPath = \"${{github.workspace}}/WinCC_OA_Test/\"
+        " > ${{github.workspace}}/WinCC_OA_Test/Projects/TfCustomizedQG/config/config
+
+        mkdir -p ${{github.workspace}}/WinCC_OA_Test/Projects/TfCustomizedQG/log
+
+        /opt/WinCC_OA/3.19/bin/WCCILpmon -config ${{github.workspace}}/WinCC_OA_Test/Projects/TfCustomizedQG/config/config -n -autofreg -status
+        RC=$?
+        if [ "$RC" '!=' "0" ]; then
+          echo "RC=$RC"
+          exit 0
+        fi;
+
+    - name: Start WinCC OA tests
+      run: |
+        echo ****** Execute WinCC OA Tests
+        /opt/WinCC_OA/3.19/bin/WCCOActrl.exe -config %WINCC_OA_TEST_PATH%Projects\TfCustomizedQG\config\config -n testRunner.ctl {'testRunId':'Regression-tests','registerGlobalProject':true,'registerAllTools':true,'registerAllTemplates':true,'showLogViewer':false,'TfTestManager.checkForPossibleFreezeTests':true} -log +stderr -lang en_US.utf8
+
+    - name: Convert WinCC OA tests to jUnit
+      run: |
+        echo ****** Convert results into jUnit format
+        /opt/WinCC_OA/3.19/bin/WCCOActrl.exe -config %WINCC_OA_TEST_PATH%Projects\TfCustomizedQG\config\config -n oaTestParsers/jsonToJUnit.ctl -log +stderr -lang en_US.utf8
+
+
+    - name: Publish Test Report
+      uses: mikepenz/action-junit-report@v4
+      with:
+        report_paths : ${{github.workspace}}/WinCC_OA_Test/Results/*.xml
 
   release:
     if: github.event_name == 'release'
