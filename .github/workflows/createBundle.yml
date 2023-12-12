@@ -190,6 +190,7 @@ jobs:
 
     - name: Prepare tests
       run: |
+        ls -la ${{github.workspace}}
         mkdir -p ${{github.workspace}}/WinCCOA_QualityChecks/bin/ctrlppcheck
 
     - name: Download ctrlppcheck binaries
@@ -200,6 +201,8 @@ jobs:
 
     - name: Start WinCC OA tests
       run: |
+        ls -la ${{github.workspace}}/WinCCOA_QualityChecks/bin/ctrlppcheck/
+        ls -la ${{github.workspace}}
         cd ${{ github.workspace }}/devTools
  #       executeTests.cmd
  #     shell: cmd
