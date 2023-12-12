@@ -184,6 +184,7 @@ jobs:
       run: |
         echo "--This is running in my custom Docker image--"
         uname
+        cd /opt/WinCC_OA/3.19/bin/ && ./WCCOActrl -version
     - uses: actions/checkout@v3
 
     - name: Prepare tests
