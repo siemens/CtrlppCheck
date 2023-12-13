@@ -207,7 +207,7 @@ jobs:
       - name: Upload html help
         uses: actions/upload-artifact@v3
         with:
-          name: wiki-help
+          name: html-help
           path: ${{github.workspace}}/WinCCOA_QualityChecks/help/html/*
 
       - name: Upload QT help
@@ -364,19 +364,19 @@ jobs:
         files: WinCCOA_QualityChecks_${{ github.event.release.tag_name }}.zip
 
 # inspired by https://nimblehq.co/blog/create-github-wiki-pull-request
-  publish-wiki:
+  publish-help:
     if: github.event_name == 'release'
-    name: Publish wiki
+    name: Publish help
     runs-on: ubuntu-20.04
     needs: tests
     steps:
       - name: Download help
         uses: actions/download-artifact@v3
         with:
-          name: wiki-help
+          name: html-help
           path: ${{github.workspace}}/public/
 
-      - name: Publish Documentation
+      - name: Publish GitHub pages help
         uses: peaceiris/actions-gh-pages@v3
         # If you're changing the branch from main,
         # also change the `main` in `refs/heads/main`
