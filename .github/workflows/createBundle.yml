@@ -172,7 +172,7 @@ jobs:
     name: Build help
     runs-on: ubuntu-20.04
     container:
-        image: mpokornyetm/winccoa:v3.19.7-server
+        image: mpokornyetm/winccoa:v3.19.7-full
         options: --user root
         credentials:
            username: mpokornyetm
