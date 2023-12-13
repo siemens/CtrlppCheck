@@ -213,12 +213,10 @@ jobs:
     needs: [build, package]
 
     steps:
-    - name: who-am-i
+    - name: Print WinCC OA version
       shell: bash
       run: |
-        echo "--This is running in my custom Docker image--"
-        uname
-        cd /opt/WinCC_OA/3.19/bin/ && ./WCCOActrl -version || true
+        /opt/WinCC_OA/3.19/bin/WCCOActrl -version || true
 
     - name: Download WinCCOA_QualityChecks package
       uses: actions/download-artifact@v3
@@ -234,7 +232,7 @@ jobs:
 
     - name: Register Ctrl TestFramework
       run: |
-        ls -la ${{github.workspace}}
+        ls -la ${{github.workspace}}/ || true
 
         echo "[general]
         pvss_path = \"/opt/WinCC_OA/3.19\"
