@@ -172,7 +172,7 @@ jobs:
     name: Build help
     runs-on: ubuntu-20.04
     container:
-        image: mpokornyetm/winccoa:v3.19.7-full
+        image: mpokornyetm/winccoa:v3.19.8-full
         options: --user root
         credentials:
            username: mpokornyetm
@@ -273,7 +273,7 @@ jobs:
     name: WinCC OA tests
     runs-on: ubuntu-20.04
     container:
-        image: mpokornyetm/winccoa:v3.19.7-full
+        image: mpokornyetm/winccoa:v3.19.8-full
         options: --user root
         credentials:
            username: mpokornyetm
