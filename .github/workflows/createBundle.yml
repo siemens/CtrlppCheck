@@ -383,7 +383,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: wiki-help
-          path: ${{github.workspace}}/
+          path: ${{github.workspace}}/public/
 
       - name: Publish Documentation
         uses: peaceiris/actions-gh-pages@v3
@@ -393,7 +393,7 @@ jobs:
    #     if: github.ref == 'refs/heads/main'
         with:
           github_token: ${{ secrets.WIKI_ACTION_TOKEN }}
-#          publish_dir: ./public
+          publish_dir: ./public
 
 #      - name: Publish Documentation to Wiki
 #        uses: SwiftDocOrg/github-wiki-publish-action@v1
