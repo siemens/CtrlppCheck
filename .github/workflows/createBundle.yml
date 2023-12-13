@@ -265,7 +265,7 @@ jobs:
 
         mkdir -p $$cwd/Projects/TfCustomizedQG/log
 
-        /opt/WinCC_OA/3.19/bin/WCCOActrl -config $cwd/Projects/TfCustomizedQG/config/config -n -autofreg -status  -log +stderr || true
+        /opt/WinCC_OA/3.19/bin/WCCILpmon -config $cwd/Projects/TfCustomizedQG/config/config -n -autofreg -status  -log +stderr || true
         
         cat config
 
