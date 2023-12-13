@@ -178,6 +178,12 @@ jobs:
            username: mpokornyetm
            password: ${{  secrets.DOCKER_CONTAINER_REGISTRY_TOKEN }}
     steps:
+      - name: Install doxygen
+        working-directory: /opt/WinCC_OA/3.19/bin/
+        run: |
+          apt-get update
+          apt-get --assume-yes install -f doxygen
+
       - uses: actions/checkout@v1
       - name: Register Project
         working-directory: ${{github.workspace}}/WinCCOA_QualityChecks/
