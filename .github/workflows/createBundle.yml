@@ -206,7 +206,7 @@ jobs:
     runs-on: ubuntu-20.04
     container:
         image: mpokornyetm/winccoa:v3.19.7-uiserver
-        options: --user root
+#        options: --user root
         credentials:
            username: mpokornyetm
            password: ${{  secrets.DOCKER_CONTAINER_REGISTRY_TOKEN }}
@@ -235,6 +235,7 @@ jobs:
         whoami
         pwd
         ls -la  || true
+        ls -la ${{github.workspace}} || true
 
         mv -rf WinCC_OA_Test/ /opt/
         
