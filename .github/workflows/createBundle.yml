@@ -235,28 +235,31 @@ jobs:
         whoami
         pwd
         ls -la  || true
-        ls -la __w/CtrlppCheck/CtrlppCheck/  || true
-        ls -la __w/CtrlppCheck/CtrlppCheck/WinCC_OA_Test/ || true
-        ls -la __w/CtrlppCheck/CtrlppCheck/WinCC_OA_Test/Projects/ || true
-        ls -la __w/CtrlppCheck/CtrlppCheck/WinCC_OA_Test/Projects/TfCustomizedQG/ || true
 
-        sudo echo "[general]
+        mv -rf WinCC_OA_Test/ /opt/
+        
+        ls -la /opt/  || true
+        ls -la /opt/WinCC_OA_Test/ || true
+        ls -la /opt/WinCC_OA_Test/Projects/ || true
+        ls -la /opt/WinCC_OA_Test/Projects/TfCustomizedQG/ || true
+
+        echo "[general]
         pvss_path = \"/opt/WinCC_OA/3.19\"
         proj_path = \"/opt/WinCC_OA/3.19/TestFramework_3.19\"
-        proj_path = \"/__w/CtrlppCheck/CtrlppCheck/WinCC_OA_Test/Projects/Global\"
-        proj_path = \"/__w/CtrlppCheck/CtrlppCheck/WinCC_OA_Test/Projects/TfCustomizedQG\"
+        proj_path = \"/opt/WinCC_OA_Test/Projects/Global\"
+        proj_path = \"/opt/WinCC_OA_Test/Projects/TfCustomizedQG\"
         proj_version = \"3.19\"
         langs = \"de_AT.utf8\"
         langs = \"en_US.utf8\"
         langs = \"ru_RU.utf8\"
         pmonPort = 5999
         [testFramework]
-        installPath = \"/__w/CtrlppCheck/CtrlppCheck/WinCC_OA_Test/\"
-        " > /__w/CtrlppCheck/CtrlppCheck/WinCC_OA_Test/Projects/TfCustomizedQG/config/config
+        installPath = \"/opt/WinCC_OA_Test/\"
+        " > /opt/WinCC_OA_Test/Projects/TfCustomizedQG/config/config
 
-        sudo mkdir -p $/__w/CtrlppCheck/CtrlppCheck/WinCC_OA_Test/Projects/TfCustomizedQG/log
+        mkdir -p $/opt/WinCC_OA_Test/Projects/TfCustomizedQG/log
 
-        /opt/WinCC_OA/3.19/bin/WCCILpmon -config /__w/CtrlppCheck/CtrlppCheck/WinCC_OA_Test/Projects/TfCustomizedQG/config/config -n -autofreg -status
+        /opt/WinCC_OA/3.19/bin/WCCILpmon -config /opt/WinCC_OA_Test/Projects/TfCustomizedQG/config/config -n -autofreg -status
         RC=$?
         if [ "$RC" '!=' "0" ]; then
           echo "RC=$RC"
