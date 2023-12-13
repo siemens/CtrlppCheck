@@ -238,20 +238,20 @@ jobs:
         echo "[general]
         pvss_path = \"/opt/WinCC_OA/3.19\"
         proj_path = \"/opt/WinCC_OA/3.19/TestFramework_3.19\"
-        proj_path = \"${{github.workspace}}/WinCC_OA_Test/Projects/Global\"
-        proj_path = \"${{github.workspace}}/WinCC_OA_Test/Projects/TfCustomizedQG\"
+        proj_path = \"/__w/CtrlppCheck/CtrlppCheck/WinCC_OA_Test/Projects/Global\"
+        proj_path = \"/__w/CtrlppCheck/CtrlppCheck/WinCC_OA_Test/Projects/TfCustomizedQG\"
         proj_version = \"3.19\"
         langs = \"de_AT.utf8\"
         langs = \"en_US.utf8\"
         langs = \"ru_RU.utf8\"
         pmonPort = 5999
         [testFramework]
-        installPath = \"${{github.workspace}}/WinCC_OA_Test/\"
-        " > ${{github.workspace}}/WinCC_OA_Test/Projects/TfCustomizedQG/config/config
+        installPath = \"/__w/CtrlppCheck/CtrlppCheck/WinCC_OA_Test/\"
+        " > /__w/CtrlppCheck/CtrlppCheck/WinCC_OA_Test/Projects/TfCustomizedQG/config/config
 
-        mkdir -p ${{github.workspace}}/WinCC_OA_Test/Projects/TfCustomizedQG/log
+        mkdir -p $/__w/CtrlppCheck/CtrlppCheck/WinCC_OA_Test/Projects/TfCustomizedQG/log
 
-        /opt/WinCC_OA/3.19/bin/WCCILpmon -config ${{github.workspace}}/WinCC_OA_Test/Projects/TfCustomizedQG/config/config -n -autofreg -status
+        /opt/WinCC_OA/3.19/bin/WCCILpmon -config /__w/CtrlppCheck/CtrlppCheck/WinCC_OA_Test/Projects/TfCustomizedQG/config/config -n -autofreg -status
         RC=$?
         if [ "$RC" '!=' "0" ]; then
           echo "RC=$RC"
@@ -267,7 +267,6 @@ jobs:
       run: |
         echo ****** Convert results into jUnit format
         /opt/WinCC_OA/3.19/bin/WCCOActrl.exe -config %WINCC_OA_TEST_PATH%Projects\TfCustomizedQG\config\config -n oaTestParsers/jsonToJUnit.ctl -log +stderr -lang en_US.utf8
-
 
     - name: Publish Test Report
       uses: mikepenz/action-junit-report@v4
