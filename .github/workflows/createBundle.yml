@@ -250,20 +250,20 @@ jobs:
         echo "[general]
         pvss_path = \"/opt/WinCC_OA/3.19\"
         proj_path = \"/opt/WinCC_OA/3.19/TestFramework_3.19\"
-        proj_path = \"$cwd//Projects/Global\"
-        proj_path = \"$cwd//Projects/TfCustomizedQG\"
+        proj_path = \"$cwd/Projects/Global\"
+        proj_path = \"$cwd/Projects/TfCustomizedQG\"
         proj_version = \"3.19\"
         langs = \"de_AT.utf8\"
         langs = \"en_US.utf8\"
         langs = \"ru_RU.utf8\"
         pmonPort = 5999
         [testFramework]
-        installPath = \"$cwd//\"
+        installPath = \"$cwd/\"
         " > config
 
-        mkdir -p $$cwd//Projects/TfCustomizedQG/log
+        mkdir -p $$cwd/Projects/TfCustomizedQG/log
 
-        /opt/WinCC_OA/3.19/bin/WCCOActrl -config $cwd//Projects/TfCustomizedQG/config/config -n -autofreg -status || true
+        /opt/WinCC_OA/3.19/bin/WCCOActrl -config $cwd/Projects/TfCustomizedQG/config/config -n -autofreg -status || true
 
     - name: Start WinCC OA tests
       run: |
