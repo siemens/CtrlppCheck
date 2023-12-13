@@ -261,12 +261,12 @@ jobs:
     - name: Start WinCC OA tests
       run: |
         echo ****** Execute WinCC OA Tests
-        /opt/WinCC_OA/3.19/bin/WCCOActrl.exe -config %WINCC_OA_TEST_PATH%Projects\TfCustomizedQG\config\config -n testRunner.ctl {'testRunId':'Regression-tests','registerGlobalProject':true,'registerAllTools':true,'registerAllTemplates':true,'showLogViewer':false,'TfTestManager.checkForPossibleFreezeTests':true} -log +stderr -lang en_US.utf8
+        /opt/WinCC_OA/3.19/bin/WCCOActrl.exe -proj TfCustomizedQG -n testRunner.ctl {'testRunId':'Regression-tests','registerGlobalProject':true,'registerAllTools':true,'registerAllTemplates':true,'showLogViewer':false,'TfTestManager.checkForPossibleFreezeTests':true} -log +stderr -lang en_US.utf8
 
     - name: Convert WinCC OA tests to jUnit
       run: |
         echo ****** Convert results into jUnit format
-        /opt/WinCC_OA/3.19/bin/WCCOActrl.exe -config %WINCC_OA_TEST_PATH%Projects\TfCustomizedQG\config\config -n oaTestParsers/jsonToJUnit.ctl -log +stderr -lang en_US.utf8
+        /opt/WinCC_OA/3.19/bin/WCCOActrl.exe -proj TfCustomizedQG -n oaTestParsers/jsonToJUnit.ctl -log +stderr -lang en_US.utf8
 
     - name: Publish Test Report
       uses: mikepenz/action-junit-report@v4
