@@ -172,7 +172,7 @@ jobs:
     name: Build help
     runs-on: ubuntu-20.04
     container:
-        image: mpokornyetm/winccoa:v3.19.7-uiserver
+        image: mpokornyetm/winccoa:v3.19.7-server
         options: --user root
         credentials:
            username: mpokornyetm
@@ -209,13 +209,18 @@ jobs:
         working-directory: /opt/WinCC_OA/3.19/bin/
         run: |
           ./WCCOActrl -proj WinCCOA_QualityChecks -n doxygen.ctl -log +stderr -lang en_US.utf8
-          ls -la ${{github.workspace}}/WinCCOA_QualityChecks/help/ || true
 
-      - name: Upload Help
+      - name: Upload html help
         uses: actions/upload-artifact@v3
         with:
-          name: Help
-          path: ${{github.workspace}}/WinCCOA_QualityChecks/help/*
+          name: wiki-help
+          path: ${{github.workspace}}/WinCCOA_QualityChecks/help/html/*
+
+      - name: Upload QT help
+        uses: actions/upload-artifact@v3
+        with:
+          name: qt-help
+          path: ${{github.workspace}}/WinCCOA_QualityChecks/help/html/index.qch
 
     #  - name: Upload Documentation to Wiki
     #    uses: SwiftDocOrg/github-wiki-publish-action@v1
@@ -238,12 +243,19 @@ jobs:
         cp -rp ${{github.workspace}}/WinCCOA_QualityChecks/* ${{github.workspace}}/install/WinCCOA_QualityChecks/
         mkdir -p ${{github.workspace}}/tests/WinCC_OA_Test/
         cp -rp ${{github.workspace}}/WinCC_OA_Test/* ${{github.workspace}}/tests/WinCC_OA_Test/
+        mkdir -p ${{github.workspace}}/install/WinCCOA_QualityChecks/help
 
     - name: Download ctrlppcheck binaries
       uses: actions/download-artifact@v3
       with:
         name: ctrlppcheck
         path: ${{github.workspace}}/install/WinCCOA_QualityChecks/bin/ctrlppcheck/
+
+    - name: Download help
+      uses: actions/download-artifact@v3
+      with:
+        name: qt-help
+        path: ${{github.workspace}}/install/WinCCOA_QualityChecks/help/index.qch
 
     - name: Upload WinCCOA_QualityChecks
       uses: actions/upload-artifact@v3
@@ -261,7 +273,7 @@ jobs:
     name: WinCC OA tests
     runs-on: ubuntu-20.04
     container:
-        image: mpokornyetm/winccoa:v3.19.7-uiserver
+        image: mpokornyetm/winccoa:v3.19.7-full
         options: --user root
         credentials:
            username: mpokornyetm
