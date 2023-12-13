@@ -206,7 +206,7 @@ jobs:
     runs-on: ubuntu-20.04
     container:
         image: mpokornyetm/winccoa:v3.19.7-uiserver
-#        options: --user root
+        options: --user root
         credentials:
            username: mpokornyetm
            password: ${{  secrets.DOCKER_CONTAINER_REGISTRY_TOKEN }}
@@ -230,7 +230,11 @@ jobs:
         name: WinCC_OA_Test
         path: ${{github.workspace}}/WinCC_OA_Test/
 
+    - name: 'Echo download path'
+      run: echo ${{steps.download.outputs.download-path}}
+
     - name: Register Ctrl TestFramework
+      working-directory: ${{github.workspace}}/WinCC_OA_Test/
       run: |
         whoami
         pwd
