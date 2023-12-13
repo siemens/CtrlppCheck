@@ -261,9 +261,13 @@ jobs:
         installPath = \"$cwd/\"
         " > config
 
+        cat config
+
         mkdir -p $$cwd/Projects/TfCustomizedQG/log
 
-        /opt/WinCC_OA/3.19/bin/WCCOActrl -config $cwd/Projects/TfCustomizedQG/config/config -n -autofreg -status || true
+        /opt/WinCC_OA/3.19/bin/WCCOActrl -config $cwd/Projects/TfCustomizedQG/config/config -n -autofreg -status  -log +stderr || true
+        
+        cat config
 
     - name: Start WinCC OA tests
       run: |
