@@ -385,9 +385,19 @@ jobs:
           name: wiki-help
           path: ${{github.workspace}}/
 
-      - name: Publish Documentation to Wiki
-        uses: SwiftDocOrg/github-wiki-publish-action@v1
-  #      with:
-  #        path: "wiki-help"
-        env:
-          GH_PERSONAL_ACCESS_TOKEN: ${{secrets.WIKI_ACTION_TOKEN}}
+      - name: Publish Documentation
+        uses: peaceiris/actions-gh-pages@v3
+        # If you're changing the branch from main,
+        # also change the `main` in `refs/heads/main`
+        # below accordingly.
+   #     if: github.ref == 'refs/heads/main'
+        with:
+          github_token: ${{ secrets.WIKI_ACTION_TOKEN }}
+          publish_dir: ./public
+
+#      - name: Publish Documentation to Wiki
+#        uses: SwiftDocOrg/github-wiki-publish-action@v1
+#  #      with:
+#  #        path: "wiki-help"
+#        env:
+#          GH_PERSONAL_ACCESS_TOKEN: ${{secrets.WIKI_ACTION_TOKEN}}
