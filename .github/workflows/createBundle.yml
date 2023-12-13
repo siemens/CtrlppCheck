@@ -155,12 +155,6 @@ jobs:
           execute_process(COMMAND sccache --show-stats)
         endif()
 
-    # no ctest tests for modified cppcheck, they were just thrown away
-    #- name: Test
-    #  working-directory: ${{github.workspace}}/build
-    #  # Execute tests defined by the CMake configuration.
-    #  # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
-    #  run: ctest -C ${{env.BUILD_TYPE}}
 
     - name: Upload ctrlppcheck
       uses: actions/upload-artifact@v3
@@ -310,7 +304,6 @@ jobs:
         proj_version = \"3.19\"
         langs = \"de_AT.utf8\"
         langs = \"en_US.utf8\"
-        langs = \"ru_RU.utf8\"
         pmonPort = 5999
         [testFramework]
         installPath = \"$cwd/\"
@@ -319,8 +312,6 @@ jobs:
         mkdir -p $$cwd/Projects/TfCustomizedQG/log
 
         /opt/WinCC_OA/3.19/bin/WCCILpmon -config $cwd/Projects/TfCustomizedQG/config/config -n -autofreg -status  -log +stderr || true
-        
-        cat config
 
     - name: Start WinCC OA tests
       working-directory: /opt/WinCC_OA/3.19/bin/
@@ -374,7 +365,7 @@ jobs:
 
 # inspired by https://nimblehq.co/blog/create-github-wiki-pull-request
   publish-wiki:
- #   if: github.event_name == 'release'
+    if: github.event_name == 'release'
     name: Publish wiki
     runs-on: ubuntu-20.04
     needs: tests
@@ -384,12 +375,6 @@ jobs:
         with:
           name: wiki-help
           path: ${{github.workspace}}/public/
-      
-      - name: echo
-        run: |
-          ls -la ${{github.workspace}}/ || true
-          ls -la ${{github.workspace}}/public/ || true
-
 
       - name: Publish Documentation
         uses: peaceiris/actions-gh-pages@v3
@@ -400,10 +385,3 @@ jobs:
         with:
           github_token: ${{ secrets.WIKI_ACTION_TOKEN }}
           publish_dir: ./public
-
-#      - name: Publish Documentation to Wiki
-#        uses: SwiftDocOrg/github-wiki-publish-action@v1
-#  #      with:
-#  #        path: "wiki-help"
-#        env:
-#          GH_PERSONAL_ACCESS_TOKEN: ${{secrets.WIKI_ACTION_TOKEN}}
