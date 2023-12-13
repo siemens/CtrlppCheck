@@ -383,11 +383,11 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: wiki-help
-          path: ${{github.workspace}}/wiki-help/
+          path: ${{github.workspace}}/
 
       - name: Publish Documentation to Wiki
         uses: SwiftDocOrg/github-wiki-publish-action@v1
-        with:
-          path: "wiki-help"
+  #      with:
+  #        path: "wiki-help"
         env:
           GH_PERSONAL_ACCESS_TOKEN: ${{secrets.WIKI_ACTION_TOKEN}}
