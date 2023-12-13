@@ -168,10 +168,60 @@ jobs:
         name: ctrlppcheck
         path: ${{github.workspace}}/build/${{ matrix.config.artifact }}
 
+  buildHelp:
+    name: Build help
+    runs-on: ubuntu-20.04
+    container:
+        image: mpokornyetm/winccoa:v3.19.7-uiserver
+        options: --user root
+        credentials:
+           username: mpokornyetm
+           password: ${{  secrets.DOCKER_CONTAINER_REGISTRY_TOKEN }}
+    steps:
+      - uses: actions/checkout@v1
+      - name: Register Project
+        working-directory: ${{github.workspace}}/WinCCOA_QualityChecks/
+        run: |
+          cwd=$(pwd)
+  
+          mkdir -p $cwd/config
+          cd $cwd/config
+  
+          echo "[general]
+          pvss_path = \"/opt/WinCC_OA/3.19\"
+          proj_path = \"$cwd\"
+          proj_version = \"3.19\"
+          langs = \"en_US.utf8\"
+          pmonPort = 5999
+          " > config
+  
+          mkdir -p $cwd/log
+  
+          /opt/WinCC_OA/3.19/bin/WCCILpmon -config $cwd/config/config -n -autofreg -status  -log +stderr || true
+  
+      - name: Generate help
+        working-directory: /opt/WinCC_OA/3.19/bin/
+        run: |
+          ./WCCOActrl -proj WinCCOA_QualityChecks -n doxygen.ctl -log +stderr -lang en_US.utf8
+          ls -la ${{github.workspace}}/WinCCOA_QualityChecks/help/ || true
+
+      - name: Upload Help
+        uses: actions/upload-artifact@v3
+        with:
+          name: Help
+          path: ${{github.workspace}}/WinCCOA_QualityChecks/help/*
+
+    #  - name: Upload Documentation to Wiki
+    #    uses: SwiftDocOrg/github-wiki-publish-action@v1
+    #    with:
+    #      path: "Documentation"
+    #    env:
+    #      GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+
   package:
     name: Package project and binaries
     runs-on: ubuntu-20.04
-    needs: build
+    needs: [build, buildHelp]
 
     steps:
     - uses: actions/checkout@v3
@@ -236,16 +286,10 @@ jobs:
     - name: Register Ctrl TestFramework
       working-directory: ${{github.workspace}}/WinCC_OA_Test/
       run: |
-        whoami
-        pwd
         cwd=$(pwd)
-        echo cwd $cwd
-        ls -la  || true
 
         mkdir -p $cwd/Projects/TfCustomizedQG/config
         cd $cwd/Projects/TfCustomizedQG/config
-
-      
 
         echo "[general]
         pvss_path = \"/opt/WinCC_OA/3.19\"
