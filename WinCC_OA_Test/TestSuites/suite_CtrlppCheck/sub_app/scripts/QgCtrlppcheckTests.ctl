@@ -19,6 +19,8 @@
 
 class MockCppCheck : CppCheck
 {
+  string tcId;
+
   public void checkFile(const string &testFile)
   {
     string s;
@@ -32,15 +34,15 @@ class MockCppCheck : CppCheck
     else
       s = "";
 
-    info("Start check of test file: " + testFile + ", with options:" + s);
+    oaUnitInfo(tcId, "Start check of test file: " + testFile + ", with options:" + s);
     start(testFile + s);
     stdErrToErrList();
   }
 
   public void compare(const string &refFile)
   {
-    info("Compare result with reference file: " + refFile);
-    const string tcId = "Ctrlppcheck." +  baseName(refFile);
+    tcId = "Ctrlppcheck." +  baseName(refFile);
+    oaUnitInfo(tcId, "Compare result with reference file: " + refFile);
     string str;
     bool hasFailedRead = fileToString(refFile, str, "UTF8");
     str = str.trim();
