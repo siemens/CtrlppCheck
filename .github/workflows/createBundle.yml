@@ -384,6 +384,12 @@ jobs:
         with:
           name: wiki-help
           path: ${{github.workspace}}/public/
+      
+      - name: echo
+        run: |
+          ls -la ${{github.workspace}}/ || true
+          ls -la ${{github.workspace}}/public/ || true
+
 
       - name: Publish Documentation
         uses: peaceiris/actions-gh-pages@v3
