@@ -222,13 +222,13 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: WinCCOA_QualityChecks
-        path: ${{github.workspace}}/WinCCOA_QualityChecks/
+        path: ${{github.workspace}}/
 
     - name: Download WinCC_OA_Test
       uses: actions/download-artifact@v3
       with:
         name: WinCC_OA_Test
-        path: ${{github.workspace}}/WinCC_OA_Test/
+        path: ${{github.workspace}}/
 
     - name: 'Echo download path'
       run: echo ${{steps.download.outputs.download-path}}
@@ -238,33 +238,32 @@ jobs:
       run: |
         whoami
         pwd
+        cwd=$(pwd)
+        echo cwd $cwd
         ls -la  || true
-        ls -la ${{github.workspace}} || true
 
-        mv -rf WinCC_OA_Test/ /opt/
-        
-        ls -la /opt/  || true
-        ls -la /opt/WinCC_OA_Test/ || true
-        ls -la /opt/WinCC_OA_Test/Projects/ || true
-        ls -la /opt/WinCC_OA_Test/Projects/TfCustomizedQG/ || true
+        mkdir -p $cwd/Projects/TfCustomizedQG/config
+        cd $cwd/Projects/TfCustomizedQG/config
+
+      
 
         echo "[general]
         pvss_path = \"/opt/WinCC_OA/3.19\"
         proj_path = \"/opt/WinCC_OA/3.19/TestFramework_3.19\"
-        proj_path = \"/opt/WinCC_OA_Test/Projects/Global\"
-        proj_path = \"/opt/WinCC_OA_Test/Projects/TfCustomizedQG\"
+        proj_path = \"$cwd//Projects/Global\"
+        proj_path = \"$cwd//Projects/TfCustomizedQG\"
         proj_version = \"3.19\"
         langs = \"de_AT.utf8\"
         langs = \"en_US.utf8\"
         langs = \"ru_RU.utf8\"
         pmonPort = 5999
         [testFramework]
-        installPath = \"/opt/WinCC_OA_Test/\"
-        " > /opt/WinCC_OA_Test/Projects/TfCustomizedQG/config/config
+        installPath = \"$cwd//\"
+        " > config
 
-        mkdir -p $/opt/WinCC_OA_Test/Projects/TfCustomizedQG/log
+        mkdir -p $$cwd//Projects/TfCustomizedQG/log
 
-        /opt/WinCC_OA/3.19/bin/WCCILpmon -config /opt/WinCC_OA_Test/Projects/TfCustomizedQG/config/config -n -autofreg -status
+        /opt/WinCC_OA/3.19/bin/WCCILpmon -config $cwd//Projects/TfCustomizedQG/config/config -n -autofreg -status
         RC=$?
         if [ "$RC" '!=' "0" ]; then
           echo "RC=$RC"
