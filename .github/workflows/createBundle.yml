@@ -261,8 +261,6 @@ jobs:
         installPath = \"$cwd/\"
         " > config
 
-        cat config
-
         mkdir -p $$cwd/Projects/TfCustomizedQG/log
 
         /opt/WinCC_OA/3.19/bin/WCCILpmon -config $cwd/Projects/TfCustomizedQG/config/config -n -autofreg -status  -log +stderr || true
@@ -270,14 +268,17 @@ jobs:
         cat config
 
     - name: Start WinCC OA tests
+      working-directory: /opt/WinCC_OA/3.19/bin/
       run: |
         echo ****** Execute WinCC OA Tests
-        /opt/WinCC_OA/3.19/bin/WCCOActrl -proj TfCustomizedQG -n testRunner.ctl {'testRunId':'Regression-tests','registerGlobalProject':true,'registerAllTools':true,'registerAllTemplates':true,'showLogViewer':false,'TfTestManager.checkForPossibleFreezeTests':true} -log +stderr -lang en_US.utf8
+        ls -la /opt/WinCC_OA/3.19/
+        ./WCCOActrl -proj TfCustomizedQG -n testRunner.ctl {'testRunId':'Regression-tests','registerGlobalProject':true,'registerAllTools':true,'registerAllTemplates':true,'showLogViewer':false,'TfTestManager.checkForPossibleFreezeTests':true} -log +stderr -lang en_US.utf8
 
     - name: Convert WinCC OA tests to jUnit
+      working-directory: /opt/WinCC_OA/3.19/bin/
       run: |
         echo ****** Convert results into jUnit format
-        /opt/WinCC_OA/3.19/bin/WCCOActrl -proj TfCustomizedQG -n oaTestParsers/jsonToJUnit.ctl -log +stderr -lang en_US.utf8
+        ./WCCOActrl -proj TfCustomizedQG -n oaTestParsers/jsonToJUnit.ctl -log +stderr -lang en_US.utf8
 
     - name: Publish Test Report
       uses: mikepenz/action-junit-report@v4
