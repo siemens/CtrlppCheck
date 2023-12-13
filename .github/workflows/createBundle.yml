@@ -222,13 +222,6 @@ jobs:
           name: qt-help
           path: ${{github.workspace}}/WinCCOA_QualityChecks/help/html/index.qch
 
-    #  - name: Upload Documentation to Wiki
-    #    uses: SwiftDocOrg/github-wiki-publish-action@v1
-    #    with:
-    #      path: "Documentation"
-    #    env:
-    #      GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
-
   package:
     name: Package project and binaries
     runs-on: ubuntu-20.04
@@ -377,3 +370,22 @@ jobs:
       uses: softprops/action-gh-release@v1
       with:
         files: WinCCOA_QualityChecks_${{ github.event.release.tag_name }}.zip
+
+  publish-wiki:
+ #   if: github.event_name == 'release'
+    name: Publish wiki
+    runs-on: ubuntu-20.04
+    needs: tests
+    steps:
+      - name: Download help
+        uses: actions/download-artifact@v3
+        with:
+          name: wiki-help
+          path: ${{github.workspace}}/wiki-help/
+
+      - name: Publish Documentation to Wiki
+        uses: SwiftDocOrg/github-wiki-publish-action@v1
+        with:
+          path: "wiki-help"
+        env:
+          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
