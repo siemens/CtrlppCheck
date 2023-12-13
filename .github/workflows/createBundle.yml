@@ -274,7 +274,7 @@ jobs:
       with:
         report_paths : ${{github.workspace}}/WinCC_OA_Test/Results/*.xml
 
-  tests:
+  release:
     if: github.event_name == 'release'
     name: Release
     runs-on: ubuntu-20.04
