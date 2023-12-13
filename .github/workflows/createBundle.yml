@@ -232,6 +232,7 @@ jobs:
 
     - name: Register Ctrl TestFramework
       run: |
+        whoami
         pwd
         ls -la  || true
         ls -la __w/CtrlppCheck/CtrlppCheck/  || true
@@ -239,7 +240,7 @@ jobs:
         ls -la __w/CtrlppCheck/CtrlppCheck/WinCC_OA_Test/Projects/ || true
         ls -la __w/CtrlppCheck/CtrlppCheck/WinCC_OA_Test/Projects/TfCustomizedQG/ || true
 
-        echo "[general]
+        sudo echo "[general]
         pvss_path = \"/opt/WinCC_OA/3.19\"
         proj_path = \"/opt/WinCC_OA/3.19/TestFramework_3.19\"
         proj_path = \"/__w/CtrlppCheck/CtrlppCheck/WinCC_OA_Test/Projects/Global\"
@@ -253,7 +254,7 @@ jobs:
         installPath = \"/__w/CtrlppCheck/CtrlppCheck/WinCC_OA_Test/\"
         " > /__w/CtrlppCheck/CtrlppCheck/WinCC_OA_Test/Projects/TfCustomizedQG/config/config
 
-        mkdir -p $/__w/CtrlppCheck/CtrlppCheck/WinCC_OA_Test/Projects/TfCustomizedQG/log
+        sudo mkdir -p $/__w/CtrlppCheck/CtrlppCheck/WinCC_OA_Test/Projects/TfCustomizedQG/log
 
         /opt/WinCC_OA/3.19/bin/WCCILpmon -config /__w/CtrlppCheck/CtrlppCheck/WinCC_OA_Test/Projects/TfCustomizedQG/config/config -n -autofreg -status
         RC=$?
