@@ -179,7 +179,7 @@ jobs:
     - name: Prepare file structure and project
       run: |
         mkdir -p ${{github.workspace}}/install/WinCCOA_QualityChecks/bin/ctrlppcheck
-        cp -rp ${{github.workspace}}/WinCCOA_QualityChecks/* ${{github.workspace}}/install/WinCCOA_QualityChecks/bin/ctrlppcheck/ctrlppcheck
+        cp -rp ${{github.workspace}}/WinCCOA_QualityChecks/* ${{github.workspace}}/install/WinCCOA_QualityChecks/
         cp -rp ${{github.workspace}}/WinCC_OA_Test/* ${{github.workspace}}/tests/WinCC_OA_Test/
 
     - name: Download ctrlppcheck binaries
@@ -274,7 +274,7 @@ jobs:
       with:
         report_paths : ${{github.workspace}}/WinCC_OA_Test/Results/*.xml
 
-  release:
+  tests:
     if: github.event_name == 'release'
     name: Release
     runs-on: ubuntu-20.04
