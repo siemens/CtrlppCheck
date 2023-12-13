@@ -232,7 +232,8 @@ jobs:
 
     - name: Register Ctrl TestFramework
       run: |
-        ls -la ${{github.workspace}}/ || true
+        pwd
+        ls -la  || true
 
         echo "[general]
         pvss_path = \"/opt/WinCC_OA/3.19\"
@@ -277,7 +278,7 @@ jobs:
     if: github.event_name == 'release'
     name: Release
     runs-on: ubuntu-20.04
-    needs: package
+    needs: tests
     steps:
 
     - name: Get the version
