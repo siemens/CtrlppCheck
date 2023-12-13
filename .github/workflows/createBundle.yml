@@ -334,7 +334,7 @@ jobs:
       run: |
         echo ****** Execute WinCC OA Tests
         ls -la /opt/WinCC_OA/3.19/
-        ./WCCOActrl -proj TfCustomizedQG -n testRunner.ctl {'testRunId':'Regression-tests','registerGlobalProject':true,'registerAllTools':true,'registerAllTemplates':true,'showLogViewer':false,'TfTestManager.checkForPossibleFreezeTests':true} -log +stderr -lang en_US.utf8
+        ./WCCOActrl -proj TfCustomizedQG -n testRunner.ctl {\'testRunId\':\'Regression-tests\',\'registerGlobalProject\':true,\'registerAllTools\':true,\'registerAllTemplates\':true,\'showLogViewer\':false,\'TfTestManager.checkForPossibleFreezeTests\':true} -log +stderr -lang en_US.utf8
 
     - name: Convert WinCC OA tests to jUnit
       working-directory: /opt/WinCC_OA/3.19/bin/
