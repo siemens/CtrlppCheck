@@ -180,6 +180,7 @@ jobs:
       run: |
         mkdir -p ${{github.workspace}}/install/WinCCOA_QualityChecks/bin/ctrlppcheck
         cp -rp ${{github.workspace}}/WinCCOA_QualityChecks/* ${{github.workspace}}/install/WinCCOA_QualityChecks/
+        mkdir -p ${{github.workspace}}/tests/WinCC_OA_Test/
         cp -rp ${{github.workspace}}/WinCC_OA_Test/* ${{github.workspace}}/tests/WinCC_OA_Test/
 
     - name: Download ctrlppcheck binaries
