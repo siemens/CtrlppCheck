@@ -8,23 +8,24 @@
 //
 
 #uses "classes/QualityGates/Tools/Lizard/ToolLizard"
+#uses "classes/QualityGates/QgResult"
 #uses "classes/QualityGates/QgSettings"
 
 class FunctionData
 {
-//--------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 //@public members
-//--------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
-  //------------------------------------------------------------------------------
-  public shared_ptr <QgVersionResult> result; //!< Quality gate result
+  //---------------------------------------------------------------------------
+  public shared_ptr <QgResult> result; //!< Quality gate result
 
-  //------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   public FunctionData()
   {
   }
 
-  //------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   public int fillFromCsv(const dyn_string &line)
   {
     if (dynlen(line) < (int)LizardCsvIndx::PARAMS)
@@ -55,62 +56,62 @@ class FunctionData
     return 0;
   }
 
-  //------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   /// cyclomatic complex. number
   public int getCCN()
   {
     return _ccn;
   }
 
-  //------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   // lines of comment
   public int getLOC()
   {
     return getLinesCount() - getNLOC();
   }
 
-  //------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   // no. lines of code
   public int getNLOC()
   {
     return _nloc;
   }
 
-  //------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   public int getParamCount()
   {
     return _paramCount;
   }
 
-  //------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   public int getLinesCount()
   {
     return _linesCount;
   }
 
-  //------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   public string getSynopsis()
   {
     return _synopsis;
   }
 
-  //------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   public string getName()
   {
     return _name;
   }
 
-  //------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   public string isCtor()
   {
     return _isCtor;
   }
 
-  //------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   public int validate()
   {
-    result = new QgVersionResult();
-    result.text = getName();
+    const mapping dollars = makeMapping("function.name", getName());
+    result = new QgResult("QgStaticCheck_FunctionData", "function", dollars);
 
     validateCCN();
     validateNLOC();
@@ -119,23 +120,19 @@ class FunctionData
     return 0;
   }
 
-//--------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 //@protected members
-//--------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
-  //------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   protected validateCCN()
   {
     shared_ptr<QgSettings> settings = new QgSettings("FunctionData.function.CCN");
 
     if (settings.isEnabled())
     {
-      shared_ptr <QgVersionResult> assertion = new QgVersionResult();
-      assertion.setMsgCatName("QgStaticCheck_FunctionData");
-
-      assertion.setAssertionText("assert.function.CCN");
-      assertion.setReasonText("reason.function.CCN", makeMapping("function.name", getName(),
-                              "function.CCN", getCCN()));
+      const mapping dollars = makeMapping("function.name", getName(), "function.CCN", getCCN());
+      shared_ptr <QgResult> assertion = new QgResult("QgStaticCheck_FunctionData", "function.CCN", dollars);
       assertion.assertLessEqual(getCCN(),
                                 settings.getHighLimit(DEFAULT_CNN_HIGH),
                                 settings.getScorePoints());
@@ -143,7 +140,7 @@ class FunctionData
     }
   }
 
-  //------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   protected validateNLOC()
   {
     string path = isCtor() ? "FunctionData.function.NLOC.ctor" : "FunctionData.function.NLOC";
@@ -151,13 +148,8 @@ class FunctionData
 
     if (settings.isEnabled())
     {
-      shared_ptr <QgVersionResult> assertion = new QgVersionResult();
-      assertion.setMsgCatName("QgStaticCheck_FunctionData");
-
-      assertion.setAssertionText("assert.function.NLOC");
-      assertion.setReasonText("reason.function.NLOC", makeMapping("function.name", getName(),
-                              "function.NLOC", getNLOC()));
-
+      const mapping dollars = makeMapping("function.name", getName(), "function.NLOC", getNLOC());
+      shared_ptr <QgResult> assertion = new QgResult("QgStaticCheck_FunctionData", "function.NLOC", dollars);
       assertion.assertBetween(getNLOC(),
                               settings.getLowLimit(DEFAULT_NLOC_LOW),
                               settings.getHighLimit(DEFAULT_NLOC_HIGH),
@@ -166,19 +158,15 @@ class FunctionData
     }
   }
 
-  //------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   protected validateParamCount()
   {
     shared_ptr<QgSettings> settings = new QgSettings("FunctionData.function.paramCount");
 
     if (settings.isEnabled())
     {
-      shared_ptr <QgVersionResult> assertion = new QgVersionResult();
-      assertion.setMsgCatName("QgStaticCheck_FunctionData");
-
-      assertion.setAssertionText("assert.function.paramCount");
-      assertion.setReasonText("reason.function.paramCount", makeMapping("function.name", getName(),
-                              "function.paramCount", getNLOC()));
+      const mapping dollars = makeMapping("function.name", getName(), "function.paramCount", getParamCount());
+      shared_ptr <QgResult> assertion = new QgResult("QgStaticCheck_FunctionData", "function.paramCount", dollars);
       assertion.assertLessEqual(getParamCount(),
                                 settings.getHighLimit(10),
                                 settings.getScorePoints());
@@ -186,27 +174,23 @@ class FunctionData
     }
   }
 
-  //------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   protected validateCountOfLines()
   {
     shared_ptr<QgSettings> settings = new QgSettings("FunctionData.function.countOfLines");
 
     if (settings.isEnabled())
     {
-      shared_ptr <QgVersionResult> assertion = new QgVersionResult();
-      assertion.setMsgCatName("QgStaticCheck_FunctionData");
-
-      assertion.setAssertionText("assert.function.countOfLines");
-      assertion.setReasonText("reason.function.countOfLines", makeMapping("function.name", getName(),
-                              "function.countOfLines", getLinesCount()));
+      const mapping dollars = makeMapping("function.name", getName(), "function.countOfLines", getLinesCount());
+      shared_ptr <QgResult> assertion = new QgResult("QgStaticCheck_FunctionData", "function.countOfLines", dollars);
       assertion.info(getLinesCount(), settings.getScorePoints());
       result.addChild(assertion);
     }
   }
 
-//--------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 //@private members
-//--------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
   int _nloc, _ccn, _paramCount, _linesCount;
   string _synopsis, _name;

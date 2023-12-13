@@ -7,17 +7,18 @@
 // SPDX-License-Identifier: GPL-3.0-only
 //
 
-#uses "classes/QualityGates/QgBase"
-#uses "classes/QualityGates/QgStaticCheck/CtrlCode/ScriptData"
 #uses "classes/FileSys/QgFile"
+#uses "classes/QualityGates/QgBase"
+#uses "classes/QualityGates/QgResult"
 #uses "classes/QualityGates/QgSettings"
+#uses "classes/QualityGates/QgStaticCheck/CtrlCode/ScriptData"
 
 class ScriptFile : QgFile
 {
-//--------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 //@public members
-//--------------------------------------------------------------------------------
-  //------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   /** @brief Default c-tor.
     @param dirPath Full path to directory.
   */
@@ -28,13 +29,13 @@ class ScriptFile : QgFile
     _enabledExtensions = makeDynString("ctl", "ctc");
   }
 
-  //------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   public static bool isCrypted(const string &s)
   {
     return (strpos(s, "PVSS_CRYPTED_PANEL") == 0);
   }
 
-  //------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   public bool isFileCrypted()
   {
     string s;
@@ -46,12 +47,13 @@ class ScriptFile : QgFile
     return isCrypted(s);
   }
 
+  //---------------------------------------------------------------------------
   public bool isCalculated()
   {
     return _isCalculated;
   }
 
-
+  //---------------------------------------------------------------------------
   public int calculate()
   {
     _isCalculated = FALSE;
@@ -89,10 +91,11 @@ class ScriptFile : QgFile
     return 0;
   }
 
+  //---------------------------------------------------------------------------
   public int validate()
   {
-    result = new QgVersionResult();
-    result.text = getName();
+    const mapping dollars = makeMapping("file.name", getName());
+    result = new QgResult("QgStaticCheck_ScriptFile", "file", dollars);
 
     {
       shared_ptr<QgSettings> settings = new QgSettings("ScriptFile.file.isExampleFile");
@@ -101,10 +104,8 @@ class ScriptFile : QgFile
       {
         // check if the file is example.
         // ignore all example files, the example are terrible scripts
-        shared_ptr <QgVersionResult> assertion = new QgVersionResult();
-        assertion.setMsgCatName("QgStaticCheck_ScriptFile");
-        assertion.setAssertionText("assert.file.isExampleFile");
-        assertion.setReasonText("reason.file.isExampleFile", makeMapping("file.name", getName()));
+        const mapping dollars = makeMapping("function.name", getName(), "file.isExampleFile", this.isExample());
+        shared_ptr <QgResult> assertion = new QgResult("QgStaticCheck_ScriptFile", "file.isExampleFile", dollars);
         assertion.allowNextErr(TRUE);
 
         if (!assertion.assertFalse(this.isExample(), settings.getScorePoints()))
@@ -123,11 +124,8 @@ class ScriptFile : QgFile
       if (settings.isEnabled())
       {
         // check for valid extensions
-        shared_ptr <QgVersionResult> assertion = new QgVersionResult();
-        assertion.setMsgCatName("QgStaticCheck_ScriptFile");
-        assertion.setAssertionText("assert.file.extension");
-        assertion.setReasonText("reason.file.extension", makeMapping("file.name", getName(),
-                                "file.extension", _extension));
+        const mapping dollars = makeMapping("function.name", getName(), "file.extension", _extension);
+        shared_ptr <QgResult> assertion = new QgResult("QgStaticCheck_ScriptFile", "file.extension", dollars);
 
         if (!assertion.assertDynContains(settings.getReferenceValues(), strtolower(_extension), settings.getScorePoints()))
         {
@@ -146,10 +144,8 @@ class ScriptFile : QgFile
       {
         // check if file is calculated.
         // ognore all not calculated files (crypted, empty files ...)
-        shared_ptr <QgVersionResult> assertion = new QgVersionResult();
-        assertion.setMsgCatName("QgStaticCheck_ScriptFile");
-        assertion.setAssertionText("assert.file.isCalculated");
-        assertion.setReasonText("reason.file.isCalculated", makeMapping("file.name", getName()));
+        const mapping dollars = makeMapping("function.name", getName(), "file.isCalculated", isCalculated());
+        shared_ptr <QgResult> assertion = new QgResult("QgStaticCheck_ScriptFile", "file.isCalculated", dollars);
 
         if (!assertion.assertTrue(isCalculated(), settings.getScorePoints()))
         {
@@ -169,33 +165,41 @@ class ScriptFile : QgFile
     return 0;
   }
 
+  //---------------------------------------------------------------------------
   public int getCCN()
   {
     return _scriptData.getCCN();
   }
 
+  //---------------------------------------------------------------------------
   public int getNLOC()
   {
     return _scriptData.getNLOC();
   }
 
+  //---------------------------------------------------------------------------
   public float getAvgCCN()
   {
     return _scriptData.getAvgCCN();
   }
 
+  //---------------------------------------------------------------------------
   public float getAvgNLOC()
   {
     return _scriptData.getAvgNLOC();
   }
 
+  //---------------------------------------------------------------------------
+  public shared_ptr <QgResult> result; //!< Quality gate result
 
-
-  //------------------------------------------------------------------------------
-  public shared_ptr <QgVersionResult> result; //!< Quality gate result
-
+//-----------------------------------------------------------------------------
+//@protected members
+//-----------------------------------------------------------------------------
   protected ScriptData _scriptData = ScriptData();
 
+//-----------------------------------------------------------------------------
+//@private members
+//-----------------------------------------------------------------------------
   static dyn_string _enabledExtensions = makeDynString();
   string _extension;
   bool _isCalculated;

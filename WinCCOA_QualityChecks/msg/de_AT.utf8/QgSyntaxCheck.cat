@@ -1,3 +1,6 @@
+
+syntaxMsgs
+
 assert.missingFiles,Has files
 reason.missingFiles,Application doesn´t contain any scripts, libs or panels.
 syntaxMsgs,Details

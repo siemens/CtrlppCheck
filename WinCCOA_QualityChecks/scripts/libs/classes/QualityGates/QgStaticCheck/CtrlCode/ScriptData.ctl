@@ -7,15 +7,15 @@
 // SPDX-License-Identifier: GPL-3.0-only
 //
 
-#uses "classes/QualityGates/Tools/Python/Python"
-#uses "classes/FileSys/QgFile"
 #uses "csv"
-#uses "classes/QualityGates/Tools/Lizard/ToolLizard"
-#uses "classes/QualityGates/QgStaticCheck/CtrlCode/FunctionData"
-#uses "classes/Variables/Float"
-#uses "classes/QualityGates/QgSettings"
-
+#uses "classes/FileSys/QgFile"
 #uses "classes/QualityGates/QgAddOnResultErr"
+#uses "classes/QualityGates/QgStaticCheck/CtrlCode/FunctionData"
+#uses "classes/QualityGates/QgResult"
+#uses "classes/QualityGates/QgSettings"
+#uses "classes/QualityGates/Tools/Lizard/ToolLizard"
+#uses "classes/QualityGates/Tools/Python/Python"
+#uses "classes/Variables/Float"
 
 /**
   Checks for static script data.
@@ -35,10 +35,10 @@ class ScriptData
 //@public members
 //--------------------------------------------------------------------------------
 
-  //------------------------------------------------------------------------------
-  public shared_ptr <QgVersionResult> result; //!< Quality gate result
+  //---------------------------------------------------------------------------
+  public shared_ptr <QgResult> result; //!< Quality gate result
 
-  //------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   /**
     Default c-tor
     @param filePath Full native path to file there shall be checked.
@@ -48,7 +48,7 @@ class ScriptData
     setPath(filePath);
   }
 
-  //------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   /**
     Set path to the checked file.
     It shall be used before calculation.
@@ -59,7 +59,7 @@ class ScriptData
     _filePath = filePath;
   }
 
-  //------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   /**
     Return the checked file name with extension.
     @note Not full path only the file name.
@@ -69,7 +69,7 @@ class ScriptData
     return baseName(_filePath);
   }
 
-  //------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   /**
     Returns TRUE when file is calcualted, otherwise false.
     */
@@ -78,7 +78,7 @@ class ScriptData
     return _isCalculated;
   }
 
-  //------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   /**
     Returns count of function located in file.
     */
@@ -87,7 +87,7 @@ class ScriptData
     return dynlen(_functions);
   }
 
-  //------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   /**
     Returns clount of lines in the script.
     Count of all lines (code, comments, empty ...)
@@ -97,7 +97,7 @@ class ScriptData
     return _linesCount;
   }
 
-  //------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   /**
     Returns CCN (cyclomatic complexicity) of script.
     CCN of all functions.
@@ -107,7 +107,7 @@ class ScriptData
     return _ccn;
   }
 
-  //------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   /**
     Returns NLOC (NumberLinesOfCode) of script.
     Pure code lines count (without comments, empty lines)
@@ -117,7 +117,7 @@ class ScriptData
     return _nloc;
   }
 
-  //------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   /**
     Returns average CCN of script.
     Seel also function getCCN() .
@@ -133,7 +133,7 @@ class ScriptData
     return f.round();
   }
 
-  //------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   /**
     Returns average NLOC of script.
     Seel also function getNLOC() .
@@ -149,8 +149,8 @@ class ScriptData
     return f.round();
   }
 
-  //------------------------------------------------------------------------------
-  //------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   /**
     Returns average count of lines per function in script.
     */
@@ -159,7 +159,7 @@ class ScriptData
     return _avgLines;
   }
 
-  //------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   /**
     Returns maximum enabled count of functions, there can be located in script.
     Quality limit.
@@ -170,7 +170,7 @@ class ScriptData
     return (int)settings.getHighLimit(DEFAULT_FUNCCOUNT_HIGH);
   }
 
-  //------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   /**
     Returns minimun enabled count of functions, there can be located in script.
     Quality limit.
@@ -181,7 +181,7 @@ class ScriptData
     return (int)settings.getLowLimit(DEFAULT_FUNCCOUNT_LOW);
   }
 
-  //------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   /**
     Returns maximum enabled NLOC.
     Quality limit.
@@ -193,7 +193,7 @@ class ScriptData
     return (int)settings.getHighLimit(DEFAULT_NLOC_HIGH);
   }
 
-  //------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   /**
     Returns minimum enabled NLOC.
     Quality limit.
@@ -205,7 +205,7 @@ class ScriptData
     return (int)settings.getLowLimit(DEFAULT_NLOC_LOW);
   }
 
-  //------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   /**
     Returns maximum enabled average CCN.
     Quality limit.
@@ -217,7 +217,7 @@ class ScriptData
     return (float)settings.getHighLimit(DEFAULT_AVGCCN_HIGH);
   }
 
-  //------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   /**
     Returns everage count of functions parameters.
     Quality limit.
@@ -227,7 +227,7 @@ class ScriptData
     return _avgParamCount;
   }
 
-  //------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   /**
     Function calculate script data.
 
@@ -312,15 +312,15 @@ class ScriptData
     return 0;
   }
 
-  //------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   /**
     Validate script data.
     @return Return 0 when successfull.
     */
   public int validate()
   {
-    result = new QgVersionResult();
-    result.text = getName();
+    const mapping dollars = makeMapping("script.name", getName());
+    result = new QgResult("QgStaticCheck_ScriptData", "function", dollars);
 
     if (!validateIsCalucalted())
       return 0;
@@ -337,11 +337,11 @@ class ScriptData
 //@protected members
 //--------------------------------------------------------------------------------
 
-  //------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   protected dyn_anytype _functions;  //!< list with functions data.
   protected string _filePath = "";   //!< Full native path to the script.
 
-  //------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   /**
     Validate calculation state of the script.
     @detals There are more reasons, why the script is not calculated
@@ -359,10 +359,8 @@ class ScriptData
     {
       // check if file is calculated.
       // ognore all not calculated files (crypted, empty files ...)
-      shared_ptr <QgVersionResult> assertion = new QgVersionResult();
-      assertion.setMsgCatName("QgStaticCheck_ScriptData");
-      assertion.setAssertionText("assert.script.isCalculated");
-      assertion.setReasonText("reason.script.isCalculated", makeMapping("script.name", getName()));
+      const mapping dollars = makeMapping("script.name", getName());
+      shared_ptr <QgResult> assertion = new QgResult("QgStaticCheck_ScriptData", "script.isCalculated", dollars);
 
       if (!assertion.assertTrue(isCalculated(), settings.getScorePoints()))
       {
@@ -375,7 +373,7 @@ class ScriptData
     return 1;
   }
 
-  //------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   /**
     Validate count of function in the script.
     Enabled count of functions are depend of the script type. For example scope of panel
@@ -394,17 +392,14 @@ class ScriptData
     if (settings.isEnabled())
     {
       // check count of functions.
-      shared_ptr <QgVersionResult> assertion = new QgVersionResult();
-      assertion.setMsgCatName("QgStaticCheck_ScriptData");
-      assertion.setAssertionText("assert.script.countOfFunctions");
-      assertion.setReasonText("reason.script.countOfFunctions", makeMapping("script.name", getName(),
-                              "countOfFunctions", getCountOfFunctions()));
+      const mapping dollars = makeMapping("script.name", getName(), "script.countOfFunctions", getCountOfFunctions());
+      shared_ptr <QgResult> assertion = new QgResult("QgStaticCheck_ScriptData", "script.countOfFunctions", dollars);
       assertion.assertBetween(getCountOfFunctions(), getMinCountOfFunctions(), getMaxCountOfFunctions(), settings.getScorePoints());
       result.addChild(assertion);
     }
   }
 
-  //------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   /**
     Validate average CCN of the script.
     Check average CCN (Cyclomatic complexicity -McCabe)
@@ -417,18 +412,15 @@ class ScriptData
 
       if (settings.isEnabled())
       {
-        shared_ptr <QgVersionResult> assertion = new QgVersionResult();
-        assertion.setMsgCatName("QgStaticCheck_ScriptData");
-        assertion.setAssertionText("assert.script.avgCCN");
-        assertion.setReasonText("reason.script.avgCCN", makeMapping("script.name", getName(),
-                                "avgCCN", getAvgCCN()));
+        const mapping dollars = makeMapping("script.name", getName(), "script.avgCCN", getAvgCCN());
+        shared_ptr <QgResult> assertion = new QgResult("QgStaticCheck_ScriptData", "script.avgCCN", dollars);
         assertion.assertLessEqual(getAvgCCN(), getMaxAvgCCN(), settings.getScorePoints());
         result.addChild(assertion);
       }
     }
   }
 
-  //------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   /**
     Validate NLOC of the script.
     Check NLOC - Noumber Line Of Code
@@ -439,17 +431,14 @@ class ScriptData
 
     if (settings.isEnabled())
     {
-      shared_ptr <QgVersionResult> assertion = new QgVersionResult();
-      assertion.setMsgCatName("QgStaticCheck_ScriptData");
-      assertion.setAssertionText("assert.script.NLOC");
-      assertion.setReasonText("reason.script.NLOC", makeMapping("script.name", getName(),
-                              "NLOC", getNLOC()));
+      const mapping dollars = makeMapping("script.name", getName(), "script.NLOC", getNLOC());
+      shared_ptr <QgResult> assertion = new QgResult("QgStaticCheck_ScriptData", "script.NLOC", dollars);
       assertion.assertBetween(getNLOC(), getMinNLOC(), getMaxNLOC(), settings.getScorePoints());
       result.addChild(assertion);
     }
   }
 
-  //------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   /**
     Validate average NLOC.
     Check average NLOC - Noumber Line Of Code
@@ -462,11 +451,8 @@ class ScriptData
 
       if (settings.isEnabled())
       {
-        shared_ptr <QgVersionResult> assertion = new QgVersionResult();
-        assertion.setMsgCatName("QgStaticCheck_ScriptData");
-        assertion.setAssertionText("assert.script.avgNLOC");
-        assertion.setReasonText("reason.script.avgNLOC", makeMapping("script.name", getName(),
-                                "avgNLOC", getAvgNLOC()));
+        const mapping dollars = makeMapping("script.name", getName(), "script.avgNLOC", getAvgNLOC());
+        shared_ptr <QgResult> assertion = new QgResult("QgStaticCheck_ScriptData", "script.avgNLOC", dollars);
         assertion.info(getAvgNLOC(), settings.getScorePoints()); // does not check it, only information character
         //     assertion.assertLessEqual(getAvgNLOC(), getMaxAvgCCN());
         result.addChild(assertion);
@@ -474,7 +460,7 @@ class ScriptData
     }
   }
 
-  //------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   /**
     Validate functions in script.
     Check each functions located in script.
@@ -484,9 +470,8 @@ class ScriptData
     // check all functions too.
     if (getCountOfFunctions() > 0)
     {
-      shared_ptr <QgVersionResult> functions = new QgVersionResult();
-      functions.setMsgCatName("QgStaticCheck_ScriptData");
-      functions.setAssertionText("functionsList");
+      const mapping dollars = makeMapping("script.name", getName(), "functionsList", getAvgNLOC());
+      shared_ptr <QgResult> assertion = new QgResult("QgStaticCheck_ScriptData", "functionsList", dollars);
 
       for (int i = 1; i <= dynlen(_functions); i++)
       {

@@ -1,6 +1,4 @@
 00001,QualityGates does not run successfully !!!
-00010,Assertion return error: $1
-00011,Assertion works: $1
 00020,The function $1 is not implemented.
 00021,Start quality gate $1.
 00022,Calculate sources for quality gate $1.

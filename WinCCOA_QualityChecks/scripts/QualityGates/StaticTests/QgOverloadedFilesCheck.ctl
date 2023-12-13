@@ -12,6 +12,7 @@
 #uses "classes/QualityGates/Qg"
 #uses "classes/QualityGates/QgBase"
 #uses "classes/QualityGates/QgOverloadedFilesCheck/QgOverloadedFilesCheck"
+#uses "classes/QualityGates/QgResult"
 
 //--------------------------------------------------------------------------------
 // declare variables and constans
@@ -32,7 +33,7 @@ class QgStaticCheck_OverloadedFiles : QgBase
     if (QgBase::setUp())
       return -1;
 
-    QgVersionResult::showErrorsOnly = TRUE;
+    QgResult::showErrorsOnly = TRUE;
     return 0;
   }
 

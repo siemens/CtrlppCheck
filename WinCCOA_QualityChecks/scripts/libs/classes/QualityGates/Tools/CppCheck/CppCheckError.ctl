@@ -6,7 +6,7 @@
 */
 
 
-//--------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 struct CppCheckError
 {
   string id;
@@ -19,6 +19,7 @@ struct CppCheckError
   int cwe;
   string knownBug; // for internal use (tests)
 
+  //---------------------------------------------------------------------------
   string toStdErrString()
   {
     string s =  "ID: " + id + "\n" +
@@ -38,5 +39,20 @@ struct CppCheckError
          "CWE: " + cwe;
 
     return s;
+  }
+
+  //---------------------------------------------------------------------------
+  public mapping toMapping()
+  {
+    return makeMapping(
+      "id", id,
+      "severity", severity,
+      "msg", msg,
+      "verbose", verbose,
+      "path", path,
+      "path0", path0,
+      "line", line,
+      "cwe", cwe
+    );
   }
 };
