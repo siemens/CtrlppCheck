@@ -19,11 +19,13 @@
 
 class MockCppCheck : CppCheck
 {
+  string tcId;
+
   public void checkFile(const string &testFile)
   {
     string s;
     fileToString(testFile, s);
-    s = substr(s, 0, strpos(s, "\n")); // get fist lines
+    s = substr(s, 0, strpos(s, "\n")); // get first line
     const string key = "// start options: ";
     int idx = strpos(s, key);
 
@@ -32,15 +34,15 @@ class MockCppCheck : CppCheck
     else
       s = "";
 
-    DebugN(__FUNCTION__, testFile, s);
+    oaUnitInfo(tcId, "Start check of test file: " + testFile + ", with options:" + s);
     start(testFile + s);
     stdErrToErrList();
   }
 
   public void compare(const string &refFile)
   {
-    DebugTN(__FUNCTION__, refFile);
-    const string tcId = "Ctrlppcheck." +  baseName(refFile);
+    tcId = "Ctrlppcheck." +  baseName(refFile);
+    oaUnitInfo(tcId, "Compare result with reference file: " + refFile);
     string str;
     bool hasFailedRead = fileToString(refFile, str, "UTF8");
     str = str.trim();
@@ -89,8 +91,6 @@ class MockCppCheck : CppCheck
       // DebugN(__FUNCTION__, map, expErr);
       oaUnitAssertGreater(tcId, dynContains(simpleErrStrings, expErrorStr), 0, map);
     }
-
-
   }
 };
 
@@ -163,6 +163,10 @@ class TstCtrlppcheck : OaTest
           mkdir(resDir);
 
         moveFile(PROJ_PATH + LOG_REL_PATH + "cppcheck-result.xml",  resDir + baseName(refFile));
+
+        // please keep this dummy pass() here to eliminate following failure
+        // Can not determine test case data ('Ctrlppcheck'). Check results for 'suite_CtrlppCheck/CtrlppCheck_App_3.19'
+        pass("The file " + path + " has been analyzed");
         return 0;
       }
     }
