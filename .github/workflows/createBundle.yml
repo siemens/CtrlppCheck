@@ -176,7 +176,7 @@ jobs:
         options: --user root
         credentials:
            username: mpokornyetm
-           password: ${{  secrets.DOCKER_CONTAINER_REGISTRY_TOKEN }}
+           password: ${{ secrets.DOCKER_CONTAINER_REGISTRY_TOKEN }}
     steps:
       - name: Install doxygen
         working-directory: /opt/WinCC_OA/3.19/bin/
@@ -270,7 +270,7 @@ jobs:
         options: --user root
         credentials:
            username: mpokornyetm
-           password: ${{  secrets.DOCKER_CONTAINER_REGISTRY_TOKEN }}
+           password: ${{ secrets.DOCKER_CONTAINER_REGISTRY_TOKEN }}
     needs: [build, package]
 
     steps:
@@ -376,14 +376,14 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     name: Publish help
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     needs: tests
     steps:
       - name: Download help
         uses: actions/download-artifact@v3
         with:
           name: html-help
-          path: ${{github.workspace}}/public/
+          path: ${{github.workspace}}/
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
