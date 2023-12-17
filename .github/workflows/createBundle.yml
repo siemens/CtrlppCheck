@@ -369,7 +369,6 @@ jobs:
       with:
         files: WinCCOA_QualityChecks_${{ github.event.release.tag_name }}.zip
 
-# inspired by https://nimblehq.co/blog/create-github-wiki-pull-request
   publish-help:
     # if: github.event_name == 'release'
     environment:
@@ -385,13 +384,13 @@ jobs:
           name: html-help
           path: ${{github.workspace}}/
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
-        with:
-          # Upload entire repository
-          path: '.'
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v3
+    #  - name: Setup Pages
+    #    uses: actions/configure-pages@v4
+    #  - name: Upload artifact
+    #    uses: actions/upload-pages-artifact@v2
+    #    with:
+    #      # Upload entire repository
+    #      path: '.'
+    #  - name: Deploy to GitHub Pages
+    #    id: deployment
+    #    uses: actions/deploy-pages@v3
