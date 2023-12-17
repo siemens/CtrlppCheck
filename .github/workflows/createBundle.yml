@@ -376,12 +376,13 @@ jobs:
           name: html-help
           path: ${{github.workspace}}/public/
 
-      - name: Publish GitHub pages help
-        uses: peaceiris/actions-gh-pages@v3
-        # If you're changing the branch from main,
-        # also change the `main` in `refs/heads/main`
-        # below accordingly.
-   #     if: github.ref == 'refs/heads/main'
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
         with:
-          github_token: ${{ secrets.WIKI_ACTION_TOKEN }}
-          publish_dir: ./public
+          # Upload entire repository
+          path: '.'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v3
