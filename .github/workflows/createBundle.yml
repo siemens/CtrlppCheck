@@ -372,6 +372,7 @@ jobs:
   
 # inspired by https://nimblehq.co/blog/create-github-wiki-pull-request
   publish-help:
+# !! TODO enable it only on release
    # if: github.event_name == 'release'
     name: Publish help
     runs-on: ubuntu-latest
