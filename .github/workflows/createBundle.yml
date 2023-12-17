@@ -369,11 +369,10 @@ jobs:
       with:
         files: WinCCOA_QualityChecks_${{ github.event.release.tag_name }}.zip
 
+  
+# inspired by https://nimblehq.co/blog/create-github-wiki-pull-request
   publish-help:
-    # if: github.event_name == 'release'
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+   # if: github.event_name == 'release'
     name: Publish help
     runs-on: ubuntu-latest
     needs: tests
@@ -382,15 +381,14 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: html-help
-          path: ${{github.workspace}}/
+          path: ${{github.workspace}}/docs/
 
-    #  - name: Setup Pages
-    #    uses: actions/configure-pages@v4
-    #  - name: Upload artifact
-    #    uses: actions/upload-pages-artifact@v2
-    #    with:
-    #      # Upload entire repository
-    #      path: '.'
-    #  - name: Deploy to GitHub Pages
-    #    id: deployment
-    #    uses: actions/deploy-pages@v3
+      - name: Publish GitHub pages help
+        uses: peaceiris/actions-gh-pages@v3
+        # If you're changing the branch from main,
+        # also change the `main` in `refs/heads/main`
+        # below accordingly.
+   #     if: github.ref == 'refs/heads/main'
+        with:
+          github_token: ${{ secrets.WIKI_ACTION_TOKEN }}
+          publish_dir: ./docs
