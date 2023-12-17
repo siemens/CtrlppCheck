@@ -9,6 +9,12 @@ on:
   release:
     types: [published]
 
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
   BUILD_TYPE: Release
@@ -366,6 +372,9 @@ jobs:
 # inspired by https://nimblehq.co/blog/create-github-wiki-pull-request
   publish-help:
     # if: github.event_name == 'release'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     name: Publish help
     runs-on: ubuntu-20.04
     needs: tests
