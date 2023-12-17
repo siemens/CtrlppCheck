@@ -50,7 +50,7 @@ If no error is in the .ctl file and an error is in the .xml file a warning will 
 
 Test results will be written to: "<project_dir>/log/CtrlppCheck/testscripts/suspiciousSemicolon.xml"
 
-Please keep in mind, that good documented test is the best example. Therefor document the test-script as well, that everybody can see and understand, what the check does and what is the (un)expected result. Also when you find some limitation, it is still good idea to document it in the test-code. It is public and transparent. Also the next developer will find possible leaks faster.
+Please mind that well documented tests are the best examples. Therefore, document the test-script as well so that everybody can see and understand what the check does and what the (un)expected results are. Also if you find limitations, it is good practice to document them in the test-code as well. This is transparent for the public community and makes it easier for others to steps in and proceed.
 
 ## Tests: configs and rules
 
