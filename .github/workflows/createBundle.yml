@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [ "main", "release/*" , "tests-*", "simulate-*"]
+    branches: [ "main", "release/*" , "feature/*"]
 #    tags: ["v*"]
   pull_request:
     branches: [ "main", "release/*" ]
@@ -386,10 +386,6 @@ jobs:
 
       - name: Publish GitHub pages help
         uses: peaceiris/actions-gh-pages@v3
-        # If you're changing the branch from main,
-        # also change the `main` in `refs/heads/main`
-        # below accordingly.
-   #     if: github.ref == 'refs/heads/main'
         with:
           github_token: ${{ secrets.WIKI_ACTION_TOKEN }}
           publish_dir: ./docs
