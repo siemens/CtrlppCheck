@@ -300,7 +300,7 @@ class ScriptData
 
     {
       string str;
-      fileToString(_filePath, str);
+      fileToString(_filePath, str, "UTF8");
 
       if (str != "")
         str += " "; // otherwise last line could be ignored
