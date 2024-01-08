@@ -10,64 +10,64 @@
 
 <!-- BRANDING ISSUES -->
 <rule version="1">
-	<tokenlist>normal</tokenlist>
-	<pattern><![CDATA[".\S*PVSS.\S*"|"PVSS.\S*"]]></pattern>
-	<message>
-	    <id>brandig_PVSS</id>
-		<severity>style</severity>
-		<summary>Use getComponentName() instead of hardcoded manager name $symbol</summary>
-	</message>
+    <tokenlist>normal</tokenlist>
+    <pattern><![CDATA[".\S*PVSS.\S*"|"PVSS.\S*"]]></pattern>
+    <message>
+        <id>brandig_PVSS</id>
+        <severity>style</severity>
+        <summary>Use getComponentName() instead of hardcoded manager name $symbol</summary>
+    </message>
 </rule>
 <rule version="1">
-	<tokenlist>normal</tokenlist>
-	<pattern><![CDATA[".\S*WCC.\S*"|".\S*wcc.\S*"|"WCC.\S*"|"wcc.\S*"|"WCC"|"wcc"]]></pattern>
-	<message>
-	    <id>brandig_OA</id>
-		<severity>error</severity>
-		<summary>Use getComponentName() instead of hardcoded manager name $symbol</summary>
-	</message>
+    <tokenlist>normal</tokenlist>
+    <pattern><![CDATA[".\S*WCC.\S*"|".\S*wcc.\S*"|"WCC.\S*"|"wcc.\S*"|"WCC"|"wcc"]]></pattern>
+    <message>
+        <id>brandig_OA</id>
+        <severity>error</severity>
+        <summary>Use getComponentName() instead of hardcoded manager name $symbol</summary>
+    </message>
 </rule>
 <!-- END OF: BRANDING ISSUES -->
 
 <!-- BAD FUNCTIONS -->
 <rule version="1">
-	<tokenlist>normal</tokenlist>
-	<pattern><![CDATA[ foo\d| foo  | foo_|_foo |_foo\d|\dfoo|\dfoo_]]></pattern>
-	<message>
-	    <id>usageOfFoo</id>
-		<severity>style</severity>
-		<summary>It is some develop version?, The funcion foo() or variable foo is found</summary>
-	</message>
+    <tokenlist>normal</tokenlist>
+    <pattern><![CDATA[ foo\d| foo  | foo_|_foo |_foo\d|\dfoo|\dfoo_]]></pattern>
+    <message>
+        <id>usageOfFoo</id>
+        <severity>style</severity>
+        <summary>It is some develop version?, The funcion foo() or variable foo is found</summary>
+    </message>
 </rule>
 <!-- END OF: BAD FUNCTIONS -->
 
 <!-- SAFETY -->
 <rule version="1">
-	<tokenlist>normal</tokenlist>
-	<pattern><![CDATA[ exit \( ]]></pattern>
-	<message>
-	    <id>badFunc_safety_exit</id>
-		<severity>error</severity>
-		<summary>It is potentially a safety issue to use the function exit()</summary>
-	</message>
+    <tokenlist>normal</tokenlist>
+    <pattern><![CDATA[ exit \( ]]></pattern>
+    <message>
+        <id>badFunc_safety_exit</id>
+        <severity>error</severity>
+        <summary>It is potentially a safety issue to use the function exit()</summary>
+    </message>
 </rule>
 <rule version="1">
-	<tokenlist>normal</tokenlist>
-	<pattern><![CDATA[ addGlobal \( ]]></pattern>
-	<message>
-	    <id>badFunc_safety_addGlobal</id>
-		<severity>warning</severity>
-		<summary>It is potentially a safety issue to use the function addGlobal()</summary>
-	</message>
+    <tokenlist>normal</tokenlist>
+    <pattern><![CDATA[ addGlobal \( ]]></pattern>
+    <message>
+        <id>badFunc_safety_addGlobal</id>
+        <severity>warning</severity>
+        <summary>It is potentially a safety issue to use the function addGlobal()</summary>
+    </message>
 </rule>
 <rule version="1">
-	<tokenlist>normal</tokenlist>
-	<pattern><![CDATA[ removeGlobal \( ]]></pattern>
-	<message>
-	    <id>badFunc_safety_removeGlobal</id>
-		<severity>error</severity>
-		<summary>It is potentially a safety issue to use the function removeGlobal()</summary>
-	</message>
+    <tokenlist>normal</tokenlist>
+    <pattern><![CDATA[ removeGlobal \( ]]></pattern>
+    <message>
+        <id>badFunc_safety_removeGlobal</id>
+        <severity>error</severity>
+        <summary>It is potentially a safety issue to use the function removeGlobal()</summary>
+    </message>
 </rule>
 <!-- END OF: SAFETY -->
 
@@ -76,16 +76,16 @@
 
 <!-- PERFORMANCE -->
 <rule version="1">
-	<tokenlist>normal</tokenlist>
-	<pattern><![CDATA[ delay \( ]]></pattern>
-	<message>
-	    <id>badFunc_performance_delay</id>
-		<severity>performance</severity>
-		<summary>It is really neccessary to use the function delay()</summary>
-	</message>
+    <tokenlist>normal</tokenlist>
+    <pattern><![CDATA[ delay \( ]]></pattern>
+    <message>
+        <id>badFunc_performance_delay</id>
+        <severity>performance</severity>
+        <summary>It is really neccessary to use the function delay()</summary>
+    </message>
 </rule>
 <rule version="1">
-	<tokenlist>raw</tokenlist>
+    <tokenlist>raw</tokenlist>
     <pattern> substr \( \w , \w , 1 \) </pattern>
     <message>
     <id>TokenSubStrAt0</id>
@@ -110,7 +110,7 @@
     </message>
 </rule>
 <rule version="1">
-	<tokenlist>normal</tokenlist>
+    <tokenlist>normal</tokenlist>
     <pattern>strpos \( \S+ , \S+ \) == 0 </pattern>
     <message>
         <id>strPosEq0</id>
@@ -122,99 +122,109 @@
 
 <!-- DEBUG -->
 <rule version="1">
-	<tokenlist>normal</tokenlist>
-	<pattern><![CDATA[ Debug \( ]]></pattern>
-	<message>
-	    <id>badFunc_style_Debug</id>
-		<severity>style</severity>
-		<summary>Use throwError() instead of Debug() functions</summary>
-	</message>
+    <tokenlist>normal</tokenlist>
+    <pattern><![CDATA[ Debug \( ]]></pattern>
+    <message>
+        <id>badFunc_style_Debug</id>
+        <severity>style</severity>
+        <summary>Use throwError() instead of Debug() functions</summary>
+    </message>
 </rule>
 <rule version="1">
-	<tokenlist>normal</tokenlist>
-	<pattern><![CDATA[ DebugN \( ]]></pattern>
-	<message>
-	    <id>badFunc_style_DebugN</id>
-		<severity>style</severity>
-		<summary>Use throwError() instead of DebugN() functions</summary>
-	</message>
+    <tokenlist>normal</tokenlist>
+    <pattern><![CDATA[ DebugN \( ]]></pattern>
+    <message>
+        <id>badFunc_style_DebugN</id>
+        <severity>style</severity>
+        <summary>Use throwError() instead of DebugN() functions</summary>
+    </message>
 </rule>
 <rule version="1">
-	<tokenlist>normal</tokenlist>
-	<pattern><![CDATA[ DebugTN \( ]]></pattern>
-	<message>
-	    <id>badFunc_style_DebugTN</id>
-		<severity>style</severity>
-		<summary>Use throwError() instead of DebugTN() functions</summary>
-	</message>
+    <tokenlist>normal</tokenlist>
+    <pattern><![CDATA[ DebugTN \( ]]></pattern>
+    <message>
+        <id>badFunc_style_DebugTN</id>
+        <severity>style</severity>
+        <summary>Use throwError() instead of DebugTN() functions</summary>
+    </message>
 </rule>
 <!-- END OF: DEBUG -->
 <rule version="1">
-	<tokenlist>normal</tokenlist>
-	<pattern>system \( \S+ </pattern>
-	<message>
-	    <id>quoted_params_system</id>
-		<severity>error</severity>
-		<summary>Call function system() with unquoted parameters.
-		Calling function system() with unquoted parameters leads to issues, when spaces in parameter are used.
-		For example, when the program is located in path containing spaces.
-		Verify, that the system call has quoted parameters and suppres this error by
-		//ctrlppcheck-suppress quoted_params_system</summary>
-	</message>
+    <tokenlist>normal</tokenlist>
+    <pattern>system \( \S+ </pattern>
+    <message>
+        <id>quoted_params_system</id>
+        <severity>error</severity>
+        <summary>Call function system() with unquoted parameters.
+        Calling function system() with unquoted parameters leads to issues, when spaces in parameter are used.
+        For example, when the program is located in path containing spaces.
+        Verify, that the system call has quoted parameters and suppres this error by
+        //ctrlppcheck-suppress quoted_params_system</summary>
+    </message>
 </rule>
 <rule version="1">
-	<tokenlist>normal</tokenlist>
-	<pattern>system \( \S+ </pattern>
-	<message>
-	    <id>unsafe_system_call</id>
-		<severity>warning</severity>
-		<summary>Calling system command outside WinCC OA.
-		Calling system command outside WinCC OA may be dangerours.
-		This is potential security issue.
-		Verify that this operation is safe and suppres this warning by
-		//ctrlppcheck-suppress unsafe_system_call</summary>
-	</message>
+    <tokenlist>normal</tokenlist>
+    <pattern>system \( \S+ </pattern>
+    <message>
+        <id>unsafe_system_call</id>
+        <severity>warning</severity>
+        <summary>Calling system command outside WinCC OA.
+        Calling system command outside WinCC OA may be dangerours.
+        This is potential security issue.
+        Verify that this operation is safe and suppres this warning by
+        //ctrlppcheck-suppress unsafe_system_call</summary>
+    </message>
 </rule>
 <rule version="1">
-	<tokenlist>raw</tokenlist>
-	<pattern>makeError \( \S+ , \S+ , \S+ , 0 </pattern>
-	<message>
-	    <id>fatal_program_exit</id>
-		<severity>warning</severity>
-		<summary>Throw error with FATAL priority stop the program.
-		Throwing a error with FATAL priority leads to stop the program.
-		Verify that this scenario is accepted and suppres this warning by
-		//ctrlppcheck-suppress fatal_program_exit</summary>
-	</message>
+    <tokenlist>raw</tokenlist>
+    <pattern>makeError \( \S+ , \S+ , \S+ , 0 </pattern>
+    <message>
+        <id>fatal_program_exit</id>
+        <severity>warning</severity>
+        <summary>Throw error with FATAL priority stop the program.
+        Throwing a error with FATAL priority leads to stop the program.
+        Verify that this scenario is accepted and suppres this warning by
+        //ctrlppcheck-suppress fatal_program_exit</summary>
+    </message>
 </rule>
 
 <rule version="1">
-	<tokenlist>raw</tokenlist>
-	<pattern>logger . fatal \( </pattern>
-	<message>
-	    <id>fatal_program_exit</id>
-		<severity>warning</severity>
-		<summary>Throw error with FATAL priority stop the program.
-		Throwing a error with FATAL priority leads to stop the program.
-		Verify that this scenario is accepted and suppres this warning by
-		//ctrlppcheck-suppress fatal_program_exit</summary>
-	</message>
+    <tokenlist>raw</tokenlist>
+    <pattern>logger . fatal \( </pattern>
+    <message>
+        <id>fatal_program_exit</id>
+        <severity>warning</severity>
+        <summary>Throw error with FATAL priority stop the program.
+        Throwing a error with FATAL priority leads to stop the program.
+        Verify that this scenario is accepted and suppres this warning by
+        //ctrlppcheck-suppress fatal_program_exit</summary>
+    </message>
 </rule>
 <rule version="1">
-	<tokenlist>normal</tokenlist>
-	<pattern>uses \".*\.ctl\"</pattern>
-	<message>
-	    <id>library_extension</id>
-		<severity>style</severity>
-		<summary>It is not neccessary to use .ctl extension in #uses.</summary>
-	</message>
+    <tokenlist>normal</tokenlist>
+    <pattern>uses \".*\.ctl\"</pattern>
+    <message>
+        <id>library_extension</id>
+        <severity>style</severity>
+        <summary>It is not neccessary to use .ctl extension in #uses.</summary>
+    </message>
 </rule>
 <rule version="1">
-	<tokenlist>normal</tokenlist>
-	<pattern>uses \".*\.ctc\"</pattern>
-	<message>
-	    <id>library_extension</id>
-		<severity>style</severity>
-		<summary>It is not neccessary to use .ctc extension in #uses.</summary>
-	</message>
+    <tokenlist>normal</tokenlist>
+    <pattern>uses \".*\.ctc\"</pattern>
+    <message>
+        <id>library_extension</id>
+        <severity>style</severity>
+        <summary>It is not neccessary to use .ctc extension in #uses.</summary>
+    </message>
+</rule>
+
+<!-- ISO vs UTF8 issues -->
+<rule version="1">
+    <pattern>fileToString \( \S+ , \S+ \)</pattern>
+    <message>
+        <id>fileToString_noEncoding</id>
+        <severity>warning</severity>
+        <summary>Using fileToString(fileName , result) will encode files in ISO88591 format. Use fileToString(fileName , result, "utf8") instead.</summary>
+    </message>
 </rule>

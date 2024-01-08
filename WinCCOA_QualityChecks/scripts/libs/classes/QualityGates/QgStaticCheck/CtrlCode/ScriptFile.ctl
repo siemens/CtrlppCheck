@@ -38,7 +38,7 @@ class ScriptFile : QgFile
   public bool isFileCrypted()
   {
     string s;
-    fileToString(getFilePath(), s);
+    fileToString(getFilePath(), s, "UTF8");
 
     if ((s == "") && (strpos(getFilePath(), ".ctc") > 0))
       return TRUE;
