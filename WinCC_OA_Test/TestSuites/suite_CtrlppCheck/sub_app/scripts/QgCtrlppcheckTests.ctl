@@ -22,7 +22,7 @@ class MockCppCheck : CppCheck
   public void checkFile(const string &testFile)
   {
     string s;
-    fileToString(testFile, s);
+    fileToString(testFile, s, "UTF8");
     s = substr(s, 0, strpos(s, "\n")); // get fist lines
     const string key = "// start options: ";
     int idx = strpos(s, key);
@@ -32,18 +32,18 @@ class MockCppCheck : CppCheck
     else
       s = "";
 
-    DebugN(__FUNCTION__, testFile, s);
+    DebugFTN("MockCppCheck", __FUNCTION__, testFile, s);
     start(testFile + s);
     stdErrToErrList();
   }
 
   public void compare(const string &refFile)
   {
-    DebugTN(__FUNCTION__, refFile);
+    DebugFTN("MockCppCheck", __FUNCTION__, refFile);
     const string tcId = "Ctrlppcheck." +  baseName(refFile);
     string str;
     bool hasFailedRead = fileToString(refFile, str, "UTF8");
-    str = str.trim();
+    str.trim();
     oaUnitAssertTrue(tcId, hasFailedRead, "Read reference file: " + refFile);
     MockCppCheck reference;
 
@@ -55,11 +55,17 @@ class MockCppCheck : CppCheck
 
     reference.strToErrList(str);
 
-//     if ( dynlen(errList) != dynlen(reference.errList) )
-//     {
-//       oaUnitFail(tcId, "Count of error does not match with reference file:\n" + refFile);
-//       return;
-//     }
+    if (dynlen(reference.errList) <= 0)
+    {
+      oaUnitAbort(tcId, "Can not parse reference file " + refFile + " errors,\n" + str);
+      return;
+    }
+
+    //  if ( dynlen(errList) != dynlen(reference.errList) )
+    //  {
+    //    oaUnitFail(tcId, "Count of error (" + dynlen(errList) + ") does not match with reference file (" + dynlen(reference.errList) + "):\n" + refFile);
+    //   //  return;
+    //  }
 
     dyn_string simpleErrStrings;
 

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<results version="2">
+    <cppcheck version="2.0"/>
+    <errors>
+        <error id="fileToString_noEncoding" severity="warning" msg="Using fileToString(fileName , result) will encode files in ISO88591 format. Use fileToString(fileName , result, &quot;utf8&quot;) instead." verbose="Using fileToString(fileName , result) will encode files in ISO88591 format. Use fileToString(fileName , result, &quot;utf8&quot;) instead.">
+            <location file0="" file="" line="19"/>
+            <symbol>fileToString ( path , s )</symbol>
+        </error>
+    </errors>
+</results>
