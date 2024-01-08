@@ -1,0 +1,108 @@
+V 14
+1
+LANG:10000 0 
+PANEL,-1 -1 641 472 N "WF_PanelBackground" 0
+"
+
+main()
+{
+  splitter.addModule(\"qgSideBar\");
+  splitter.addModule(\"qgViewContainer\");
+
+  dyn_int sizes = jsonDecode(globalStorage.getValue(\"qg_splitter_sizes\", \"[]\"));
+
+  if ( dynlen(sizes) > 0 )
+    splitter.setSizes(sizes);
+
+  rootPanelOnModule(\"vision/tf/objects/qgSideBar\", \"qgSideBar\", \"qgSideBar\", \"\");
+  rootPanelOnModule(\"vision/tf/objects/qgViewContainer\", \"qgViewContainer\", \"qgViewContainer\", \"\");
+
+  splitter.setMinimumSize(\"qgSideBar\", 100);
+  splitter.setCollapsible(\"qgSideBar\", FALSE);
+}
+" 0
+ E E E E 1 -1 -1 0  -107.5 -50.25641025641026
+""0  1
+E "#uses \"classes/globalStorage/GlobalStorage\"
+
+GlobalStorage globalStorage = GlobalStorage(\"vision_tf\");
+" 0
+ 5
+"CBRef" "1"
+"EClose" E
+"type" "WF"
+"dpi" "120"
+"pdpi" "141.951"
+1 1 0 0 0 0 1 0
+""
+DISPLAY_LAYER, 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0
+LAYER, 0 
+0
+29 2
+"splitter"
+""
+1 -170 -90 E E E 1 E 1 E N "WF_Text" E N "SiemensSand" E E
+ E E
+1 0 0 0 0 0
+E E E
+0
+3
+LANG:10000 0 
+LANG:10001 0 
+LANG:10027 0 
+
+8
+"lineWidth" "int 1"
+"styleSheet" "string QWidget#splitter{font-family: \"Noto Sans\"; font-size: 17px; font-style: normal; font-weight: 400; }QWidget#splitter:enabled {background: #ffaaaa96; color: #ff505a64; }"
+"handleWidth" "int 2"
+"frameShape" "enum 1"
+"tabletTracking" "bool TRUE"
+"sizePolicy" "Preferred MinimumExpanding"
+"layoutAlignment" "AlignNone"
+"snapMode" "Line"
+3
+LANG:10000 35 MS Shell Dlg 2,-1,13,5,50,0,0,0,0,0
+LANG:10001 38 Noto Sans,-1,17,5,50,0,0,0,0,0,Regular
+LANG:10027 35 MS Shell Dlg 2,-1,13,5,50,0,0,0,0,0
+0  -57.5 -50.25641025641026 392.5 259.7435897435897
+8 Splitter
+1
+0 "splitterMoved" "(int pos, int idx)"
+"  globalStorage.setValue(\"qg_splitter_sizes\", jsonEncode(splitter.getSizes(), TRUE));"
+E0
+LAYER, 1 
+0
+0
+LAYER, 2 
+0
+0
+LAYER, 3 
+0
+0
+LAYER, 4 
+0
+0
+LAYER, 5 
+0
+0
+LAYER, 6 
+0
+0
+LAYER, 7 
+0
+0
+4 0 "LAYOUT_GROUP5" 2
+1 0 
+2 
+
+"S 2" "0 0 1 1"
+"" ""
+0 1 0 1 0
+4 2 "LAYOUT_GROUP16" -1
+0 1 
+
+0 
+"G 0" "0 0 1 1"
+"" ""
+0 2 0 1 0
+0

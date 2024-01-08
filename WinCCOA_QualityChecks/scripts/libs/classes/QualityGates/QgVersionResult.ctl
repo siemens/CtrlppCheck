@@ -595,14 +595,15 @@ struct QgVersionResult
   }
 
   //------------------------------------------------------------------------------
-  /** @brief enabled or disabled oaUnitResults
-    @todo mPunk 30.10.2018: make it configureable, otherwise does not work in jenkins
-    @return TRUE hen are oaUnit results enabled
+  /** Check if the oaUnitResult can be enabled.
+
+     The oaUnitFormat is enabled only when the script has been started by WinCC OA
+     TestFramework.
   */
   protected static bool _enableOaTestOutput()
   {
-    return true;
-    return Qg::isRunningOnJenkins();
+    // like in the OaTestBase::isStartedByTF() but the function is private :-(
+    return isfile(PROJ_PATH + "fullResult.json");
   }
 
   //------------------------------------------------------------------------------
