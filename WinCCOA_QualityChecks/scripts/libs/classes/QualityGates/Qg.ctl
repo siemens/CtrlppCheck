@@ -72,7 +72,7 @@ class Qg
   }
 
   //------------------------------------------------------------------------------
-  /** @depracted
+  /** @deprecated
       @todo Eliminatig this function will remove many of not used code,
             probably used by store.
     */
