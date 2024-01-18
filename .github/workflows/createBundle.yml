@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [ "main", "release/*" , "feature/*"]
+    branches: [ "main", "release/*" ]
 #    tags: ["v*"]
   pull_request:
     branches: [ "main", "release/*" ]
@@ -369,23 +369,23 @@ jobs:
       with:
         files: WinCCOA_QualityChecks_${{ github.event.release.tag_name }}.zip
 
-  
-# inspired by https://nimblehq.co/blog/create-github-wiki-pull-request
-  publish-help:
-# !! TODO enable it only on release
-   # if: github.event_name == 'release'
-    name: Publish help
-    runs-on: ubuntu-latest
-    needs: tests
-    steps:
-      - name: Download help
-        uses: actions/download-artifact@v3
-        with:
-          name: html-help
-          path: ${{github.workspace}}/docs/
-
-      - name: Publish GitHub pages help
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.WIKI_ACTION_TOKEN }}
-          publish_dir: ./docs
+#  current html is not really user friendly, therefor deactivated
+## inspired by https://nimblehq.co/blog/create-github-wiki-pull-request
+#  publish-help:
+#    if: github.event_name == 'release'
+#    name: Publish help
+#    runs-on: ubuntu-20.04
+#    needs: tests
+#    steps:
+#      - name: Download help
+#        uses: actions/download-artifact@v3
+#        with:
+#          name: html-help
+#          path: ${{github.workspace}}/docs/
+#
+#      - name: Publish GitHub pages help
+#        uses: peaceiris/actions-gh-pages@v3
+#        with:
+#          github_token: ${{ secrets.WIKI_ACTION_TOKEN }}
+#          publish_dir: ./docs
+#
