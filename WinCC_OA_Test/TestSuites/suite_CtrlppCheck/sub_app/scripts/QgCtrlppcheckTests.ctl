@@ -25,7 +25,7 @@ class MockCppCheck : CppCheck
   {
     string s;
     fileToString(testFile, s, "UTF8");
-    s = substr(s, 0, strpos(s, "\n")); // get fist lines
+    s = substr(s, 0, strpos(s, "\n")); // get first line
     const string key = "// start options: ";
     int idx = strpos(s, key);
 
