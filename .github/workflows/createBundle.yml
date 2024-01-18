@@ -36,7 +36,7 @@ jobs:
         - {
             name: "Ubuntu 2004 GCC",
             artifact: "bin/ctrlppcheck",
-            os: ubuntu-20.04,
+            os: ubuntu-latest,
             cc: "gcc", cxx: "g++"
           }
 
@@ -170,7 +170,7 @@ jobs:
 
   buildHelp:
     name: Build help
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     container:
         image: mpokornyetm/winccoa:v3.19.8-full
         options: --user root
