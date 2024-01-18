@@ -58,12 +58,12 @@ Both types of checks may also be executed from the command line to facilitate in
 Hardware requirements
 ---------------------
 
-see WinCC OA online documentation [link](https://www.winccoa.com/documentation/WinCCOA/latest/en_US/GettingStarted/GettingStarted-13_2.html)
+see WinCC OA online documentation [link](https://www.winccoa.com/documentation/WinCCOA/latest/en_US/WCCOA_Voraussetzungen/Voraussetzungen-02.html)
 
 Software requirements
 ---------------------
 
-for basic requirements see WinCC OA online documentation [link](https://www.winccoa.com/documentation/WinCCOA/latest/en_US/GettingStarted/GettingStarted-13_2.html)
+for basic requirements see WinCC OA online documentation [link](https://www.winccoa.com/documentation/WinCCOA/latest/en_US/WCCOA_Voraussetzungen/Voraussetzungen-03.html)
 
 python must be installed; min. V3.6
 
