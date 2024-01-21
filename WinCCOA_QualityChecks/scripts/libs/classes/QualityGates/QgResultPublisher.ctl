@@ -133,7 +133,7 @@ class QgResultPublisher
   //------------------------------------------------------------------------------
   protected int _publishFull(const QgAddOnResultsDir &resDir)
   {
-    if (Qg::isRunningOnJenkins() || true)
+    if (Qg::isRunningOnJenkins())
       return _publishFullOnJenkins(resDir);
     else
       return _publishFullLocale(resDir);

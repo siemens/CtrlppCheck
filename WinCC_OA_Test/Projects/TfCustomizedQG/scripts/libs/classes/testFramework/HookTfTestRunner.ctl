@@ -45,7 +45,6 @@ class HookTfTestRunner : TfTestRunner
     if (!isdir(resDir))
       mkdir(resDir);
 
-    // if (TstNoPosix::isStaredByJenkins())
     if (currentTestSuite != "__TF__")
     {
       oaUnitSetup(resDir + "result.json", makeMapping("Format", (int)OaTestResultFileFormat::JsonFull));
@@ -76,38 +75,6 @@ class HookTfTestRunner : TfTestRunner
 //--------------------------------------------------------------------------------
 //@protected members
 //--------------------------------------------------------------------------------
-  public static int registerNoDeployPacket(const string &packetName, const string installDir = WINCCOA_PATH)
-  {
-    ProjEnvProject packet = ProjEnvProject(packetName);
-    packet.setInstallDir(installDir);
-    packet.setVersion(VERSION);
-    packet.setRunnable(FALSE);
-    packet.setName("noDeploy " + packetName);
-
-    // check if a project directory exist.
-    if (!packet.exists())
-    {
-      DebugTN(__FUNCTION__, getenv("NODE_NAME"), "packet does not exist", packet);
-      return -1;
-    }
-
-    // re-register project
-    if (packet.isRegistered())
-    {
-      DebugFTN(__FUNCTION__, __FUNCTION__, "packet is registered", packetName);
-      return 0;
-    }
-
-    if (packet.registerProj())
-    {
-      DebugTN(__FUNCTION__, getenv("NODE_NAME"), "can NOT register packet", packet);
-      return -2;
-    }
-
-    DebugFTN(__FUNCTION__, __FUNCTION__, "packet registered", packetName);
-
-    return 0;
-  }
 
 //--------------------------------------------------------------------------------
 //@private members
