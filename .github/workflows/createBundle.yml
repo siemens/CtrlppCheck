@@ -246,6 +246,10 @@ jobs:
         name: ctrlppcheck
         path: ${{github.workspace}}/install/WinCCOA_QualityChecks/bin/ctrlppcheck/
 
+    - name: Add x bit to Linux binary
+      run: |
+        chmod +x /__w/CtrlppCheck/CtrlppCheck/WinCCOA_QualityChecks/bin/ctrlppcheck/ctrlppcheck
+
     - name: Download help
       uses: actions/download-artifact@v3
       with:
@@ -333,10 +337,6 @@ jobs:
         echo ****** Convert results into jUnit format
         ./WCCOActrl -proj TfCustomizedQG -n oaTestParsers/jsonToJUnit.ctl -log +stderr -lang en_US.utf8
 
-    - name: Add x bit to Linux binary
-      run: |
-        chmod +x /__w/CtrlppCheck/CtrlppCheck/WinCCOA_QualityChecks/bin/ctrlppcheck/ctrlppcheck
-
     - name: Publish Failed projects
       uses: actions/upload-artifact@v3
       with:
@@ -368,10 +368,6 @@ jobs:
         name: WinCCOA_QualityChecks
         path: ${{github.workspace}}/install/
 
-    - name: Add x bit to Linux binary
-      run: |
-        chmod +x ${{ github.workspace }}/install/WinCCOA_QualityChecks/bin/ctrlppcheck/ctrlppcheck
-
     - name: Zip Folder
       run: cd ${{ github.workspace }}/install/ && zip -r ${{ github.workspace }}/WinCCOA_QualityChecks_${{ github.event.release.tag_name }}.zip *
 
@@ -382,7 +378,6 @@ jobs:
         files: WinCCOA_QualityChecks_${{ github.event.release.tag_name }}.zip
 
   
-# inspired by https://nimblehq.co/blog/create-github-wiki-pull-request
   publish-help:
 # !! TODO enable it only on release
    # if: github.event_name == 'release'
@@ -405,7 +400,7 @@ jobs:
         with:
           token: ${{ secrets.WIKI_ACTION_TOKEN }}
           branch: gh-pages
-          folder: ${{ inputs.folder }}
+          folder: ./docs/
 #          target-folder: ${{ inputs.target_folder }}
         
  
