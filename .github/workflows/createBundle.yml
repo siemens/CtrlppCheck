@@ -386,8 +386,16 @@ jobs:
           name: html-help
           path: ${{github.workspace}}/docs/
 
+      - name: Create .nojekyll (ensures pages with underscores work on gh pages)
+        run: touch ./docs/.nojekyll
+        shell: bash
+
       - name: Publish GitHub pages help
-        uses: peaceiris/actions-gh-pages@v3
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          github_token: ${{ secrets.WIKI_ACTION_TOKEN }}
-          publish_dir: ./docs
+          token: ${{ secrets.WIKI_ACTION_TOKEN }}
+          branch: gh-pages
+          folder: ${{ inputs.folder }}
+#          target-folder: ${{ inputs.target_folder }}
+        
+ 
