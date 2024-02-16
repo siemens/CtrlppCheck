@@ -333,6 +333,10 @@ jobs:
         echo ****** Convert results into jUnit format
         ./WCCOActrl -proj TfCustomizedQG -n oaTestParsers/jsonToJUnit.ctl -log +stderr -lang en_US.utf8
 
+    - name: Add x bit to Linux binary
+      run: |
+        chmod +x ${{ github.workspace }}/WinCCOA_QualityChecks/bin/ctrlppcheck/ctrlppcheck
+
     - name: Publish Failed projects
       uses: actions/upload-artifact@v4
       with:
