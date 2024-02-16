@@ -165,7 +165,7 @@ jobs:
 
 
     - name: Upload ctrlppcheck
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: ctrlppcheck
         path: ${{github.workspace}}/build/${{ matrix.config.artifact }}
@@ -213,13 +213,13 @@ jobs:
           ./WCCOActrl -proj WinCCOA_QualityChecks -n doxygen.ctl -log +stderr -lang en_US.utf8
 
       - name: Upload html help
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: html-help
           path: ${{github.workspace}}/WinCCOA_QualityChecks/help/html/*
 
       - name: Upload QT help
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: qt-help
           path: ${{github.workspace}}/WinCCOA_QualityChecks/help/html/index.qch
@@ -253,13 +253,13 @@ jobs:
         path: ${{github.workspace}}/install/WinCCOA_QualityChecks/help/index.qch
 
     - name: Upload WinCCOA_QualityChecks
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: WinCCOA_QualityChecks
         path: ${{github.workspace}}/install/*
 
     - name: Upload WinCC_OA_Test
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: WinCC_OA_Test
         path: ${{github.workspace}}/tests/*
