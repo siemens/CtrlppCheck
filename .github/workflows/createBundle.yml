@@ -176,7 +176,7 @@ jobs:
         options: --user root
         credentials:
            username: mpokornyetm
-           password: ${{ secrets.DOCKER_CONTAINER_REGISTRY_TOKEN }}
+           password: Katopeso1#
     steps:
       - name: Install doxygen
         working-directory: /opt/WinCC_OA/3.19/bin/
@@ -270,7 +270,7 @@ jobs:
         options: --user root
         credentials:
            username: mpokornyetm
-           password: ${{ secrets.DOCKER_CONTAINER_REGISTRY_TOKEN }}
+           password: Katopeso1#
     needs: [build, package]
 
     steps:
