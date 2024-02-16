@@ -213,13 +213,13 @@ jobs:
           ./WCCOActrl -proj WinCCOA_QualityChecks -n doxygen.ctl -log +stderr -lang en_US.utf8
 
       - name: Upload html help
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: html-help
           path: ${{github.workspace}}/WinCCOA_QualityChecks/help/html/*
 
       - name: Upload QT help
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: qt-help
           path: ${{github.workspace}}/WinCCOA_QualityChecks/help/html/index.qch
@@ -253,13 +253,13 @@ jobs:
         path: ${{github.workspace}}/install/WinCCOA_QualityChecks/help/index.qch
 
     - name: Upload WinCCOA_QualityChecks
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v3
       with:
         name: WinCCOA_QualityChecks
         path: ${{github.workspace}}/install/*
 
     - name: Upload WinCC_OA_Test
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v3
       with:
         name: WinCC_OA_Test
         path: ${{github.workspace}}/tests/*
@@ -338,7 +338,7 @@ jobs:
         chmod +x ${{ github.workspace }}/WinCCOA_QualityChecks/bin/ctrlppcheck/ctrlppcheck
 
     - name: Publish Failed projects
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v3
       with:
         name: failed-test-projects
         path: /__w/CtrlppCheck/CtrlppCheck/WinCC_OA_Test/Projects/Stored/Failed/
