@@ -11,7 +11,8 @@ on:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
-  contents: read
+  # for JamesIves/github-pages-deploy-action@v4
+  contents: write
   pages: write
   id-token: write
   # for jUnit report
@@ -325,8 +326,6 @@ jobs:
 
         /opt/WinCC_OA/3.19/bin/WCCILpmon -config $cwd/Projects/TfCustomizedQG/config/config -n -autofreg -status  -log +stderr || true
 
-        ls -la /__w/CtrlppCheck/CtrlppCheck/WinCCOA_QualityChecks/bin/ctrlppcheck/ctrlppcheck
-
     - name: Add x bit to Linux binary
       run: |
         chmod +x /__w/CtrlppCheck/CtrlppCheck/WinCCOA_QualityChecks/bin/ctrlppcheck/ctrlppcheck
@@ -404,9 +403,4 @@ jobs:
       - name: Publish GitHub pages help
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          token: ${{ secrets.WIKI_ACTION_TOKEN }}
-          branch: gh-pages
           folder: ./docs/
-#          target-folder: ${{ inputs.target_folder }}
-        
- 
