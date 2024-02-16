@@ -14,6 +14,8 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  # for jUnit report
+  checks: write
 
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
@@ -182,7 +184,7 @@ jobs:
         working-directory: /opt/WinCC_OA/3.19/bin/
         run: |
           apt-get update
-          apt-get --assume-yes install -f doxygen
+          apt-get --assume-yes install -f doxygen graphviz
 
       - uses: actions/checkout@v1
       - name: Register Project
