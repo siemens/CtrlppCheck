@@ -355,6 +355,7 @@ jobs:
         fail_on_failure : true
         require_tests : true
         report_paths : /__w/CtrlppCheck/CtrlppCheck/WinCC_OA_Test/Results/jUnit*.xml
+        detailed_summary : true
 
   release:
     if: github.event_name == 'release'
