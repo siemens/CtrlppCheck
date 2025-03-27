@@ -1,5 +1,4 @@
 include_directories(${PROJECT_SOURCE_DIR}/lib/)
-include_directories(SYSTEM ${PROJECT_SOURCE_DIR}/externals/tinyxml2/)
 include_directories(${PROJECT_SOURCE_DIR}/externals/simplecpp/)
 
 file(GLOB hdrs "*.h")
@@ -7,8 +6,11 @@ file(GLOB srcs "*.cpp")
 file(GLOB mainfile "main.cpp")
 list(REMOVE_ITEM srcs ${mainfile})
 
-add_library(cli_objs OBJECT ${hdrs} ${srcs}) 
-add_executable(ctrlppcheck ${hdrs} ${mainfile} $<TARGET_OBJECTS:cli_objs> $<TARGET_OBJECTS:lib_objs> $<TARGET_OBJECTS:tinyxml2_objs> $<TARGET_OBJECTS:simplecpp_objs>) #$<TARGET_OBJECTS:tinyxml_objs> 
+add_library(cli_objs OBJECT ${hdrs} ${srcs})
+
+target_link_libraries(cli_objs PRIVATE tinyxml2)
+add_executable(ctrlppcheck ${hdrs} ${mainfile})
+target_link_libraries(ctrlppcheck PRIVATE cli_objs lib_objs simplecpp_objs)
 
 if (WIN32 AND NOT BORLAND)
     target_link_libraries(ctrlppcheck Shlwapi.lib)
