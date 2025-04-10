@@ -163,7 +163,7 @@ jobs:
     #  run: ctest -C ${{env.BUILD_TYPE}}
       
     - name: Upload ctrlppcheck
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: ctrlppcheck
         path: ${{github.workspace}}/build/${{ matrix.config.artifact }}
@@ -188,7 +188,7 @@ jobs:
         path: ${{github.workspace}}/install/WinCCOA_QualityChecks/bin/ctrlppcheck/
 
     - name: Upload WinCCOA_QualityChecks
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: WinCCOA_QualityChecks
         path: ${{github.workspace}}/install/*
