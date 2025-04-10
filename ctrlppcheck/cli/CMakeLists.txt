@@ -13,7 +13,7 @@ add_executable(ctrlppcheck ${hdrs} ${mainfile})
 target_link_libraries(ctrlppcheck PRIVATE cli_objs lib_objs simplecpp_objs)
 
 if (WIN32 AND NOT BORLAND)
-    target_link_libraries(ctrlppcheck Shlwapi.lib)
+  target_link_libraries(ctrlppcheck PRIVATE Shlwapi.lib)
 endif()
 
 install(TARGETS ctrlppcheck
