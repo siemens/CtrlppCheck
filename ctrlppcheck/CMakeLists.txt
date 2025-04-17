@@ -1,6 +1,8 @@
 project(Ctrlppcheck)
 cmake_minimum_required(VERSION 3.11.0)
 
+set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+
 include(GNUInstallDirs)
 include(FetchContent)
 
