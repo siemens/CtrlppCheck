@@ -42,7 +42,7 @@ call "%oaBinPath%WCCOActrl.exe" -config %WINCC_OA_TEST_PATH%Projects\TfCustomize
 
 REM ---------------------------------------------------------------------------
 REM convert to jUnit
-@REM echo ****** Convert results into jUnit format
-@REM call "%oaBinPath%WCCOActrl.exe" -config %WINCC_OA_TEST_PATH%Projects\TfCustomizedQG\config\config -n oaTestParsers/jsonToJUnit.ctl -log +stderr -lang en_US.utf8
+echo ****** Convert results into jUnit format
+call "%oaBinPath%WCCOActrl.exe" -config %WINCC_OA_TEST_PATH%Projects\TfCustomizedQG\config\config -n oaTestParsers/jsonToJUnit.ctl -log +stderr -lang en_US.utf8
 
 
