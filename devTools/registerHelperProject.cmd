@@ -49,7 +49,7 @@ echo #path with tests  >> %_cfgPath%
 echo installPath = "%WINCC_OA_TEST_PATH%"  >> %_cfgPath%
 
 REM re-register project
-call %oaBinPath%WCCILpmon.exe -config %WINCC_OA_TEST_PATH%Projects\TfCustomizedQG\config\config -n -autofreg -status -log +stderr
+call "%oaBinPath%WCCILpmon.exe" -config %WINCC_OA_TEST_PATH%Projects\TfCustomizedQG\config\config -n -autofreg -status -log +stderr
 IF %ERRORLEVEL% NEQ 0 IF %ERRORLEVEL% NEQ 3 (
   REM ERRORLEVEL == 0 - first registration
   REM ERRORLEVEL == 3 - re-registration
