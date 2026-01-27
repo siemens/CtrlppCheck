@@ -40,7 +40,7 @@ jobs:
     runs-on: ${{ matrix.config.os }}
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     # Based on the work of https://cristianadam.eu/20200113/speeding-up-c-plus-plus-github-actions-using-ccache/
     # and https://github.com/cristianadam/HelloWorld
@@ -70,12 +70,14 @@ jobs:
         execute_process(COMMAND ${CMAKE_COMMAND} -E tar xvf ./sccache.tar.gz)
         file(GLOB_RECURSE mydirs LIST_DIRECTORIES true)
         message(STATUS "${mydirs}")
-        set(path_separator ":")
+        # GitHub Actions: $GITHUB_PATH expects one path per line.
+        file(APPEND "$ENV{GITHUB_PATH}" "$ENV{GITHUB_WORKSPACE}\n")
         if ("${{ runner.os }}" STREQUAL "Windows")
-          set(path_separator ";")
+          file(TO_NATIVE_PATH "$ENV{GITHUB_WORKSPACE}/${sccache_dir}" sccache_abs_dir)
+        else()
+          set(sccache_abs_dir "$ENV{GITHUB_WORKSPACE}/${sccache_dir}")
         endif()
-        file(TO_NATIVE_PATH "$ENV{GITHUB_WORKSPACE}/${sccache_dir}" sccache_dir)
-        file(APPEND "$ENV{GITHUB_PATH}" "$ENV{GITHUB_WORKSPACE}${path_separator}${sccache_dir}")
+        file(APPEND "$ENV{GITHUB_PATH}" "${sccache_abs_dir}\n")
         if (NOT "${{ runner.os }}" STREQUAL "Windows")
           execute_process(
             COMMAND chmod +x ninja
@@ -99,7 +101,7 @@ jobs:
         set(ENV{CXX} ${{ matrix.config.cxx }})
         if ("${{ runner.os }}" STREQUAL "Windows" AND NOT "x${{ matrix.config.environment_script }}" STREQUAL "x")
           execute_process(
-            COMMAND "${{ matrix.config.environment_script }}" && set
+            COMMAND cmd /c "call \"${{ matrix.config.environment_script }}\" && set"
             OUTPUT_FILE environment_script_output.txt
           )
           file(STRINGS environment_script_output.txt output_lines)
@@ -165,7 +167,7 @@ jobs:
     - name: Upload ctrlppcheck
       uses: actions/upload-artifact@v6
       with:
-        name: ctrlppcheck
+        name: ctrlppcheck-${{ matrix.config.os }}
         path: ${{github.workspace}}/build/${{ matrix.config.artifact }}
 
   package:
@@ -174,7 +176,7 @@ jobs:
     needs: build
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Prepare file structure and project
       run: |
@@ -184,7 +186,8 @@ jobs:
     - name: Download ctrlppcheck binaries
       uses: actions/download-artifact@v7
       with:
-        name: ctrlppcheck
+        pattern: ctrlppcheck-*
+        merge-multiple: true
         path: ${{github.workspace}}/install/WinCCOA_QualityChecks/bin/ctrlppcheck/
 
     - name: Upload WinCCOA_QualityChecks
