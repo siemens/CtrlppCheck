@@ -16,12 +16,14 @@ env:
 jobs:
   build:
     strategy:
+      fail-fast: false
       matrix:
         config:
         - {
             name: "Windows MSVC",
             artifact: "bin/ctrlppcheck.exe",
-            os: windows-latest
+            os: windows-latest,
+            cc: "cl", cxx: "cl"
           }
         - {
             name: "Linux GCC-12 (Debian 12-like)",
@@ -53,12 +55,23 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y gcc-12 g++-12
 
-    - name: Configure CMake
+    - name: Configure CMake (Windows)
+      if: runner.os == 'Windows'
       env:
         CC: ${{ matrix.config.cc }}
         CXX: ${{ matrix.config.cxx }}
+      shell: pwsh
       run: |
-        cmake -S ctrlppcheck -B ${{ github.workspace }}/build \
+        cmake -S ctrlppcheck -B "${{ github.workspace }}/build" -G Ninja -D CMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -D USE_MATCHCOMPILER=Off
+
+    - name: Configure CMake (Linux)
+      if: runner.os == 'Linux'
+      env:
+        CC: ${{ matrix.config.cc }}
+        CXX: ${{ matrix.config.cxx }}
+      shell: bash
+      run: |
+        cmake -S ctrlppcheck -B "${{ github.workspace }}/build" \
           -G Ninja \
           -D CMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} \
           -D USE_MATCHCOMPILER=Off
