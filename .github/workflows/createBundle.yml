@@ -30,7 +30,7 @@ jobs:
         - {
             name: "Ubuntu 2004 GCC",
             artifact: "bin/ctrlppcheck",
-            os: ubuntu-20.04,
+            os: ubuntu-22.04,
             cc: "gcc", cxx: "g++"
           }
 
@@ -170,7 +170,7 @@ jobs:
 
   package:
     name: Package project and binaries
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     needs: build
 
     steps:
@@ -196,7 +196,7 @@ jobs:
   release:
     if: github.event_name == 'release'
     name: Release
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     needs: package
     steps:
 
