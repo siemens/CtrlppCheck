@@ -249,14 +249,14 @@ class ScriptData
     if (!isfile(_filePath))
       return -1;
 
-    string cmd;
-    cmd = Python::getExecutable() + " " + ToolLizard::getBinDir() + "lizard.py --csv " + makeUnixPath(_filePath);
+    dyn_string args;
+    args = makeDynString(Python::getExecutable(), ToolLizard::getBinDir() + "lizard.py", "--csv", makeUnixPath(_filePath));
     string stdOut, stdErr;
-    int rc = system(cmd, stdOut, stdErr);
+    int rc = system(args, stdOut, stdErr);
 
     if (rc != 0)
     {
-      DebugFTN("ScriptData", __FUNCTION__, "!!! check if lizard is installed", rc, cmd, stdErr);
+      DebugFTN("ScriptData", __FUNCTION__, "!!! check if lizard is installed", rc, args, stdErr);
       return -2;
     }
 

@@ -37,12 +37,12 @@ call registerHelperProject.cmd
 REM ---------------------------------------------------------------------------
 REM execute tests
 echo ****** Execute WinCC OA Tests : %WINCC_OA_TEST_RUN_ID%
-call %oaBinPath%WCCOActrl.exe -config %WINCC_OA_TEST_PATH%Projects\TfCustomizedQG\config\config -n testRunner.ctl {'registerGlobalProject':true,'registerAllTools':true,'registerAllTemplates':true,'cleanOldResults':true,'cleanStoredProjects':true,'showLogViewer':true,'TfTestManager.checkForPossibleFreezeTests':true,'testRunId':'%WINCC_OA_TEST_RUN_ID%'} -log +stderr -lang en_US.utf8
+call "%oaBinPath%WCCOActrl.exe" -config %WINCC_OA_TEST_PATH%Projects\TfCustomizedQG\config\config -n testRunner.ctl {'registerGlobalProject':true,'registerAllTools':true,'registerAllTemplates':true,'cleanOldResults':true,'cleanStoredProjects':true,'showLogViewer':true,'TfTestManager.checkForPossibleFreezeTests':true,'testRunId':'%WINCC_OA_TEST_RUN_ID%'} -log +stderr -lang en_US.utf8
 
 
 REM ---------------------------------------------------------------------------
 REM convert to jUnit
 echo ****** Convert results into jUnit format
-call %oaBinPath%WCCOActrl.exe -config %WINCC_OA_TEST_PATH%Projects\TfCustomizedQG\config\config -n oaTestParsers/jsonToJUnit.ctl -log +stderr -lang en_US.utf8
+call "%oaBinPath%WCCOActrl.exe" -config %WINCC_OA_TEST_PATH%Projects\TfCustomizedQG\config\config -n oaTestParsers/jsonToJUnit.ctl -log +stderr -lang en_US.utf8
 
 

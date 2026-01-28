@@ -32,5 +32,5 @@ call registerHelperProject.cmd
 
 REM --------------------------------------------------------------------------
 REM Change copyright information
-call %oaBinPath%WCCOActrl.exe -config %WINCC_OA_TEST_PATH%Projects\TfCustomizedQG\config\config -n copyright.ctl %WINCC_OA_TEST_PATH% -log +stderr -lang en_US.utf8
-call %oaBinPath%WCCOActrl.exe -config %WINCC_OA_TEST_PATH%Projects\TfCustomizedQG\config\config -n copyright.ctl %WINCC_OA_TEST_PATH%..\WinCCOA_QualityChecks -log +stderr -lang en_US.utf8
+call "%oaBinPath%WCCOActrl.exe" -config %WINCC_OA_TEST_PATH%Projects\TfCustomizedQG\config\config -n copyright.ctl %WINCC_OA_TEST_PATH% -log +stderr -lang en_US.utf8
+call "%oaBinPath%WCCOActrl.exe" -config %WINCC_OA_TEST_PATH%Projects\TfCustomizedQG\config\config -n copyright.ctl %WINCC_OA_TEST_PATH%..\WinCCOA_QualityChecks -log +stderr -lang en_US.utf8
