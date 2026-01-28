@@ -1,0 +1,115 @@
+V 14
+1
+LANG:10000 0 
+PANEL,-1 -1 584 400 N "WF_PanelBackground" 0
+"main()
+{
+  uiConnect(\"showQgResultGate\", \"qgSideBar.qgSideBar:\", \"showQgResultGate\");
+  uiConnect(\"showQgResultBuild\", \"qgSideBar.qgSideBar:\", \"showQgResultBuild\");
+}
+
+void claerTab()
+{
+  while (qgsTab.registerCount() > 0)
+    qgsTab.deleteRegister(0);
+}
+
+
+void showQgResultBuild(const string &buildDir)
+{
+  claerTab();
+
+  dyn_string qgIds = getSubDirNames(buildDir);
+
+  for (int i = 1; i <= dynlen(qgIds); i++)
+  {
+    addGate(qgIds[i], buildDir, i - 1);
+  }
+
+}
+
+void showQgResultGate(const string &gateDir)
+{
+  claerTab();
+
+  addGate(baseName(gateDir), dirName(gateDir), 0);
+
+}
+
+void addGate(const string &gate, const string &buildDir, const int regIdx)
+{
+  qgsTab.insertRegister(regIdx);
+  qgsTab.registerName(regIdx, gate);
+
+  string registerName = getCatStr(\"QG_Names\", gate);
+
+  if (dynlen(getLastError()) > 0)
+    registerName = gate;
+
+  qgsTab.registerHeader(regIdx, registerName);
+  qgsTab.registerPanel(regIdx, \"vision/QualityChecks/QG_Result.pnl\", makeDynString(\"$fileName:\" + buildDir + gate + \"/Result\"));
+}
+" 0
+ E E E E 1 -1 -1 0  50 30
+""0  1
+E E 5
+"CBRef" "1"
+"EClose" E
+"type" "WF"
+"dpi" "120"
+"pdpi" "141.951"
+2 1 0 0 0 0 1 0
+""
+DISPLAY_LAYER, 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0
+LAYER, 0 
+0
+28 1
+"qgsTab"
+"WF"
+1 50 30 E E E 1 E 1 E N "_3DText" E N "_3DFace" E E
+ E E
+0 0 0 0 0 0
+E E E
+0
+1
+LANG:10000 0 
+
+2
+"layoutAlignment" "AlignNone"
+"showBackground" "0"
+3
+LANG:10000 30 Noto Sans,12,-1,5,50,0,0,0,0,0
+LANG:10001 30 Noto Sans,12,-1,5,50,0,0,0,0,0
+LANG:10027 30 Noto Sans,12,-1,5,50,0,0,0,0,0
+0  48 28 332 202
+E0 
+0
+LAYER, 1 
+0
+0
+LAYER, 2 
+0
+0
+LAYER, 3 
+0
+0
+LAYER, 4 
+0
+0
+LAYER, 5 
+0
+0
+LAYER, 6 
+0
+0
+LAYER, 7 
+0
+0
+4 0 "LAYOUT_GROUP1" -1
+1 0 
+1 
+
+"S 1" "0 0 1 1"
+"" ""
+0 1 0 0
+0
