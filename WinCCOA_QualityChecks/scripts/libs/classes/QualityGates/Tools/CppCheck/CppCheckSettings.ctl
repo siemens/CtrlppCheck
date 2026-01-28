@@ -149,25 +149,24 @@ class CppCheckSettings
   }
 
   //------------------------------------------------------------------------------
-  public string toCmdLine()
+  public dyn_string toCmdLine()
   {
-    string opts;
+    dyn_string opts;
 
     if (enabled != "")
-      opts += " --enable=" + enabled;
+      dynAppend(opts, "--enable=" + enabled);
 
     if (xml != "")
-      opts += " " + xml;
+      dynAppend(opts, xml);
 
     if (inconclusive)
-      opts += " --inconclusive";
-
+      dynAppend(opts, "--inconclusive");
 
     for (int i = 1; i <= dynlen(ruleFiles); i++)
-      opts += " --rule-file=" + makeNativePath(ruleFiles[i]);
+      dynAppend(opts, "--rule-file=" + makeNativePath(ruleFiles[i]));
 
     if (enableLibCheck)
-      opts += " --check-library";
+      dynAppend(opts, "--check-library");
 
     // disable header check for perfomance reason
     //if ( !enableHeadersCheck )
@@ -183,22 +182,25 @@ class CppCheckSettings
       }
 
       for (int i = 1; i <= dynlen(includedSubProjDirs); i++)
-        opts += " -I " + includedSubProjDirs[i];
+      {
+        dynAppend(opts, "-I");
+        dynAppend(opts, includedSubProjDirs[i]);
+      }
     }
 
     for (int i = 1; i <= dynlen(libraryFiles); i++)
-      opts += " --library=" + makeNativePath(libraryFiles[i]);
+      dynAppend(opts, "--library=" + makeNativePath(libraryFiles[i]));
 
-    opts += " --winccoa-projectName=" + winccoaProjectName;
+    dynAppend(opts, "--winccoa-projectName=" + winccoaProjectName);
 
     if (verbose)
-      opts += " -v";
+      dynAppend(opts, "-v");
 
     if (inlineSuppressions)
-      opts += " --inline-suppr";
+      dynAppend(opts, "--inline-suppr");
 
     if (errorList)
-      opts += " --errorlist";
+      dynAppend(opts, "--errorlist");
 
     return opts;
   }
