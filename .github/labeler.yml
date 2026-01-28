@@ -1,0 +1,20 @@
+
+# .github/labeler.yml  — actions/labeler v6 schema
+
+frontend:
+  - changed-files:
+      - any-glob-to-any-file: 'WinCCOA_QualityChecks/**'
+      - any-glob-to-any-file: 'ctrlppcheck/**'
+
+ci:
+  - changed-files:
+      - any-glob-to-any-file: '.github/workflows/**'
+
+docs:
+  - changed-files:
+      - any-glob-to-any-file: 'README.md'
+      - any-glob-to-any-file: 'docs/**'
+
+tests:
+  - changed-files:
+      - any-glob-to-any-file: 'WinCC_OA_Test/**'

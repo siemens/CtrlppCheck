@@ -53,12 +53,15 @@ class OaSyntaxCheck
       return -1;
     }
 
-    cmd += " -syntax all -n -proj " + PROJ + " -log +stderr";
+    dyn_string args = makeDynString(cmd, "-syntax", "all", "-n", "-proj", PROJ, "-log", "+stderr");
 
     if (_UNIX)
-      cmd += " -platform offscreen"; // because at centos gui is not opened
+    {
+      dynAppend(args, "-platform"); // because at centos gui is not opened
+      dynAppend(args, "offscreen");
+    }
 
-    rc = system(cmd, stdOut, stdErr);
+    rc = system(args, stdOut, stdErr);
 
     if (rc)
     {
