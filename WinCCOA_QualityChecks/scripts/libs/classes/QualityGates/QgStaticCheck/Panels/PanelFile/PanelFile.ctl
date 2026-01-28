@@ -55,14 +55,20 @@ class PanelFile
     if (_WIN32)
       cmd = getPath(BIN_REL_PATH, getComponentName(UI_COMPONENT) + ".exe");
     else
-      cmd = getPath(BIN_REL_PATH, getComponentName(UI_COMPONENT)) + " -platform offscreen";
+      cmd = getPath(BIN_REL_PATH, getComponentName(UI_COMPONENT));
 
     if (cmd == "")
       return -1;
 
-    cmd += " -p " + makeNativePath(_relPath) + " -xmlConvert=XML -proj " + PROJ;
+    dyn_string args  = makeDynString(cmd, "-p", makeNativePath(_relPath), "-xmlConvert=XML", "-proj", PROJ);
 
-    int rc = system(cmd);
+    if (!_WIN32)
+    {
+      dynAppend(args, "-platform");
+      dynAppend(args, "offscreen");
+    }
+
+    int rc = system(args);
 
     if (rc)
     {

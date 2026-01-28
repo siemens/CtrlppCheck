@@ -60,14 +60,22 @@ class CppCheck
     if (cmd == "")
     {
       stdErr = __FUNCTION__ + " can not find executable";
+      throwError(makeError("", PRIO_WARNING, ERR_CONTROL, 0, "Can not find ctrlppcheck executable."));
       rc = -1;
       return rc;
     }
 
-    cmd += " " + addOptions + " " + settings.toCmdLine();
+    dyn_string args = settings.toCmdLine();
+    dynInsertAt(args , cmd, 1);
+    dynInsertAt(args , addOptions, 2);
+    
+    throwError(makeError("", PRIO_INFO, ERR_CONTROL, 0, "Starting ctrlppcheck with options \n\"" + strjoin(args, "\" \"") + "\"\n This may take some time..."));
+    rc = system(args, stdOut, stdErr);
 
-    DebugFTN("ctrlppcheck",  __FUNCTION__, cmd);
-    rc = system(cmd, stdOut, stdErr);
+    if (rc)
+    {
+      throwError(makeError("", PRIO_WARNING, ERR_CONTROL, 54, "CppCheck exited with rc = " + rc, stdOut, stdErr));
+    }
     DebugFN("ctrlppcheck_dtl",  __FUNCTION__, stdOut, stdErr);
 
     if (settings.verbose)
@@ -108,11 +116,11 @@ class CppCheck
       return makeDynAnytype();
     }
 
-    cmd += " --errorlist --winccoa-projectName=" + PROJ;
+    dyn_string args = makeDynString(cmd, "--errorlist", "--winccoa-projectName=" + PROJ);
 
-    DebugFTN("ctrlppcheck",  __FUNCTION__, cmd);
-    rc = system(cmd, stdOut, stdErr);
-
+    DebugFTN("ctrlppcheck",  __FUNCTION__, args);
+    throwError(makeError("", PRIO_INFO, ERR_CONTROL, 0, "Getting all possible ctrlppcheck errors may take some time..."));
+    rc = system(args, stdOut, stdErr);
 
     // make a copy of result in log
     file f = fopen(PROJ_PATH + LOG_REL_PATH + "cppcheck-all-errors.xml", "wb+");
