@@ -1,4 +1,3 @@
-include_directories(SYSTEM ${PROJECT_SOURCE_DIR}/externals/tinyxml2/)
 include_directories(${PROJECT_SOURCE_DIR}/externals/simplecpp/)
 
 file(GLOB_RECURSE hdrs "*.h")
@@ -36,4 +35,5 @@ else()
 endif()
 
 add_library(lib_objs OBJECT ${srcs_lib} ${hdrs})
+target_link_libraries(lib_objs PUBLIC tinyxml2)
 
