@@ -10,8 +10,6 @@
 
 #uses "classes/FileSys/QgDir"
 #uses "classes/QualityGates/Qg"
-#uses "classes/QualityGates/QgApp"
-#uses "classes/QualityGates/AddOn/FileSys/QgAddOnSourceDir"
 
 class QgAddOnResultsDir
 {
@@ -102,16 +100,8 @@ class QgAddOnResultsDir
   {
     if (_resultDir == "")
     {
-      if (!Qg::isRunningOnJenkins())
-      {
-        // projPath should be used, when Jenkins is not used
-        _resultDir = makeNativePath(PROJ_PATH + DATA_REL_PATH + "QualityGates/" + _qgId + "/" + _buildNo + "/");
-      }
-      else
-      {
-        QgApp app  = QgApp::getAppFromProjName(PROJ);
-        _resultDir = makeNativePath(app.getSourcePath() + "QgResult/" + Qg::getId() + "/");
-      }
+      // result are stored in porject directory
+      _resultDir = makeNativePath(PROJ_PATH + DATA_REL_PATH + "QualityGates/" + _qgId + "/" + _buildNo + "/");
     }
 
     return _resultDir;

@@ -1,6 +1,7 @@
 // start options:
 // error id: 
 // support for WinCC OA datatype vector 
+#uses "stdVar"
 
 void main()
 {

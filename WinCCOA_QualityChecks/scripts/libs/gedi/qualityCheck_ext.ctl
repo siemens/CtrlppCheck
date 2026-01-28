@@ -90,9 +90,9 @@ private  int _startCtrlMan(string script, const string scriptOptions = "")
   else
     DebugFTN("qualityCheck_ext", "Sorry, the script " + script + " was not found.");
 
-  cmd += " " + script + " " + scriptOptions + " -proj " + PROJ;// + " -log +stderr";
+  dyn_string args = makeDynString(cmd, script, scriptOptions, "-proj", PROJ);// + " -log +stderr";
 
-  int rc = system(cmd, stdOut, stdErr);
+  int rc = system(args, stdOut, stdErr);
 
   if (rc)
   {
@@ -167,10 +167,7 @@ void tool_QualityGates_OpenResult()
 
 void open_Docu()
 {
-  if (getLocale(getActiveLang()) == "de_AT.iso88591" || getLocale(getActiveLang()) == "de_AT.utf8")
-    openUrl("https://www.winccoa.com/documentation/WinCCOA/3.18/en_US/index.html");
-  else
-    openUrl("https://www.winccoa.com/documentation/WinCCOA/3.18/en_US/index.html");
+  openUrl("https://github.com/siemens/CtrlppCheck/blob/main/README.md");
 }
 
 void tool_QualityGates_BuildDocu()
