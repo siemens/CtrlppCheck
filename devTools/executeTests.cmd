@@ -5,6 +5,10 @@ REM ---------------------------------------------------------------------------
 cls
 
 REM ---------------------------------------------------------------------------
+REM Store the script directory
+SET SCRIPT_DIR=%~dp0
+
+REM ---------------------------------------------------------------------------
 REM default values
 SET WINCC_OA_VERSION=3.19
 set WINCC_OA_TEST_PATH=%cd%\..\WinCC_OA_Test\
@@ -61,7 +65,7 @@ REM generate coverage report
 echo ****** Generate Coverage Report
 where node >nul 2>nul
 IF %ERRORLEVEL% EQU 0 (
-  node "%~dp0ctlCoverageReport\coverage_report.js" "%WINCC_OA_TEST_PATH%CoverageReports" -f "WinCCOA_QualityChecks" -o "%WINCC_OA_TEST_PATH%CoverageReports\cobertura_coverage.xml"
+  node "%SCRIPT_DIR%ctlCoverageReport\coverage_report.js" "%WINCC_OA_TEST_PATH%CoverageReports" -f "WinCCOA_QualityChecks" -o "%WINCC_OA_TEST_PATH%CoverageReports\cobertura_coverage.xml"
 ) ELSE (
   echo WARNING: Node.js not found. Skipping coverage report generation.
 )
