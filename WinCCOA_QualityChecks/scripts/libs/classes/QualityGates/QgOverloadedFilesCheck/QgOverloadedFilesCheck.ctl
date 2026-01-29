@@ -11,6 +11,7 @@
 #uses "classes/QualityGates/QgBase"
 #uses "classes/QualityGates/QgSettings"
 #uses "fileSys"
+#uses "fileSystem"
 
 
 class QgOverloadedFilesCheck

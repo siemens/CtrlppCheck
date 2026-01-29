@@ -8,7 +8,7 @@
 //
 
 #uses "classes/QualityGates/QgBase"
-#uses "classes/QualityGates/QgStaticCheck/CtrlCode/ScriptData"
+#uses "classes/QualityGates/QgStaticCheck/CtrlCode/QgCtrlCodeScriptData"
 #uses "classes/FileSys/QgFile"
 #uses "classes/QualityGates/QgSettings"
 
@@ -194,7 +194,7 @@ class ScriptFile : QgFile
   //------------------------------------------------------------------------------
   public shared_ptr <QgVersionResult> result; //!< Quality gate result
 
-  protected ScriptData _scriptData = ScriptData();
+  protected QgCtrlCodeScriptData _scriptData = QgCtrlCodeScriptData();
 
   static dyn_string _enabledExtensions = makeDynString();
   string _extension;

@@ -20,7 +20,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------------------------
 #uses "classes/QualityGates/Qg"
-#uses "classes/QualityGates/QgStaticCheck/CtrlCode/ScriptData"
+#uses "classes/QualityGates/QgStaticCheck/CtrlCode/QgCtrlCodeScriptData"
 #uses "classes/QualityGates/Tools/CppCheck/CppCheck"
 #uses "panel"
 
@@ -100,7 +100,7 @@ void ctrlPPCheck()
 
   {
     // in new scope to eliminate memory usage
-    ScriptData script;
+    QgCtrlCodeScriptData script;
     script.setPath(path);
     script.calculate();
 //     script.validate();

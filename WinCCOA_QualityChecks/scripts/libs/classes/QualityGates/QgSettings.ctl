@@ -299,7 +299,7 @@ class QgSettings
     return makeDynString("FunctionData", "PanelCheck",
                          "PanelFileShape", "PicturesFile",
                          "InternalCheck", "OverloadedFilesCheck",
-                         "SyntaxCheck", "ScriptData",
+                         "SyntaxCheck", "QgCtrlCodeScriptData",
                          "ScriptFile", "StaticCodeDir",
                          "StaticDir");
   }

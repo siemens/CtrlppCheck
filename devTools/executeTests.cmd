@@ -27,6 +27,10 @@ IF NOT "%1"=="" (
     SET WINCC_OA_TEST_RUN_ID=%2
     SHIFT
   )
+  
+  IF "%1"=="-startIDE" (
+    SET startIDE=true
+  )
 
   SHIFT
   GOTO :loopStdIn
