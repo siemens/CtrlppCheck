@@ -11,7 +11,7 @@
 
 //--------------------------------------------------------------------------------
 // used libraries (#uses)
-#uses "stdVar"
+#uses "std"
 #uses "classes/ErrorHdl/OaLogger" /*!< tested object */
 #uses "classes/oaTest/OaTest"
 
