@@ -1,19 +1,19 @@
 # Unit Test Coverage - ToDo List
 
 > **Generated:** 2026-01-29  
-> **Test Coverage:** ~33% (14 of 43 libraries have tests)
+> **Test Coverage:** ~44% (19 of 43 libraries have tests)
 
 ## Summary
 
 | Metric              | Count |
 |---------------------|-------|
 | Total Libraries     | 43    |
-| Existing Tests      | 14    |
-| Missing Tests       | 29    |
+| Existing Tests      | 19    |
+| Missing Tests       | 24    |
 
 ---
 
-## ✅ Existing Tests (14)
+## ✅ Existing Tests (19)
 
 | Library Path | Test Status |
 |--------------|-------------|
@@ -24,8 +24,13 @@
 | `classes/Math/Math.ctl` | ✅ Done |
 | `classes/QualityGates/Qg.ctl` | ✅ Done |
 | `classes/QualityGates/QgAddOnResultErr.ctl` | ✅ Done |
+| `classes/QualityGates/QgBase.ctl` | ✅ Done |
+| `classes/QualityGates/QgMsgCat.ctl` | ✅ Done |
+| `classes/QualityGates/QgResultPublisher.ctl` | ✅ Done |
 | `classes/QualityGates/QgTest.ctl` | ✅ Done |
 | `classes/QualityGates/QgVersionResult.ctl` | ✅ Done |
+| `classes/QualityGates/AddOn/FileSys/QgAddOnResultsDir.ctl` | ✅ Done |
+| `classes/QualityGates/AddOn/Output/QgAddOnResult.ctl` | ✅ Done |
 | `classes/QualityGates/Tools/CppCheck/CppCheckError.ctl` | ✅ Done |
 | `classes/QualityGates/Tools/CppCheck/CppCheckSettings.ctl` | ✅ Done |
 | `classes/Variables/Float.ctl` | ✅ Done |
@@ -34,26 +39,21 @@
 
 ---
 
-## ❌ Missing Tests (29)
+## ❌ Missing Tests (24)
 
 > **Skipped:** `gedi/qualityCheck_ext.ctl`, `scriptEditor/ctrlPPCheck_ext.ctl` (UI extensions, not in `/scripts/libs/classes/`)
 
-### classes/QualityGates/ (4)
+### classes/QualityGates/ (1)
 
 | Library | Priority | Notes |
 |---------|----------|-------|
-| `classes/QualityGates/QgBase.ctl` | Medium | Base class, has OaLogger dep |
-| `classes/QualityGates/QgMsgCat.ctl` | Medium | Message catalog, needs getCatStr() |
-| `classes/QualityGates/QgResultPublisher.ctl` | Low | Needs file output |
 | `classes/QualityGates/QgSettings.ctl` | High (⚠️ deps) | Settings parsing, needs JSON files |
 
-### classes/QualityGates/AddOn/ (3)
+### classes/QualityGates/AddOn/ (1)
 
 | Library | Priority | Notes |
 |---------|----------|-------|
-| `classes/QualityGates/AddOn/FileSys/QgAddOnResultsDir.ctl` | Low | Directory handling |
-| `classes/QualityGates/AddOn/Output/QgAddOnResult.ctl` | Medium | Output result |
-| `classes/QualityGates/AddOn/Output/QgAddOnScore.ctl` | Medium | Scoring logic |
+| `classes/QualityGates/AddOn/Output/QgAddOnScore.ctl` | Medium | Scoring logic (deprecated) |
 
 ### classes/QualityGates/QgCtrlppCheck/ (1)
 
