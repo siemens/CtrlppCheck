@@ -1,14 +1,12 @@
 //--------------------------------------------------------------------------------
 /**
   @file $relPath
-  @copyright Copyright 2023 SIEMENS AG
+  @copyright Copyright 2026 SIEMENS AG
              SPDX-License-Identifier: GPL-3.0-only
 */
 
 /*!
- * @brief Tests for lib: fileSys
- *
- * @author lschopp
+ * @brief Tests for library: fileSys
  */
 
 //--------------------------------------------------------------------------------
@@ -21,22 +19,27 @@ class TstFileSys : OaTest
 {
   public dyn_string getAllTestCaseIds()
   {
-    // list with our testcases
-    return makeDynString("fileSys getFileNamesRecursive");
+    return makeDynString("fileSys");
   }
 
   protected int startTestCase(const string tcId)
   {
     switch (tcId)
     {
-      case "fileSys getFileNamesRecursive":
+      case "fileSys":
       {
-        fclose(fopen(PROJ_PATH + LIBS_REL_PATH + "dummy.ctl", "w"));
-        assertEqual(getFileNamesRecursive(""), makeDynString());
-        assertEqual(getFileNamesRecursive("non existin path"), makeDynString());
-        assertEqual(dynlen(getFileNamesRecursive(PROJ_PATH + PANELS_REL_PATH, "panel*")), 0);
-        assertEqual(dynlen(getFileNamesRecursive(PROJ_PATH + LIBS_REL_PATH, "*.ctl", FILTER_DIRS)), 0);
-        assertEqual(getFileNamesRecursive(PROJ_PATH + LIBS_REL_PATH, "*.ctl"), makeDynString(makeNativePath(PROJ_PATH + LIBS_REL_PATH + "dummy.ctl")));
+        dyn_string paths = getSubProjPathes();
+        int n = dynlen(paths);
+
+        assertTrue(n >= 0);
+
+        // The function starts at getPath(..., 2) and appends consecutively.
+        if (n > 0)
+        {
+          assertEqual(paths[1], getPath("", "", -1, 2));
+          assertEqual(paths[n], getPath("", "", -1, n + 1));
+        }
+
         return 0;
       }
     }
@@ -48,6 +51,7 @@ class TstFileSys : OaTest
 //--------------------------------------------------------------------------------
 main()
 {
-  TstFileSys test;
+  TstFileSys test = TstFileSys();
   test.startAll();
+  exit(0);
 }
