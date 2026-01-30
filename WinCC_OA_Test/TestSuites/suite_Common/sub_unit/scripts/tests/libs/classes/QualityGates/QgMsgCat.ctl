@@ -104,7 +104,7 @@ class TstQgMsgCat : OaTest
         QgMsgCat msgCat;
 
         // Invalid enum value should return "Unkwon" (typo in original code)
-        assertEqual(msgCat.getPriorityAsText((QgMsgCatErrPrio)99), "Unkwon");
+        assertEqual(msgCat.getPriorityAsText((99), "Unkwon");
         return 0;
       }
 

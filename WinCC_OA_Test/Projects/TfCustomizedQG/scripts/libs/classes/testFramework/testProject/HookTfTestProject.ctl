@@ -57,7 +57,7 @@ class HookTfTestProject : TfTestProject
 
     if (useIDE())
     {
-      dyn_string arguments = makeDynString("-m", "gedi", "-user", "root:");
+      dyn_string arguments = makeDynString("-m", "gedi");
 
       if (!this.isProjWithDb(_packageSelection))
       {
