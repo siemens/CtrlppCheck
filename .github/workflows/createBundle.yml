@@ -106,7 +106,7 @@ jobs:
         cp -rp ${{github.workspace}}/WinCCOA_QualityChecks/* ${{github.workspace}}/install/WinCCOA_QualityChecks/
 
     - name: Download ctrlppcheck binaries
-      uses: actions/download-artifact@v7
+      uses: actions/download-artifact@v8
       with:
         pattern: ctrlppcheck-*
         merge-multiple: true
@@ -130,7 +130,7 @@ jobs:
       run: echo "VERSION=$(echo $GITHUB_REF | cut -d / -f 3)" >> $GITHUB_OUTPUT
 
     - name: Download artifact
-      uses: actions/download-artifact@v7
+      uses: actions/download-artifact@v8
       with:
         name: WinCCOA_QualityChecks
         path: ${{github.workspace}}/install/
