@@ -166,7 +166,7 @@ class QgCtrlCodeScriptData
     */
   public static int getMaxCountOfFunctions()
   {
-    shared_ptr<QgSettings> settings = new QgSettings("QgCtrlCodeScriptData.script.countOfFunctions");
+    shared_ptr<QgSettings> settings = new QgSettings("ScriptData.script.countOfFunctions");
     return (int)settings.getHighLimit(DEFAULT_FUNCCOUNT_HIGH);
   }
 
@@ -177,7 +177,7 @@ class QgCtrlCodeScriptData
     */
   public static int getMinCountOfFunctions()
   {
-    shared_ptr<QgSettings> settings = new QgSettings("QgCtrlCodeScriptData.script.countOfFunctions");
+    shared_ptr<QgSettings> settings = new QgSettings("ScriptData.script.countOfFunctions");
     return (int)settings.getLowLimit(DEFAULT_FUNCCOUNT_LOW);
   }
 
@@ -189,7 +189,7 @@ class QgCtrlCodeScriptData
     */
   public static int getMaxNLOC()
   {
-    shared_ptr<QgSettings> settings = new QgSettings("QgCtrlCodeScriptData.script.NLOC");
+    shared_ptr<QgSettings> settings = new QgSettings("ScriptData.script.NLOC");
     return (int)settings.getHighLimit(DEFAULT_NLOC_HIGH);
   }
 
@@ -201,7 +201,7 @@ class QgCtrlCodeScriptData
     */
   public static int getMinNLOC()
   {
-    shared_ptr<QgSettings> settings = new QgSettings("QgCtrlCodeScriptData.script.NLOC");
+    shared_ptr<QgSettings> settings = new QgSettings("ScriptData.script.NLOC");
     return (int)settings.getLowLimit(DEFAULT_NLOC_LOW);
   }
 
@@ -213,7 +213,7 @@ class QgCtrlCodeScriptData
     */
   public static float getMaxAvgCCN()
   {
-    shared_ptr<QgSettings> settings = new QgSettings("QgCtrlCodeScriptData.script.avgCCN");
+    shared_ptr<QgSettings> settings = new QgSettings("ScriptData.script.avgCCN");
     return (float)settings.getHighLimit(DEFAULT_AVGCCN_HIGH);
   }
 
@@ -353,7 +353,7 @@ class QgCtrlCodeScriptData
     */
   protected int validateIsCalucalted()
   {
-    shared_ptr<QgSettings> settings = new QgSettings("QgCtrlCodeScriptData.script.isCalculated");
+    shared_ptr<QgSettings> settings = new QgSettings("ScriptData.script.isCalculated");
 
     if (settings.isEnabled())
     {
@@ -389,7 +389,7 @@ class QgCtrlCodeScriptData
     */
   protected validateCountOfFunctions()
   {
-    shared_ptr<QgSettings> settings = new QgSettings("QgCtrlCodeScriptData.script.countOfFunctions");
+    shared_ptr<QgSettings> settings = new QgSettings("ScriptData.script.countOfFunctions");
 
     if (settings.isEnabled())
     {
@@ -413,7 +413,7 @@ class QgCtrlCodeScriptData
   {
     if (getCountOfFunctions() > 1)   // only when has more then 1 function
     {
-      shared_ptr<QgSettings> settings = new QgSettings("QgCtrlCodeScriptData.script.avgCCN");
+      shared_ptr<QgSettings> settings = new QgSettings("ScriptData.script.avgCCN");
 
       if (settings.isEnabled())
       {
@@ -435,7 +435,7 @@ class QgCtrlCodeScriptData
     */
   protected validateNLOC()
   {
-    shared_ptr<QgSettings> settings = new QgSettings("QgCtrlCodeScriptData.script.NLOC");
+    shared_ptr<QgSettings> settings = new QgSettings("ScriptData.script.NLOC");
 
     if (settings.isEnabled())
     {
@@ -458,7 +458,7 @@ class QgCtrlCodeScriptData
   {
     if (getCountOfFunctions() > 1)   // only when has more then 1 function
     {
-      shared_ptr<QgSettings> settings = new QgSettings("QgCtrlCodeScriptData.script.avgNLOC");
+      shared_ptr<QgSettings> settings = new QgSettings("ScriptData.script.avgNLOC");
 
       if (settings.isEnabled())
       {
