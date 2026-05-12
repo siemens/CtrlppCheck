@@ -29,7 +29,7 @@
  @note Call function calculate() before you want acces some file information.
        C-tor does not read the file to eliminate performacne.
 */
-class ScriptData
+class QgCtrlCodeScriptData
 {
 //--------------------------------------------------------------------------------
 //@public members
@@ -43,7 +43,7 @@ class ScriptData
     Default c-tor
     @param filePath Full native path to file there shall be checked.
   */
-  public ScriptData(const string filePath = "")
+  public QgCtrlCodeScriptData(const string filePath = "")
   {
     setPath(filePath);
   }
@@ -256,7 +256,7 @@ class ScriptData
 
     if (rc != 0)
     {
-      DebugFTN("ScriptData", __FUNCTION__, "!!! check if lizard is installed", rc, args, stdErr);
+      DebugFTN("QgCtrlCodeScriptData", __FUNCTION__, "!!! check if lizard is installed", rc, args, stdErr);
       return -2;
     }
 

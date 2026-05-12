@@ -1,7 +1,7 @@
 //
 // tests for CheckAutoVariables
 // CheckAutoVariables::assignFunctionArg
-#uses "stdVar"
+#uses "std"
 
 struct S
 {

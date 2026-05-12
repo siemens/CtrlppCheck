@@ -7,9 +7,9 @@
 // SPDX-License-Identifier: GPL-3.0-only
 //
 
-#uses "classes/QualityGates/QgStaticCheck/CtrlCode/ScriptData"
+#uses "classes/QualityGates/QgStaticCheck/CtrlCode/QgCtrlCodeScriptData"
 
-class PanelFileScript : ScriptData
+class PanelFileScript : QgCtrlCodeScriptData
 {
   public PanelFileScript(const string name = "")
   {
@@ -71,7 +71,7 @@ class PanelFileScript : ScriptData
     fputs(getScript(), f);
     fclose(f);
 
-    if (ScriptData::calculate())
+    if (QgCtrlCodeScriptData::calculate())
       return -1;
 
     remove(_filePath);
