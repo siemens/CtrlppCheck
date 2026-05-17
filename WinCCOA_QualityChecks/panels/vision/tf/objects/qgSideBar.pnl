@@ -1,0 +1,290 @@
+V 14
+1
+LANG:10000 0 
+PANEL,-1 -1 358 461 N "WF_PanelBackground" 0
+E E E E E 1 -1 -1 0  -10 10
+""0  1
+E "#uses \"classes/json/JsonFile\"
+#uses \"fileSystem\"
+
+
+#event showQgResultBuild(const string &buildDir)
+#event showQgResultGate(const string &buildDir)
+
+const int COL_PATH = 4;
+const int COL_TYPE = 5;
+
+dyn_string fswMonitoredPathes;
+//--------------------------------------------------------------------------------
+fswAddPathRecursive(const string &path)
+{
+  if (!fswMonitoredPathes.contains(path))
+  {
+    fswAddPath(path);
+    dynAppend(fswMonitoredPathes, path);
+  }
+
+  dyn_string subDirs = getSubDirNames(path);
+
+  for (int i = 1; i <= dynlen(subDirs); i++)
+  {
+    fswAddPathRecursive(path + subDirs[i] + \"/\");
+  }
+}
+//--------------------------------------------------------------------------------
+synchronized newResultFound(string eventName, string path)
+{
+  fswAddPathRecursive(path); // be sure new directories are added in to watcher
+  loadResults();
+}
+
+
+void loadResults()
+{
+  string resDir = makeUnixPath(TfFileSys::getTestInstallPath(TfFileSysPath::Results) + \"QualityGates/\");
+
+  if (resDir == \"\")
+    return;
+
+  testTree.updatesEnabled(FALSE);
+//   testTree.clear();
+  //Return a list with all executed testSuites and merge it
+  dyn_string testSuiteIds = getSubDirNames(resDir);
+
+  for (int i = 1; i <= dynlen(testSuiteIds); i++)
+  {
+    _addSuite(testSuiteIds[i], resDir);
+  }
+
+  testTree.updatesEnabled(TRUE);
+
+}
+
+
+//--------------------------------------------------------------------------------
+_addSuite(const string &tsName, const string &resDir)
+{
+  OaTestResult summary;
+  const string id = tsName;
+
+  // add only not existing items (due refresh)
+  if (!testTree.itemExists(id))
+  {
+    testTree.appendItem(\"\", id, tsName);
+    testTree.setText(id, COL_PATH, resDir + tsName + \"/\");
+    testTree.setText(id, COL_TYPE, \"suite\");
+  }
+
+  dyn_string projects = getSubDirNames(resDir + tsName);
+
+  for (int i = 1; i <= dynlen(projects); i++)
+  {
+    _addProj(id, projects[i]);
+
+  }
+
+}
+
+//--------------------------------------------------------------------------------
+_addProj(const string &parrentId, const string &projName)
+{
+  const string id = parrentId + \";\" + projName;
+  const string parrentPath = testTree.getText(parrentId, COL_PATH);
+  const string myPath = parrentPath + projName + \"/\";
+
+  // add only not existing items (due refresh)
+  if (!testTree.itemExists(id))
+  {
+    testTree.appendItem(parrentId, id, projName);
+    testTree.setText(id, COL_PATH, myPath);
+    testTree.setText(id, COL_TYPE, \"project\");
+  }
+
+  dyn_string builds = getSubDirNames(myPath);
+
+  for (int i = 1; i <= dynlen(builds); i++)
+  {
+    _addBuild(id, builds[i]);
+  }
+}
+
+_addBuild(const string &parrentId, const string &build)
+{
+  const string id = parrentId + \"#\" + build;
+  const string parrentPath = testTree.getText(parrentId, COL_PATH);
+  const string myPath = parrentPath + build + \"/\";
+
+  // add only not existing items (due refresh)
+  if (!testTree.itemExists(id))
+  {
+    testTree.appendItem(parrentId, id, build);
+    testTree.setText(id, COL_PATH, myPath);
+    testTree.setText(id, COL_TYPE, \"build\");
+  }
+
+  dyn_string gates = getSubDirNames(myPath);
+
+  for (int i = 1; i <= dynlen(gates); i++)
+  {
+    _addGate(id, gates[i]);
+  }
+
+}
+
+
+_addGate(const string &parrentId, const string &gate)
+{
+  const string id = parrentId + \"-\" + gate;
+  const string parrentPath = testTree.getText(parrentId, COL_PATH);
+  const string myPath = parrentPath + gate + \"/\";
+
+  // add only not existing items (due refresh)
+  if (!testTree.itemExists(id))
+  {
+    string gateName = getCatStr(\"QG_Names\", gate);
+
+    if (dynlen(getLastError()) > 0)
+      gateName = gate;
+
+    testTree.appendItem(parrentId, id, gateName);
+    testTree.setText(id, COL_PATH, myPath);
+    testTree.setText(id, COL_TYPE, \"gate\");
+  }
+
+
+  string score;
+  fileToString(myPath + \"Score\", score, \"UTF8\");
+  testTree.setText(id, 1, score);
+
+  JsonFile sumFile = JsonFile(myPath + \"sum.json\");
+  mapping sumData;
+  sumFile.read(sumData);
+  testTree.setText(id, 2, sumData.value(\"totalPoints\"));
+  testTree.setText(id, 3, sumData.value(\"errorPoints\"));
+
+
+  if (sumData.value(\"hasError\"))
+  {
+    testTree.setBackColor(id, 0, \"WF_Error\");
+  }
+  else
+  {
+    testTree.setBackColor(id, 0, \"WF_Info\");
+  }
+
+}
+
+
+
+" 0
+ 5
+"CBRef" "1"
+"EClose" E
+"type" "WF"
+"dpi" "120"
+"pdpi" "141.951"
+2 1 0 0 0 0 1 0
+""
+DISPLAY_LAYER, 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0
+LAYER, 0 
+0
+29 1
+"testTree"
+"WF"
+1 30 40 E E E 1 E 1 E N "WF_Text" E N "WF_PanelBackground" E E
+ E E
+0 0 0 0 0 0
+E E E
+0
+3
+LANG:10000 0 
+LANG:10001 0 
+LANG:10027 0 
+
+1
+"layoutAlignment" "AlignNone"
+3
+LANG:10000 35 MS Shell Dlg 2,-1,13,5,50,0,0,0,0,0
+LANG:10001 35 MS Shell Dlg 2,-1,13,5,50,0,0,0,0,0
+LANG:10027 35 MS Shell Dlg 2,-1,13,5,50,0,0,0,0,0
+0  30 40 510 360
+10 TreeWidget
+2
+0 "selectionChanged" "(string id)"
+"  const string path = testTree.getText(id, COL_PATH);
+
+  if (path.isEmpty())
+    return;
+
+  const string type = testTree.getText(id, COL_TYPE);
+
+  if (type == \"gate\")
+    triggerEvent(self.showQgResultGate, path);
+  else if (type == \"build\")
+    triggerEvent(self.showQgResultBuild, path);
+"
+0 "doubleClicked" "(string id, int column)"
+""
+"#uses \"fileSystem\"
+
+main()
+{
+  this.addColumn(\"Name\");
+  this.setColumnWidthMode(0, TREE_WIDTH_STRETCH);
+  // Score
+  this.addColumn(\"Score\\n[%]\");
+  // totalPoints
+  this.addColumn(\"Total\\npoints\");
+  // errorPoints
+  this.addColumn(\"Error\\npoints\");
+
+  this.addColumn(\"resultPath\");
+  this.hideColumn(COL_PATH, TRUE);
+  this.addColumn(\"type\");
+  this.hideColumn(COL_TYPE, TRUE);
+
+  this.alternatingRowColors(TRUE);
+  loadResults();
+
+//   uiConnect(\"testRunFinished\", \"testRunFinished\");
+
+  string resDir = makeUnixPath(TfFileSys::getTestInstallPath(TfFileSysPath::Results) + \"QualityGates/\");
+
+  if (resDir != \"\")
+  {
+    fswAddPathRecursive(resDir);
+    sysConnect(\"newResultFound\", \"fswPathChanged\");
+  }
+}
+
+" 0
+0
+LAYER, 1 
+0
+0
+LAYER, 2 
+0
+0
+LAYER, 3 
+0
+0
+LAYER, 4 
+0
+0
+LAYER, 5 
+0
+0
+LAYER, 6 
+0
+0
+LAYER, 7 
+0
+0
+4 0 "LAYOUT_GROUP1" -1
+1 0 
+1 
+
+"S 1" "0 0 1 1"
+"" ""
+0 1 0 0
+0
