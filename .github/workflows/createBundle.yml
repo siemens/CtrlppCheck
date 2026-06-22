@@ -38,7 +38,7 @@ jobs:
     runs-on: ${{ matrix.config.os }}
 
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
 
     - name: Setup Ninja
       uses: seanmiddleditch/gha-setup-ninja@v6
@@ -98,7 +98,7 @@ jobs:
     needs: build
 
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
 
     - name: Prepare file structure and project
       run: |
